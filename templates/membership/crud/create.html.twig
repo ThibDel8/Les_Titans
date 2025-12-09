@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }}Adhésion{% endblock %}
+
+{% block body %}
+
+<section class="public-section">
+    <h2 class="public-title">Demande d'adhésion</h2>
+    <p>
+        L'adhésion demandée couvre la période de janvier à janvier de l'année suivante.
+        Une fois acceptée, cette adhésion prendra fin le 31 décembre {{ "now"|date("Y") }}.
+    </p>
+    <p>
+        Si vous remplissez ce formulaire pour une autre personne que vous-même, merci de fournir uniquement ses informations et non les vôtres.
+    </p><br>
+    <p>
+        <strong>Remarque :</strong> si le membre est mineur, les informations du tuteur légal sont obligatoires pour la validation de l'adhésion.
+    </p><br>
+
+    {{ form_start(form, {'attr': {'enctype': 'multipart/form-data', 'autocomplete': 'off'}}) }}
+
+        <h3 class="public-title">Informations du membre</h3>
+        {{ form_row(form.lastname) }}
+        {{ form_row(form.firstname) }}
+        {{ form_row(form.birthdate) }}
+        {{ form_row(form.gender) }}
+        {{ form_row(form.phone) }}
+        {{ form_row(form.address) }}
+        {{ form_row(form.postalcode) }}
+        {{ form_row(form.city) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.profileImage) }}
+        <br>
+        <h3 class="public-title">Informations du tuteur légal (si membre mineur)</h3>
+        <p>Ces informations sont obligatoires uniquement si le membre a moins de 18 ans.</p>
+        {{ form_row(form.tutorLastname) }}
+        {{ form_row(form.tutorFirstname) }}
+        {{ form_row(form.tutorPhone) }}
+        {{ form_row(form.tutorEmail) }}
+        {{ form_row(form.tutorAddress) }}
+        {{ form_row(form.tutorPostalcode) }}
+        {{ form_row(form.tutorCity) }}
+        <br>
+        <button type="submit">Envoyer la demande</button>
+    {{ form_end(form) }}
+</section>
+
+{% endblock %}

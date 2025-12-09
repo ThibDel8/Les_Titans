@@ -4,37 +4,139 @@
 
 {% block body %}
 
-<section>
-    <h2>Localisation</h2>
-    <p class="schedule">Cité Saint-Jules<br>80610 Saint-Ouen</p>
+
+{% if app.user %}
+{% else %}
+    <div class="admin-link">
+        <a href="{{ path('app_login') }}">Administration</a>
+    </div>
+{% endif %}
+
+{% if app.user %}
+    <section class="manager-section">
+        <div class="user-container">
+            <div class="profil-container">
+                <a href="" title="Voir le profil">
+                    <img src="{{ asset('images/profiles/' ~ app.user.member.profileImage) }}">
+                    <h2 class="manager-title">{{ app.user.member.firstname }}</h2>
+                </a>
+            </div>
+            <a href="{{path('app_logout') }}" title="Se déconnecter">
+                {% include 'icons/logout.svg.twig' %}
+            </a>
+        </div>
+        <div class="dashboard">
+            <ul>
+                <li>
+                    <a href="{{path('admin_user_list') }}" title="Liste des utilisateurs">
+                        {% include 'icons/manage-members.svg.twig' %} Utilisateurs ({{ nbUsers }})
+                    </a>
+                </li>
+                <li>
+                    <a href="{{path('admin_member_list') }}" title="Liste des membres">
+                        {% include 'icons/manage-members.svg.twig' %} Membres ({{ nbMembers }})
+                    </a>
+                </li>
+                <li>
+                    <a href="{{path('admin_message_list') }}" title="Voir les messages">
+                        {% include 'icons/messages.svg.twig' %} Messages ({{ nbUnreadMessages }})
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ path('admin_membership_list') }}" title="Voir les demandes d'adhésion">
+                        {% include 'icons/membership-adhesion.svg.twig' %} Demandes d'adhésion ({{ nbMemberships }})
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </section>
+{% endif %}
+
+<section class="public-section">
+    <h2 class="public-title">Présentation</h2>
+    <p>
+        La salle de musculation communale est une association locale destinée aux habitants souhaitant pratiquer
+        la musculation dans un cadre encadré, sécurisé et respectueux des règles.
+    </p>
+    <p>
+        L'accès est réservé aux membres à jour de leur adhésion, de leur certificat médical et du règlement intérieur.
+    </p>
 </section>
 
-<section>
-    <h2>Horaires</h2>
-    <ul class="schedule">
-        <li><strong>Lundi :</strong> …</li>
-        <li><strong>Mardi :</strong> …</li>
-        <li><strong>Mercredi :</strong> …</li>
-        <li><strong>Jeudi :</strong> …</li>
-        <li><strong>Vendredi :</strong> …</li>
-        <li><strong>Samedi :</strong> …</li>
-        <li><strong>Dimanche :</strong> …</li>
-    </ul>
-</section>
-
-<section>
-    <h2>Contact</h2>
-    <div class="schedule column-center">
-        <a class="btn" href="">Envoyer un message</a>
-        <a class="btn" href="">Demande d'inscription</a>
+<section class="public-section">
+    <h2 class="public-title">Informations pratiques</h2>
+    <div class="infos-grid">
+        <div class="info-box">
+            <h3>📍 Localisation</h3>
+            <p>Salle de musculation Les Titans</p>
+            <p>Cité Saint-Jules,</p>
+            <p>80610 Saint-Ouen</p>
+        </div>
+        <div class="info-box">
+            <h3>⏰ Horaires</h3>
+            <div class="schedules">
+                <div>
+                    Lundi :<br>
+                    Mardi :<br>
+                    Mercredi :<br>
+                    Jeudi :<br>
+                    Vendredi :<br>
+                    Samedi :<br>
+                    Dimanche :<br>
+                </div>
+                <div>
+                    7h – 22h<br>
+                    7h – 22h<br>
+                    7h – 22h<br>
+                    7h – 22h<br>
+                    7h – 22h<br>
+                    7h – 22h<br>
+                    7h – 22h<br>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 
-<section>
-    <h2>Informations</h2>
-    <p class="schedule">
-        Texte informatif sur l'association, la salle de sport, les règles à suivre...
+<section class="public-section">
+    <h2 class="public-title">Fonctionnement et règles</h2>
+    <p>
+        Badge obligatoire pour accéder à la salle
+        Certificat médical valide requis
+        Respect du matériel et des autres membres
+        Nettoyage des machines après utilisation
     </p>
+</section>
+
+<section class="public-section">
+    <h2 class="public-title">Contactez-nous</h2>
+    <p>Vous avez une question, une suggestion ou souhaitez proposer un service ?</p>
+    <p>Cliquez ci-dessous pour nous contacter via notre formulaire.</p>
+    <br>
+    <a href="{{ path('app_contact') }}">Contactez-nous</a>
+</section>
+
+<section class="public-section">
+    <h2 class="public-title">Modalités d’adhésion à la salle de sport</h2>
+    <p>
+        L’adhésion à la salle de sport est fixée à <strong>50 € par an</strong>.
+        Elle doit être <strong>validée</strong> afin d’obtenir un <strong>badge d’accès</strong>, indispensable pour entrer dans la salle.
+    </p><br>
+    <p>
+        Dans un premier temps, nous vous invitons à <strong>remplir le formulaire</strong> en cliquant sur le lien ci-dessous afin de débuter la procédure d’adhésion.
+        À l’issue de cette étape, un <strong>document récapitulatif</strong> sera généré à partir des informations fournies. Ce document devra être <strong>imprimé et signé</strong>.
+    </p><br>
+    <p>
+        Pour finaliser l’adhésion, il vous sera ensuite demandé de remettre <strong>en mains propres</strong> une enveloppe contenant :
+    </p>
+    <ul>
+        <li>le document généré, <strong>imprimé et signé</strong> ;</li>
+        <li><strong>50 € en espèces uniquement</strong>, correspondant à la cotisation annuelle ;</li>
+        <li><strong>10 € de caution</strong> pour le badge d’accès (cette somme est <strong>restituée lors de la restitution du badge</strong>) ;</li>
+        <li>un <strong>certificat médical valide</strong>, autorisant la pratique de la musculation et du cardio-training.</li>
+    </ul>
+    <br>
+    <a href="{{ path('app_membership_create') }}">Faire une demande</a>
 </section>
 
 {% endblock %}

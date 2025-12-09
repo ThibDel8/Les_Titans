@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }}Demandes d'adhésion{% endblock %}
+
+{% block body %}
+
+<section class="public-section">
+    <h2 class="public-title">Demandes d'adhésion</h2>
+    <div>
+    <p>
+        <strong>Attention :</strong> ne quittez pas cette page avant d'avoir téléchargé votre document !
+        Il est disponible uniquement maintenant et est nécessaire pour finaliser votre inscription.
+    </p>
+    <br>
+    <p>
+        La première étape de l'adhésion est terminée.
+        Veuillez télécharger ci-dessous votre document pour vérifier que toutes les informations sont correctes.
+    </p>
+    <p>
+        Il vous restera ensuite à l'imprimer, le signer et nous le remettre en mains propres, accompagné de :
+        <ul>
+            <li>50 € en espèces correspondant à la cotisation annuelle ;</li>
+            <li>10 € de caution pour le badge d’accès (restituée lors de la remise du badge) ;</li>
+            <li>Un certificat médical valide autorisant la pratique de la musculation et du cardio-training.</li>
+        </ul>
+    </p>
+    <p>
+        Une fois tous ces éléments remis, un badge d'accès vous sera délivré et votre adhésion à la salle sera validée.
+    </p>
+    <br>
+    <div class="center"><a class="btn btn-warning" href="{{ path('app_membership_download', {id: membership.id }) }}">Télécharger</a></div>
+    <br>
+    <p>
+        À très bientôt,
+    </p>
+    <p>
+        Saint-Ouen Musculation | Les Titans
+    </p>
+    </div>
+</section>
+
+{% endblock %}

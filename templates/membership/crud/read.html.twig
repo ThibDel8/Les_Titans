@@ -1,0 +1,91 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }}Adhésion de {{ membership.firstname|capitalize }}{% endblock %}
+
+{% block body %}
+
+<div class="right-content">
+    {% if membership.medicalCertificateExpiry
+        and membership.accessBadgeDeposit
+        and membership.annualMembershipFee %}
+        <form method="post" action="{{ path('admin_member_create', {id: membership.id}) }}" style="display:inline">
+            <input type="hidden" name="_token" value="{{ csrf_token('validate_membership_' ~ membership.id) }}">
+            <button class="btn btn-success">Accepter</button>
+        </form>
+    {% endif %}
+    <button class="btn btn-error" onclick="document.getElementById('confirm-delete').showModal()">Refuser</button>
+    <dialog id="confirm-delete">
+        <p>Êtes-vous sûr de vouloir refuser cette demande d’adhésion ?</p>
+        <br>
+        <form method="post"
+            action="{{ path('admin_membership_delete', {id: membership.id}) }}">
+
+            <input type="hidden" name="_token"
+                value="{{ csrf_token('delete_membership_' ~ membership.id) }}">
+
+            <button class="btn btn-error">Oui, refuser</button>
+            <button class="btn btn-warning" type="button"
+                    onclick="this.closest('dialog').close()">
+                Annuler
+            </button>
+        </form>
+    </dialog>
+</div>
+
+<section class="manager-section">
+    <h2 class="manager-title">{{ membership.firstname|capitalize }} {{ membership.lastname|capitalize }}</h2>
+    <div class="membership-profile-image">
+        <img src="{{ asset('images/profiles/' ~ membership.profileImage ) }}" alt="" title="">
+        <p>
+            {{ membership.gender.label|trans|capitalize }}
+        </p>
+        <p>
+            Né{% if membership.gender.value == 'female' %}e{% endif %} le {{ membership.birthdate|date('d/m/Y') }}
+            ({{ membership.age }} ans)
+        </p>
+    </div><br>
+    <div>
+        <a href="tel:+33{{ membership.phone|slice(1) }}">☎️ {{ membership.phone }}</a><br>
+        <p>🏠 {{ membership.address }} {{ membership.postalcode }}, {{ membership.city|capitalize }}</p><br>
+        <a href="mailto:{{ membership.email }}">📧 {{ membership.email }}</a>
+    </div>
+</section>
+
+{% if membership.age < 18 %}
+    <section class="manager-section">
+        <h2 class="manager-title">Tuteur légal{% if membership.tutorFirstname or membership.tutorLastname %} : {{ membership.tutorFirstname }} {{ membership.tutorLastname }}{% endif %}</h2>
+        <div>
+            {% if membership.tutorPhone %}<a href="tel:+33{{ membership.tutorPhone|slice(1) }}">☎️ {{ membership.tutorPhone }}</a><br>{% else %}<p>☎️ Information obligatoire manquante</p>{% endif %}
+            {% if membership.tutorAddress and membership.tutorPostalcode and membership.tutorCity %}<p>🏠 {{ membership.tutorAddress }} {{ membership.tutorPostalcode }}, {{ membership.tutorCity|capitalize }}</p><br>{% else %}<p>🏠 Information obligatoire manquante</p>{% endif %}
+            {% if membership.tutorEmail %}<a href="mailto:{{ membership.tutorEmail }}">📧 {{ membership.tutorEmail }}</a><br>{% else %}<p>📧 Information obligatoire manquante</p>{% endif %}
+        </div>
+    </section>
+{% endif %}
+
+
+<section class="manager-section">
+
+{% if membership.medicalCertificateExpiry and membership.accessBadgeDeposit and membership.annualMembershipFee %}
+    <h2 class="manager-title">Nouvel adhérant !</h2>
+    <p>La demande d'ahdésion est maintenant valide, elle peut être acceptée à tout moment en cliquant sur <strong>Accepter</strong>. Cette demande d'adhésion se supprimera automatiquement après l'avoir accepté, et le profil du nouvel adhérant sera créé.</p>
+    <br>
+    <p>{{ membership.firstname }} peut maintenant avoir son badge d'accès.</p>
+    <p>Ne pas oublier de lui attribuer son numéro de badge dans son profil.</p>
+{% else %}
+    <h2 class="manager-title">Validations pour acceptation</h2>
+    {{ form_start(form, {'attr': {'autocomplete': 'off'}}) }}
+        {{ form_row(form.medicalCertificateExpiry) }}
+        {{ form_row(form.annualMembershipFee) }}
+        {{ form_row(form.accessBadgeDeposit) }}
+        <br>
+        <button type="submit">Enregistrer</button>
+    {{ form_end(form) }}
+{% endif %}
+
+</section>
+
+<div class="admin-link">
+    <a>Demande d'adhésion faite le {{ membership.createdAt|fr_date }}</a>
+</div>
+
+{% endblock %}

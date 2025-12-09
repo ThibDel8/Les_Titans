@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }}Mentions légales{% endblock %}
+
+{% block body %}
+
+    <section class="public-section" id="mentions-legales">
+        <h2 class="public-title">Mentions légales</h2>
+
+
+        <h3>Éditeur du site</h3>
+        <p>
+            Saint-Ouen Musculation<br>
+            Association loi 1901<br>
+            Siège social : [ADRESSE DU SIÈGE SOCIAL]<br>
+            Email : <a href="mailto:">[EMAIL DE CONTACT DE L’ASSOCIATION]</a>
+        </p><br>
+
+        <h3>Responsable de publication</h3>
+        <p>
+            [Prénom Nom]<br>
+            Fonction : Président de l’association Saint-Ouen Musculation
+        </p><br>
+
+        <h3>Hébergement</h3>
+        <p>
+            Syndicat mixte Somme Numérique<br>
+            83 rue Saint Fuscien – 80000 Amiens<br>
+            Téléphone : 03 22 22 27 27<br>
+            Site : <a href="http://www.sommenumerique.fr" target="_blank">www.sommenumerique.fr</a><br>
+            Email : <a href="mailto:courrier@sommenumerique.fr">courrier@sommenumerique.fr</a>
+        </p>
+    </section>
+
+{% endblock %}

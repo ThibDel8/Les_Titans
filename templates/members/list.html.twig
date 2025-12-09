@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }}Liste des membres{% endblock %}
+
+{% block body %}
+
+    <h2 class="manager-title">Membres ({{ validMembers|length + invalidMembers|length }})</h2>
+
+    {% if invalidMembers|length > 0 %}
+        {% for member in invalidMembers %}
+            {% include 'members/_card/_members_list.html.twig' with { member: member, status: 'invalid' } %}
+        {% endfor %}
+    {% endif %}
+
+    {% for member in validMembers %}
+        {% include 'members/_card/_members_list.html.twig' with { member: member, status: 'valid' } %}
+    {% endfor %}
+
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }}Demandes d'adhésion{% endblock %}
+
+{% block body %}
+
+    <h2 class="manager-title">Demandes d'adhésion ({{ memberships|length }})</h2>
+        {% for membership in memberships %}
+            <section class="manager-list-section">
+                    <a class="manager" href="{{ path('admin_membership_read', {id: membership.id}) }}">
+                        <div class="membership-list-names">
+                            <img src="{{ asset('images/profiles/' ~ membership.profileImage) }}">
+                            <div>
+                                <p>{{ membership.firstname|capitalize }} {{ membership.lastname|capitalize }}</p>
+                                <div class="membership-list-date">{{ membership.createdAt|fr_date }}</div>
+                            </div>
+                        </div>
+                    </a>
+
+            </section>
+        {% endfor %}
+
+{% endblock %}

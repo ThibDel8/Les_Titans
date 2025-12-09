@@ -1,0 +1,97 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }}Profil de {{ member.firstname|capitalize }}{% endblock %}
+
+{% block body %}
+
+    <div class="right-content">
+        <button class="btn btn-warning" onclick="document.getElementById('confirm-create').showModal()">Rendre Manager</button>
+        <dialog id="confirm-create">
+            <p>Êtes-vous sûr de vouloir rendre ce membre manager ?</p>
+            <br>
+            <form method="post"
+                action="{{ path('admin_user_create', {id: member.id}) }}">
+
+                <input type="hidden" name="_token"
+                    value="{{ csrf_token('create_user_' ~ member.id) }}">
+
+                <button class="btn btn-warning">Oui, rendre manager</button>
+                <button class="btn btn-error" type="button" onclick="this.closest('dialog').close()">Annuler</button>
+            </form>
+        </dialog>
+        <a class="btn btn-info" href="{{ path('admin_member_update', {id: member.id}) }}">Mettre à jour</a>
+        <button class="btn btn-error" onclick="document.getElementById('confirm-delete').showModal()">Supprimer</button>
+        <dialog id="confirm-delete">
+            <p>Êtes-vous sûr de vouloir supprimer ce membre ?</p>
+            <br>
+            <form method="post"
+                action="{{ path('admin_member_delete', {id: member.id}) }}">
+
+                <input type="hidden" name="_token"
+                    value="{{ csrf_token('delete_member_' ~ member.id) }}">
+
+                <button class="btn btn-error">Oui, supprimer</button>
+                <button class="btn btn-warning" type="button" onclick="this.closest('dialog').close()">Annuler</button>
+            </form>
+        </dialog>
+    </div>
+
+    <section class="manager-section">
+        <h2 class="manager-title">Profil de {{ member.firstname|capitalize }} {{ member.lastname|capitalize }}</h2>
+        <div class="member-profile-image">
+            <img src="{{ asset('images/profiles/' ~ member.profileImage ) }}" alt="" title="">
+            <p>
+                {{ member.gender.label|trans|capitalize }}
+            </p>
+            <p>
+                Né{% if member.gender.value == 'female' %}e{% endif %} le {{ member.birthdate|date('d/m/Y') }}
+                ({{ member.age }} ans)
+            </p>
+            {% if member.accessBadgeNumber is not null %}
+                <p>Badge n° {{ member.accessBadgeNumber }}</p>
+            {% endif %}
+            {% if member.medicalCertificateExpiry|date('U') < "now"|date('U') and member.annualMembershipFee is not null %}
+                <p>🩺 {{ member.firstname|capitalize }} doit mettre à jour son certificat médical.</p>
+            {% endif %}
+            {% if member.annualMembershipFee is null and member.accessBadgeNumber is not null %}
+                <p>💰🔑 {{ member.firstname|capitalize }} a encore son badge alors que son abonnement annuel est terminé.</p>
+            {% endif %}
+            {% if member.accessBadgeNumber is null and member.annualMembershipFee is not null %}
+                <p>🔑 {{ member.firstname|capitalize }} n'a pas encore de badge alors que son abonnement annuel est payé.</p>
+            {% endif %}
+        </div><br>
+        <div>
+            <a href="tel:+33{{ member.phone|slice(1) }}">☎️ {{ member.phone }}</a><br>
+            <p>🏠 {{ member.address }} {{ member.postalcode }}, {{ member.city|capitalize }}</p><br>
+            <a href="mailto:{{ member.email }}">📧 {{ member.email }}</a>
+        </div>
+    </section>
+
+{% if member.age < 18 %}
+    <section class="manager-section">
+        <h2 class="manager-title">Tuteur légal{% if member.tutorFirstname or member.tutorLastname %} : {{ member.tutorFirstname }} {{ member.tutorLastname }}{% endif %}</h2>
+        <div>
+            {% if member.tutorPhone %}<a href="tel:+33{{ member.tutorPhone|slice(1) }}">☎️ {{ member.tutorPhone }}</a><br>{% else %}<p>☎️ Information obligatoire manquante</p>{% endif %}
+            {% if member.tutorAddress and member.tutorPostalcode and member.tutorCity %}<p>🏠 {{ member.tutorAddress }} {{ member.tutorPostalcode }}, {{ member.tutorCity|capitalize }}</p><br>{% else %}<p>🏠 Information obligatoire manquante</p>{% endif %}
+            {% if member.tutorEmail %}<a href="mailto:{{ member.tutorEmail }}">📧 {{ member.tutorEmail }}</a><br>{% else %}<p>📧 Information obligatoire manquante</p>{% endif %}
+        </div>
+    </section>
+{% endif %}
+
+
+
+{% if member.accessBadgeNumber is null %}
+<section class="manager-section">
+    <h2 class="manager-title">Attribuer un numéro de badge</h2>
+    {{ form_start(form) }}
+        {{ form_rest(form) }}
+        <button type="submit">Enregistrer</button>
+    {{ form_end(form) }}
+</section>
+{% endif %}
+
+<div class="admin-link">
+    <a>Adhésion validée depuis le {{ member.createdAt|fr_date }}</a>
+</div>
+
+{% endblock %}

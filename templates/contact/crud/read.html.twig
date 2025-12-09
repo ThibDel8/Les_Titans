@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }}Message{% endblock %}
+
+{% block body %}
+
+<section class="manager-section">
+    <h2 class="manager-title">Message</h2>
+
+    <div class="message-content">
+        <p><strong>Sujet :</strong> {{ message.subject }}</p>
+        <br>
+        <p><strong>Message :</strong> {{ message.message }}</p>
+    </div>
+    <br>
+    <div class="membership-list-date">
+        <p><strong>Envoyé par :</strong> {{ message.email }}</p>
+        <p>{{ message.createdAt|fr_date }}</p>
+    </div>
+
+</section>
+
+{% endblock %}
