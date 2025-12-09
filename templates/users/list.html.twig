@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }}Liste des utilisateurs{% endblock %}
+
+{% block body %}
+
+    <h2 class="manager-title">Utilisateurs ({{ users|length }})</h2>
+
+    {% for user in users %}
+        <section class="manager-list-section">
+            <a class="manager" href="">
+                <div class="user-list-names">
+                    <img src="{{ asset('images/profiles/' ~ user.member.profileImage) }}">
+                    <div>
+                        <p>{{ user.member.firstname|capitalize }} {{ user.member.lastname|capitalize }}</p>
+                        <div class="user-list-role">{{ user.roles[0]|replace({'_': ' '})|lower|capitalize }}</div>
+                    </div>
+                </div>
+            </a>
+        </section>
+    {% endfor %}
+
+{% endblock %}
