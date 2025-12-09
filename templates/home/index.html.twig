@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }}Accueil{% endblock %}
+
+{% block body %}
+
+<section>
+    <h2>Localisation</h2>
+    <p class="schedule">Cité Saint-Jules<br>80610 Saint-Ouen</p>
+</section>
+
+<section>
+    <h2>Horaires</h2>
+    <ul class="schedule">
+        <li><strong>Lundi :</strong> …</li>
+        <li><strong>Mardi :</strong> …</li>
+        <li><strong>Mercredi :</strong> …</li>
+        <li><strong>Jeudi :</strong> …</li>
+        <li><strong>Vendredi :</strong> …</li>
+        <li><strong>Samedi :</strong> …</li>
+        <li><strong>Dimanche :</strong> …</li>
+    </ul>
+</section>
+
+<section>
+    <h2>Contact</h2>
+    <div class="schedule column-center">
+        <a class="btn" href="">Envoyer un message</a>
+        <a class="btn" href="">Demande d'inscription</a>
+    </div>
+</section>
+
+<section>
+    <h2>Informations</h2>
+    <p class="schedule">
+        Texte informatif sur l'association, la salle de sport, les règles à suivre...
+    </p>
+</section>
+
+{% endblock %}
