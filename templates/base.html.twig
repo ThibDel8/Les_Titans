@@ -10,23 +10,20 @@
 </head>
 
 <body>
-    <header class="header">
-        <div class="container">
-            <img src="{{ asset('images/logo_image.png') }}"/>
-            <h1 class="brand">Les Titans</h1>
-        </div>
-    </header>
+
+    {% include '_partials/_flash_message/_flash_message.html.twig' %}
+
+    {% block header %}
+        {% include "_partials/_header/_header.html.twig" %}
+    {% endblock %}
 
     <main class="container">
         {% block body %}{% endblock %}
     </main>
 
-    <footer class="footer">
-        <div class="container">
-            <p>© 2025 - Les Titans</p>
-            <p>Powered by Thibault Delattre</p>
-        </div>
-    </footer>
+    {% block footer %}
+        {% include "_partials/_footer/_footer.html.twig" %}
+    {% endblock %}
 
 </body>
 </html>
