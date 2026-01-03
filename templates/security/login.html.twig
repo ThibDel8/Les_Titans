@@ -15,7 +15,7 @@
                     Tu es connecté avec l'adresse {{ app.user.userIdentifier }}.
                     <br>
                     <br>
-                    <div class="center"><a class="btn btn-error" href="{{ logout_path() }}">Se déconnecter</a></div>
+                    <div class="center"><a class="btn btn-error" href="{{ logout_path() }}" title="Se déconnecter">Se déconnecter</a></div>
                 </div>
             {% else %}
                 <div>
@@ -29,9 +29,7 @@
                 <div>
                     <input type="hidden" name="_csrf_token" data-controller="csrf-protection" value="{{ csrf_token('authenticate') }}">
                 </div>
-                <button type="submit">
-                    Se connecter
-                </button>
+                <button type="submit" title="Se connecter">Se connecter</button>
             {% endif %}
 
             {#

@@ -252,6 +252,10 @@ section {
     list-style: none;
 }
 
+.dashboard ul li a {
+    color: var(--grey);
+}
+
 .icon-member-settings {
     height: 25px;
 }

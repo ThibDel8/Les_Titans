@@ -3,7 +3,7 @@
 {% else %}
 <section class="manager-section">
 {% endif %}
-    <a class="manager" href="{{ path('admin_message_read', {id: message.id}) }}">
+    <a class="manager" href="{{ path('admin_message_read', {id: message.id}) }}" title="Cliquer pour lire le message">
         <div class="member-list-names">
             <div>
                 <p>{{ message.subject }}</p>
