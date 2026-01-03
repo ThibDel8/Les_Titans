@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\DataFixtures;
 
 use Faker\Factory;
@@ -14,7 +16,7 @@ class MembershipFixtures extends Fixture
     {
         $faker = Factory::create('fr_FR');
 
-        $this->create(
+        $this->createMembership(
             manager: $manager,
             lastname: $faker->lastName(),
             firstname: $faker->firstNameFemale(),
@@ -35,7 +37,7 @@ class MembershipFixtures extends Fixture
             profileImage: 'female_default_profile.png',
         );
 
-        $this->create(
+        $this->createMembership(
             manager: $manager,
             lastname: $faker->lastName(),
             firstname: $faker->firstNameMale(),
@@ -49,7 +51,7 @@ class MembershipFixtures extends Fixture
             profileImage: 'male_default_profile.png',
         );
 
-        $this->create(
+        $this->createMembership(
             manager: $manager,
             lastname: $faker->lastName(),
             firstname: $faker->firstName(),
@@ -73,7 +75,7 @@ class MembershipFixtures extends Fixture
         $manager->flush();
     }
 
-    private function create(
+    private function createMembership(
         ObjectManager $manager,
         string $lastname,
         string $firstname,

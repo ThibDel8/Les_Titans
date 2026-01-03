@@ -17,4 +17,12 @@ class MessageRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Message::class);
     }
+
+    public function findAllOrderedByDate(): array
+    {
+        return $this->createQueryBuilder('m')
+            ->orderBy('m.createdAt', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
 }

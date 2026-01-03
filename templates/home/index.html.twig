@@ -29,22 +29,22 @@
             <ul>
                 <li>
                     <a href="{{path('admin_user_list') }}" title="Liste des utilisateurs">
-                        {% include 'icons/manage-members.svg.twig' %} Utilisateurs ({{ users|length }})
+                        {% include 'icons/manage-members.svg.twig' %} Utilisateurs ({{ nbUsers }})
                     </a>
                 </li>
                 <li>
                     <a href="{{path('admin_member_list') }}" title="Liste des membres">
-                        {% include 'icons/manage-members.svg.twig' %} Membres ({{ members|length }})
+                        {% include 'icons/manage-members.svg.twig' %} Membres ({{ nbMembers }})
                     </a>
                 </li>
                 <li>
-                    <a href="" title="Voir les messages">
-                        {% include 'icons/messages.svg.twig' %} Messages ({{ messages|length }})
+                    <a href="{{path('admin_message_list') }}" title="Voir les messages">
+                        {% include 'icons/messages.svg.twig' %} Messages ({{ nbUnreadMessages }})
                     </a>
                 </li>
                 <li>
                     <a href="{{ path('admin_membership_list') }}" title="Voir les demandes d'adhésion">
-                        {% include 'icons/membership-adhesion.svg.twig' %} Demandes d'adhésion ({{ memberships|length }})
+                        {% include 'icons/membership-adhesion.svg.twig' %} Demandes d'adhésion ({{ nbMemberships }})
                     </a>
                 </li>
             </ul>

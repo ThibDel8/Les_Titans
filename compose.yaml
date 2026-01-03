@@ -66,7 +66,9 @@ services:
     volumes:
       - mailpit_data:/data
     networks:
-      - les_titans_net
+      les_titans_net:
+        aliases:
+          - mailpit.local
 
 volumes:
   db_data:

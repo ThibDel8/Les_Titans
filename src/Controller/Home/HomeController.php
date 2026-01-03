@@ -22,10 +22,10 @@ final class HomeController extends AbstractController
         $data = $this->homeQuery->fetch();
 
         return $this->render('home/index.html.twig', [
-            'users' => $data['users'],
-            'members' => $data['members'],
-            'messages' => $data['messages'],
-            'memberships' => $data['memberships'],
+            'nbUsers' => $data['nbUsers'],
+            'nbMembers' => $data['nbMembers'],
+            'nbUnreadMessages' => $data['nbUnreadMessages'],
+            'nbMemberships' => $data['nbMemberships'],
         ]);
     }
 }

@@ -151,6 +151,13 @@ section {
     border-radius: 4px;
 }
 
+.gray-section {
+    padding: 25px;
+    margin-bottom: 40px;
+    border-left: 5px solid var(--grey);
+    opacity: 0.6;
+}
+
 .public-section {
     padding: 25px;
     margin-bottom: 40px;
@@ -197,10 +204,16 @@ section {
     width: 100%;
 }
 
-.manager-section a {
+.gray-section a {
     display: flex;
     align-items: center;
     color: var(--grey);
+    gap: 10px;
+}
+
+.manager-section a {
+    display: flex;
+    align-items: center;
     gap: 10px;
 }
 

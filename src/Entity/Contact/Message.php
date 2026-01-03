@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity\Contact;
 
+use App\Entity\Security\User;
 use Doctrine\DBAL\Types\Types;
 use Symfony\Component\Uid\Uuid;
 use Doctrine\ORM\Mapping as ORM;
@@ -26,8 +27,8 @@ class Message
     #[ORM\Column(type: Types::TEXT)]
     private string $message;
 
-    #[ORM\Column(type: Types::BOOLEAN, options: ['default' => false])]
-    private bool $isOpen;
+    #[ORM\Column(type: Types::BOOLEAN, options: ['default' => true])]
+    private bool $isUnread;
 
     #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
     private \DateTimeImmutable $createdAt;
@@ -43,7 +44,7 @@ class Message
 
         // Initialisation des valeurs par défaut
         $this->id = Uuid::v4();
-        $this->isOpen = false;
+        $this->isUnread = true;
         $this->createdAt = new \DateTimeImmutable();
     }
 
@@ -72,9 +73,9 @@ class Message
         return $this->message;
     }
 
-    public function isOpen(): bool
+    public function isUnread(): bool
     {
-        return $this->isOpen;
+        return $this->isUnread;
     }
 
     public function getCreatedAt(): \DateTimeImmutable
@@ -85,6 +86,16 @@ class Message
     public function getAnswerBy(): ?string
     {
         return $this->answerBy;
+    }
+
+    public function markAsRead(): void
+    {
+        $this->isUnread = false;
+    }
+
+    public function markAsAnswerBy(string $name): void
+    {
+        $this->answerBy = $name;
     }
 
     public static function create(

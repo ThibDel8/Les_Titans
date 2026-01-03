@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }}Liste des messages{% endblock %}
+
+{% block body %}
+
+    <h2 class="manager-title">Messages ({{ messages|length }})</h2>
+
+    {% for message in messages %}
+        {% include 'contact/_card/_messages_list.html.twig' with { message: message } %}
+    {% endfor %}
+
+{% endblock %}

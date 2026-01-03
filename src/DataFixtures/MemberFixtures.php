@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\DataFixtures;
 
 use App\Entity\Member\Member;
@@ -14,96 +16,7 @@ class MemberFixtures extends Fixture
     {
         $faker = Factory::create('fr_FR');
 
-        $this->create(
-            manager: $manager,
-            lastname: $faker->lastName(),
-            firstname: $faker->firstNameFemale(),
-            birthdate: new \DateTimeImmutable('-20 years'),
-            gender: Gender::Female,
-            phone: $faker->numerify('0#########'),
-            address: $faker->buildingNumber() . ' ' . $faker->streetName(),
-            postalcode: $faker->postcode(),
-            city: $faker->city(),
-            email: $faker->unique()->safeEmail(),
-            medicalCertificateExpiry:new \DateTimeImmutable('-1 day'),
-            tutorLastname: $faker->lastName(),
-            tutorFirstname: $faker->firstName(),
-            tutorPhone: $faker->numerify('0#########'),
-            tutorEmail: $faker->unique()->safeEmail(),
-            tutorAddress: $faker->buildingNumber() . ' ' . $faker->streetName(),
-            tutorPostalcode: $faker->postcode(),
-            tutorCity: $faker->city(),
-            profileImage: 'female_default_profile.png',
-        );
-
-        $this->create(
-            manager: $manager,
-            lastname: $faker->lastName(),
-            firstname: $faker->firstNameFemale(),
-            birthdate: new \DateTimeImmutable('-22 years'),
-            gender: Gender::Female,
-            phone: $faker->numerify('0#########'),
-            address: $faker->buildingNumber() . ' ' . $faker->streetName(),
-            postalcode: $faker->postcode(),
-            city: $faker->city(),
-            email: $faker->unique()->safeEmail(),
-            profileImage: 'female_default_profile.png',
-            badgeNumber: $faker->unique()->numerify('000#######'),
-        );
-
-        $this->create(
-            manager: $manager,
-            lastname: $faker->lastName(),
-            firstname: $faker->firstNameFemale(),
-            birthdate: new \DateTimeImmutable('-18 years'),
-            gender: Gender::Female,
-            phone: $faker->numerify('0#########'),
-            address: $faker->buildingNumber() . ' ' . $faker->streetName(),
-            postalcode: $faker->postcode(),
-            city: $faker->city(),
-            email: $faker->unique()->safeEmail(),
-            profileImage: 'female_default_profile.png',
-            badgeNumber: $faker->unique()->numerify('000#######'),
-        );
-
-        $this->create(
-            manager: $manager,
-            lastname: $faker->lastName(),
-            firstname: $faker->firstNameFemale(),
-            birthdate: new \DateTimeImmutable('-43 years'),
-            gender: Gender::Female,
-            phone: $faker->numerify('0#########'),
-            address: $faker->buildingNumber() . ' ' . $faker->streetName(),
-            postalcode: $faker->postcode(),
-            city: $faker->city(),
-            email: $faker->unique()->safeEmail(),
-            profileImage: 'female_default_profile.png',
-            badgeNumber: $faker->unique()->numerify('000#######'),
-        );
-
-        $this->create(
-            manager: $manager,
-            lastname: $faker->lastName(),
-            firstname: $faker->firstNameFemale(),
-            birthdate: new \DateTimeImmutable('-16 years'),
-            gender: Gender::Female,
-            phone: $faker->numerify('0#########'),
-            address: $faker->buildingNumber() . ' ' . $faker->streetName(),
-            postalcode: $faker->postcode(),
-            city: $faker->city(),
-            email: $faker->unique()->safeEmail(),
-            tutorLastname: $faker->lastName(),
-            tutorFirstname: $faker->firstName(),
-            tutorPhone: $faker->numerify('0#########'),
-            tutorEmail: $faker->unique()->safeEmail(),
-            tutorAddress: $faker->buildingNumber() . ' ' . $faker->streetName(),
-            tutorPostalcode: $faker->postcode(),
-            tutorCity: $faker->city(),
-            profileImage: 'female_default_profile.png',
-            badgeNumber: $faker->unique()->numerify('000#######'),
-        );
-
-        $this->create(
+        $memberUser =$this->createMember(
             manager: $manager,
             lastname: $faker->lastName(),
             firstname: $faker->firstNameMale(),
@@ -118,7 +31,9 @@ class MemberFixtures extends Fixture
             badgeNumber: $faker->unique()->numerify('000#######'),
         );
 
-        $this->create(
+        $this->addReference('member_user', $memberUser);
+
+        $this->createMember(
             manager: $manager,
             lastname: $faker->lastName(),
             firstname: $faker->firstNameMale(),
@@ -133,7 +48,7 @@ class MemberFixtures extends Fixture
             badgeNumber: $faker->unique()->numerify('000#######'),
         );
 
-        $this->create(
+        $this->createMember(
             manager: $manager,
             lastname: $faker->lastName(),
             firstname: $faker->firstNameMale(),
@@ -148,7 +63,7 @@ class MemberFixtures extends Fixture
             badgeNumber: $faker->unique()->numerify('000#######'),
         );
 
-        $this->create(
+        $this->createMember(
             manager: $manager,
             lastname: $faker->lastName(),
             firstname: $faker->firstNameMale(),
@@ -170,7 +85,96 @@ class MemberFixtures extends Fixture
             badgeNumber: $faker->unique()->numerify('000#######'),
         );
 
-        $this->create(
+        $this->createMember(
+            manager: $manager,
+            lastname: $faker->lastName(),
+            firstname: $faker->firstNameFemale(),
+            birthdate: new \DateTimeImmutable('-20 years'),
+            gender: Gender::Female,
+            phone: $faker->numerify('0#########'),
+            address: $faker->buildingNumber() . ' ' . $faker->streetName(),
+            postalcode: $faker->postcode(),
+            city: $faker->city(),
+            email: $faker->unique()->safeEmail(),
+            medicalCertificateExpiry:new \DateTimeImmutable('-1 day'),
+            tutorLastname: $faker->lastName(),
+            tutorFirstname: $faker->firstName(),
+            tutorPhone: $faker->numerify('0#########'),
+            tutorEmail: $faker->unique()->safeEmail(),
+            tutorAddress: $faker->buildingNumber() . ' ' . $faker->streetName(),
+            tutorPostalcode: $faker->postcode(),
+            tutorCity: $faker->city(),
+            profileImage: 'female_default_profile.png',
+        );
+
+        $this->createMember(
+            manager: $manager,
+            lastname: $faker->lastName(),
+            firstname: $faker->firstNameFemale(),
+            birthdate: new \DateTimeImmutable('-22 years'),
+            gender: Gender::Female,
+            phone: $faker->numerify('0#########'),
+            address: $faker->buildingNumber() . ' ' . $faker->streetName(),
+            postalcode: $faker->postcode(),
+            city: $faker->city(),
+            email: $faker->unique()->safeEmail(),
+            profileImage: 'female_default_profile.png',
+            badgeNumber: $faker->unique()->numerify('000#######'),
+        );
+
+        $this->createMember(
+            manager: $manager,
+            lastname: $faker->lastName(),
+            firstname: $faker->firstNameFemale(),
+            birthdate: new \DateTimeImmutable('-18 years'),
+            gender: Gender::Female,
+            phone: $faker->numerify('0#########'),
+            address: $faker->buildingNumber() . ' ' . $faker->streetName(),
+            postalcode: $faker->postcode(),
+            city: $faker->city(),
+            email: $faker->unique()->safeEmail(),
+            profileImage: 'female_default_profile.png',
+            badgeNumber: $faker->unique()->numerify('000#######'),
+        );
+
+        $this->createMember(
+            manager: $manager,
+            lastname: $faker->lastName(),
+            firstname: $faker->firstNameFemale(),
+            birthdate: new \DateTimeImmutable('-43 years'),
+            gender: Gender::Female,
+            phone: $faker->numerify('0#########'),
+            address: $faker->buildingNumber() . ' ' . $faker->streetName(),
+            postalcode: $faker->postcode(),
+            city: $faker->city(),
+            email: $faker->unique()->safeEmail(),
+            profileImage: 'female_default_profile.png',
+            badgeNumber: $faker->unique()->numerify('000#######'),
+        );
+
+        $this->createMember(
+            manager: $manager,
+            lastname: $faker->lastName(),
+            firstname: $faker->firstNameFemale(),
+            birthdate: new \DateTimeImmutable('-16 years'),
+            gender: Gender::Female,
+            phone: $faker->numerify('0#########'),
+            address: $faker->buildingNumber() . ' ' . $faker->streetName(),
+            postalcode: $faker->postcode(),
+            city: $faker->city(),
+            email: $faker->unique()->safeEmail(),
+            tutorLastname: $faker->lastName(),
+            tutorFirstname: $faker->firstName(),
+            tutorPhone: $faker->numerify('0#########'),
+            tutorEmail: $faker->unique()->safeEmail(),
+            tutorAddress: $faker->buildingNumber() . ' ' . $faker->streetName(),
+            tutorPostalcode: $faker->postcode(),
+            tutorCity: $faker->city(),
+            profileImage: 'female_default_profile.png',
+            badgeNumber: $faker->unique()->numerify('000#######'),
+        );
+
+        $this->createMember(
             manager: $manager,
             lastname: $faker->lastName(),
             firstname: $faker->firstName(),
@@ -188,7 +192,7 @@ class MemberFixtures extends Fixture
         $manager->flush();
     }
 
-    private function create(
+    private function createMember(
         ObjectManager $manager,
         string $lastname,
         string $firstname,
@@ -211,7 +215,7 @@ class MemberFixtures extends Fixture
         ?string $tutorCity = null,
         ?string $profileImage = null,
         ?string $badgeNumber = null,
-    ): void
+    ): Member
     {
         $member = Member::create(
             lastname: $lastname,
@@ -239,5 +243,7 @@ class MemberFixtures extends Fixture
         $member->giveBadgeNumber($badgeNumber);
 
         $manager->persist($member);
+
+        return $member;
     }
 }

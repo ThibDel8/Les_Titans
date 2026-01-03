@@ -1,5 +1,6 @@
 # Variables
 CONSOLE=php bin/console
+COMPOSE=docker compose
 COMPOSE_PHP=docker compose exec php
 
 # ---------------------------
@@ -35,4 +36,8 @@ tf-db:
 
 bash:
 	docker exec -it les_titans_php bash
+
+rebuild:
+	$(COMPOSE) down -v --remove-orphans
+	$(COMPOSE) up --build -d
 

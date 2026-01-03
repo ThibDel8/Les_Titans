@@ -1,16 +1,39 @@
+# Dockerfile pour PHP 8.4-FPM + Symfony (WSL2 friendly)
+
 FROM php:8.4-fpm
 
-# Dépendances Symfony
-RUN apt-get update && apt-get install -y \
-    libfreetype6-dev libjpeg-dev libpng-dev libwebp-dev libxpm-dev \
-    libonig-dev libicu-dev libzip-dev zip unzip git curl \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp --with-xpm \
+# Installer les dépendances système et extensions PHP
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        apt-utils \
+        gnupg \
+        ca-certificates \
+        libpng-dev \
+        libjpeg62-turbo-dev \
+        libwebp-dev \
+        libxpm-dev \
+        libfreetype6-dev \
+        libonig-dev \
+        libicu-dev \
+        libzip-dev \
+        zip unzip git curl \
+    && docker-php-ext-configure gd \
+        --with-freetype \
+        --with-jpeg \
+        --with-webp \
+        --with-xpm \
     && docker-php-ext-install -j$(nproc) pdo_mysql gd intl opcache zip \
     && pecl install xdebug \
     && docker-php-ext-enable xdebug \
-    && apt-get clean && rm -rf /var/lib/apt/lists/* \
-    && chown -R www-data:www-data /var/www/html/var \
-    && chmod -R 775 /var/www/html/var
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# Créer les dossiers nécessaires
+RUN mkdir -p /var/www/html/var \
+    && mkdir -p /var/www/html/public/images/profiles
+
+# Droits corrects pour Symfony
+RUN chown -R www-data:www-data /var/www/html/var /var/www/html/public/images \
+    && chmod -R 775 /var/www/html/var /var/www/html/public/images
 
 # Copier l’entrypoint
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh

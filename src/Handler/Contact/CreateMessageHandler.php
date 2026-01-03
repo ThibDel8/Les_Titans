@@ -7,10 +7,14 @@ namespace App\Handler\Contact;
 use App\Repository\Contact\MessageRepository;
 use App\DTO\Request\Contact\MessageCreationRequest;
 use App\Entity\Contact\Message;
+use App\Service\Contact\MessageContactService;
 
 final class CreateMessageHandler
 {
-    public function __construct(private MessageRepository $messageRepository) {
+    public function __construct(
+        private MessageRepository $messageRepository,
+        private MessageContactService $messageContactService,
+    ) {
     }
 
     public function handle(MessageCreationRequest $request): void
@@ -23,6 +27,6 @@ final class CreateMessageHandler
 
         $this->messageRepository->save($message);
 
-        // envoyer le message
+        $this->messageContactService->send($message);
     }
 }
