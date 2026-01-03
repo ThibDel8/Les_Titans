@@ -37,37 +37,53 @@ class MembershipPdfGenerator
         $pdf->writeHTML(html: 'SAINT-OUEN MUSCULATION', align: 'C');
 
         $pdf->setFontSize(14);
-        $pdf->writeHTML(html: "SAISON $year", align: 'C');
+        $pdf->writeHTML(html: 'SAISON '.$year, align: 'C');
 
         $pdf->setFontSize(11);
-        $pdf->writeHTML(html: "Bulletin d'inscription du 1er janvier $year au 31 décembre $year", align: 'C');
+        $pdf->writeHTML(html: '<i>Bulletin d\'inscription du 1er janvier '.$year.' au 31 décembre </i>'.$year, align: 'C');
+        $pdf->writeHTML(html: '<br><br>');
 
-        $pdf->writeHTML(html: 'Nom : '.$lastname);
-        $pdf->writeHTML(html: 'Prénom : '.$firstname);
-        $pdf->writeHTML(html: 'Né(e) le : '.$birthday);
-        $pdf->writeHTML(html: 'Sexe : '.$gender);
-        $pdf->writeHTML(html: 'Téléphone : '.$phone);
-        $pdf->writeHTML(html: 'Adresse : '.$address);
+        $pdf->writeHTML(html: '<strong>Nom : </strong>'.$lastname);
+        $pdf->writeHTML(html: '<strong>Prénom : </strong>'.$firstname);
+        $pdf->writeHTML(html: '<strong>Né(e) le : </strong>'.$birthday);
+        $pdf->writeHTML(html: '<strong>Sexe : </strong>'.$gender);
+        $pdf->writeHTML(html: '<strong>Téléphone : </strong>'.$phone);
+        $pdf->writeHTML(html: '<strong>Adresse : </strong>'.$address);
 
+        $pdf->writeHTML(html: '<br><br>');
+        $pdf->writeHTML(html: '<strong><i>RAPPEL</i></strong>', align: 'C');
+        $pdf->writeHTML(html: '<br>');
 
-        $pdf->writeHTML(html: "RAPPEL", align: 'C');
         $pdf->writeHTML(html: "Les jeunes âgés de 10 à 16 ans ont accès uniquement aux séances de renforcement musculaire léger et de cardio-training.
 Toute activité impliquant des charges lourdes ou des exercices complexes leur est strictement interdite.
 Ils doivent être accompagnés par un adulte, qui en assume l’entière responsabilité.");
+        $pdf->writeHTML(html: '<br>');
+
         $pdf->writeHTML(html: "Pour le respect de l’hygiène et de la sécurité de tous, le port d’une serviette et de chaussures propres est obligatoire à chaque séance.");
+        $pdf->writeHTML(html: '<br>');
+
         $pdf->writeHTML(html: "L’inscription devient effective lors de la remise de ce bulletin dûment complété, accompagné d’un certificat médical autorisant la pratique de la musculation et/ou du cardio-training, ainsi que du règlement de la cotisation annuelle de 50 €.");
         $pdf->writeHTML(html: "Une caution de 10 € est demandée pour le badge magnétique. Cette somme sera restituée en cas de non-renouvellement de l’adhésion.");
 
-        $pdf->writeHTML(html: "Je reconnais avoir pris connaissance des statuts et du règlement intérieur de l’association.", align: 'C');
+        if($membership->getAge() < 18) {
+            $pdf->writeHTML(html: '___________________________________________________________________________________');
+            $pdf->writeHTML(html: '<br>');
+            $pdf->writeHTML(html: "<i>Je soussigné(e) $tutorNames, demeurant au $tutorAddress, agissant en qualité de représentant légal de $firstname $lastname, autorise ce dernier à fréquenter la salle de musculation de l’association Saint-Ouen Musculation.</i>");
+            $pdf->writeHTML(html: '<br>');
+
+            $pdf->writeHTML(html: "Le $today");
+            $pdf->writeHTML(html: 'Signature du représentant légal "lu et approuvé"');
+        }
+
+        $pdf->writeHTML(html: '___________________________________________________________________________________');
+        $pdf->writeHTML(html: '<br>');
+
+        $pdf->writeHTML(html: '<i>Je reconnais avoir pris connaissance des statuts et du règlement intérieur de l’association.</i>', align: 'C');
+        $pdf->writeHTML(html: '<br>');
+
         $pdf->writeHTML(html: "Le $today");
         $pdf->writeHTML(html: "Signature de l'adhérent \"lu et approuvé\"");
         $pdf->writeHTML(html: "Signature d'un membre de la direction");
-
-        if($membership->getAge() < 18) {
-            $pdf->writeHTML(html: "Je soussigné(e) $tutorNames, demeurant au $tutorAddress, agissant en qualité de représentant légal de $firstname $lastname, autorise ce dernier à fréquenter la salle de musculation de l’association Saint-Ouen Musculation.");
-            $pdf->writeHTML(html: "Le $today");
-            $pdf->writeHTML(html: "Signature du représentant légal \"lu et approuvé\"");
-        }
 
         return $pdf->Output(name: 'adhesion_saint_ouen_musculation.pdf', dest: 'D');
     }

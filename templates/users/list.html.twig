@@ -8,7 +8,7 @@
 
     {% for user in users %}
         <section class="manager-list-section">
-            <a class="manager" href="">
+            <a class="manager" href="" title="Voir les informations de l'utilisateur {{ user.member.firstname|capitalize }} {{ user.member.lastname|capitalize }}">
                 <div class="user-list-names">
                     <img src="{{ asset('images/profiles/' ~ user.member.profileImage) }}">
                     <div>

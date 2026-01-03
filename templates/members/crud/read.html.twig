@@ -5,7 +5,7 @@
 {% block body %}
 
     <div class="right-content">
-        <button class="btn btn-warning" onclick="document.getElementById('confirm-create').showModal()">Rendre Manager</button>
+        <button class="btn btn-warning" onclick="document.getElementById('confirm-create').showModal()" title="Rendre ce membre manager">Rendre Manager</button>
         <dialog id="confirm-create">
             <p>Êtes-vous sûr de vouloir rendre ce membre manager ?</p>
             <br>
@@ -15,12 +15,12 @@
                 <input type="hidden" name="_token"
                     value="{{ csrf_token('create_user_' ~ member.id) }}">
 
-                <button class="btn btn-warning">Oui, rendre manager</button>
-                <button class="btn btn-error" type="button" onclick="this.closest('dialog').close()">Annuler</button>
+                <button class="btn btn-warning" title="Rendre ce membre manager">Oui, rendre manager</button>
+                <button class="btn btn-error" type="button" onclick="this.closest('dialog').close()" title="Annuler">Annuler</button>
             </form>
         </dialog>
-        <a class="btn btn-info" href="{{ path('admin_member_update', {id: member.id}) }}">Mettre à jour</a>
-        <button class="btn btn-error" onclick="document.getElementById('confirm-delete').showModal()">Supprimer</button>
+        <a class="btn btn-info" href="{{ path('admin_member_update', {id: member.id}) }}" title="Modifier les informations du membre">Mettre à jour</a>
+        <button class="btn btn-error" onclick="document.getElementById('confirm-delete').showModal()" title="Supprimer ce membre">Supprimer</button>
         <dialog id="confirm-delete">
             <p>Êtes-vous sûr de vouloir supprimer ce membre ?</p>
             <br>
@@ -30,8 +30,8 @@
                 <input type="hidden" name="_token"
                     value="{{ csrf_token('delete_member_' ~ member.id) }}">
 
-                <button class="btn btn-error">Oui, supprimer</button>
-                <button class="btn btn-warning" type="button" onclick="this.closest('dialog').close()">Annuler</button>
+                <button class="btn btn-error" title="Supprimer ce membre">Oui, supprimer</button>
+                <button class="btn btn-warning" type="button" onclick="this.closest('dialog').close()" title="Annuler">Annuler</button>
             </form>
         </dialog>
     </div>
@@ -61,9 +61,9 @@
             {% endif %}
         </div><br>
         <div>
-            <a href="tel:+33{{ member.phone|slice(1) }}">☎️ {{ member.phone }}</a><br>
+            <a href="tel:+33{{ member.phone|slice(1) }}" title="Appeler {{ member.firstname|capitalize }}">☎️ {{ member.phone }}</a><br>
             <p>🏠 {{ member.address }} {{ member.postalcode }}, {{ member.city|capitalize }}</p><br>
-            <a href="mailto:{{ member.email }}">📧 {{ member.email }}</a>
+            <a href="mailto:{{ member.email }}" title="Envoyer un email à {{ member.firstname|capitalize }}">📧 {{ member.email }}</a>
         </div>
     </section>
 
@@ -71,9 +71,9 @@
     <section class="manager-section">
         <h2 class="manager-title">Tuteur légal{% if member.tutorFirstname or member.tutorLastname %} : {{ member.tutorFirstname }} {{ member.tutorLastname }}{% endif %}</h2>
         <div>
-            {% if member.tutorPhone %}<a href="tel:+33{{ member.tutorPhone|slice(1) }}">☎️ {{ member.tutorPhone }}</a><br>{% else %}<p>☎️ Information obligatoire manquante</p>{% endif %}
+            {% if member.tutorPhone %}<a href="tel:+33{{ member.tutorPhone|slice(1) }}" title="Appeler le tuteur légal de {{ member.firstname|capitalize }}">☎️ {{ member.tutorPhone }}</a><br>{% else %}<p>☎️ Information obligatoire manquante</p>{% endif %}
             {% if member.tutorAddress and member.tutorPostalcode and member.tutorCity %}<p>🏠 {{ member.tutorAddress }} {{ member.tutorPostalcode }}, {{ member.tutorCity|capitalize }}</p><br>{% else %}<p>🏠 Information obligatoire manquante</p>{% endif %}
-            {% if member.tutorEmail %}<a href="mailto:{{ member.tutorEmail }}">📧 {{ member.tutorEmail }}</a><br>{% else %}<p>📧 Information obligatoire manquante</p>{% endif %}
+            {% if member.tutorEmail %}<a href="mailto:{{ member.tutorEmail }}" title="Envoyer un email au tuteur légal de {{ member.firstname|capitalize }}">📧 {{ member.tutorEmail }}</a><br>{% else %}<p>📧 Information obligatoire manquante</p>{% endif %}
         </div>
     </section>
 {% endif %}
@@ -85,7 +85,7 @@
     <h2 class="manager-title">Attribuer un numéro de badge</h2>
     {{ form_start(form) }}
         {{ form_rest(form) }}
-        <button type="submit">Enregistrer</button>
+        <button type="submit" title="Enregistrer le numéro de badge">Enregistrer</button>
     {{ form_end(form) }}
 </section>
 {% endif %}

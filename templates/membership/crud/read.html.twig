@@ -10,10 +10,10 @@
         and membership.annualMembershipFee %}
         <form method="post" action="{{ path('admin_member_create', {id: membership.id}) }}" style="display:inline">
             <input type="hidden" name="_token" value="{{ csrf_token('validate_membership_' ~ membership.id) }}">
-            <button class="btn btn-success">Accepter</button>
+            <button class="btn btn-success" title="Accepter cette demande d'adhésion">Accepter</button>
         </form>
     {% endif %}
-    <button class="btn btn-error" onclick="document.getElementById('confirm-delete').showModal()">Refuser</button>
+    <button class="btn btn-error" onclick="document.getElementById('confirm-delete').showModal()" title="Refuser cette demande d'adhésion">Refuser</button>
     <dialog id="confirm-delete">
         <p>Êtes-vous sûr de vouloir refuser cette demande d’adhésion ?</p>
         <br>
@@ -23,11 +23,8 @@
             <input type="hidden" name="_token"
                 value="{{ csrf_token('delete_membership_' ~ membership.id) }}">
 
-            <button class="btn btn-error">Oui, refuser</button>
-            <button class="btn btn-warning" type="button"
-                    onclick="this.closest('dialog').close()">
-                Annuler
-            </button>
+            <button class="btn btn-error" title="Refuser cette demande d'adhésion">Oui, refuser</button>
+            <button class="btn btn-warning" type="button" onclick="this.closest('dialog').close()" title="Annuler">Annuler</button>
         </form>
     </dialog>
 </div>
@@ -45,9 +42,9 @@
         </p>
     </div><br>
     <div>
-        <a href="tel:+33{{ membership.phone|slice(1) }}">☎️ {{ membership.phone }}</a><br>
+        <a href="tel:+33{{ membership.phone|slice(1) }}" title="Appeler {{ membership.firstname|capitalize }}">☎️ {{ membership.phone }}</a><br>
         <p>🏠 {{ membership.address }} {{ membership.postalcode }}, {{ membership.city|capitalize }}</p><br>
-        <a href="mailto:{{ membership.email }}">📧 {{ membership.email }}</a>
+        <a href="mailto:{{ membership.email }}" title="Envoyer un email à {{ membership.firstname|capitalize }}">📧 {{ membership.email }}</a>
     </div>
 </section>
 
@@ -55,9 +52,9 @@
     <section class="manager-section">
         <h2 class="manager-title">Tuteur légal{% if membership.tutorFirstname or membership.tutorLastname %} : {{ membership.tutorFirstname }} {{ membership.tutorLastname }}{% endif %}</h2>
         <div>
-            {% if membership.tutorPhone %}<a href="tel:+33{{ membership.tutorPhone|slice(1) }}">☎️ {{ membership.tutorPhone }}</a><br>{% else %}<p>☎️ Information obligatoire manquante</p>{% endif %}
+            {% if membership.tutorPhone %}<a href="tel:+33{{ membership.tutorPhone|slice(1) }}" title="Appeler le tuteur légal de {{ membership.firstname|capitalize }}">☎️ {{ membership.tutorPhone }}</a><br>{% else %}<p>☎️ Information obligatoire manquante</p>{% endif %}
             {% if membership.tutorAddress and membership.tutorPostalcode and membership.tutorCity %}<p>🏠 {{ membership.tutorAddress }} {{ membership.tutorPostalcode }}, {{ membership.tutorCity|capitalize }}</p><br>{% else %}<p>🏠 Information obligatoire manquante</p>{% endif %}
-            {% if membership.tutorEmail %}<a href="mailto:{{ membership.tutorEmail }}">📧 {{ membership.tutorEmail }}</a><br>{% else %}<p>📧 Information obligatoire manquante</p>{% endif %}
+            {% if membership.tutorEmail %}<a href="mailto:{{ membership.tutorEmail }}" title="Envoyer un email au tuteur légal de {{ membership.firstname|capitalize }}">📧 {{ membership.tutorEmail }}</a><br>{% else %}<p>📧 Information obligatoire manquante</p>{% endif %}
         </div>
     </section>
 {% endif %}
@@ -78,7 +75,7 @@
         {{ form_row(form.annualMembershipFee) }}
         {{ form_row(form.accessBadgeDeposit) }}
         <br>
-        <button type="submit">Enregistrer</button>
+        <button type="submit" title="Enregistrer les données obligatoires">Enregistrer</button>
     {{ form_end(form) }}
 {% endif %}
 
