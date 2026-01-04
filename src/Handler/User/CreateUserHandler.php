@@ -8,7 +8,7 @@ use App\Entity\Member\Member;
 use App\Entity\Security\User;
 use App\Enum\Security\Role;
 use App\Repository\Security\UserRepository;
-use App\Service\User\UserMailer;
+use App\Service\User\Mailer\UserMailer;
 
 final class CreateUserHandler
 {

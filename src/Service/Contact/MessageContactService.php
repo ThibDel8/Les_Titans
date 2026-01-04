@@ -5,26 +5,31 @@ declare(strict_types=1);
 namespace App\Service\Contact;
 
 use App\Entity\Contact\Message;
-use Symfony\Component\Mime\Email;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class MessageContactService
 {
-    public function __construct(private MailerInterface $mailer)
+    public function __construct(
+        private MailerInterface $mailer,
+        private ParameterBagInterface $params,
+    )
     {
     }
 
     public function send(Message $message): void
     {
-        $email = (new Email())
-            ->from('hello@example.com')
-            ->to($message->getEmail())
-            //->cc('cc@example.com')
-            //->bcc('bcc@example.com')
-            //->replyTo('fabien@example.com')
-            //->priority(Email::PRIORITY_HIGH)
-            ->subject($message->getSubject())
-            ->text($message->getMessage());
+        $email = (new TemplatedEmail())
+            ->from($this->params->get('app.email'))
+            ->to($this->params->get('manager1.email'))
+            ->subject('Vous avez reçu un nouveau message de contact')
+            ->htmlTemplate('emails/contact/new_message.html.twig')
+            ->context([
+                'email_address' => $message->getEmail(),
+                'subject' => $message->getSubject(),
+                'message' => $message->getMessage(),
+            ]);
 
         $this->mailer->send($email);
     }

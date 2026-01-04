@@ -1,0 +1,33 @@
+{% extends 'emails/base.html.twig' %}
+
+{% block subject %}{{ parent() }}Nouveau message{% endblock %}
+
+{% block body %}
+    <h2 style="color: {{ colors.managerColor }};">Nouveau message</h2>
+    <div style="color: {{ colors.grey }}; margin-bottom: 20px;">
+        <p>Bonjour,</p>
+        <p>Vous avez reçu un nouveau message via le formulaire de contact.</p>
+    </div>
+
+    <section style="
+        background-color: {{ colors.greyDark }};
+        border-radius: 4px;
+        padding: 25px;
+        margin-bottom: 40px;
+        border-left: 5px solid {{ colors.managerColor }};
+    ">
+        <h3 style="color: {{ colors.managerColor }}; margin-bottom: 40px;">Détails du message</h3>
+        <div style="color: {{ colors.grey }};">
+            <strong>Email : </strong><a href="mailto:{{ email_address }}" style="color:{{ colors.grey }}; text-decoration: none;">{{ email_address }}</a><br><br>
+            <strong>Sujet : </strong>{{ subject }}<br><br>
+            <strong>Message : </strong><br>
+            {{ message }}
+        </div>
+    </section>
+
+    <div style="color: {{ colors.grey }};">
+        <p>Pour répondre, veuillez cliquer sur l'adresse e-mail fournie ci-dessus, ou vous connecter sur le site.</p><br>
+        <p>Merci,</p>
+        <p>Saint-Ouen Musculation | Les Titans</p>
+    </div>
+{% endblock %}
