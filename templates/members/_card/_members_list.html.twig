@@ -1,7 +1,7 @@
 <section class="manager-{{ status }}-section">
     <a class="manager" href="{{ path('admin_member_read', {id: member.id}) }}" title="Cliquer pour voir le membre">
         <div class="member-list-names">
-            <img src="{{ asset('images/profiles/' ~ member.profileImage) }}">
+            <img src="{{ asset('images/profiles/uploads/' ~ member.profileImage) }}" alt="Image de profil du membre">
             <div>
                 <p>
                 {{ member.firstname|capitalize }} {{ member.lastname|capitalize }}

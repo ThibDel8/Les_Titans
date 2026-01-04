@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Service\User;
+namespace App\Service\User\Mailer;
 
 use App\Entity\Security\User;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;

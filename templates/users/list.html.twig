@@ -10,7 +10,7 @@
         <section class="manager-list-section">
             <a class="manager" href="" title="Voir les informations de l'utilisateur {{ user.member.firstname|capitalize }} {{ user.member.lastname|capitalize }}">
                 <div class="user-list-names">
-                    <img src="{{ asset('images/profiles/' ~ user.member.profileImage) }}">
+                    <img src="{{ asset('images/profiles/uploads/' ~ user.member.profileImage) }}" alt="Image de profil de l'utilisateur">
                     <div>
                         <p>{{ user.member.firstname|capitalize }} {{ user.member.lastname|capitalize }}</p>
                         <div class="user-list-role">{{ user.roles[0]|replace({'_': ' '})|lower|capitalize }}</div>
@@ -18,6 +18,8 @@
                 </div>
             </a>
         </section>
+    {% else %}
+        <p>Aucun utilisateur pour le moment.</p>
     {% endfor %}
 
 {% endblock %}

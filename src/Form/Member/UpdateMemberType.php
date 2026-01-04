@@ -98,6 +98,9 @@ class UpdateMemberType extends AbstractType
                 'attr' => [
                     'accept' => '.jpeg,.jpg,.png,.gif,.bmp,.webp,.wbmp',
                 ],
+                'row_attr' => [
+                    'class' => 'form-row',
+                ],
             ])
             ->add('tutorLastname', TextType::class, [
                 'label' => 'Nom du tuteur légal',
@@ -152,24 +155,40 @@ class UpdateMemberType extends AbstractType
                 'label' => 'Date d\'expiration du certificat médical',
                 'required' => false,
                 'widget' => 'single_text',
+                'row_attr' => [
+                    'class' => 'form-row',
+                ],
             ])
             ->add('accessBadgeDeposit', IntegerType::class, [
                 'label' => 'Caution donnée par l\'adhérent pour le badge',
                 'required' => false,
+                'row_attr' => [
+                    'class' => 'form-row',
+                ],
             ])
             ->add('annualMembershipFee', IntegerType::class, [
                 'label' => 'Cotisation donnée par l\'adhérent pour l\'année',
                 'required' => false,
+                'row_attr' => [
+                    'class' => 'form-row',
+                ],
             ])
             ->add('accessBadgeNumber', TextType::class, [
                 'label' => 'Numéro du badge',
                 'required' => true,
-            ]);
+                'row_attr' => [
+                    'class' => 'form-row',
+                ],
+            ])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
+            'attr' => [
+                'autocomplete' => 'off',
+            ],
             'data_class' => MemberRequest::class,
         ]);
     }

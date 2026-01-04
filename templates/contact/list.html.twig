@@ -8,6 +8,8 @@
 
     {% for message in messages %}
         {% include 'contact/_card/_messages_list.html.twig' with { message: message } %}
+    {% else %}
+        <p>Aucun message pour le moment.</p>
     {% endfor %}
 
 {% endblock %}

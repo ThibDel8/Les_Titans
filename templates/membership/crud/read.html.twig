@@ -32,7 +32,7 @@
 <section class="manager-section">
     <h2 class="manager-title">{{ membership.firstname|capitalize }} {{ membership.lastname|capitalize }}</h2>
     <div class="membership-profile-image">
-        <img src="{{ asset('images/profiles/' ~ membership.profileImage ) }}" alt="" title="">
+        <img src="{{ asset('images/profiles/uploads/' ~ membership.profileImage ) }}" alt="Image de profil du potentiel futur membre">
         <p>
             {{ membership.gender.label|trans|capitalize }}
         </p>
@@ -70,7 +70,7 @@
     <p>Ne pas oublier de lui attribuer son numéro de badge dans son profil.</p>
 {% else %}
     <h2 class="manager-title">Validations pour acceptation</h2>
-    {{ form_start(form, {'attr': {'autocomplete': 'off'}}) }}
+    {{ form_start(form) }}
         {{ form_row(form.medicalCertificateExpiry) }}
         {{ form_row(form.annualMembershipFee) }}
         {{ form_row(form.accessBadgeDeposit) }}

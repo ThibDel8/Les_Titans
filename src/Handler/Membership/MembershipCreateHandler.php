@@ -6,6 +6,7 @@ namespace App\Handler\Membership;
 
 use App\Entity\Membership\Membership;
 use App\DTO\Request\Membership\MembershipCreationRequest;
+use App\Enum\Membership\Gender;
 use App\Repository\Membership\MembershipRepository;
 use App\Service\ProfileImage\ProfileImageService;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -21,11 +22,8 @@ final class MembershipCreateHandler
     public function handle(MembershipCreationRequest $request): Membership
     {
         $uploadedProfileImage = $request->profileImage;
-        $profileImage = null;
 
-        if ($uploadedProfileImage) {
-            $profileImage = $this->getCleanProfileImage($uploadedProfileImage);
-        }
+        $profileImage = $this->getCleanProfileImage($uploadedProfileImage, $request->gender);
 
         $membership = Membership::create(
             lastname: $request->lastname,
@@ -52,9 +50,18 @@ final class MembershipCreateHandler
         return $membership;
     }
 
-    private function getCleanProfileImage(UploadedFile $uploadedFile): string
+    private function getCleanProfileImage(?UploadedFile $uploadedFile, Gender $gender): string
     {
-        $originalPath = $uploadedFile->getPathname();
+        if (null === $uploadedFile) {
+            $defaultFile = match ($gender->value) {
+                Gender::Male->value => ProfileImageService::MALE_PROFILE,
+                Gender::Female->value => ProfileImageService::FEMALE_PROFILE,
+                Gender::Other->value => ProfileImageService::OTHER_PROFILE,
+            };
+            $originalPath = $this->profileImageService->getDefaultsDir() . $defaultFile;
+        } else {
+            $originalPath = $uploadedFile->getPathname();
+        }
 
         return $this->profileImageService->save($originalPath);
     }

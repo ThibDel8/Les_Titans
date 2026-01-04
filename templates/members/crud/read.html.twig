@@ -5,7 +5,9 @@
 {% block body %}
 
     <div class="right-content">
-        <button class="btn btn-warning" onclick="document.getElementById('confirm-create').showModal()" title="Rendre ce membre manager">Rendre Manager</button>
+        {% if member.user is null %}
+            <button class="btn btn-warning" onclick="document.getElementById('confirm-create').showModal()" title="Rendre ce membre manager">Rendre Manager</button>
+        {% endif %}
         <dialog id="confirm-create">
             <p>Êtes-vous sûr de vouloir rendre ce membre manager ?</p>
             <br>
@@ -39,7 +41,7 @@
     <section class="manager-section">
         <h2 class="manager-title">Profil de {{ member.firstname|capitalize }} {{ member.lastname|capitalize }}</h2>
         <div class="member-profile-image">
-            <img src="{{ asset('images/profiles/' ~ member.profileImage ) }}" alt="" title="">
+            <img src="{{ asset('images/profiles/uploads/' ~ member.profileImage ) }}" alt="Image de profil du membre">
             <p>
                 {{ member.gender.label|trans|capitalize }}
             </p>
@@ -60,7 +62,7 @@
                 <p>🔑 {{ member.firstname|capitalize }} n'a pas encore de badge alors que son abonnement annuel est payé.</p>
             {% endif %}
         </div><br>
-        <div>
+        <div class="member-contact-info">
             <a href="tel:+33{{ member.phone|slice(1) }}" title="Appeler {{ member.firstname|capitalize }}">☎️ {{ member.phone }}</a><br>
             <p>🏠 {{ member.address }} {{ member.postalcode }}, {{ member.city|capitalize }}</p><br>
             <a href="mailto:{{ member.email }}" title="Envoyer un email à {{ member.firstname|capitalize }}">📧 {{ member.email }}</a>

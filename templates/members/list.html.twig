@@ -14,6 +14,8 @@
 
     {% for member in validMembers %}
         {% include 'members/_card/_members_list.html.twig' with { member: member, status: 'valid' } %}
+    {% else %}
+        <p>Aucun membre pour le moment.</p>
     {% endfor %}
 
 {% endblock %}
