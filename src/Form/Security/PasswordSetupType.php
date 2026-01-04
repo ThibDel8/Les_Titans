@@ -18,7 +18,7 @@ class PasswordSetupType extends AbstractType
     {
         $builder
             ->add('plainPassword', PasswordType::class, [
-                'label' => 'Nouveau mot de passe',
+                'label' => 'Mot de passe',
                 'mapped' => false,
                 'attr' => ['autocomplete' => 'new-password'],
                 'constraints' => [
@@ -35,7 +35,7 @@ class PasswordSetupType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => MembershipCreationRequest::class,
+            'data_class' => null,
         ]);
     }
 }

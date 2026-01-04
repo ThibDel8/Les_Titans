@@ -18,7 +18,7 @@ class MessageContactService
     {
     }
 
-    public function send(Message $message): void
+    public function sendContactMessage(Message $message): void
     {
         $email = (new TemplatedEmail())
             ->from($this->params->get('app.email'))
