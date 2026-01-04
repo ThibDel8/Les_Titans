@@ -15,15 +15,22 @@ class MemberAccessBadgeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-        ->add('accessBadgeNumber', TextType::class, [
-            'label' => 'Numéro du badge',
-            'required' => true,
-        ]);
+            ->add('accessBadgeNumber', TextType::class, [
+                'label' => 'Numéro du badge',
+                'required' => true,
+                'row_attr' => [
+                    'class' => 'form-row',
+                ],
+            ])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
+            'attr' => [
+                'autocomplete' => 'off',
+            ],
             'data_class' => MemberAccessBadgeRequest::class,
         ]);
     }

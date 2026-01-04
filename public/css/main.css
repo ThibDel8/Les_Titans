@@ -393,7 +393,12 @@ input:focus, textarea:focus, select:focus {
     color: var(--manager-color);
 }
 
+.member-contact-info a {
+    color: var(--grey);
+}
+
 .membership-list-names,
+.message-list-names,
 .member-list-names,
 .user-list-names {
     width: 100%;
@@ -414,8 +419,9 @@ input:focus, textarea:focus, select:focus {
     object-position: center;
 }
 
-.user-list-role,
-.membership-list-date {
+.membership-list-date,
+.message-list-date,
+.user-list-role {
     width: 100%;
     font-size: 0.8rem;
     opacity: 0.6;

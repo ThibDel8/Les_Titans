@@ -2,12 +2,13 @@
 
 namespace App\Command;
 
-use App\Entity\Member\Member;
 use App\Enum\Security\Role;
+use App\Entity\Member\Member;
 use App\Entity\Security\User;
 use App\Enum\Membership\Gender;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
+use App\Service\ProfileImage\ProfileImageService;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -22,6 +23,7 @@ class CreateAdminAccountCommand extends Command
     public function __construct(
         private EntityManagerInterface $manager,
         private UserPasswordHasherInterface $hasher,
+        private ProfileImageService $profileImageService,
     )
     {
         parent::__construct();
@@ -49,7 +51,7 @@ class CreateAdminAccountCommand extends Command
             medicalCertificateExpiry: new \DateTimeImmutable('2027-01-01'),
             accessBadgeDeposit: 10,
             annualMembershipFee: 50,
-            profileImage: 'admin.png',
+            profileImage: $this->profileImageService->save($this->profileImageService->getDefaultsDir() . ProfileImageService::ADMIN_PROFILE),
         );
 
         $member->giveBadgeNumber('0009559203');

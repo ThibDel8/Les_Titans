@@ -40,12 +40,16 @@ class ContactType extends AbstractType
                 'row_attr' => [
                     'class' => 'form-row',
                 ],
-            ]);
+            ])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
+            'attr' => [
+                'autocomplete' => 'off',
+            ],
             'data_class' => MessageCreationRequest::class,
         ]);
     }

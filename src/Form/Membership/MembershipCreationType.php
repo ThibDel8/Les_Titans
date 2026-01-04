@@ -97,6 +97,9 @@ class MembershipCreationType extends AbstractType
                 'attr' => [
                     'accept' => '.jpeg,.jpg,.png,.gif,.bmp,.webp,.wbmp',
                 ],
+                'row_attr' => [
+                    'class' => 'form-row',
+                ],
             ])
             ->add('tutorLastname', TextType::class, [
                 'label' => 'Nom du tuteur légal',
@@ -146,12 +149,16 @@ class MembershipCreationType extends AbstractType
                 'row_attr' => [
                     'class' => 'form-row',
                 ],
-            ]);
+            ])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
+            'attr' => [
+                'autocomplete' => 'off',
+            ],
             'data_class' => MembershipCreationRequest::class,
         ]);
     }

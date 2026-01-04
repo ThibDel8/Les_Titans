@@ -25,7 +25,11 @@ class PasswordSetupType extends AbstractType
                     new NotBlank(),
                     new Length(min: 8),
                 ],
-            ]);
+                'row_attr' => [
+                    'class' => 'form-row',
+                ],
+            ])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
