@@ -11,25 +11,34 @@ class ProfileImageService
     public const string FEMALE_PROFILE = 'female_default_profile.png';
     public const string MALE_PROFILE = 'male_default_profile.png';
     public const string OTHER_PROFILE = 'other_default_profile.png';
-    public const array ALL_PROFILES = [
-        self::FEMALE_PROFILE,
-        self::MALE_PROFILE,
-        self::OTHER_PROFILE,
-    ];
+    public const string ADMIN_PROFILE = 'admin_default_profile.png';
 
     public function __construct(
-        #[Autowire('%kernel.project_dir%/public/images/profiles/')]
-        private string $profileImageDir
+        #[Autowire('%kernel.project_dir%/public/images/profiles/uploads/')]
+        private string $uploadsDir,
+        #[Autowire('%kernel.project_dir%/public/images/profiles/defaults/')]
+        private string $defaultsDir
     ) {
+        if (!is_dir($this->uploadsDir)) {
+            mkdir($this->uploadsDir, 0775, true);
+        }
+
+        if (!is_writable($this->uploadsDir)) {
+            throw new \RuntimeException('Le dossier ' . $this->uploadsDir . ' n’est pas accessible en écriture.');
+        }
     }
 
     public function save(string $originalPath): string
     {
-        $imageInfo = getimagesize($originalPath);
+        if (!file_exists($originalPath)) {
+            throw new \RuntimeException('Le fichier source ' . $originalPath . ' n’existe pas.');
+        }
 
+        $imageInfo = getimagesize($originalPath);
         if ($imageInfo === false || !isset($imageInfo['mime'])) {
             throw new \RuntimeException('Fichier image invalide.');
         }
+
         $mime = $imageInfo['mime'];
 
         switch ($mime) {
@@ -59,7 +68,7 @@ class ProfileImageService
 
         $newFilename = bin2hex(random_bytes(16)) . '.png';
 
-        imagepng($image, $this->profileImageDir . $newFilename);
+        imagepng($image, $this->uploadsDir . $newFilename);
         unset($image);
 
         return $newFilename;
@@ -67,11 +76,7 @@ class ProfileImageService
 
     public function remove(string $profileImage): void
     {
-        if (in_array($profileImage, self::ALL_PROFILES, true)) {
-            return;
-        }
-
-        $filePath = rtrim($this->profileImageDir, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $profileImage;
+        $filePath = rtrim($this->uploadsDir, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $profileImage;
 
         if (file_exists($filePath)) {
             unlink($filePath);
@@ -83,5 +88,9 @@ class ProfileImageService
         $this->remove($oldImagePath);
 
         return $this->save($newImagePath);
+    }
+    public function getDefaultsDir(): string
+    {
+        return $this->defaultsDir;
     }
 }

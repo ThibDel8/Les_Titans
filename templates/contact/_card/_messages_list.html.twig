@@ -4,10 +4,10 @@
 <section class="manager-section">
 {% endif %}
     <a class="manager" href="{{ path('admin_message_read', {id: message.id}) }}" title="Cliquer pour lire le message">
-        <div class="member-list-names">
+        <div class="message-list-names">
             <div>
                 <p>{{ message.subject }}</p>
-                <div class="membership-list-date">
+                <div class="message-list-date">
                     <p>Envoyé par {{ message.email }}.</p>
                     <p>{{ message.createdAt|fr_date }}</p>
                 </div>
