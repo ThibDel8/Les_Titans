@@ -19,6 +19,7 @@ class MembershipPdfGenerator
         $now = new \DateTimeImmutable('now');
         $today = $now->format('d/m/Y');
         $year = $now->format('Y');
+        $majorityAge = 18;
         $lastname = $membership->getLastname();
         $firstname = $membership->getFirstname();
         $birthday = $membership->getBirthdate()->format('d/m/Y');
@@ -30,61 +31,83 @@ class MembershipPdfGenerator
 
         $pdf = new TCPDF();
         $pdf->setPrintHeader(false);
-        $pdf->SetMargins(15, 20, 15);
+        $pdf->setPrintFooter(false);
+        $pdf->SetMargins(left: 20, top: 20);
+        $pdf->SetAutoPageBreak(false);
         $pdf->AddPage();
 
-        $pdf->setFontSize(20);
-        $pdf->writeHTML(html: 'SAINT-OUEN MUSCULATION', align: 'C');
+        $pdf->SetFont(family: 'helvetica', style: 'B', size: 16);
+        $pdf->Cell(w: 0, h: 10, txt: 'SAINT-OUEN MUSCULATION', border: 0, ln: 1, align: 'C');
+        $pdf->SetFont(family: 'helvetica', style: '', size: 11);
+        $pdf->Ln(h: 2);
+        $pdf->Cell(w: 0, h: 6, txt: "Bulletin d’adhésion – Année {$year}", border: 0, ln: 1, align: 'C');
+        $pdf->Ln(h: 8);
 
-        $pdf->setFontSize(14);
-        $pdf->writeHTML(html: 'SAISON '.$year, align: 'C');
+        $pdf->SetFont(family: 'helvetica', style: 'B', size: 11);
+        $pdf->Cell(w: 0, h: 6, txt: 'IDENTITÉ DE L’ADHÉRENT', border: 0, ln: 1);
+        $pdf->Ln(h: 2);
+        $pdf->SetFont(family: 'helvetica', style: '', size: 10);
+        $pdf->Cell(w: 50, h: 8, txt: 'Nom et Prénom :', border: 1);
+        $pdf->Cell(w: 0, h: 8, txt: $lastname.' '.$firstname, border: 1, ln: 1);
+        $pdf->Cell(w: 50, h: 8, txt: 'Sexe :', border: 1);
+        $pdf->Cell(w: 0, h: 8, txt: $gender, border: 1, ln: 1);
+        $pdf->Cell(w: 50, h: 8, txt: 'Date de naissance :', border: 1);
+        $pdf->Cell(w: 0, h: 8, txt: $birthday, border: 1, ln: 1);
+        $pdf->Cell(w: 50, h: 8, txt: 'Téléphone :', border: 1);
+        $pdf->Cell(w: 0, h: 8, txt: $phone, border: 1, ln: 1);
+        $pdf->Cell(w: 50, h: 8, txt: 'Adresse :', border: 1);
+        $pdf->Cell(w: 0, h: 8, txt: $address, border: 1, ln: 1);
+        $pdf->Ln(h: 8);
 
-        $pdf->setFontSize(11);
-        $pdf->writeHTML(html: '<i>Bulletin d\'inscription du 1er janvier '.$year.' au 31 décembre </i>'.$year, align: 'C');
-        $pdf->writeHTML(html: '<br><br>');
+        $pdf->SetFont(family: 'helvetica', style: 'B', size: 11);
+        $pdf->Cell(w: 0, h: 6, txt: 'CONDITIONS D’ADHÉSION', border: 0, ln: 1);
+        $pdf->Ln(h: 2);
+        $pdf->SetFont(family: 'helvetica', style: '', size: 10);
+        $pdf->MultiCell(w: 0, h: 6, txt:"L’adhésion est valable du 1er janvier {$year} au 31 décembre {$year}.", ishtml: true);
+        $pdf->Ln(h: 2);
+        $pdf->MultiCell(w: 0, h: 6, txt:"Pour les adhérents âgés de 10 à 16 ans, l’accès est limité aux séances de renforcement musculaire léger et de cardio-training. Toute activité impliquant des charges lourdes ou des exercices complexes est strictement interdite. La présence et la responsabilité d’un adulte accompagnateur sont obligatoires.", ishtml: true);
+        $pdf->Ln(h: 2);
+        $pdf->MultiCell(w: 0, h: 6, txt:"Pour des raisons d’hygiène et de sécurité, le port de chaussures propres et l’utilisation d’une serviette sont obligatoires à chaque séance.", ishtml: true);
+        $pdf->Ln(h: 2);
+        $pdf->MultiCell(w: 0, h: 6, txt:"L’adhésion est effective après remise du présent bulletin signé, d’un certificat médical valide couvrant toute la durée de l’adhésion (à défaut, celui-ci devra être renouvelé sous peine de suspension d’accès), ainsi que du règlement de la cotisation annuelle de 50 €.
+        Une caution de 10 € est demandée pour le badge magnétique et restituée en cas de non-renouvellement.", ishtml: true);
+        $pdf->Ln(h: 8);
 
-        $pdf->writeHTML(html: '<strong>Nom : </strong>'.$lastname);
-        $pdf->writeHTML(html: '<strong>Prénom : </strong>'.$firstname);
-        $pdf->writeHTML(html: '<strong>Né(e) le : </strong>'.$birthday);
-        $pdf->writeHTML(html: '<strong>Sexe : </strong>'.$gender);
-        $pdf->writeHTML(html: '<strong>Téléphone : </strong>'.$phone);
-        $pdf->writeHTML(html: '<strong>Adresse : </strong>'.$address);
-
-        $pdf->writeHTML(html: '<br><br>');
-        $pdf->writeHTML(html: '<strong><i>RAPPEL</i></strong>', align: 'C');
-        $pdf->writeHTML(html: '<br>');
-
-        $pdf->writeHTML(html: "Les jeunes âgés de 10 à 16 ans ont accès uniquement aux séances de renforcement musculaire léger et de cardio-training.
-Toute activité impliquant des charges lourdes ou des exercices complexes leur est strictement interdite.
-Ils doivent être accompagnés par un adulte, qui en assume l’entière responsabilité.");
-        $pdf->writeHTML(html: '<br>');
-
-        $pdf->writeHTML(html: "Pour le respect de l’hygiène et de la sécurité de tous, le port d’une serviette et de chaussures propres est obligatoire à chaque séance.");
-        $pdf->writeHTML(html: '<br>');
-
-        $pdf->writeHTML(html: "L’inscription devient effective lors de la remise de ce bulletin dûment complété, accompagné d’un certificat médical autorisant la pratique de la musculation et/ou du cardio-training, ainsi que du règlement de la cotisation annuelle de 50 €.");
-        $pdf->writeHTML(html: "Une caution de 10 € est demandée pour le badge magnétique. Cette somme sera restituée en cas de non-renouvellement de l’adhésion.");
-
-        if($membership->getAge() < 18) {
-            $pdf->writeHTML(html: '___________________________________________________________________________________');
-            $pdf->writeHTML(html: '<br>');
-            $pdf->writeHTML(html: "<i>Je soussigné(e) $tutorNames, demeurant au $tutorAddress, agissant en qualité de représentant légal de $firstname $lastname, autorise ce dernier à fréquenter la salle de musculation de l’association Saint-Ouen Musculation.</i>");
-            $pdf->writeHTML(html: '<br>');
-
-            $pdf->writeHTML(html: "Le $today");
-            $pdf->writeHTML(html: 'Signature du représentant légal "lu et approuvé"');
+        if ($membership->getAge() < $majorityAge) {
+            $pdf->SetFont(family: 'helvetica', style: 'B', size: 11);
+            $pdf->Cell(w: 0, h: 6, txt: 'AUTORISATION DU REPRÉSENTANT LÉGAL', border: 0, ln: 1);
+            $pdf->Ln(h: 2);
+            $pdf->SetFont(family: 'helvetica', style: '', size: 10);
+            $pdf->MultiCell(w: 0, h: 6, txt:"Je soussigné(e) {$tutorNames}, demeurant au {$tutorAddress}, représentant légal de {$firstname} {$lastname}, autorise ce dernier à fréquenter la salle de musculation de l’association Saint-Ouen Musculation.", ishtml: true);
+            $pdf->Ln(h: 6);
         }
 
-        $pdf->writeHTML(html: '___________________________________________________________________________________');
-        $pdf->writeHTML(html: '<br>');
+        $pdf->SetFont(family: 'helvetica', style: 'B', size: 11);
+        $pdf->Cell(w: 0, h: 6, txt: 'ENGAGEMENT ET SIGNATURES', border: 0, ln: 1);
+        $pdf->Ln(h: 2);
+        $pdf->SetFont(family: 'helvetica', style: '', size: 10);
+        $pdf->MultiCell(w: 0, h: 6, txt:"Je reconnais avoir pris connaissance des statuts et du règlement intérieur de l’association et m’engage à les respecter.", ishtml: true);
+        $pdf->Ln(h: 10);
 
-        $pdf->writeHTML(html: '<i>Je reconnais avoir pris connaissance des statuts et du règlement intérieur de l’association.</i>', align: 'C');
-        $pdf->writeHTML(html: '<br>');
+        $pdf->Cell(w: 11, h: 6, txt: "Fait à");
+        $pdf->setTextColor(180, 180, 180);
+        $pdf->Cell(w: 60, h: 6, txt: "______________________________");
+        $pdf->setTextColor(0, 0, 0);
+        $pdf->Cell(w: 0, h: 6, txt: ", le {$today}", ln: 1);
+        $pdf->Ln(h: 10);
+        $pdf->Cell(w: 56, h: 6, txt: 'Signature de l’adhérent :');
+        if ($membership->getAge() < $majorityAge) {
+            $pdf->Cell(w: 56, h: 6, txt: 'Signature du représentant légal :', align: 'C');
+        }
+        $pdf->Cell(w: 56, h: 6, txt: 'Signature de la direction :', align: 'R');
+        $pdf->Ln(h: 16);
+        $pdf->setTextColor(180, 180, 180);
+        $pdf->Cell(w: 56, h: 6, txt: '____________________');
+        if ($membership->getAge() < $majorityAge) {
+            $pdf->Cell(w: 56, h: 6, txt: '____________________', align: 'C');
+        }
+        $pdf->Cell(w: 56, h: 6, txt: '____________________', align: 'R');
 
-        $pdf->writeHTML(html: "Le $today");
-        $pdf->writeHTML(html: "Signature de l'adhérent \"lu et approuvé\"");
-        $pdf->writeHTML(html: "Signature d'un membre de la direction");
-
-        return $pdf->Output(name: 'adhesion_saint_ouen_musculation.pdf', dest: 'D');
+        return $pdf->Output(name: 'bulletin_adhesion_saint_ouen_musculation.pdf', dest: 'D');
     }
 }
