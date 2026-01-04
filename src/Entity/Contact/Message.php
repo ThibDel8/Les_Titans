@@ -105,9 +105,9 @@ class Message
     ): self
     {
         return new self(
-            email: $email,
-            subject: $subject,
-            message: $message,
+            email: \strtolower($email),
+            subject: \trim(\ucfirst(\strtolower($subject))),
+            message: \trim($message),
         );
     }
 }

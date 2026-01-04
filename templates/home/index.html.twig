@@ -2,15 +2,11 @@
 
 {% block title %}{{ parent() }}Accueil{% endblock %}
 
+{% block maps %}
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+{% endblock %}
+
 {% block body %}
-
-
-{% if app.user %}
-{% else %}
-    <div class="admin-link">
-        <a href="{{ path('app_login') }}">Administration</a>
-    </div>
-{% endif %}
 
 {% if app.user %}
     <section class="manager-section">
@@ -21,17 +17,16 @@
                     <h2 class="manager-title">{{ app.user.member.firstname }}</h2>
                 </a>
             </div>
-            <a href="{{path('app_logout') }}" title="Se déconnecter">
-                {% include 'icons/logout.svg.twig' %}
-            </a>
         </div>
         <div class="dashboard">
             <ul>
-                <li>
-                    <a href="{{path('admin_user_list') }}" title="Liste des utilisateurs">
-                        {% include 'icons/manage-members.svg.twig' %} Utilisateurs ({{ nbUsers }})
-                    </a>
-                </li>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <li>
+                        <a href="{{path('admin_user_list') }}" title="Liste des utilisateurs">
+                            {% include 'icons/manage-members.svg.twig' %} Utilisateurs ({{ nbUsers }})
+                        </a>
+                    </li>
+                {% endif %}
                 <li>
                     <a href="{{path('admin_member_list') }}" title="Liste des membres">
                         {% include 'icons/manage-members.svg.twig' %} Membres ({{ nbMembers }})
@@ -66,33 +61,22 @@
 <section class="public-section">
     <h2 class="public-title">Informations pratiques</h2>
     <div class="infos-grid">
-        <div class="info-box">
-            <h3>📍 Localisation</h3>
-            <p>Salle de musculation Les Titans</p>
-            <p>Cité Saint-Jules,</p>
-            <p>80610 Saint-Ouen</p>
-        </div>
-        <div class="info-box">
+        <div class="subsection">
             <h3>⏰ Horaires</h3>
-            <div class="schedules">
-                <div>
-                    Lundi :<br>
-                    Mardi :<br>
-                    Mercredi :<br>
-                    Jeudi :<br>
-                    Vendredi :<br>
-                    Samedi :<br>
-                    Dimanche :<br>
-                </div>
-                <div>
-                    7h – 22h<br>
-                    7h – 22h<br>
-                    7h – 22h<br>
-                    7h – 22h<br>
-                    7h – 22h<br>
-                    7h – 22h<br>
-                    7h – 22h<br>
-                </div>
+            <ul class="schedules">
+            <li><span>Lundi</span><span>7h – 22h</span></li>
+            <li><span>Mardi</span><span>7h – 22h</span></li>
+            <li><span>Mercredi</span><span>7h – 22h</span></li>
+            <li><span>Jeudi</span><span>7h – 22h</span></li>
+            <li><span>Vendredi</span><span>7h – 22h</span></li>
+            <li><span>Samedi</span><span>7h – 22h</span></li>
+            <li><span>Dimanche</span><span>7h – 22h</span></li>
+        </ul>
+        </div>
+        <div class="subsection">
+            <h3>📍 Localisation</h3>
+            <div>
+                <div id="map" style="height: 250px;"></div>
             </div>
         </div>
     </div>
@@ -108,35 +92,40 @@
     </p>
 </section>
 
-<section class="public-section">
-    <h2 class="public-title">Contactez-nous</h2>
-    <p>Vous avez une question, une suggestion ou souhaitez proposer un service ?</p>
-    <p>Cliquez ci-dessous pour nous contacter via notre formulaire.</p>
-    <br>
-    <a href="{{ path('app_contact') }}" title="Cliquer pour nous contacter">Contactez-nous</a>
-</section>
+{% endblock %}
 
-<section class="public-section">
-    <h2 class="public-title">Modalités d’adhésion à la salle de sport</h2>
-    <p>
-        L’adhésion à la salle de sport est fixée à <strong>50 € par an</strong>.
-        Elle doit être <strong>validée</strong> afin d’obtenir un <strong>badge d’accès</strong>, indispensable pour entrer dans la salle.
-    </p><br>
-    <p>
-        Dans un premier temps, nous vous invitons à <strong>remplir le formulaire</strong> en cliquant sur le lien ci-dessous afin de débuter la procédure d’adhésion.
-        À l’issue de cette étape, un <strong>document récapitulatif</strong> sera généré à partir des informations fournies. Ce document devra être <strong>imprimé et signé</strong>.
-    </p><br>
-    <p>
-        Pour finaliser l’adhésion, il vous sera ensuite demandé de remettre <strong>en mains propres</strong> une enveloppe contenant :
-    </p>
-    <ul>
-        <li>le document généré, <strong>imprimé et signé</strong> ;</li>
-        <li><strong>50 € en espèces uniquement</strong>, correspondant à la cotisation annuelle ;</li>
-        <li><strong>10 € de caution</strong> pour le badge d’accès (cette somme est <strong>restituée lors de la restitution du badge</strong>) ;</li>
-        <li>un <strong>certificat médical valide</strong>, autorisant la pratique de la musculation et du cardio-training.</li>
-    </ul>
-    <br>
-    <a href="{{ path('app_membership_create') }}" title="Cliquer pour faire une demande d'adhésion">Faire une demande</a>
-</section>
+{% block javascripts %}
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+    // Centre la carte sur l'adresse avec géocodage léger OSM
+    const query = "Cité Saint-Jules, 80610 Saint-Ouen, France";
+
+    // Appelle l’API Nominatim (OSM) pour obtenir la lat/lng
+    fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}`)
+        .then(response => response.json())
+        .then(data => {
+            if (!data || data.length === 0) {
+                console.error("Adresse non trouvée !");
+                return;
+            }
+
+            const lat = parseFloat(data[0].lat);
+            const lon = parseFloat(data[0].lon);
+
+            // Initialise la carte
+            const map = L.map("map").setView([lat, lon], 16);
+
+            L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+                attribution: "&copy; OpenStreetMap"
+            }).addTo(map);
+
+            // Ajoute un marqueur
+            L.marker([lat, lon]).addTo(map)
+                .bindPopup("<strong>Salle de musculation Les Titans</strong><br>Cité Saint-Jules, 80610 Saint-Ouen")
+                .openPopup();
+        })
+        .catch(err => console.error("Erreur géocodage :", err));
+</script>
 
 {% endblock %}

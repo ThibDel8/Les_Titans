@@ -5,15 +5,17 @@ declare(strict_types=1);
 namespace App\Form\Membership;
 
 use App\Enum\Membership\Gender;
-use App\DTO\Request\Membership\MembershipCreationRequest;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use App\DTO\Request\Membership\MembershipCreationRequest;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 class MembershipCreationType extends AbstractType
 {
@@ -148,6 +150,17 @@ class MembershipCreationType extends AbstractType
                 'required' => false,
                 'row_attr' => [
                     'class' => 'form-row',
+                ],
+            ])
+            ->add('acceptedRules', CheckboxType::class, [
+                'label' => false,
+                'mapped' => false,
+                'required' => true,
+                'constraints' => [
+                    new IsTrue(message: 'Vous devez accepter le règlement intérieur pour valider l’adhésion.'),
+                ],
+                'attr' => [
+                    'class' => 'form-check-input'
                 ],
             ])
         ;

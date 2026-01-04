@@ -1,0 +1,11 @@
+.schedules {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.schedules li {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+}

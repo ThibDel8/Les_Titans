@@ -4,7 +4,7 @@
             <img src="{{ asset('images/profiles/uploads/' ~ member.profileImage) }}" alt="Image de profil du membre">
             <div>
                 <p>
-                {{ member.firstname|capitalize }} {{ member.lastname|capitalize }}
+                {{ member.firstname }} {{ member.lastname }}
                 {% if member.medicalCertificateExpiry|date('U') < "now"|date('U') and member.annualMembershipFee is not null %}🩺{% endif %}
                 {% if member.annualMembershipFee is null and member.accessBadgeNumber is not null %}💰🔑{% endif %}
                 {% if member.accessBadgeNumber is null and member.annualMembershipFee is not null %}🔑{% endif %}

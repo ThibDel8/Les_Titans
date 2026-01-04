@@ -1,0 +1,7 @@
+.invalid-settings {
+  filter: grayscale();
+}
+
+.manager {
+  color: var(--manager-color);
+}

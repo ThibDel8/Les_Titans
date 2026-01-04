@@ -392,7 +392,8 @@ input:focus, textarea:focus, select:focus {
     color: var(--manager-color);
 }
 
-.member-contact-info a {
+.member-contact-info a,
+.membership-contact-info a {
     color: var(--grey);
 }
 
@@ -475,7 +476,7 @@ footer .links {
     gap: 5px;
 }
 
-#updated-at-content {
+.updated-at-content {
     display: flex;
     justify-content: end;
     font-size: 0.8em;

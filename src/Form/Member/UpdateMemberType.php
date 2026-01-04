@@ -175,7 +175,7 @@ class UpdateMemberType extends AbstractType
             ])
             ->add('accessBadgeNumber', TextType::class, [
                 'label' => 'Numéro du badge',
-                'required' => true,
+                'required' => false,
                 'row_attr' => [
                     'class' => 'form-row',
                 ],

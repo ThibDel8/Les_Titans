@@ -1,0 +1,44 @@
+{% extends 'emails/base.html.twig' %}
+
+{% block subject %}{{ parent() }}Adhésion Saint-Ouen Musculation{% endblock %}
+
+{% block body %}
+
+    <section style="
+        background-color: {{ colors.greyDark }};
+        border-radius: 4px;
+        padding: 25px;
+        margin-bottom: 40px;
+        border-left: 5px solid {{ colors.publicColor }};
+    ">
+        <h2 style="color: {{ colors.publicColor }}; padding-bottom: 20px;">Adhésion Saint-Ouen Musculation</h2>
+        <div style="color: {{ colors.grey }};">
+            <p>Bonjour,</p><br>
+            <p>Vous venez de recevoir une nouvelle demande d'adhésion.</p>
+            <p>La personne est actuellement en attente d’une prise de contact avec l’un des gérants afin de convenir d’un rendez-vous à la salle de sport.
+            Ce rendez-vous permettra de fournir les documents nécessaires et de procéder au paiement de l’adhésion.</p>
+            <p>N’hésitez pas à la contacter afin de faire le point sur sa situation et de répondre à ses éventuelles questions.</p><br>
+            <h3>Voici ses informations :</h3>
+            <ul>
+                <li style="list-style: none;">👤 {{ membership.firstname }} {{ membership.lastname }}</li>
+                <li style="list-style: none;">⚧️ {{ membership.gender.label|trans }}</li>
+                <li style="list-style: none;">🎂 {{ membership.birthdate|date('d/m/Y') }} ({{ age }} ans)</li>
+                <li style="list-style: none;"><a href="tel:+33{{ membership.phone|slice(1) }}" style="color: {{ colors.grey }}; text-decoration: none;">☎️ {{ membership.phone }}</a></li>
+                <li style="list-style: none;">🏠 {{ membership.address }} {{ membership.postalcode }}, {{ membership.city }}</li>
+                <li style="list-style: none;"><a href="mailto:{{ membership.email }}" style="color: {{ colors.grey }}; text-decoration: none;">📧 {{ membership.email }}</a></li>
+                {% if age < 18 %}
+                </ul><br>
+                <h3>Voici les informations du tuteur légal :</h3>
+                <ul>
+                    <li style="list-style: none;">👤 {{ membership.tutorFirstname }} {{ membership.tutorLastname }}</li>
+                    <li style="list-style: none;"><a href="tel:+33{{ membership.tutorPhone|slice(1) }}" style="color: {{ colors.grey }}; text-decoration: none;">☎️ {{ membership.tutorPhone }}</a></li>
+                    <li style="list-style: none;">🏠 {{ membership.tutorAddress }} {{ membership.tutorPostalcode }}, {{ membership.tutorCity }}</li>
+                    <li style="list-style: none;"><a href="mailto:{{ membership.tutorEmail }}" style="color: {{ colors.grey }}; text-decoration: none;">📧 {{ membership.tutorEmail }}</a></li>
+                {% endif %}
+            </ul>
+            <br>
+            <p>Merci de votre réactivité,</p>
+            <p>Saint-Ouen Musculation | Les Titans</p>
+        </div>
+    </section>
+{% endblock %}

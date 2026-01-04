@@ -1,9 +1,11 @@
 <footer class="footer">
     <img src="{{ asset('images/logo_text.png') }}" alt="Logo Les Titans">
     <p>&copy; 2025 - {{ "now"|date("Y") }} Saint-Ouen Musculation</p>
-    <div class="links">
-        <a class="link" href="{{ path('app_legal_notices') }}" title="Consulter les mentions légales">Mentions légales</a>
+    <div class="footer-links">
+        <a href="{{ path('app_legal_notices') }}" title="Consulter les mentions légales">Mentions légales</a>
         -
-        <a class="link" href="{{ path('app_privacy_policy') }}" title="Consulter la politique de confidentialité">Politique de confidentialité</a>
+        <a href="{{ path('app_privacy_policy') }}" title="Consulter la politique de confidentialité">Politique de confidentialité</a>
+        -
+        <a href="{{ path('app_house_rules') }}">Règlement</a>
     </div>
 </footer>

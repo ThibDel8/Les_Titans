@@ -6,16 +6,33 @@
 
 <section class="public-section">
     <h2 class="public-title">Demande d'adhésion</h2>
+
     <p>
-        L'adhésion demandée couvre la période de janvier à janvier de l'année suivante.
-        Une fois acceptée, cette adhésion prendra fin le 31 décembre {{ "now"|date("Y") }}.
+        L’adhésion à la salle est de <strong>50 € par an</strong> et permet l’obtention d’un <strong>badge d’accès</strong>
+        (caution de <strong>10 €</strong>, restituée lors de la restitution du badge).
     </p>
+
     <p>
-        Si vous remplissez ce formulaire pour une autre personne que vous-même, merci de fournir uniquement ses informations et non les vôtres.
-    </p><br>
+        Une fois le formulaire validé, un document récapitulatif vous sera fourni.
+        Il devra être <strong>imprimé et signé</strong>, puis remis en main propre avec :
+    </p>
+
+    <ul>
+        <li>les <strong>50 € en espèces</strong> de cotisation</li>
+        <li>les <strong>10 € de caution</strong></li>
+        <li>un <strong>certificat médical valide</strong></li>
+    </ul>
+
     <p>
-        <strong>Remarque :</strong> si le membre est mineur, les informations du tuteur légal sont obligatoires pour la validation de l'adhésion.
-    </p><br>
+        L’adhésion actuelleest valable jusqu’au <strong>31 décembre {{ "now"|date("Y") }}</strong>.
+    </p>
+    <br>
+
+    <p>
+        Si vous inscrivez une autre personne, merci d’indiquer uniquement ses informations.
+        Pour un mineur, les coordonnées du tuteur légal sont obligatoires.
+    </p>
+    <br><br>
 
     {{ form_start(form) }}
 
@@ -33,6 +50,7 @@
         <br>
         <h3 class="public-title">Informations du tuteur légal (si membre mineur)</h3>
         <p>Ces informations sont obligatoires uniquement si le membre a moins de 18 ans.</p>
+        <br>
         {{ form_row(form.tutorLastname) }}
         {{ form_row(form.tutorFirstname) }}
         {{ form_row(form.tutorPhone) }}
@@ -40,6 +58,16 @@
         {{ form_row(form.tutorAddress) }}
         {{ form_row(form.tutorPostalcode) }}
         {{ form_row(form.tutorCity) }}
+        <div class="form-check">
+            {{ form_widget(form.acceptedRules) }}
+            <label class="form-check-label" for="{{ form.acceptedRules.vars.id }}">
+                J'ai lu et j'accepte le
+                <a href="{{ path('app_house_rules') }}" target="_blank">
+                    règlement intérieur de l'association
+                </a>
+            </label>
+            {{ form_errors(form.acceptedRules) }}
+        </div>
         <br>
         <button type="submit" title="Envoyer la demande d'adhésion">Envoyer la demande</button>
     {{ form_end(form) }}

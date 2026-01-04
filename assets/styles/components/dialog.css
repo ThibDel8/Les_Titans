@@ -1,0 +1,26 @@
+dialog::backdrop {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
+}
+
+dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 400px;
+  max-width: 90vw;
+  padding: 1rem;
+
+  background-color: var(--grey);
+  border: none;
+  border-left: 5px solid var(--public-color);
+  border-radius: 8px;
+
+  color: var(--grey-light);
+}
+
+dialog p {
+  text-align: center;
+}

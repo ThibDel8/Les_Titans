@@ -1,0 +1,7 @@
+.dashboard ul {
+  list-style: none;
+}
+
+.dashboard ul li a {
+  color: var(--grey-light);
+}

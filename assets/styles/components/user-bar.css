@@ -1,0 +1,35 @@
+.user-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 15px;
+}
+
+.user-container .profil-container a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  color: var(--manager-color);
+}
+
+.user-container .profil-container img {
+  width: 40px;
+  height: 40px;
+
+  border: 2px solid var(--grey);
+  border-radius: 50%;
+
+  object-fit: cover;
+  object-position: center;
+}
+
+.profil-container h2 {
+  margin: 0;
+}
+
+.user-container .logout-icon {
+  height: 35px;
+  color: var(--manager-color);
+}
