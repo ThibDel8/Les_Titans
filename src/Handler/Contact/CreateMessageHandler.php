@@ -27,6 +27,6 @@ final class CreateMessageHandler
 
         $this->messageRepository->save($message);
 
-        $this->messageContactService->send($message);
+        $this->messageContactService->sendContactMessage($message);
     }
 }

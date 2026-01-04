@@ -41,7 +41,7 @@
             ({{ membership.age }} ans)
         </p>
     </div><br>
-    <div>
+    <div class="membership-contact-info">
         <a href="tel:+33{{ membership.phone|slice(1) }}" title="Appeler {{ membership.firstname|capitalize }}">☎️ {{ membership.phone }}</a><br>
         <p>🏠 {{ membership.address }} {{ membership.postalcode }}, {{ membership.city|capitalize }}</p><br>
         <a href="mailto:{{ membership.email }}" title="Envoyer un email à {{ membership.firstname|capitalize }}">📧 {{ membership.email }}</a>

@@ -6,8 +6,10 @@ namespace App\Handler\Membership;
 
 use App\Entity\Membership\Membership;
 use App\DTO\Request\Membership\MembershipCreationRequest;
+use App\Entity\Member\Member;
 use App\Enum\Membership\Gender;
 use App\Repository\Membership\MembershipRepository;
+use App\Service\Membership\Mailer\MembershipMailer;
 use App\Service\ProfileImage\ProfileImageService;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
@@ -15,6 +17,7 @@ final class MembershipCreateHandler
 {
     public function __construct(
         private MembershipRepository $repository,
+        private MembershipMailer $membershipMailer,
         private ProfileImageService $profileImageService,
     ) {
     }
@@ -46,6 +49,9 @@ final class MembershipCreateHandler
         );
 
         $this->repository->save($membership);
+
+        $this->membershipMailer->sendMembershipPdfDownload($membership);
+        $this->membershipMailer->sendEmailNotificationToManager($membership);
 
         return $membership;
     }
