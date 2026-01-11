@@ -50,6 +50,7 @@ class MemberFixtures extends Fixture
             city: $faker->city(),
             email: $faker->unique()->safeEmail(),
             profileImage: $this->profileImageService->save($this->profileImageService->getDefaultsDir() . ProfileImageService::MALE_PROFILE),
+            annualMembershipFee: null,
             badgeNumber: $faker->unique()->numerify('000#######'),
         );
 
@@ -110,6 +111,7 @@ class MemberFixtures extends Fixture
             tutorPostalcode: $faker->postcode(),
             tutorCity: $faker->city(),
             profileImage: $this->profileImageService->save($this->profileImageService->getDefaultsDir() . ProfileImageService::FEMALE_PROFILE),
+            badgeNumber: $faker->unique()->numerify('000#######'),
         );
 
         $this->createMember(
@@ -123,8 +125,8 @@ class MemberFixtures extends Fixture
             postalcode: $faker->postcode(),
             city: $faker->city(),
             email: $faker->unique()->safeEmail(),
+            medicalCertificateExpiry:new \DateTimeImmutable('-1 day'),
             profileImage: $this->profileImageService->save($this->profileImageService->getDefaultsDir() . ProfileImageService::FEMALE_PROFILE),
-            badgeNumber: $faker->unique()->numerify('000#######'),
         );
 
         $this->createMember(
@@ -190,7 +192,6 @@ class MemberFixtures extends Fixture
             postalcode: $faker->postcode(),
             city: $faker->city(),
             email: $faker->unique()->safeEmail(),
-            medicalCertificateExpiry:new \DateTimeImmutable('-1 day'),
             profileImage: $this->profileImageService->save($this->profileImageService->getDefaultsDir() . ProfileImageService::OTHER_PROFILE),
         );
 
@@ -208,9 +209,9 @@ class MemberFixtures extends Fixture
         string $postalcode,
         string $city,
         string $email,
-        \DateTimeImmutable $medicalCertificateExpiry = new \DateTimeImmutable('+1 year'),
-        int $accessBadgeDeposit = 10,
-        int $annualMembershipFee = 50,
+        ?\DateTimeImmutable $medicalCertificateExpiry = new \DateTimeImmutable('+1 year'),
+        ?int $accessBadgeDeposit = 10,
+        ?int $annualMembershipFee = 50,
         ?string $tutorLastname = null,
         ?string $tutorFirstname = null,
         ?string $tutorPhone = null,

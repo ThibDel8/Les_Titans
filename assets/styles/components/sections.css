@@ -1,0 +1,40 @@
+.gray-section {
+  border-left: 5px solid var(--grey-light);
+  opacity: 0.6;
+}
+
+.public-section {
+  border-left: 5px solid var(--public-color);
+}
+
+.manager-section {
+  border-left: 5px solid var(--manager-color);
+}
+
+.manager-list-section,
+.manager-valid-section,
+.manager-invalid-section {
+  padding: 10px;
+  margin-bottom: 15px;
+}
+
+.manager-list-section {
+  border-left: 5px solid var(--manager-color);
+}
+
+.manager-valid-section {
+  border-left: 5px solid var(--green);
+}
+
+.manager-invalid-section {
+  border-left: 5px solid var(--red);
+}
+
+.public-title {
+  color: var(--public-color);
+  margin-bottom: 30px;
+}
+
+.manager-title {
+  color: var(--manager-color);
+}

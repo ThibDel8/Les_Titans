@@ -476,7 +476,7 @@ footer .links {
     gap: 5px;
 }
 
-#updated-at-content {
+.updated-at-content {
     display: flex;
     justify-content: end;
     font-size: 0.8em;

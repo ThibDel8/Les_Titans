@@ -1,0 +1,20 @@
+.manager-section ul {
+  padding: 0;
+}
+
+.manager-section li {
+  width: 100%;
+}
+
+.gray-section a,
+.manager-section a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.manager-section ul li .icon {
+  width: 1em;
+  height: 1em;
+  color: var(--grey-light);
+}

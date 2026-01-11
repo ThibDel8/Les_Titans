@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace App\DTO\Request\Membership;
 
-use App\Enum\Membership\Gender;
-use Symfony\Component\Validator\Constraints as Assert;
 use DateTimeImmutable;
+use App\Enum\Membership\Gender;
+use Symfony\Component\Validator\Constraints\Callback;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 final class MembershipCreationRequest
 {
@@ -103,4 +105,31 @@ final class MembershipCreationRequest
     public ?string $tutorPostalcode = null;
 
     public ?string $tutorCity = null;
+
+    #[Callback]
+    public function validateTutorFields(ExecutionContextInterface $context): void
+    {
+        $today = new \DateTimeImmutable('today');
+        $age = $this->birthdate->diff($today)->y;
+
+        if ($age < 18) {
+            $requiredFields = [
+                'tutorLastname' => $this->tutorLastname,
+                'tutorFirstname' => $this->tutorFirstname,
+                'tutorPhone' => $this->tutorPhone,
+                'tutorEmail' => $this->tutorEmail,
+                'tutorAddress' => $this->tutorAddress,
+                'tutorPostalcode' => $this->tutorPostalcode,
+                'tutorCity' => $this->tutorCity,
+            ];
+
+            foreach ($requiredFields as $fieldName => $value) {
+                if (empty($value)) {
+                    $context->buildViolation("Ce champ est obligatoire pour un mineur.")
+                        ->atPath($fieldName)
+                        ->addViolation();
+                }
+            }
+        }
+    }
 }

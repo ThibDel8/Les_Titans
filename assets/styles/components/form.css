@@ -1,0 +1,51 @@
+form {
+  display: grid;
+  gap: 15px;
+}
+
+label {
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+input,
+textarea,
+select {
+  width: 100%;
+  padding: 10px;
+
+  background-color: #111;
+  border: 1px solid #444;
+  border-radius: 3px;
+
+  color: var(--grey-light);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--public-color);
+}
+
+.form-row ul {
+  margin-top: 0.25rem;
+  padding: 0;
+  list-style: none;
+}
+
+.form-row ul li {
+  color: #b42318;
+}
+
+.form-check {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 1rem;
+}
+
+.form-check-input {
+    height: 30px;
+    width: 30px;
+}

@@ -1,0 +1,19 @@
+.info-line {
+  display: flex;
+  justify-content: end;
+  gap: 10px;
+
+  padding-bottom: 10px;
+}
+
+.info-line span,
+.info-line i {
+  color: var(--grey-light);
+  opacity: 0.3;
+  font-size: 0.85rem;
+  font-style: italic;
+}
+
+.info-line a:hover {
+  opacity: 0.6;
+}

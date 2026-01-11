@@ -4,9 +4,19 @@
     <meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <title>{% block title %}Les Titans | {% endblock %}</title>
-    <link rel="icon" href="{{ asset('images/logo_image.png') }}">
-    <link rel="stylesheet" href="{{ asset('css/main.css') }}">
-    {% block stylesheets %}{% endblock %}
+    <link rel="icon" type="image/svg+xml" href="{{ asset('favicon/favicon.svg') }}" />
+    <link rel="icon" type="image/png" href="{{ asset('favicon/favicon-32x32.png') }}" sizes="32x32" />
+    <link rel="icon" type="image/png" href="{{ asset('favicon/favicon-16x16.png') }}" sizes="16x16" />
+    <link rel="icon" type="image/png" href="{{ asset('favicon/favicon-96x96.png') }}" sizes="96x96" />
+    <link rel="shortcut icon" href="{{ asset('favicon/favicon.ico') }}" />
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('favicon/apple-touch-icon.png') }}" />
+    <link rel="manifest" href="{{ asset('favicon/site.webmanifest') }}" />
+    <!-- link rel="mask-icon" href="{{ asset('favicon/safari-pinned-tab.svg') }}" color="#b6882a" / -->
+    {% block stylesheets %}
+        <!--link rel="stylesheet" href="{{ asset('css/main.css') }}" /-->
+        <link rel="stylesheet" href="{{ asset('styles/app.css') }}" />
+    {% endblock %}
+    {% block maps %}{% endblock %}
 </head>
 
 <body>
@@ -24,6 +34,8 @@
     {% block footer %}
         {% include "_partials/_footer/_footer.html.twig" %}
     {% endblock %}
+
+    {% block javascripts %}{% endblock %}
 
 </body>
 </html>

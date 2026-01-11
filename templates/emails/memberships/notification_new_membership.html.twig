@@ -21,7 +21,7 @@
             <h3>Voici ses informations :</h3>
             <ul>
                 <li style="list-style: none;">👤 {{ membership.firstname }} {{ membership.lastname }}</li>
-                <li style="list-style: none;">⚧️ {{ membership.gender.label|trans|capitalize }}</li>
+                <li style="list-style: none;">⚧️ {{ membership.gender.label|trans }}</li>
                 <li style="list-style: none;">🎂 {{ membership.birthdate|date('d/m/Y') }} ({{ age }} ans)</li>
                 <li style="list-style: none;"><a href="tel:+33{{ membership.phone|slice(1) }}" style="color: {{ colors.grey }}; text-decoration: none;">☎️ {{ membership.phone }}</a></li>
                 <li style="list-style: none;">🏠 {{ membership.address }} {{ membership.postalcode }}, {{ membership.city }}</li>

@@ -8,12 +8,12 @@
 
     {% for user in users %}
         <section class="manager-list-section">
-            <a class="manager" href="" title="Voir les informations de l'utilisateur {{ user.member.firstname|capitalize }} {{ user.member.lastname|capitalize }}">
+            <a class="manager" href="" title="Voir les informations de l'utilisateur {{ user.member.firstname }} {{ user.member.lastname }}">
                 <div class="user-list-names">
                     <img src="{{ asset('images/profiles/uploads/' ~ user.member.profileImage) }}" alt="Image de profil de l'utilisateur">
                     <div>
-                        <p>{{ user.member.firstname|capitalize }} {{ user.member.lastname|capitalize }}</p>
-                        <div class="user-list-role">{{ user.roles[0]|replace({'_': ' '})|lower|capitalize }}</div>
+                        <p>{{ user.member.firstname }} {{ user.member.lastname }}</p>
+                        <div class="user-list-role">{{ user.roles[0]|replace({'_': ' '})|lower }}</div>
                     </div>
                 </div>
             </a>

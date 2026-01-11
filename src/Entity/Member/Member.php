@@ -98,9 +98,9 @@ class Member
         string $postalcode,
         string $city,
         string $email,
-        \DateTimeImmutable $medicalCertificateExpiry,
-        int $accessBadgeDeposit,
-        int $annualMembershipFee,
+        ?\DateTimeImmutable $medicalCertificateExpiry,
+        ?int $accessBadgeDeposit,
+        ?int $annualMembershipFee,
         ?string $tutorLastname = null,
         ?string $tutorFirstname = null,
         ?string $tutorPhone = null,
@@ -285,6 +285,17 @@ class Member
         $this->accessBadgeNumber = $number;
     }
 
+    public function renewMembership(): void
+    {
+        $this->annualMembershipFee = 50;
+    }
+
+    public function restitutionBadge(): void
+    {
+        $this->accessBadgeDeposit = null;
+        $this->accessBadgeNumber = null;
+    }
+
     public function update(
         string $lastname,
         string $firstname,
@@ -309,26 +320,26 @@ class Member
         ?string $profileImage = null,
     ): void
     {
-        $this->lastname = $lastname;
-        $this->firstname = $firstname;
+        $this->lastname = \trim(\ucfirst(\strtolower($lastname)));
+        $this->firstname = \trim(\ucfirst(\strtolower($firstname)));
         $this->birthdate = $birthdate;
         $this->gender = $gender;
         $this->phone = $phone;
         $this->address = $address;
         $this->postalcode = $postalcode;
-        $this->city = $city;
-        $this->email = $email;
+        $this->city = \trim(\ucfirst(\strtolower($city)));
+        $this->email = \strtolower(\trim($email));
         $this->medicalCertificateExpiry = $medicalCertificateExpiry;
         $this->accessBadgeDeposit = $accessBadgeDeposit;
         $this->annualMembershipFee = $annualMembershipFee;
         $this->accessBadgeNumber = $accessBadgeNumber;
-        $this->tutorLastname = $tutorLastname;
-        $this->tutorFirstname = $tutorFirstname;
+        $this->tutorLastname = null !== $tutorLastname ? \trim(\ucfirst(\strtolower($tutorLastname))) : null;
+        $this->tutorFirstname = null !== $tutorFirstname ? \trim(\ucfirst(\strtolower($tutorFirstname))) : null;
         $this->tutorPhone = $tutorPhone;
-        $this->tutorEmail = $tutorEmail;
+        $this->tutorEmail = null !== $tutorEmail ? \strtolower(\trim($tutorEmail)) : null;
         $this->tutorAddress = $tutorAddress;
         $this->tutorPostalcode = $tutorPostalcode;
-        $this->tutorCity = $tutorCity;
+        $this->tutorCity = null !== $tutorCity ? \trim(\ucfirst(\strtolower($tutorCity))) : null;
         $this->profileImage = $profileImage;
     }
 
@@ -342,9 +353,9 @@ class Member
         string $postalcode,
         string $city,
         string $email,
-        \DateTimeImmutable $medicalCertificateExpiry,
-        int $accessBadgeDeposit,
-        int $annualMembershipFee,
+        ?\DateTimeImmutable $medicalCertificateExpiry,
+        ?int $accessBadgeDeposit,
+        ?int $annualMembershipFee,
         ?string $tutorLastname = null,
         ?string $tutorFirstname = null,
         ?string $tutorPhone = null,
