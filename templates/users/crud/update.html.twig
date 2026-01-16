@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ parent() }}Profil de {{ member.firstname }}{% endblock %}
+{% block title %}{{ parent() }}Profil de {{ user.firstname }}{% endblock %}
 
 {% block body %}
 
 <section class="manager-section">
-<h2 class="manager-title">Mise à jour du profil de {{ member.firstname }}</h2>
+<h2 class="manager-title">Mise à jour du profil de {{ user.firstname }}</h2>
 {{ form_start(form) }}
     {{ form_rest(form) }}
     <button type="submit" title="Enregistrer les modifications">Enregistrer</button>

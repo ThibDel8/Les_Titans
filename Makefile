@@ -15,6 +15,7 @@ cache-clear:
 # ---------------------------
 
 create-database:
+	$(COMPOSE_PHP) $(CONSOLE) app:clean-uploaded-file-fixture --env=dev
 	$(COMPOSE_PHP) $(CONSOLE) doctrine:database:drop --force --env=dev
 	$(COMPOSE_PHP) $(CONSOLE) doctrine:database:create --env=dev
 	$(COMPOSE_PHP) $(CONSOLE) doctrine:migrations:migrate --no-interaction --env=dev

@@ -2,15 +2,16 @@
 
 namespace App\Command;
 
-use App\Enum\Security\Role;
-use App\Entity\Security\User;
-use App\Enum\Membership\Gender;
-use App\Repository\Security\UserRepository;
+use App\Admin\User\Domain\Entity\User;
+use App\SharedKernel\Domain\Enum\Role;
+use App\SharedKernel\Domain\Enum\Gender;
 use Symfony\Component\Console\Command\Command;
-use App\Service\ProfileImage\ProfileImageService;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use App\Admin\User\Domain\Repository\UserReadRepositoryInterface;
+use App\Admin\User\Domain\Repository\UserWriteRepositoryInterface;
+use App\SharedKernel\Domain\Service\ProfileImage\ProfileImageService;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 #[AsCommand(
@@ -20,9 +21,10 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 class CreateAdminAccountCommand extends Command
 {
     public function __construct(
-        private UserRepository $userRepository,
         private UserPasswordHasherInterface $hasher,
         private ProfileImageService $profileImageService,
+        private UserReadRepositoryInterface $userReadRepository,
+        private UserWriteRepositoryInterface $userWriteRepository,
     )
     {
         parent::__construct();
@@ -30,7 +32,8 @@ class CreateAdminAccountCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $existing = $this->userRepository->findOneBy(['email' => 'delattre.thibault8@gmail.com']);
+        $email = 'delattre.thibault8@gmail.com';
+        $existing = $this->userReadRepository->findByEmail($email);
 
         if ($existing) {
             $output->writeln('Admin déjà existant');
@@ -46,7 +49,7 @@ class CreateAdminAccountCommand extends Command
             address: '17 rue du Général de Gaulle',
             postalcode: 80610,
             city: 'Saint-Ouen',
-            email: 'delattre.thibault8@gmail.com',
+            email: $email,
             medicalCertificateExpiry: new \DateTimeImmutable('2027-01-01'),
             accessBadgeDeposit: 10,
             annualMembershipFee: 50,
@@ -59,7 +62,7 @@ class CreateAdminAccountCommand extends Command
         $hashedPassword = $this->hasher->hashPassword($user, 'Adm!nF1rstC0nn3ct');
         $user->setPassword($hashedPassword);
 
-        $this->userRepository->save($user);
+        $this->userWriteRepository->save($user);
 
         $output->writeln('Admin créé avec succès');
 
