@@ -23,7 +23,7 @@ class UserMailer
         $email = (new TemplatedEmail())
             ->from($this->params->get('app.email'))
             ->to($user->getEmail())
-            ->subject('Manager Saint-Ouen Musculation')
+            ->subject('Les Titans | Inscription validée')
             ->htmlTemplate('emails/security/password_setup.html.twig')
             ->context([
                 'user' => $user,

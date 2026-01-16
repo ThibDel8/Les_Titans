@@ -3,10 +3,9 @@
 namespace App\Command;
 
 use App\Enum\Security\Role;
-use App\Entity\Member\Member;
 use App\Entity\Security\User;
 use App\Enum\Membership\Gender;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\Security\UserRepository;
 use Symfony\Component\Console\Command\Command;
 use App\Service\ProfileImage\ProfileImageService;
 use Symfony\Component\Console\Attribute\AsCommand;
@@ -16,12 +15,12 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 #[AsCommand(
     name: 'app:create-admin-account',
-    description: "Création du compte Admin qui sera le seul à pouvoir créer d'autres nouveaux comptes.",
+    description: "Création du compte Admin.",
 )]
 class CreateAdminAccountCommand extends Command
 {
     public function __construct(
-        private EntityManagerInterface $manager,
+        private UserRepository $userRepository,
         private UserPasswordHasherInterface $hasher,
         private ProfileImageService $profileImageService,
     )
@@ -31,14 +30,14 @@ class CreateAdminAccountCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $existing = $this->manager->getRepository(User::class)
-            ->findOneBy(['roles' => [Role::Admin]]);
+        $existing = $this->userRepository->findOneBy(['email' => 'delattre.thibault8@gmail.com']);
 
         if ($existing) {
+            $output->writeln('Admin déjà existant');
             return Command::FAILURE;
         }
 
-        $member = Member::create(
+        $user = User::create(
             lastname: 'Delattre',
             firstname: 'Thibault',
             birthdate: new \DateTimeImmutable('1994-09-11'),
@@ -54,21 +53,15 @@ class CreateAdminAccountCommand extends Command
             profileImage: $this->profileImageService->save($this->profileImageService->getDefaultsDir() . ProfileImageService::ADMIN_PROFILE),
         );
 
-        $member->giveBadgeNumber('0009559203');
-
-        $this->manager->persist($member);
-
-        $user = User::create(
-            member: $member,
-            roles: [Role::Admin],
-            email: $member->getEmail(),
-        );
+        $user->giveBadgeNumber('0009559203');
+        $user->assignRoles([Role::Admin->value]);
 
         $hashedPassword = $this->hasher->hashPassword($user, 'Adm!nF1rstC0nn3ct');
         $user->setPassword($hashedPassword);
 
-        $this->manager->persist($user);
-        $this->manager->flush();
+        $this->userRepository->save($user);
+
+        $output->writeln('Admin créé avec succès');
 
         return Command::SUCCESS;
     }

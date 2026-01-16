@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace App\DTO\Request\Member;
+namespace App\DTO\Request\User;
 
-use App\Entity\Member\Member;
+use App\Entity\Security\User;
 use App\Enum\Membership\Gender;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-class MemberRequest
+class UserRequest
 {
     #[Assert\File(
         mimeTypes: [
@@ -124,29 +124,29 @@ class MemberRequest
 
     public ?string $tutorCity = null;
 
-    public static function fromEntity(Member $member): self
+    public static function fromEntity(User $user): self
     {
         $dto = new self();
-        $dto->lastname = $member->getLastname();
-        $dto->firstname = $member->getFirstname();
-        $dto->birthdate = $member->getBirthdate();
-        $dto->gender = $member->getGender();
-        $dto->phone = $member->getPhone();
-        $dto->address = $member->getAddress();
-        $dto->postalcode = $member->getPostalcode();
-        $dto->city = $member->getCity();
-        $dto->email = $member->getEmail();
-        $dto->medicalCertificateExpiry = $member->getMedicalCertificateExpiry();
-        $dto->accessBadgeDeposit = $member->getAccessBadgeDeposit();
-        $dto->annualMembershipFee = $member->getAnnualMembershipFee();
-        $dto->accessBadgeNumber = $member->getAccessBadgeNumber();
-        $dto->tutorLastname = $member->getTutorLastname();
-        $dto->tutorFirstname = $member->getTutorFirstname();
-        $dto->tutorPhone = $member->getTutorPhone();
-        $dto->tutorEmail = $member->getTutorEmail();
-        $dto->tutorAddress = $member->getTutorAddress();
-        $dto->tutorPostalcode = $member->getTutorPostalcode();
-        $dto->tutorCity = $member->getTutorCity();
+        $dto->lastname = $user->getLastname();
+        $dto->firstname = $user->getFirstname();
+        $dto->birthdate = $user->getBirthdate();
+        $dto->gender = $user->getGender();
+        $dto->phone = $user->getPhone();
+        $dto->address = $user->getAddress();
+        $dto->postalcode = $user->getPostalcode();
+        $dto->city = $user->getCity();
+        $dto->email = $user->getEmail();
+        $dto->medicalCertificateExpiry = $user->getMedicalCertificateExpiry();
+        $dto->accessBadgeDeposit = $user->getAccessBadgeDeposit();
+        $dto->annualMembershipFee = $user->getAnnualMembershipFee();
+        $dto->accessBadgeNumber = $user->getAccessBadgeNumber();
+        $dto->tutorLastname = $user->getTutorLastname();
+        $dto->tutorFirstname = $user->getTutorFirstname();
+        $dto->tutorPhone = $user->getTutorPhone();
+        $dto->tutorEmail = $user->getTutorEmail();
+        $dto->tutorAddress = $user->getTutorAddress();
+        $dto->tutorPostalcode = $user->getTutorPostalcode();
+        $dto->tutorCity = $user->getTutorCity();
 
         return $dto;
     }

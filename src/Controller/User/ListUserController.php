@@ -20,12 +20,13 @@ final class ListUserController extends AbstractController
     #[Route(path: '/admin/users/list', name: 'admin_user_list', methods: Request::METHOD_GET)]
     public function __invoke(): Response
     {
-        $this->denyAccessUnlessGranted(Role::Admin->value);
+        $this->denyAccessUnlessGranted(Role::Secretary->value);
 
-        $users = $this->listUserQueryHandler->fetch();
+        $data = $this->listUserQueryHandler->fetch();
 
         return $this->render('users/list.html.twig', [
-            'users' => $users,
+            'validMembers' => $data['validMembers'],
+            'invalidMembers' => $data['invalidMembers'],
         ]);
     }
 }

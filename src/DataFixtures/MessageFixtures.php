@@ -16,7 +16,7 @@ class MessageFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager): void
     {
         $faker = Factory::create('fr_FR');
-        $managerUser = $this->getReference('manager_user', User::class);
+        $secretaryUser = $this->getReference('secretary_user', User::class);
 
         $this->createMessage(
             manager: $manager,
@@ -39,7 +39,7 @@ class MessageFixtures extends Fixture implements DependentFixtureInterface
             subject: $faker->sentence(),
             message: $faker->sentence(),
             isUnread: false,
-            answerBy: $managerUser->getMember()->getFirstname() . ' ' . $managerUser->getMember()->getLastname(),
+            answerBy: $secretaryUser->getFirstname() . ' ' . $secretaryUser->getLastname(),
         );
 
         $manager->flush();

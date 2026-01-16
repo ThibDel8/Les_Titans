@@ -2,32 +2,32 @@
 
 declare(strict_types=1);
 
-namespace App\Handler\Member;
+namespace App\Handler\User;
 
-use App\Entity\Member\Member;
-use App\DTO\Request\Member\MemberRequest;
-use App\Repository\Member\MemberRepository;
+use App\Entity\Security\User;
+use App\DTO\Request\User\UserRequest;
+use App\Repository\Security\UserRepository;
 use App\Service\ProfileImage\ProfileImageService;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-final class UpdateMemberHandler
+final class UpdateUserHandler
 {
     public function __construct(
-        private MemberRepository $repository,
+        private UserRepository $repository,
         private ProfileImageService $profileImageService,
     ) {
     }
 
-    public function handle(Member $member, MemberRequest $request): void
+    public function handle(User $user, UserRequest $request): void
     {
         $uploadedProfileImage = $request->profileImage;
-        $profileImage = $member->getProfileImage();
+        $profileImage = $user->getProfileImage();
 
         if ($uploadedProfileImage) {
             $profileImage = $this->getCleanProfileImage(newImage: $uploadedProfileImage, oldImagePath: $profileImage);
         }
 
-        $member->update(
+        $user->update(
             lastname: $request->lastname,
             firstname: $request->firstname,
             birthdate: $request->birthdate,
@@ -51,7 +51,7 @@ final class UpdateMemberHandler
             profileImage: $profileImage,
         );
 
-        $this->repository->save($member);
+        $this->repository->save($user);
     }
 
     private function getCleanProfileImage(UploadedFile $newImage, string $oldImagePath): string

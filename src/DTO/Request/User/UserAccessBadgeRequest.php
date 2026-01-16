@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\DTO\Request\Member;
+namespace App\DTO\Request\User;
 
-use App\Entity\Member\Member;
+use App\Entity\Security\User;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class MemberAccessBadgeRequest
+class UserAccessBadgeRequest
 {
     #[Assert\Type("string")]
     #[Assert\Regex(
@@ -16,10 +16,10 @@ class MemberAccessBadgeRequest
 )]
     public ?string $accessBadgeNumber = null;
 
-    public static function fromEntity(Member $member): self
+    public static function fromEntity(User $user): self
     {
         $dto = new self();
-        $dto->accessBadgeNumber = $member->getAccessBadgeNumber();
+        $dto->accessBadgeNumber = $user->getAccessBadgeNumber();
 
         return $dto;
     }

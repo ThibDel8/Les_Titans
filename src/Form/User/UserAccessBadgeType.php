@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace App\Form\Member;
+namespace App\Form\User;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use App\DTO\Request\Member\MemberAccessBadgeRequest;
+use App\DTO\Request\User\UserAccessBadgeRequest;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
-class MemberAccessBadgeType extends AbstractType
+class UserAccessBadgeType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -31,7 +31,7 @@ class MemberAccessBadgeType extends AbstractType
             'attr' => [
                 'autocomplete' => 'off',
             ],
-            'data_class' => MemberAccessBadgeRequest::class,
+            'data_class' => UserAccessBadgeRequest::class,
         ]);
     }
 }

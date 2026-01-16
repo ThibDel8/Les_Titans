@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\QueryHandler\User;
 
-use App\Entity\User\User;
 use App\Repository\Security\UserRepository;
 
 class ListUserQueryHandler
@@ -15,6 +14,23 @@ class ListUserQueryHandler
 
     public function fetch(): array
     {
-        return $this->userRepository->findAllByRoleOrdedr();
+        $now = new \DateTimeImmutable('now');
+        $users = $this->userRepository->findBy([], ['firstname' => 'ASC']);
+
+        $validMembers = [];
+        $invalidMembers = [];
+        /** @var User $user */
+        foreach ($users as $user) {
+            if ($user->isValid($now)) {
+                $validMembers[] = $user;
+            } else {
+                $invalidMembers[] = $user;
+            }
+        }
+
+        return [
+            'validMembers' => $validMembers,
+            'invalidMembers' => $invalidMembers,
+        ];
     }
 }

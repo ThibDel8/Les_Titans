@@ -1,25 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ parent() }}Liste des utilisateurs{% endblock %}
+{% block title %}{{ parent() }}Liste des membres{% endblock %}
 
 {% block body %}
 
-    <h2 class="manager-title">Utilisateurs ({{ users|length }})</h2>
+    <h2 class="manager-title">Membres ({{ validMembers|length + invalidMembers|length }})</h2>
 
-    {% for user in users %}
-        <section class="manager-list-section">
-            <a class="manager" href="" title="Voir les informations de l'utilisateur {{ user.member.firstname }} {{ user.member.lastname }}">
-                <div class="user-list-names">
-                    <img src="{{ asset('images/profiles/uploads/' ~ user.member.profileImage) }}" alt="Image de profil de l'utilisateur">
-                    <div>
-                        <p>{{ user.member.firstname }} {{ user.member.lastname }}</p>
-                        <div class="user-list-role">{{ user.roles[0]|replace({'_': ' '})|lower }}</div>
-                    </div>
-                </div>
-            </a>
-        </section>
+    {% if invalidMembers|length > 0 %}
+        {% for user in invalidMembers %}
+            {% include 'users/_card/_users_list.html.twig' with { user: user, status: 'invalid' } %}
+        {% endfor %}
+    {% endif %}
+
+    {% for user in validMembers %}
+        {% include 'users/_card/_users_list.html.twig' with { user: user, status: 'valid' } %}
     {% else %}
-        <p>Aucun utilisateur pour le moment.</p>
+        <p>Aucun membre pour le moment.</p>
     {% endfor %}
 
 {% endblock %}

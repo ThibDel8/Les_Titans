@@ -21,7 +21,7 @@ class DeleteMembershipController extends AbstractController
     #[Route(path: '/admin/memberships/{id}/delete', name: 'admin_membership_delete', requirements: ['id' => '[0-9a-fA-F\-]{36}'], methods:[Request::METHOD_POST])]
     public function __invoke(Membership $membership): Response
     {
-        $this->denyAccessUnlessGranted(Role::Manager->value);
+        $this->denyAccessUnlessGranted(Role::Secretary->value);
 
         $this->handler->handle($membership);
 

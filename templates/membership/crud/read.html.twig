@@ -8,21 +8,17 @@
         {% if membership.medicalCertificateExpiry
             and membership.accessBadgeDeposit
             and membership.annualMembershipFee %}
-            <form method="post" action="{{ path('admin_member_create', {id: membership.id}) }}" style="display:inline">
+            <form method="post" action="{{ path('admin_user_create', {id: membership.id}) }}" style="display:inline">
                 <input type="hidden" name="_token" value="{{ csrf_token('validate_membership_' ~ membership.id) }}">
                 <button class="btn btn-success" title="Accepter cette demande d'adhésion">Accepter</button>
             </form>
         {% endif %}
         <button class="btn btn-error" onclick="document.getElementById('confirm-delete').showModal()" title="Refuser cette demande d'adhésion">Refuser</button>
-        <dialog class="confirm-delete">
+        <dialog id="confirm-delete">
             <p>Êtes-vous sûr de vouloir refuser cette demande d’adhésion ?</p>
             <br>
-            <form method="post"
-                action="{{ path('admin_membership_delete', {id: membership.id}) }}">
-
-                <input type="hidden" name="_token"
-                    value="{{ csrf_token('delete_membership_' ~ membership.id) }}">
-
+            <form method="post" action="{{ path('admin_membership_delete', {id: membership.id}) }}">
+                <input type="hidden" name="_token" value="{{ csrf_token('delete_membership_' ~ membership.id) }}">
                 <button class="btn btn-error" title="Refuser cette demande d'adhésion">Oui, refuser</button>
                 <button class="btn btn-warning" type="button" onclick="this.closest('dialog').close()" title="Annuler">Annuler</button>
             </form>

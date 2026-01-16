@@ -61,12 +61,8 @@
         <div class="form-check">
             {{ form_widget(form.acceptedRules) }}
             <label class="form-check-label" for="{{ form.acceptedRules.vars.id }}">
-                J'ai lu et j'accepte le
-                <a href="{{ path('app_house_rules') }}" target="_blank">
-                    règlement intérieur de l'association
-                </a>
+                J'ai lu et j'accepte le <a href="{{ path('app_house_rules') }}" target="_blank">règlement intérieur de l'association</a>
             </label>
-            {{ form_errors(form.acceptedRules) }}
         </div>
         <br>
         <button type="submit" title="Envoyer la demande d'adhésion">Envoyer la demande</button>
