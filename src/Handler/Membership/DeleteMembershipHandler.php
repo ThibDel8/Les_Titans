@@ -11,7 +11,7 @@ use App\Service\ProfileImage\ProfileImageService;
 final class DeleteMembershipHandler
 {
     public function __construct(
-        private MembershipRepository $repository,
+        private MembershipRepository $membershipRepository,
         private ProfileImageService $profileImageService,
     )
     {
@@ -19,7 +19,7 @@ final class DeleteMembershipHandler
 
     public function handle(Membership $membership): void
     {
-        $this->repository->delete($membership);
+        $this->membershipRepository->delete($membership);
 
         $this->profileImageService->remove($membership->getProfileImage());
     }

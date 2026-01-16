@@ -23,7 +23,6 @@ final class HomeController extends AbstractController
 
         return $this->render('home/index.html.twig', [
             'nbUsers' => $data['nbUsers'],
-            'nbMembers' => $data['nbMembers'],
             'nbUnreadMessages' => $data['nbUnreadMessages'],
             'nbMemberships' => $data['nbMemberships'],
         ]);

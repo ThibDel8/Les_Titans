@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Controller\User\Crud;
 
 use App\Enum\Security\Role;
-use App\Entity\Member\Member;
+use App\Entity\Membership\Membership;
 use App\Handler\User\CreateUserHandler;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,16 +19,15 @@ class CreateUserController extends AbstractController
     }
 
     #[Route(path: 'admin/users/create/{id}', name: 'admin_user_create', requirements: ['id' => '[0-9a-fA-F\-]{36}'], methods: Request::METHOD_POST)]
-    public function __invoke(Member $member): Response
+    public function __invoke(Membership $membership): Response
     {
         $this->denyAccessUnlessGranted(Role::Admin->value);
 
-        $success = $this->createUserHandler->handle($member);
-
+        $success = $this->createUserHandler->handle($membership);
         if ($success) {
-            $this->addFlash('success', 'L\'utilisateur a bien été créé.');
+            $this->addFlash('success', 'Le membre a bien été créé.');
         } else {
-            $this->addFlash('error', 'L\'utilisateur existe déjà.');
+            $this->addFlash('error', 'Le membre existe déjà.');
         }
 
         return $this->redirectToRoute('admin_user_list');

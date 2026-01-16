@@ -17,14 +17,4 @@ class UserRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, User::class);
     }
-
-    public function findAllByRoleOrdedr(): array
-    {
-        return $this->createQueryBuilder('u')
-            ->leftJoin('u.member', 'm')
-            ->addSelect('m')
-            ->orderBy('m.firstname', 'ASC')
-            ->getQuery()
-            ->getResult();
-    }
 }

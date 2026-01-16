@@ -14,7 +14,6 @@ class HomeQueryHandler
 {
     public function __construct(
         private UserRepository $userRepository,
-        private MemberRepository $memberRepository,
         private MessageRepository $messageRepository,
         private MembershipRepository $membershipRepository,
     ) {
@@ -23,13 +22,11 @@ class HomeQueryHandler
     public function fetch(): array
     {
         $users = $this->userRepository->findAll();
-        $members = $this->memberRepository->findAll();
         $messages = $this->messageRepository->findAll();
         $memberships = $this->membershipRepository->findAll();
 
         return [
             'nbUsers' => \count($users),
-            'nbMembers' => \count($members),
             'nbUnreadMessages' => $this->countUnreadMessages($messages),
             'nbMemberships' => \count($memberships),
         ];

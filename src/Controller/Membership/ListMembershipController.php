@@ -20,7 +20,7 @@ class ListMembershipController extends AbstractController
     #[Route(path: '/admin/memberships/list', name: 'admin_membership_list', methods: Request::METHOD_GET)]
     public function __invoke(): Response
     {
-        $this->denyAccessUnlessGranted(Role::Manager->value);
+        $this->denyAccessUnlessGranted(Role::Secretary->value);
 
         $memberships = $this->handler->handle();
 

@@ -1,9 +1,11 @@
 security:
     role_hierarchy:
-        ROLE_ADMIN: [ROLE_MANAGER, ROLE_MEMBER, ROLE_USER]
-        ROLE_MANAGER: [ROLE_MEMBER, ROLE_USER]
-        ROLE_MEMBER: [ROLE_USER]
-        ROLE_USER: []
+        ROLE_ADMIN: [ROLE_PRESIDENT, ROLE_VICE_PRESIDENT, ROLE_TREASURER, ROLE_SECRETARY, ROLE_MEMBER]
+        ROLE_PRESIDENT: [ROLE_VICE_PRESIDENT, ROLE_TREASURER, ROLE_SECRETARY, ROLE_MEMBER]
+        ROLE_VICE_PRESIDENT: [ROLE_TREASURER, ROLE_SECRETARY, ROLE_MEMBER]
+        ROLE_TREASURER: [ROLE_SECRETARY, ROLE_MEMBER]
+        ROLE_SECRETARY: [ROLE_MEMBER]
+        ROLE_MEMBER: []
 
     # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
     password_hashers:

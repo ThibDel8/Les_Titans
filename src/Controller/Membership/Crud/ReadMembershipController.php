@@ -23,7 +23,7 @@ class ReadMembershipController extends AbstractController
     #[Route(path: '/admin/memberships/{id}', name: 'admin_membership_read', requirements: ['id' => '[0-9a-fA-F\-]{36}'], methods:[Request::METHOD_GET, Request::METHOD_POST])]
     public function __invoke(Membership $membership, Request $request): Response
     {
-        $this->denyAccessUnlessGranted(Role::Manager->value);
+        $this->denyAccessUnlessGranted(Role::Secretary->value);
 
         $membershipValidationRequest = MembershipValidationRequest::fromEntity($membership);
 
