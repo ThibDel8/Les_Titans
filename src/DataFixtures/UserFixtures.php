@@ -5,13 +5,12 @@ declare(strict_types=1);
 namespace App\DataFixtures;
 
 use Faker\Factory;
-use App\Enum\Security\Role;
-use App\Entity\Security\User;
-use App\Enum\Membership\Gender;
+use App\Admin\User\Domain\Entity\User;
+use App\SharedKernel\Domain\Enum\Role;
 use Doctrine\Persistence\ObjectManager;
+use App\SharedKernel\Domain\Enum\Gender;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use App\Service\ProfileImage\ProfileImageService;
-use Doctrine\Common\DataFixtures\DependentFixtureInterface;
+use App\SharedKernel\Domain\Service\ProfileImage\ProfileImageService;
 
 class UserFixtures extends Fixture
 {

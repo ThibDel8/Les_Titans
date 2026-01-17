@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\DataFixtures;
 
 use Faker\Factory;
-use App\Entity\Security\User;
-use App\Entity\Contact\Message;
+use App\Admin\User\Domain\Entity\User;
+use App\SharedKernel\Contact\Domain\Entity\Message;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;

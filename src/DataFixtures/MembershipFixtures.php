@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace App\DataFixtures;
 
 use Faker\Factory;
-use App\Enum\Membership\Gender;
-use App\Entity\Membership\Membership;
-use App\Service\ProfileImage\ProfileImageService;
 use Doctrine\Persistence\ObjectManager;
+use App\SharedKernel\Domain\Enum\Gender;
+use App\SharedKernel\Membership\Domain\Entity\Membership;
+use App\SharedKernel\Domain\Service\ProfileImage\ProfileImageService;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 
 class MembershipFixtures extends Fixture
