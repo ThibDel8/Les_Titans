@@ -140,7 +140,7 @@ header {
 
     .nav-links {
         position: fixed;
-        top: 117px;
+        top: 117.3px;
         right: 0;
         height: calc(100vh - 110px);
         width: 70%;

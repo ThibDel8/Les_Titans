@@ -49,3 +49,7 @@ select:focus {
     height: 30px;
     width: 30px;
 }
+
+.link-under-button {
+    font-size: 0.9rem;
+}
