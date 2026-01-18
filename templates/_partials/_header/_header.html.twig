@@ -23,7 +23,14 @@
             <nav>
                 <ul>
                     <li><a class="{{ app.request.pathInfo == path('app_home') ? 'active' : '' }}" href="{{ path('app_home') }}">Accueil</a></li>
-                    <li><a class="{{ app.request.pathInfo == path('app_membership_create') ? 'active' : '' }}" href="{{ path('app_membership_create') }}">Demande d'adhésion</a></li>
+                    {% if is_granted('ROLE_SECRETARY') %}
+                        <li><a class="{{ app.request.pathInfo == path('admin_dashboard') ? 'active' : '' }}" href="{{ path('admin_dashboard') }}">Administration</a></li>
+                    {% endif %}
+                    {% if app.user %}
+                        <li><a class="{{ app.request.pathInfo == path('app_profile_read') ? 'active' : '' }}" href="{{ path('app_profile_read') }}">Profil</a></li>
+                    {% else %}
+                        <li><a class="{{ app.request.pathInfo == path('app_membership_create') ? 'active' : '' }}" href="{{ path('app_membership_create') }}">Demande d'adhésion</a></li>
+                    {% endif %}
                     <li><a class="{{ app.request.pathInfo == path('app_contact') ? 'active' : '' }}" href="{{ path('app_contact') }}">Contact</a></li>
                     <li><a class="{{ app.request.pathInfo == path('app_about') ? 'active' : '' }}" href="{{ path('app_about') }}">À propos</a></li>
                     {% if app.user %}

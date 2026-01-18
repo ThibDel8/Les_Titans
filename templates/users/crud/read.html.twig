@@ -101,31 +101,29 @@
         </div>
     </section>
 
-{% if user.age < 18 %}
-    <section class="manager-section">
-        <h2 class="manager-title">Tuteur légal{% if user.tutorFirstname or user.tutorLastname %} : {{ user.tutorFirstname }} {{ user.tutorLastname }}{% endif %}</h2>
-        <div class="member-contact-info">
-            {% if user.tutorPhone %}<a href="tel:+33{{ user.tutorPhone|slice(1) }}" title="Appeler le tuteur légal de {{ user.firstname }}">☎️ {{ user.tutorPhone }}</a><br>{% else %}<p>☎️ Information obligatoire manquante</p>{% endif %}
-            {% if user.tutorAddress and user.tutorPostalcode and user.tutorCity %}<p>🏠 {{ user.tutorAddress }} {{ user.tutorPostalcode }}, {{ user.tutorCity }}</p><br>{% else %}<p>🏠 Information obligatoire manquante</p>{% endif %}
-            {% if user.tutorEmail %}<a href="mailto:{{ user.tutorEmail }}" title="Envoyer un email au tuteur légal de {{ user.firstname }}">📧 {{ user.tutorEmail }}</a><br>{% else %}<p>📧 Information obligatoire manquante</p>{% endif %}
-        </div>
-    </section>
-{% endif %}
+    {% if user.age < 18 %}
+        <section class="manager-section">
+            <h2 class="manager-title">Tuteur légal{% if user.tutorFirstname or user.tutorLastname %} : {{ user.tutorFirstname }} {{ user.tutorLastname }}{% endif %}</h2>
+            <div class="member-contact-info">
+                {% if user.tutorPhone %}<a href="tel:+33{{ user.tutorPhone|slice(1) }}" title="Appeler le tuteur légal de {{ user.firstname }}">☎️ {{ user.tutorPhone }}</a><br>{% else %}<p>☎️ Information obligatoire manquante</p>{% endif %}
+                {% if user.tutorAddress and user.tutorPostalcode and user.tutorCity %}<p>🏠 {{ user.tutorAddress }} {{ user.tutorPostalcode }}, {{ user.tutorCity }}</p><br>{% else %}<p>🏠 Information obligatoire manquante</p>{% endif %}
+                {% if user.tutorEmail %}<a href="mailto:{{ user.tutorEmail }}" title="Envoyer un email au tuteur légal de {{ user.firstname }}">📧 {{ user.tutorEmail }}</a><br>{% else %}<p>📧 Information obligatoire manquante</p>{% endif %}
+            </div>
+        </section>
+    {% endif %}
 
+    {% if user.accessBadgeNumber is null %}
+        <section class="manager-section">
+            <h2 class="manager-title">Attribuer un numéro de badge</h2>
+            {{ form_start(form) }}
+                {{ form_rest(form) }}
+                <button type="submit" title="Enregistrer le numéro de badge">Enregistrer</button>
+            {{ form_end(form) }}
+        </section>
+    {% endif %}
 
-
-{% if user.accessBadgeNumber is null %}
-<section class="manager-section">
-    <h2 class="manager-title">Attribuer un numéro de badge</h2>
-    {{ form_start(form) }}
-        {{ form_rest(form) }}
-        <button type="submit" title="Enregistrer le numéro de badge">Enregistrer</button>
-    {{ form_end(form) }}
-</section>
-{% endif %}
-
-<div class="info-line">
-    <span>Adhésion validée depuis le {{ user.createdAt|fr_date }}</span>
-</div>
+    <div class="info-line">
+        <span>Adhésion validée depuis le {{ user.createdAt|fr_date }}</span>
+    </div>
 
 {% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }}Profil{% endblock %}
+
+{% block body %}
+
+<section class="public-section">
+<h2 class="public-title">Mise à jour du profil</h2>
+{{ form_start(form) }}
+    {{ form_rest(form) }}
+    <br>
+    <button type="submit" title="Enregistrer les modifications">Enregistrer</button>
+{{ form_end(form) }}
+
+</section>
+
+{% endblock %}

@@ -9,35 +9,14 @@
 {% block body %}
 
 {% if app.user %}
-    <section class="manager-section">
-        <div class="user-container">
-            <div class="profil-container">
-                <a href="" title="Voir le profil">
-                    <img src="{{ asset('images/profiles/uploads/' ~ app.user.profileImage) }}" alt="Image de profil de l'utilisateur connecté"/>
-                    <h2 class="manager-title">{{ app.user.firstname }}</h2>
-                </a>
-            </div>
+    <div class="user-container">
+        <div class="profil-container">
+            <a href="{{ path('app_profile_read') }}" title="Voir le profil">
+                <img src="{{ asset('images/profiles/uploads/' ~ app.user.profileImage) }}" alt="Image de profil de l'utilisateur connecté"/>
+                <h2 class="public-title">{{ app.user.firstname }}</h2>
+            </a>
         </div>
-        <div class="dashboard">
-            <ul>
-                <li>
-                    <a href="{{path('admin_user_list') }}" title="Liste des membres">
-                        {% include 'icons/manage-members.svg.twig' %} Membres ({{ nbUsers }})
-                    </a>
-                </li>
-                <li>
-                    <a href="{{path('admin_message_list') }}" title="Voir les messages">
-                        {% include 'icons/messages.svg.twig' %} Messages ({{ nbUnreadMessages }})
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ path('admin_membership_list') }}" title="Voir les demandes d'adhésion">
-                        {% include 'icons/membership-adhesion.svg.twig' %} Demandes d'adhésion ({{ nbMemberships }})
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </section>
+    </div>
 {% endif %}
 
 <section class="public-section">

@@ -1,7 +1,17 @@
 .dashboard ul {
-  list-style: none;
+    list-style: none;
 }
 
 .dashboard ul li a {
-  color: var(--grey-light);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.1rem;
+    line-height: 35px;
+    color: var(--grey-light);
+}
+
+.dashboard .icon {
+    height: 1.3rem;
+    width: 1.3rem;
 }

@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }}Administration{% endblock %}
+
+{% block body %}
+
+    <section class="manager-section">
+        <h2 class="manager-title">Administration</h2>
+        <div class="dashboard">
+            <ul>
+                <li>
+                    <a href="{{ path('admin_user_list') }}" title="Liste des membres">
+                        {% include 'icons/manage-members.svg.twig' %} Membres ({{ nbUsers }})
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ path('admin_message_list') }}" title="Voir les messages">
+                        {% include 'icons/messages.svg.twig' %} Messages ({{ nbUnreadMessages }})
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ path('admin_membership_list') }}" title="Voir les demandes d'adhésion">
+                        {% include 'icons/membership-adhesion.svg.twig' %} Demandes d'adhésion ({{ nbMemberships }})
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+{% endblock %}
