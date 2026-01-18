@@ -20,22 +20,6 @@
                 </form>
             </dialog>
         {% endif %}
-        <!--{% if is_granted('ROLE_SECRETARY') %}
-            <button class="btn btn-warning" onclick="document.getElementById('confirm-create').showModal()" title="Rendre ce membre manager">Rendre Manager</button>
-            <dialog id="confirm-create">
-                <p>Êtes-vous sûr de vouloir rendre ce membre manager ?</p>
-                <br>
-                <form method="post"
-                    action="{{ path('admin_user_create', {id: user.id}) }}">
-
-                    <input type="hidden" name="_token"
-                        value="{{ csrf_token('create_user_' ~ user.id) }}">
-
-                    <button class="btn btn-warning" title="Rendre ce membre manager">Oui, rendre manager</button>
-                    <button class="btn btn-error" type="button" onclick="this.closest('dialog').close()" title="Annuler">Annuler</button>
-                </form>
-            </dialog>
-        {% endif %}-->
         <a class="btn btn-info" href="{{ path('admin_user_update', {id: user.id}) }}" title="Modifier les informations du membre">Mettre à jour</a>
         {% if user.accessBadgeNumber is null and user.accessBadgeDeposit is null %}
             <button class="btn btn-error" onclick="document.getElementById('confirm-delete').showModal()" title="Supprimer ce membre">Supprimer</button>
@@ -82,7 +66,7 @@
                 ({{ user.age }} ans)
             </p>
             {% if user.accessBadgeNumber is not null %}
-                <p>Badge n° {{ user.accessBadgeNumber }}</p>
+                <p>Badge n° {{ user.accessBadgeNumber }} ({{ user.role }})</p>
             {% endif %}
             {% if user.medicalCertificateExpiry|date('U') < "now"|date('U') and user.annualMembershipFee is not null %}
                 <p>🩺 {{ user.firstname }} doit mettre à jour son certificat médical.</p>

@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\Admin\User\Http\Controller\Crud;
 
-use App\SharedKernel\Domain\Enum\Role;
 use App\Admin\User\Domain\Entity\User;
-use App\Admin\User\Domain\Handler\DeleteUserHandler;
+use App\SharedKernel\Domain\Enum\Role;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use App\Admin\User\Domain\Handler\DeleteUserHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class DeleteUserController extends AbstractController

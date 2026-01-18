@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Admin\User\Infrastructure\Doctrine\Repository;
 
 use App\Admin\User\Domain\Entity\User;
+use App\SharedKernel\Domain\Enum\Role;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Admin\User\Domain\Repository\UserReadRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -38,5 +39,16 @@ class UserReadRepository extends ServiceEntityRepository implements UserReadRepo
     public function findByPasswordToken(string $token): ?User
     {
         return $this->manager->getRepository(User::class)->findOneBy(['passwordSetupToken' => $token]);
+    }
+
+    public function findPresident(): ?User
+    {
+        return $this->manager->getRepository(User::class)
+            ->createQueryBuilder('u')
+            ->andWhere("u.roles LIKE :role")
+            ->setParameter('role', '%"'.Role::President->value.'"%')
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
     }
 }

@@ -1,4 +1,4 @@
-<div class="flash-messages">
+<div class="flash-messages" aria-live="polite">
     {% for label, messages in app.flashes %}
         {% for message in messages %}
             <div class="flash flash-{{ label }}">

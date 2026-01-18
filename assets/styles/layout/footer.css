@@ -1,19 +1,21 @@
 footer {
     text-align: center;
-    padding: 20px;
+    padding: 2rem 1rem;
     font-size: 0.85rem;
     opacity: 0.6;
 }
 
-footer img {
-    height: 80px;
-    margin-bottom: 10px;
+.footer-brand img {
+    max-width: 180px;
+    margin-bottom: 1rem;
 }
 
 .footer-links {
     display: flex;
     justify-content: center;
-    gap: 5px;
+    gap: 1rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
 }
 
 .footer-links a {
@@ -24,4 +26,15 @@ footer img {
 
 .footer-links a:hover {
     opacity: 1;
+}
+
+@media (max-width: 480px) {
+    .footer-links {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .footer-links a {
+        white-space: nowrap;
+    }
 }

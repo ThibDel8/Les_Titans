@@ -15,4 +15,6 @@ interface UserReadRepositoryInterface
     public function findAllUsers(): array;
 
     public function findByPasswordToken(string $token): ?User;
+
+    public function findPresident(): ?User;
 }

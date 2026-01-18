@@ -25,9 +25,11 @@ final class UpdateUserController extends AbstractController
     {
         $this->denyAccessUnlessGranted(Role::Secretary->value);
 
+        $canEditRoles = $this->isGranted(Role::President->value);
+
         $userRequest = UserRequest::fromEntity($user);
 
-        $form = $this->createForm(UpdateUserType::class, $userRequest);
+        $form = $this->createForm(UpdateUserType::class, $userRequest, ['can_edit_roles' => $canEditRoles]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
