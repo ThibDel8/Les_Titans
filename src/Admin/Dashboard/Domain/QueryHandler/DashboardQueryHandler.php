@@ -2,15 +2,14 @@
 
 declare(strict_types=1);
 
-namespace App\PublicApp\Home\Domain\QueryHandler;
+namespace App\Admin\Dashboard\Domain\QueryHandler;
 
 use App\Admin\User\Domain\Repository\UserReadRepositoryInterface;
-use App\Admin\User\Domain\Repository\UserRepository;
 use App\SharedKernel\Contact\Domain\Entity\Message;
 use App\SharedKernel\Contact\Domain\Repository\MessageReadRepositoryInterface;
 use App\SharedKernel\Membership\Domain\Repository\MembershipReadRepositoryInterface;
 
-class HomeQueryHandler
+class DashboardQueryHandler
 {
     public function __construct(
         private UserReadRepositoryInterface $userReadRepository,

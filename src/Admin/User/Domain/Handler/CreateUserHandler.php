@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Admin\User\Domain\Handler;
 
 use App\Admin\User\Domain\Entity\User;
-use App\Admin\User\Domain\Repository\UserRepository;
 use App\Admin\User\Domain\Service\Mailer\UserMailer;
 use App\SharedKernel\Membership\Domain\Entity\Membership;
 use App\Admin\User\Domain\Repository\UserReadRepositoryInterface;

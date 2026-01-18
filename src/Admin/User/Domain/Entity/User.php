@@ -296,31 +296,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->accessBadgeNumber;
     }
 
-    public function isValid(\DateTimeImmutable $now): bool
-    {
-        return $this->medicalCertificateExpiry !== null
-            && $this->medicalCertificateExpiry > $now
-            && $this->accessBadgeDeposit !== null
-            && $this->annualMembershipFee !== null
-            && $this->accessBadgeNumber !== null;
-    }
-
-    public function giveBadgeNumber(?string $number = null): void
-    {
-        $this->accessBadgeNumber = $number;
-    }
-
-    public function renewMembership(): void
-    {
-        $this->annualMembershipFee = 50;
-    }
-
-    public function restitutionBadge(): void
-    {
-        $this->accessBadgeDeposit = null;
-        $this->accessBadgeNumber = null;
-    }
-
     public function getPasswordSetupToken(): ?string
     {
         return $this->passwordSetupToken;
@@ -343,14 +318,40 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function setPassword(string $hashedPassword): void
+    {
+        $this->password = $hashedPassword;
+    }
+
     public function getUserIdentifier(): string
     {
         return (string) $this->email;
     }
 
-    public function setPassword(string $hashedPassword): void
+    public function isValid(\DateTimeImmutable $now): bool
     {
-        $this->password = $hashedPassword;
+        return $this->medicalCertificateExpiry !== null
+            && $this->medicalCertificateExpiry > $now
+            && $this->accessBadgeDeposit !== null
+            && $this->annualMembershipFee !== null
+            && $this->accessBadgeNumber !== null;
+    }
+
+    public function giveBadgeNumber(?string $number = null): void
+    {
+        $this->accessBadgeNumber = $number;
+        $this->accessBadgeDeposit = 10;
+    }
+
+    public function renewMembership(): void
+    {
+        $this->annualMembershipFee = 50;
+    }
+
+    public function restitutionBadge(): void
+    {
+        $this->accessBadgeDeposit = null;
+        $this->accessBadgeNumber = null;
     }
 
     public function assignRoles(array $roles): void

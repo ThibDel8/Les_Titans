@@ -1,6 +1,7 @@
 .flash-messages {
   position: absolute;
   right: 1rem;
+  z-index: 900;
 }
 
 .flash {

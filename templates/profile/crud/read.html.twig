@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }}Profil{% endblock %}
+
+{% block body %}
+
+    <div class="right-content">
+        <a class="btn btn-info" href="{{ path('app_profile_edit') }}" title="Modifier mon profil">Mettre à jour</a>
+    </div>
+
+    <section class="public-section">
+        <h2 class="public-title">Mon profil</h2>
+        <div class="member-profile-image">
+            <img src="{{ asset('images/profiles/uploads/' ~ app.user.profileImage ) }}" alt="Image de profil du membre">
+            <h3>{{ app.user.firstname }} {{ app.user.lastname }}</h3>
+            <p>{{ app.user.gender.label|trans }}</p>
+            <p>
+                Né{% if app.user.gender.value == 'female' %}e{% endif %} le {{ app.user.birthdate|date('d/m/Y') }}
+                ({{ app.user.age }} ans)
+            </p>
+
+            {% if app.user.accessBadgeNumber is not null %}
+                <p>Badge n° {{ app.user.accessBadgeNumber }}</p>
+            {% endif %}
+
+            {% if app.user.medicalCertificateExpiry|date('U') < "now"|date('U') and app.user.annualMembershipFee is not null %}
+                <p class="profile-info">🩺 Vous devez mettre à jour votre certificat médical.</p>
+            {% endif %}
+            {% if app.user.annualMembershipFee is null and app.user.accessBadgeNumber is not null %}
+                <p class="profile-info">💰🔑 Vous avez encore vorte badge alors que votre adhésion annuelle est terminée.
+                Pensez à renouveler l'adhésion pour 50€ l'année, ou restituez votre badge pour récupérer la caution de 10€.</p>
+            {% endif %}
+            {% if app.user.accessBadgeNumber is null and app.user.annualMembershipFee is not null %}
+                <p class="profile-info">🔑 Vous n'avez pas encore de badge alors que vorte adhésion annuelle est payée.
+                N'hésitez pas à le faire savoir auprès de la direction.</p>
+            {% endif %}
+        </div><br>
+        <div class="member-contact-info">
+            <p>☎️ {{ app.user.phone }}</p><br>
+            <p>🏠 {{ app.user.address }} {{ app.user.postalcode }}, {{ app.user.city }}</p><br>
+            <p>📧 {{ app.user.email }}</p>
+        </div>
+    </section>
+
+    {% if app.user.age < 18 %}
+        <section class="public-section">
+            <h2 class="public-title">Tuteur légal{% if app.user.tutorFirstname or app.user.tutorLastname %} : {{ app.user.tutorFirstname }} {{ app.user.tutorLastname }}{% endif %}</h2>
+            <div class="member-contact-info">
+                {% if app.user.tutorPhone %}<a href="tel:+33{{ app.user.tutorPhone|slice(1) }}" title="Appeler le tuteur légal de {{ app.user.firstname }}">☎️ {{ app.user.tutorPhone }}</a><br>{% else %}<p>☎️ Information obligatoire manquante</p>{% endif %}
+                {% if app.user.tutorAddress and app.user.tutorPostalcode and app.user.tutorCity %}<p>🏠 {{ app.user.tutorAddress }} {{ app.user.tutorPostalcode }}, {{ app.user.tutorCity }}</p><br>{% else %}<p>🏠 Information obligatoire manquante</p>{% endif %}
+                {% if app.user.tutorEmail %}<a href="mailto:{{ app.user.tutorEmail }}" title="Envoyer un email au tuteur légal de {{ app.user.firstname }}">📧 {{ app.user.tutorEmail }}</a><br>{% else %}<p>📧 Information obligatoire manquante</p>{% endif %}
+            </div>
+        </section>
+    {% endif %}
+
+    <div class="info-line">
+        <span>Adhésion validée depuis le {{ app.user.createdAt|fr_date }}</span>
+    </div>
+
+{% endblock %}
