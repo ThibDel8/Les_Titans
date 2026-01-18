@@ -37,7 +37,7 @@
 
                 {% if app.user %}
                     <li>
-                        <a class="btn-logout" onclick="document.getElementById('confirm-logout').showModal()" title="Se déconnecter">
+                        <a class="btn-logout" href="{{ path('app_logout') }}" onclick="document.getElementById('confirm-logout').showModal()" title="Se déconnecter">
                             {% include 'icons/logout.svg.twig' %}
                         </a>
                     </li>
