@@ -22,12 +22,21 @@
 <section class="public-section">
     <h2 class="public-title">Présentation</h2>
     <p>
-        La salle de musculation communale est une association locale destinée aux habitants souhaitant pratiquer
-        la musculation dans un cadre encadré, sécurisé et respectueux des règles.
+        L’association Saint‑Ouen Musculation gère la salle de musculation communale et accueille les habitants souhaitant pratiquer la musculation dans un environnement encadré, sécurisé et respectueux des règles.
     </p>
     <p>
-        L'accès est réservé aux membres à jour de leur adhésion, de leur certificat médical et du règlement intérieur.
+        L’accès est réservé aux membres à jour de leur adhésion, de leur certificat médical et du règlement intérieur.
     </p>
+    {% if app.user is null %}
+        <br>
+        <p>
+            Vous souhaitez rejoindre l’association et profiter de la salle ainsi que de ses équipements ? Déposez dès maintenant votre demande d’adhésion.
+        </p>
+        <br>
+        <div class="center">
+            <a class="btn btn-warning" href="{{ path('app_membership_create') }}">Faire une demande d'adhésion</a>
+        </div>
+    {% endif %}
 </section>
 
 <section class="public-section">
@@ -55,13 +64,46 @@
 </section>
 
 <section class="public-section">
-    <h2 class="public-title">Fonctionnement et règles</h2>
-    <p>
-        Badge obligatoire pour accéder à la salle
-        Certificat médical valide requis
-        Respect du matériel et des autres membres
-        Nettoyage des machines après utilisation
-    </p>
+
+    {% if app.user %}
+        {# --- VERSION MEMBRE CONNECTÉ --- #}
+        <h2 class="public-title">Espace communauté</h2>
+
+        <p>
+            Notre plateforme est le cœur numérique de l’association Saint‑Ouen Musculation.
+            Pour échanger de manière plus informelle avec les autres membres, vous pouvez rejoindre notre groupe Facebook dédié.
+        </p>
+
+        <p>
+            Vous pouvez également consulter les informations institutionnelles sur la page “Associations” du site de la mairie.
+        </p>
+
+        <div class="community-links">
+            <a class="community-link" href="https://www.facebook.com/groups/627909098566646" target="_blank" rel="noopener noreferrer">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/2023_Facebook_icon.svg/960px-2023_Facebook_icon.svg.png" alt="Groupe Facebook" class="community-image">
+            </a>
+
+            <a class="community-link" href="https://www.mairie-saint-ouen.com/association/" target="_blank" rel="noopener noreferrer">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Logo-Mairie.svg/2048px-Logo-Mairie.svg.png" alt="Site de la Mairie" class="community-image">
+            </a>
+        </div>
+
+    {% else %}
+        {# --- VERSION PUBLIQUE --- #}
+        <h2 class="public-title">Informations institutionnelles</h2>
+
+        <p>
+            Notre plateforme est le cœur numérique de l’association Saint‑Ouen Musculation.
+            Pour en savoir plus sur la vie associative de la commune, vous pouvez consulter la page dédiée sur le site de la mairie.
+        </p>
+
+        <div class="community-links">
+            <a class="community-link" href="https://www.mairie-saint-ouen.com/association/" target="_blank" rel="noopener noreferrer">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Logo-Mairie.svg/2048px-Logo-Mairie.svg.png" alt="Site de la Mairie" class="community-image">
+            </a>
+        </div>
+    {% endif %}
+
 </section>
 
 {% endblock %}
@@ -70,10 +112,8 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 <script>
-    // Centre la carte sur l'adresse avec géocodage léger OSM
     const query = "Cité Saint-Jules, 80610 Saint-Ouen, France";
 
-    // Appelle l’API Nominatim (OSM) pour obtenir la lat/lng
     fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}`)
         .then(response => response.json())
         .then(data => {
@@ -85,14 +125,12 @@
             const lat = parseFloat(data[0].lat);
             const lon = parseFloat(data[0].lon);
 
-            // Initialise la carte
             const map = L.map("map").setView([lat, lon], 16);
 
             L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
                 attribution: "&copy; OpenStreetMap"
             }).addTo(map);
 
-            // Ajoute un marqueur
             L.marker([lat, lon]).addTo(map)
                 .bindPopup("<strong>Salle de musculation Les Titans</strong><br>Cité Saint-Jules, 80610 Saint-Ouen")
                 .openPopup();

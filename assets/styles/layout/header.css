@@ -80,8 +80,10 @@ header {
         position: absolute;
         display: flex;
         justify-content: center;
-        top: 125px;
+        top: 110px;
         right: 0;
+        border-left: 3px solid var(--public-color);
+        border-bottom: 3px solid var(--public-color);
         background-color: var(--black);
         width: 350px;
         transform: translateX(100%);

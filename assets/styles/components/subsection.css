@@ -13,3 +13,25 @@
 .subsection h3 {
   margin-bottom: 20px;
 }
+
+.community-links {
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.community-link {
+    display: flex;
+    align-items: center;
+}
+
+.community-image {
+    height: auto;
+    width: 60px;
+    transition: transform 0.2s ease;
+}
+
+.community-image:hover {
+    transform: scale(1.05);
+}
