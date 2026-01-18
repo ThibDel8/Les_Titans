@@ -1,0 +1,26 @@
+{% extends 'emails/base.html.twig' %}
+
+{% block subject %}{{ parent() }}Suppression d'un membre gérant{% endblock %}
+
+{% block body %}
+
+    <section style="
+        background-color: {{ colors.greyDark }};
+        border-radius: 4px;
+        padding: 25px;
+        margin-bottom: 40px;
+        border-left: 5px solid {{ colors.managerColor }};
+    ">
+        <h2 style="color: {{ colors.managerColor }}; padding-bottom: 20px;">Suppression d'un membre gérant</h2>
+        <div style="color: {{ colors.grey }};">
+            <p>Bonjour {{ president.firstname }},</p><br>
+            <p>Un membre de l'association vient d'être supprimé.</p>
+            <p>Ce membre était {{ user.firstname }} {{ user.lastname }} et occupait le poste de {{ user.role }}.</p>
+            <br>
+            <p>Si ce n'est pas encore fait, pensez à attribuer le role de {{ user.role }} sur un autre membre.</p>
+            <br><br>
+            <p>Merci,</p>
+            <p>Saint-Ouen Musculation | Les Titans</p>
+        </div>
+    </section>
+{% endblock %}

@@ -1,11 +1,12 @@
-<footer class="footer">
-    <img src="{{ asset('images/logo_text.png') }}" alt="Logo Les Titans">
-    <p>&copy; 2025 - {{ "now"|date("Y") }} Saint-Ouen Musculation</p>
+<footer aria-label="Pied de page du site">
+    <div class="footer-brand">
+        <img src="{{ asset('images/logos/les_titans_text.png') }}" alt="Logo de l'association Saint-Ouen Musculation">
+        <p>&copy; 2025 - {{ "now"|date("Y") }} Saint-Ouen Musculation</p>
+    </div>
     <div class="footer-links">
         <a href="{{ path('app_legal_notices') }}" title="Consulter les mentions légales">Mentions légales</a>
-        -
         <a href="{{ path('app_privacy_policy') }}" title="Consulter la politique de confidentialité">Politique de confidentialité</a>
-        -
         <a href="{{ path('app_house_rules') }}">Règlement</a>
+        <a href="{{ path('app_contact') }}">Contact</a>
     </div>
 </footer>

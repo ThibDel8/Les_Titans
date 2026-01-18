@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace App\Admin\User\Http\Form;
 
+use App\SharedKernel\Domain\Enum\Role;
 use App\SharedKernel\Domain\Enum\Gender;
 use Symfony\Component\Form\AbstractType;
-use App\Admin\User\Domain\DTO\Request\UserRequest;
 use Symfony\Component\Form\FormBuilderInterface;
+use App\Admin\User\Domain\DTO\Request\UserRequest;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -181,6 +182,21 @@ class UpdateUserType extends AbstractType
                 ],
             ])
         ;
+
+        if ($options['can_edit_roles']) {
+            $builder
+                ->add('roles', ChoiceType::class, [
+                    'label' => 'Rôle',
+                    'choices' => [
+                        'Président' => Role::President->value,
+                        'Vice-président' => Role::VicePresident->value,
+                        'Trésorier' => Role::Treasurer->value,
+                        'Secrétaire' => Role::Secretary->value,
+                        'Membre' => Role::Member->value,
+                    ],
+                ])
+            ;
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver): void
@@ -190,6 +206,7 @@ class UpdateUserType extends AbstractType
                 'autocomplete' => 'off',
             ],
             'data_class' => UserRequest::class,
+            'can_edit_roles' => false,
         ]);
     }
 }

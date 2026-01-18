@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Admin\User\Domain\DTO\Request;
 
 use App\Admin\User\Domain\Entity\User;
+use App\SharedKernel\Domain\Enum\Role;
 use App\SharedKernel\Domain\Enum\Gender;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -124,6 +125,9 @@ class UserRequest
 
     public ?string $tutorCity = null;
 
+    #[Assert\Choice(callback: [Role::class, 'values'])]
+    public string $roles;
+
     public static function fromEntity(User $user): self
     {
         $dto = new self();
@@ -147,6 +151,7 @@ class UserRequest
         $dto->tutorAddress = $user->getTutorAddress();
         $dto->tutorPostalcode = $user->getTutorPostalcode();
         $dto->tutorCity = $user->getTutorCity();
+        $dto->roles = array_first($user->getRoles());
 
         return $dto;
     }

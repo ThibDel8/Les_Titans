@@ -51,6 +51,8 @@ final class UpdateUserHandler
             profileImage: $profileImage,
         );
 
+        $user->assignRoles([$request->roles]);
+
         $this->userWriteRepository->save($user);
     }
 

@@ -31,4 +31,19 @@ class UserMailer
 
         $this->mailer->send($email);
     }
+
+    public function notifyPresidentOfUserDeletion(User $user, User $president): void
+    {
+        $email = (new TemplatedEmail())
+            ->from($this->params->get('app.email'))
+            ->to($president->getEmail())
+            ->subject('Les Titans | Suppression d\'un memebre gérant')
+            ->htmlTemplate('emails/user/manager_deletion.html.twig')
+            ->context([
+                'user' => $user,
+                'president' => $president,
+            ]);
+
+        $this->mailer->send($email);
+    }
 }

@@ -2,8 +2,8 @@
     <div class="header-container">
 
         <div class="logo-title">
-            <a href="{{ path('app_home') }}" title="Se rendre à l'accueil">
-                <img src="{{ asset('images/logo_image.png') }}" alt="Logo du site"/>
+            <a href="{{ path('app_home') }}" title="Retour à l'accueil">
+                <img src="{{ asset('images/logos/les_titans_image.png') }}" alt="Logo de l'association">
             </a>
             <div class="title-text">
                 <h1>Les Titans</h1>
@@ -11,53 +11,41 @@
             </div>
         </div>
 
-        <!-- burger button -->
-        <input type="checkbox" id="menu-toggle" class="menu-toggle" />
-        <label for="menu-toggle" class="burger">
+        <input type="checkbox" id="menu-toggle" class="menu-toggle">
+        <label for="menu-toggle" class="burger" aria-label="Ouvrir le menu">
             <span></span>
             <span></span>
             <span></span>
         </label>
 
-        <div class="nav-links">
-            <nav>
-                <ul>
-                    <li><a class="{{ app.request.pathInfo == path('app_home') ? 'active' : '' }}" href="{{ path('app_home') }}">Accueil</a></li>
-                    {% if is_granted('ROLE_SECRETARY') %}
-                        <li><a class="{{ app.request.pathInfo == path('admin_dashboard') ? 'active' : '' }}" href="{{ path('admin_dashboard') }}">Administration</a></li>
-                    {% endif %}
-                    {% if app.user %}
-                        <li><a class="{{ app.request.pathInfo == path('app_profile_read') ? 'active' : '' }}" href="{{ path('app_profile_read') }}">Profil</a></li>
-                    {% else %}
-                        <li><a class="{{ app.request.pathInfo == path('app_membership_create') ? 'active' : '' }}" href="{{ path('app_membership_create') }}">Demande d'adhésion</a></li>
-                    {% endif %}
-                    <li><a class="{{ app.request.pathInfo == path('app_contact') ? 'active' : '' }}" href="{{ path('app_contact') }}">Contact</a></li>
-                    <li><a class="{{ app.request.pathInfo == path('app_about') ? 'active' : '' }}" href="{{ path('app_about') }}">À propos</a></li>
-                    {% if app.user %}
-                        <li>
-                            <a class="btn-logout {{ app.request.pathInfo == path('app_logout') ? 'active' : '' }}" onclick="document.getElementById('confirm-logout').showModal()" title="Se déconnecter">
-                                {% include 'icons/logout.svg.twig' %}
-                            </a>
-                        </li>
-                    {% else %}
-                        <li><a class="{{ app.request.pathInfo == path('app_login') ? 'active' : '' }}" href="{{ path('app_login') }}">Connexion</a></li>
-                    {% endif %}
-                </ul>
-            </nav>
-            <dialog id="confirm-logout">
-                <p>Êtes-vous sûr de vouloir vous déconnecter ?</p>
-                <br>
-                <form method="get"
-                    action="{{ path('app_logout') }}">
+        <nav class="nav-links" aria-label="Navigation principale">
+            <ul>
+                <li><a class="{{ app.request.pathInfo == path('app_home') ? 'active' : '' }}" href="{{ path('app_home') }}">Accueil</a></li>
 
-                    <input type="hidden" name="_token"
-                        value="{{ csrf_token('logout') }}">
+                {% if is_granted('ROLE_SECRETARY') %}
+                    <li><a class="{{ app.request.pathInfo == path('admin_dashboard') ? 'active' : '' }}" href="{{ path('admin_dashboard') }}">Administration</a></li>
+                {% endif %}
 
-                    <button class="btn btn-error" title="Se déconnecter">Oui, se déconnecter</button>
-                    <button class="btn btn-warning" type="button" onclick="this.closest('dialog').close()" title="Annuler">Annuler</button>
-                </form>
-            </dialog>
-        </div>
+                {% if app.user %}
+                    <li><a class="{{ app.request.pathInfo == path('app_profile_read') ? 'active' : '' }}" href="{{ path('app_profile_read') }}">Profil</a></li>
+                {% else %}
+                    <li><a class="{{ app.request.pathInfo == path('app_membership_create') ? 'active' : '' }}" href="{{ path('app_membership_create') }}">Demande d'adhésion</a></li>
+                {% endif %}
+
+                <li><a class="{{ app.request.pathInfo == path('app_contact') ? 'active' : '' }}" href="{{ path('app_contact') }}">Contact</a></li>
+                <li><a class="{{ app.request.pathInfo == path('app_about') ? 'active' : '' }}" href="{{ path('app_about') }}">À propos</a></li>
+
+                {% if app.user %}
+                    <li>
+                        <a class="btn-logout" onclick="document.getElementById('confirm-logout').showModal()" title="Se déconnecter">
+                            {% include 'icons/logout.svg.twig' %}
+                        </a>
+                    </li>
+                {% else %}
+                    <li><a class="{{ app.request.pathInfo == path('app_login') ? 'active' : '' }}" href="{{ path('app_login') }}">Connexion</a></li>
+                {% endif %}
+            </ul>
+        </nav>
 
     </div>
 </header>
