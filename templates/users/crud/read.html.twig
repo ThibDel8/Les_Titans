@@ -3,6 +3,7 @@
 {% block title %}{{ parent() }}Profil de {{ user.firstname }}{% endblock %}
 
 {% block body %}
+{% set days = (user.medicalCertificateExpiry|date('U') - "now"|date('U')) // 86400 %}
 
     <div class="right-content">
         {% if user.annualMembershipFee is null and user.accessBadgeNumber is not null %}
@@ -58,18 +59,16 @@
         <h2 class="manager-title">Profil de {{ user.firstname }} {{ user.lastname }}</h2>
         <div class="member-profile-image">
             <img src="{{ asset('images/profiles/uploads/' ~ user.profileImage ) }}" alt="Image de profil du membre">
-            <p>
-                {{ user.gender.label|trans }}
-            </p>
+            <p>{{ user.role }} (genre : {{ user.gender.label|trans }})</p>
             <p>
                 Né{% if user.gender.value == 'female' %}e{% endif %} le {{ user.birthdate|date('d/m/Y') }}
                 ({{ user.age }} ans)
             </p>
             {% if user.accessBadgeNumber is not null %}
-                <p>Badge n° {{ user.accessBadgeNumber }} ({{ user.role }})</p>
+                <p>Badge n° {{ user.accessBadgeNumber }}</p>
             {% endif %}
             {% if user.medicalCertificateExpiry|date('U') < "now"|date('U') and user.annualMembershipFee is not null %}
-                <p>🩺 {{ user.firstname }} doit mettre à jour son certificat médical.</p>
+                <p>🩺 Certificat médical expiré depuis {{ days|abs }} jour{% if days < -1 %}s{% endif %}, {{ user.firstname }} doit mettre à jour son certificat médical.</p>
             {% endif %}
             {% if user.annualMembershipFee is null and user.accessBadgeNumber is not null %}
                 <p>💰🔑 {{ user.firstname }} a encore son badge alors que son abonnement annuel est terminé.</p>
@@ -81,7 +80,17 @@
         <div class="member-contact-info">
             <a href="tel:+33{{ user.phone|slice(1) }}" title="Appeler {{ user.firstname }}">☎️ {{ user.phone }}</a><br>
             <p>🏠 {{ user.address }} {{ user.postalcode }}, {{ user.city }}</p><br>
-            <a href="mailto:{{ user.email }}" title="Envoyer un email à {{ user.firstname }}">📧 {{ user.email }}</a>
+            <a href="mailto:{{ user.email }}" title="Envoyer un email à {{ user.firstname }}">📧 {{ user.email }}</a><br>
+            {% if days > 0 %}
+                <p>
+                    🩺 Certificat médical valable jusqu'au {{ user.medicalCertificateExpiry|fr_date }}
+                    (encore {{ days }} jour{% if days > 1 %}s{% endif %}).
+                </p>
+            {% elseif days == 0 %}
+                <p>
+                    🩺 Certificat médical valable jusqu'à aujourd’hui.
+                </p>
+            {% endif %}
         </div>
     </section>
 
@@ -107,7 +116,7 @@
     {% endif %}
 
     <div class="info-line">
-        <span>Adhésion validée depuis le {{ user.createdAt|fr_date }}</span>
+        <span>Adhésion validée depuis le {{ user.createdAt|fr_datetime }}</span>
     </div>
 
 {% endblock %}

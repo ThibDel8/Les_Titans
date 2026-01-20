@@ -12,7 +12,7 @@
                             <img src="{{ asset('images/profiles/uploads/' ~ membership.profileImage) }}" alt="Image de profil du potentiel futur membre">
                             <div>
                                 <p>{{ membership.firstname }} {{ membership.lastname }}</p>
-                                <div class="membership-list-date">{{ membership.createdAt|fr_date }}</div>
+                                <div class="membership-list-date">{{ membership.createdAt|fr_datetime }}</div>
                             </div>
                         </div>
                     </a>

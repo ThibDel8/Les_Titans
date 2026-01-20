@@ -7,28 +7,84 @@
     <section class="public-section">
         <h2 class="public-title">Mentions légales</h2>
 
-        <h3>Éditeur du site</h3>
-        <p>
-            Saint-Ouen Musculation<br>
-            Association loi 1901<br>
-            Siège social : [ADRESSE DU SIÈGE SOCIAL]<br>
-            Email : <a href="mailto:" title="Contactez l'association">[EMAIL DE CONTACT DE L’ASSOCIATION]</a>
-        </p><br>
+        <h3>1. Éditeur du site</h3>
+        <br>
+        <p>Le présent site internet, accessible à l’adresse <a>les-titans.fr</a>, est édité par :</p>
+        <br>
+        <ul class="paragraph">
+            <li><b>Association Saint-Ouen Musculation</b></li>
+            <li>Siège social : 7 rue Philippe Louis, 80610 Saint-Ouen, France</li>
+            <li>Forme juridique : Association déclarée (loi 1901)</li>
+            <li>SIREN : 814 710 562</li>
+            <li>SIRET : 814 710 562 00012</li>
+            <li>Identifiant RNA : W802007084</li>
+            <li>Code APE : 93.12Z – Activités de clubs de sports</li>
+            <li>Objet : Pratique de la musculation et du cardio-training en salle</li>
+        </ul>
+        <br>
 
-        <h3>Responsable de publication</h3>
-        <p>
-            [Prénom Nom]<br>
-            Fonction : Président de l’association Saint-Ouen Musculation
-        </p><br>
+        <h3>2. Directeur de la publication</h3>
+        <br>
+        <p>Le directeur de la publication est :</p>
+        <p>M. {{ legalsView.president.firstname }} {{ legalsView.president.lastname|upper }}, en sa qualité de Président de l’association.</p>
+        <br>
 
-        <h3>Hébergement</h3>
-        <p>
-            Syndicat mixte Somme Numérique<br>
-            83 rue Saint Fuscien – 80000 Amiens<br>
-            Téléphone : 03 22 22 27 27<br>
-            Site : <a href="http://www.sommenumerique.fr" target="_blank" title="Consulter le site de l'hébergeur">www.sommenumerique.fr</a><br>
-            Email : <a href="mailto:courrier@sommenumerique.fr" title="Contactez l'hébergeur">courrier@sommenumerique.fr</a>
-        </p>
+        <h3>3. Contact</h3>
+        <br>
+        <p>Pour toute demande concernant l’association ou le site :</p>
+        <ul>
+            <li>Adresse postale : 7 rue Philippe Louis, 80610 Saint-Ouen</li>
+            <li>Téléphone (mairie, relais administratif) : <a href="tel:0322529139">03 22 52 91 39</a></li>
+            <li>Email : <a href="mailto:mairie.saint-ouen@mairie-saint-ouen.com">mairie.saint-ouen@mairie-saint-ouen.com</a></li>
+        </ul>
+        <br>
+
+        <h3>3. Hébergement</h3>
+        <br>
+        <p>Le site est hébergé par :</p>
+        <br>
+        <ul class="paragraph">
+            <li><b>IONOS SARL</b></li>
+            <li>Adresse : 7 Place de la Gare, 57200 Sarreguemines, France</li>
+            <li>Téléphone : 09 70 80 89 11</li>
+            <li>Site web : <a href="https://www.ionos.fr">https://www.ionos.fr</a></li>
+            <li>Type d’hébergement : VPS (Virtual Private Server)</li>
+        </ul>
+        <br>
+
+        <h3>5. Propriété intellectuelle</h3>
+        <br>
+        <p>L’ensemble du contenu présent sur le site (textes, images, logos, éléments graphiques, structure, fonctionnalités) est la propriété exclusive de l’association Saint-Ouen Musculation, sauf mention contraire.</p>
+        <br>
+        <p>Toute reproduction, représentation, modification ou exploitation, totale ou partielle, sans autorisation écrite préalable est interdite.</p>
+        <br>
+
+        <h3>6. Responsabilité</h3>
+        <br>
+        <p>L’association s’efforce d’assurer l’exactitude et la mise à jour des informations diffusées sur le site.</p>
+        <p>Elle ne saurait toutefois être tenue responsable :</p>
+        <ul>
+            <li>d’erreurs, omissions ou inexactitudes,</li>
+            <li>d’une indisponibilité temporaire du site,</li>
+            <li>de tout dommage direct ou indirect lié à l’utilisation du site.</li>
+        </ul>
+        <br>
+
+        <h3>7. Liens externes</h3>
+        <br>
+        <p>Le site peut contenir des liens vers des sites tiers (ex. : page Facebook de la salle, site de la mairie).</p>
+        <p>L’association n’exerce aucun contrôle sur ces sites et décline toute responsabilité quant à leur contenu ou fonctionnement.</p>
+        <br>
+
+        <h3>8. Données personnelles</h3>
+        <br>
+        <p>Le traitement des données personnelles est détaillé dans la <a href="{{ path('app_privacy_policy') }}">Politique de confidentialité</a>, accessible sur une page dédiée.</p>
+        <br>
+
+        <h3>9. Cookies</h3>
+        <br>
+        <p>Le site n’utilise <b>aucun cookie de suivi</b>, ni cookie publicitaire, ni cookie tiers.</p>
+        <p>Seuls des cookies techniques indispensables au fonctionnement du site peuvent être utilisés (ex. : session utilisateur).</p>
     </section>
 
 {% endblock %}
