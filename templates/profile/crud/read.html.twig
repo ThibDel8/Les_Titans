@@ -3,6 +3,7 @@
 {% block title %}{{ parent() }}Profil{% endblock %}
 
 {% block body %}
+{% set days = (app.user.medicalCertificateExpiry|date('U') - "now"|date('U')) // 86400 %}
 
     <div class="right-content">
         <a class="btn btn-info" href="{{ path('app_profile_edit') }}" title="Modifier mon profil">Mettre à jour</a>
@@ -24,7 +25,7 @@
             {% endif %}
 
             {% if app.user.medicalCertificateExpiry|date('U') < "now"|date('U') and app.user.annualMembershipFee is not null %}
-                <p class="profile-info">🩺 Vous devez mettre à jour votre certificat médical.</p>
+                <p class="profile-info">🩺 Certificat médical expiré depuis {{ days|abs }} jour{% if days < -1 %}s{% endif %}, vous devez le renouveler rapidement.</p>
             {% endif %}
             {% if app.user.annualMembershipFee is null and app.user.accessBadgeNumber is not null %}
                 <p class="profile-info">💰🔑 Vous avez encore vorte badge alors que votre adhésion annuelle est terminée.
@@ -38,7 +39,17 @@
         <div class="member-contact-info">
             <p>☎️ {{ app.user.phone }}</p><br>
             <p>🏠 {{ app.user.address }} {{ app.user.postalcode }}, {{ app.user.city }}</p><br>
-            <p>📧 {{ app.user.email }}</p>
+            <p>📧 {{ app.user.email }}</p><br>
+            {% if days > 0 %}
+                <p>
+                    🩺 Certificat médical valable jusqu'au {{ app.user.medicalCertificateExpiry|fr_date }}
+                    (encore {{ days }} jour{% if days > 1 %}s{% endif %}).
+                </p>
+            {% elseif days == 0 %}
+                <p>
+                    🩺 Certificat médical valable jusqu'à aujourd’hui.
+                </p>
+            {% endif %}
         </div>
     </section>
 
@@ -54,7 +65,7 @@
     {% endif %}
 
     <div class="info-line">
-        <span>Adhésion validée depuis le {{ app.user.createdAt|fr_date }}</span>
+        <span>Adhésion validée depuis le {{ app.user.createdAt|fr_datetime }}</span>
     </div>
 
 {% endblock %}
