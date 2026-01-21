@@ -37,7 +37,7 @@ class UserMailer
         $email = (new TemplatedEmail())
             ->from($this->params->get('app.email'))
             ->to($president->getEmail())
-            ->subject('Les Titans | Suppression d\'un memebre gérant')
+            ->subject('Les Titans | Suppression d\'un memebre dirigeant')
             ->htmlTemplate('emails/user/manager_deletion.html.twig')
             ->context([
                 'user' => $user,
