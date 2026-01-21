@@ -7,11 +7,27 @@
 <section class="public-section">
     <h2 class="public-title">Contactez-nous</h2>
 
+    <p>Pour toute question, suggestion, demande d’information ou pour signaler un problème technique, contactez-nous.</p>
+    <p>Chaque message est lu avec attention et traité dans un esprit d’écoute, de transparence et d’engagement.</p>
+    <br>
+
     {{ form_start(form) }}
         {{ form_rest(form) }}
         <button type="submit" title="Envoyer le message">Envoyer</button>
     {{ form_end(form) }}
-
 </section>
+
+<div>
+    <h2 class="public-title">Les dirigeants de l’association</h2>
+    <div class="board-members-container">
+        {% for user in boardMembers %}
+            <div class="board-members-content">
+                <img src="{{ asset('images/profiles/uploads/' ~ user.profileImage ) }}" alt="Image de profil du membre">
+                <p>{{ user.firstname }} {{ user.lastname }}</p>
+                <p><small><i>{{ user.role }}</i></small></p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
 
 {% endblock %}

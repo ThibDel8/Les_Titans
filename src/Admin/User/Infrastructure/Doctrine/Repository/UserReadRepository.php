@@ -51,4 +51,15 @@ class UserReadRepository extends ServiceEntityRepository implements UserReadRepo
             ->getOneOrNullResult()
         ;
     }
+
+    public function getBoardMembers(): array
+    {
+        return $this->manager->getRepository(User::class)
+            ->createQueryBuilder('u')
+            ->where("u.roles NOT LIKE :memberRole")
+            ->setParameter('memberRole', '%"'.Role::Member->value.'"%')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

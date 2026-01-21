@@ -4,17 +4,21 @@ declare(strict_types=1);
 
 namespace App\PublicApp\Contact\Http\Controller\Crud;
 
-use App\PublicApp\Contact\Http\Form\ContactType;
-use App\PublicApp\Contact\Domain\Handler\CreateMessageHandler;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use App\PublicApp\Contact\Domain\DTO\Request\MessageCreationRequest;
+use App\PublicApp\Contact\Http\Form\ContactType;
+use App\PublicApp\Contact\Domain\Handler\CreateMessageHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\PublicApp\Contact\Domain\DTO\Request\MessageCreationRequest;
+use App\PublicApp\Contact\Domain\QueryHandler\CreateMessageQueryHandler;
 
 final class CreateMessageController extends AbstractController
 {
-    public function __construct(private CreateMessageHandler $createMessageHandler)
+    public function __construct(
+        private CreateMessageHandler $createMessageHandler,
+        private CreateMessageQueryHandler $createMessageQuery,
+        )
     {
     }
 
@@ -22,6 +26,8 @@ final class CreateMessageController extends AbstractController
     public function __invoke(Request $request): Response
     {
         $messageRequest = new MessageCreationRequest();
+
+        $boardMembers = $this->createMessageQuery->fetch();
 
         $form = $this->createForm(ContactType::class, $messageRequest);
         $form->handleRequest($request);
@@ -36,6 +42,7 @@ final class CreateMessageController extends AbstractController
 
         return $this->render('contact/crud/create.html.twig', [
             'form' => $form,
+            'boardMembers' => $boardMembers,
         ]);
     }
 }
