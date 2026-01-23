@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace App\DataFixtures;
 
 use Faker\Factory;
+use Symfony\Component\Uid\Uuid;
 use App\Admin\User\Domain\Entity\User;
-use App\SharedKernel\Contact\Domain\Entity\Message;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use App\Contact\Domain\Entity\ContactMessage;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 class MessageFixtures extends Fixture implements DependentFixtureInterface
@@ -16,30 +17,30 @@ class MessageFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager): void
     {
         $faker = Factory::create('fr_FR');
-        $secretaryUser = $this->getReference('secretary_user', User::class);
+        $secretaryUserId = $this->getReference('secretary_user', User::class)->getUuid();
 
-        $this->createMessage(
+        $this->createContactMessage(
             manager: $manager,
             email: $faker->email(),
             subject: $faker->sentence(),
-            message: $faker->sentence(),
+            body: $faker->sentence(),
         );
 
-        $this->createMessage(
+        $this->createContactMessage(
             manager: $manager,
             email: $faker->email(),
             subject: $faker->sentence(),
-            message: $faker->sentence(),
-            isUnread: false,
+            body: $faker->sentence(),
+            assignTo: $secretaryUserId,
+            answer: $faker->sentence(),
         );
 
-        $this->createMessage(
+        $this->createContactMessage(
             manager: $manager,
             email: $faker->email(),
             subject: $faker->sentence(),
-            message: $faker->sentence(),
-            isUnread: false,
-            answerBy: $secretaryUser->getFirstname() . ' ' . $secretaryUser->getLastname(),
+            body: $faker->sentence(),
+            assignTo: $secretaryUserId,
         );
 
         $manager->flush();
@@ -52,27 +53,28 @@ class MessageFixtures extends Fixture implements DependentFixtureInterface
         ];
     }
 
-    private function createMessage(
+    private function createContactMessage(
         ObjectManager $manager,
         string $email,
         string $subject,
-        string $message,
-        bool $isUnread = true,
-        ?string $answerBy = null,
+        string $body,
+        ?Uuid $assignTo = null,
+        ?string $answer = null,
     ): void
     {
-        $message = Message::create(
+        $message = ContactMessage::create(
             email: $email,
             subject: $subject,
-            message: $message,
+            body: $body,
         );
 
-        if (false === $isUnread) {
-            $message->markAsRead();
+        if (null !== $assignTo) {
+            $message->assignTo($assignTo);
         }
 
-        if ($answerBy !== null) {
-            $message->markAsAnswerBy($answerBy);
+        if (null !== $answer) {
+            $message->answer(answer: $answer, adminId: $assignTo);
+            $message->archive();
         }
 
         $manager->persist($message);
