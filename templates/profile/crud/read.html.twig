@@ -28,12 +28,12 @@
                 <p class="profile-info">🩺 Certificat médical expiré depuis {{ days|abs }} jour{% if days < -1 %}s{% endif %}, vous devez le renouveler rapidement.</p>
             {% endif %}
             {% if app.user.annualMembershipFee is null and app.user.accessBadgeNumber is not null %}
-                <p class="profile-info">💰🔑 Vous avez encore vorte badge alors que votre adhésion annuelle est terminée.
+                <p class="profile-info">💰🔑 Vous avez encore votre badge alors que votre adhésion annuelle est terminée.
                 Pensez à renouveler l'adhésion pour 50€ l'année, ou restituez votre badge pour récupérer la caution de 10€.</p>
             {% endif %}
             {% if app.user.accessBadgeNumber is null and app.user.annualMembershipFee is not null %}
                 <p class="profile-info">🔑 Vous n'avez pas encore de badge alors que vorte adhésion annuelle est payée.
-                N'hésitez pas à le faire savoir auprès de la direction.</p>
+                N'hésitez pas à le faire savoir auprès des membres du bureau.</p>
             {% endif %}
         </div><br>
         <div class="member-contact-info">

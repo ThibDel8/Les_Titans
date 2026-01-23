@@ -62,7 +62,6 @@ header {
     justify-content: center;
     padding: 5px;
     border-radius: 50%;
-    background-color: var(--red);
     cursor: pointer;
 }
 

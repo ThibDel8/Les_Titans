@@ -60,7 +60,10 @@
 
     {% if membership.medicalCertificateExpiry and membership.accessBadgeDeposit and membership.annualMembershipFee %}
         <h2 class="manager-title">Nouvel adhérant !</h2>
-        <p>La demande d'ahdésion est maintenant valide, elle peut être acceptée à tout moment en cliquant sur <strong>Accepter</strong>. Cette demande d'adhésion se supprimera automatiquement après l'avoir accepté, et le profil du nouvel adhérant sera créé.</p>
+        <p>
+            La demande d'ahdésion est maintenant valide, elle peut être acceptée à tout moment en cliquant sur <strong>Accepter</strong>.
+            Cette demande d'adhésion se supprimera automatiquement après l'avoir acceptée, et le profil du nouvel adhérant sera créé.
+        </p>
         <br>
         <p>{{ membership.firstname }} peut maintenant avoir son badge d'accès.</p>
         <p>Ne pas oublier de lui attribuer son numéro de badge dans son profil.</p>

@@ -1,9 +1,5 @@
-{% if message.isUnread == 0 %}
-<section class="gray-section">
-{% else %}
 <section class="manager-section">
-{% endif %}
-    <a class="manager" href="{{ path('admin_message_read', {id: message.id}) }}" title="Cliquer pour lire le message">
+    <a class="manager" href="{{ path('admin_contact_message_read', {id: message.id}) }}" title="Cliquer pour lire le message">
         <div class="message-list-names">
             <div>
                 <p>{{ message.subject }}</p>
