@@ -4,6 +4,8 @@
 
 {% block body %}
 
+    {% include '_partials/_breadcrumb/_breadcrumb.html.twig' with { breadcrumb: breadcrumb } %}
+
     <h2 class="manager-title">Membres ({{ validMembers|length + invalidMembers|length }})</h2>
 
     {% if invalidMembers|length > 0 %}

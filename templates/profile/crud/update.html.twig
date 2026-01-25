@@ -4,14 +4,15 @@
 
 {% block body %}
 
-<section class="public-section">
-<h2 class="public-title">Mise à jour du profil</h2>
-{{ form_start(form) }}
-    {{ form_rest(form) }}
-    <br>
-    <button type="submit" title="Enregistrer les modifications">Enregistrer</button>
-{{ form_end(form) }}
+    {% include '_partials/_breadcrumb/_breadcrumb.html.twig' with { breadcrumb: breadcrumb } %}
 
-</section>
+    <section class="public-section">
+        <h2 class="public-title">Mise à jour du profil</h2>
+        {{ form_start(form) }}
+            {{ form_rest(form) }}
+            <br>
+            <button class="btn" type="submit" title="Enregistrer les modifications">Enregistrer</button>
+        {{ form_end(form) }}
+    </section>
 
 {% endblock %}

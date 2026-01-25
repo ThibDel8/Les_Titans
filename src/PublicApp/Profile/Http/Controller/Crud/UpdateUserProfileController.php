@@ -40,8 +40,16 @@ class UpdateUserProfileController extends AbstractController
             return $this->redirectToRoute('app_profile_read');
         }
 
+        $breadcrumb = [
+            ['label' => 'Accueil', 'path' => $this->generateUrl('app_home')],
+            ['label' => 'Profil', 'path' => $this->generateUrl('app_profile_read')],
+            ['label' => 'Modifications', 'path' => null],
+        ];
+
+
         return $this->render('profile/crud/update.html.twig', [
             'form' => $form,
+            'breadcrumb' => $breadcrumb,
         ]);
     }
 }

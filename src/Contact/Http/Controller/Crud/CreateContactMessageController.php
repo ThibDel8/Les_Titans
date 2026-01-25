@@ -40,9 +40,15 @@ final class CreateContactMessageController extends AbstractController
             return $this->redirectToRoute('app_contact');
         }
 
+        $breadcrumb = [
+            ['label' => 'Accueil', 'path' => $this->generateUrl('app_home')],
+            ['label' => 'Contact', 'path' => null],
+        ];
+
         return $this->render('contact/crud/create.html.twig', [
             'form' => $form,
             'boardMembers' => $boardMembers,
+            'breadcrumb' => $breadcrumb,
         ]);
     }
 }

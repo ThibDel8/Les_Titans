@@ -28,8 +28,3 @@
 .profil-container h2 {
   margin: 0;
 }
-
-.logout-icon {
-  height: 35px;
-  color: var(--manager-color);
-}

@@ -8,7 +8,9 @@ use App\SharedKernel\Membership\Domain\Repository\MembershipReadRepositoryInterf
 
 final class MembershipListHandler
 {
-    public function __construct(private MembershipReadRepositoryInterface $membershipReadRepository) {}
+    public function __construct(private MembershipReadRepositoryInterface $membershipReadRepository)
+    {
+    }
 
     public function handle(): array
     {

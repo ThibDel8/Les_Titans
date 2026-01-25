@@ -20,29 +20,66 @@
 
         <nav class="nav-links" aria-label="Navigation principale">
             <ul>
-                <li><a class="{{ app.request.pathInfo == path('app_home') ? 'active' : '' }}" href="{{ path('app_home') }}">Accueil</a></li>
-
-                {% if is_granted('ROLE_SECRETARY') %}
-                    <li><a class="{{ app.request.pathInfo == path('admin_dashboard') ? 'active' : '' }}" href="{{ path('admin_dashboard') }}">Administration</a></li>
-                {% endif %}
-
-                {% if app.user %}
-                    <li><a class="{{ app.request.pathInfo == path('app_profile_read') ? 'active' : '' }}" href="{{ path('app_profile_read') }}">Profil</a></li>
-                {% else %}
-                    <li><a class="{{ app.request.pathInfo == path('app_membership_create') ? 'active' : '' }}" href="{{ path('app_membership_create') }}">Demande d'adhésion</a></li>
-                {% endif %}
-
-                <li><a class="{{ app.request.pathInfo == path('app_contact') ? 'active' : '' }}" href="{{ path('app_contact') }}">Contact</a></li>
-                <li><a class="{{ app.request.pathInfo == path('app_about') ? 'active' : '' }}" href="{{ path('app_about') }}">À propos</a></li>
+                <li>
+                    <a class="{{ app.request.pathInfo == path('app_home') ? 'active' : '' }}" href="{{ path('app_home') }}">
+                        {% include 'icons/home.svg.twig' %}
+                        Accueil
+                    </a>
+                </li>
 
                 {% if app.user %}
                     <li>
-                        <a class="btn-logout" href="{{ path('app_logout') }}" onclick="document.getElementById('confirm-logout').showModal()" title="Se déconnecter">
-                            {% include 'icons/logout.svg.twig' %}
+                        <a class="{{ app.request.pathInfo == path('app_profile_read') ? 'active' : '' }}" href="{{ path('app_profile_read') }}">
+                            {% include 'icons/profile.svg.twig' %}
+                            Profil
                         </a>
                     </li>
                 {% else %}
-                    <li><a class="{{ app.request.pathInfo == path('app_login') ? 'active' : '' }}" href="{{ path('app_login') }}">Connexion</a></li>
+                    <li>
+                        <a class="{{ app.request.pathInfo == path('app_membership_create') ? 'active' : '' }}" href="{{ path('app_membership_create') }}">
+                            {% include 'icons/memberships.svg.twig' %}
+                            Adhésions
+                        </a>
+                    </li>
+                {% endif %}
+
+                <li>
+                    <a class="{{ app.request.pathInfo == path('app_contact') ? 'active' : '' }}" href="{{ path('app_contact') }}">
+                        {% include 'icons/contact-messages.svg.twig' %}
+                        Contact
+                    </a>
+                </li>
+
+                <li>
+                    <a class="{{ app.request.pathInfo == path('app_about') ? 'active' : '' }}" href="{{ path('app_about') }}">
+                        {% include 'icons/about.svg.twig' %}
+                        À propos
+                    </a>
+                </li>
+
+                {% if is_granted('ROLE_SECRETARY') %}
+                    <li>
+                        <a class="{{ app.request.pathInfo == path('admin_dashboard') ? 'active-manager' : '' }} manager" href="{{ path('admin_dashboard') }}">
+                            {% include 'icons/dashboard.svg.twig' %}
+                            Administration
+                        </a>
+                    </li>
+                {% endif %}
+
+                {% if app.user %}
+                    <li>
+                        <a href="{{ path('app_logout') }}" onclick="document.getElementById('confirm-logout').showModal()" title="Se déconnecter">
+                            {% include 'icons/logout.svg.twig' %}
+                            Se déconnecter
+                        </a>
+                    </li>
+                {% else %}
+                    <li>
+                        <a class="{{ app.request.pathInfo == path('app_login') ? 'active' : '' }}" href="{{ path('app_login') }}">
+                            {% include 'icons/login.svg.twig' %}
+                            Connexion
+                        </a>
+                    </li>
                 {% endif %}
             </ul>
         </nav>

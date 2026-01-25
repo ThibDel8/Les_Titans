@@ -1,0 +1,25 @@
+.contact-message-status {
+    display: inline-block;
+    min-width: 5rem;
+    text-align: center;
+    padding: 0.25em 0.6em;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: 9999px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #fff;
+}
+
+/* Couleurs par statut */
+.contact-message-status.new {
+    background-color: #E53E3E;
+}
+
+.contact-message-status.in_progress {
+    background-color: #DD6B20;
+}
+
+.contact-message-status.answered {
+    background-color: #3182CE;
+}

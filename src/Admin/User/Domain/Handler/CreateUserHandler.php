@@ -21,21 +21,23 @@ final class CreateUserHandler
     ) {
     }
 
-    public function handle(Membership $membership): bool
+    public function handle(Membership $membership): ?User
     {
         $existingUser = $this->userReadRepository->findByEmail($membership->getEmail());
 
-        if (null === $existingUser) {
-            $user = $this->createNewUser($membership);
-
-            $this->userWriteRepository->save($user);
-
-            $this->userMailer->sendPasswordSetupEmail($user);
-
-            $this->deleteMembership($membership);
+        if (null !== $existingUser) {
+            return null;
         }
 
-        return null === $existingUser;
+        $user = $this->createNewUser($membership);
+
+        $this->userWriteRepository->save($user);
+
+        $this->userMailer->sendPasswordSetupEmail($user);
+
+        $this->deleteMembership($membership);
+
+        return $user;
     }
 
     private function createNewUser(Membership $membership): User

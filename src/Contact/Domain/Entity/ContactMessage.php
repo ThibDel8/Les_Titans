@@ -7,6 +7,7 @@ namespace App\Contact\Domain\Entity;
 use Doctrine\DBAL\Types\Types;
 use Symfony\Component\Uid\Uuid;
 use Doctrine\ORM\Mapping as ORM;
+use App\Admin\User\Domain\Entity\User;
 use App\Contact\Domain\Enum\ContactMessageStatus;
 
 #[ORM\Entity]
@@ -29,14 +30,16 @@ class ContactMessage
     #[ORM\Column(enumType: ContactMessageStatus::class)]
     private ContactMessageStatus $status;
 
-    #[ORM\Column(type: 'uuid', length: 36, nullable: true)]
-    private ?Uuid $assignedTo = null;
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
+    private ?User $assignedTo = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $answer = null;
 
-    #[ORM\Column(type: 'uuid', length: 36, nullable: true)]
-    private ?Uuid $answeredBy = null;
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
+    private ?User $answeredBy = null;
 
     #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: true)]
     private ?\DateTimeImmutable $answeredAt = null;
@@ -89,7 +92,7 @@ class ContactMessage
         return $this->status;
     }
 
-    public function getAssignedTo(): ?Uuid
+    public function getAssignedTo(): ?User
     {
         return $this->assignedTo;
     }
@@ -99,7 +102,7 @@ class ContactMessage
         return $this->answer;
     }
 
-    public function getAnsweredBy(): ?Uuid
+    public function getAnsweredBy(): ?User
     {
         return $this->answeredBy;
     }
@@ -114,39 +117,40 @@ class ContactMessage
         return $this->createdAt;
     }
 
-    public function assignTo(Uuid $adminId): void
+    public function saveAssignTo(User $boardMember): void
     {
         if ($this->status !== ContactMessageStatus::NEW) {
-            throw new \DomainException('Contact message already assigned.');
+            return;
         }
 
-        $this->assignedTo = $adminId;
+        $this->assignedTo = $boardMember;
         $this->status = ContactMessageStatus::IN_PROGRESS;
     }
 
-    public function answer(string $answer, Uuid $adminId): void
+    public function saveUnread(): void
     {
         if ($this->status !== ContactMessageStatus::IN_PROGRESS) {
-            throw new \DomainException('Contact message not in progress.');
+            return;
         }
 
-        if ($this->assignedTo === null || !$this->assignedTo->equals($adminId)) {
-            throw new \DomainException('Only assigned admin can answer.');
+        $this->assignedTo = null;
+        $this->status = ContactMessageStatus::NEW;
+    }
+
+    public function saveAnswer(string $answer, User $boardMember): void
+    {
+        if ($this->status !== ContactMessageStatus::IN_PROGRESS) {
+            return;
+        }
+
+        if ($this->assignedTo === null || !$this->assignedTo === $boardMember) {
+            return;
         }
 
         $this->answer = \trim($answer);
-        $this->answeredBy = $adminId;
+        $this->answeredBy = $boardMember;
         $this->answeredAt = new \DateTimeImmutable();
         $this->status = ContactMessageStatus::ANSWERED;
-    }
-
-    public function archive(): void
-    {
-        if ($this->status !== ContactMessageStatus::ANSWERED) {
-            throw new \DomainException('Only answered messages can be archived.');
-        }
-
-        $this->status = ContactMessageStatus::ARCHIVED;
     }
 
     public static function create(

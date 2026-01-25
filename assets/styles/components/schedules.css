@@ -17,20 +17,44 @@
 }
 
 .opening-hours li.open .today-status {
-    color: green;
+    color: var(--green);
 }
 
 .opening-hours li.closed .today-status {
-    color: red;
+    color: var(--red);
 }
 
 .opening-hours .status.open {
-    color: green;
+    color: var(--green);
     font-weight: bold;
 }
 
 .opening-hours .status.closed {
-    color: red;
+    color: var(--red);
     font-weight: bold;
 }
 
+.note {
+    display: inline-flex;
+    align-items: center;
+    color: #6b7280;
+    gap: 0.25rem;
+    line-height: 1.2;
+    font-weight: 400;
+}
+
+.note .info-icon {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    color: #3b82f6;
+    border-radius: 50%;
+    width: 1.2em;
+    height: 1.2em;
+}
+
+.note .info-icon:hover {
+    color: #2563eb;
+    cursor: help;
+}

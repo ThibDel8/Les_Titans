@@ -8,5 +8,7 @@ use App\Contact\Domain\Entity\ContactMessage;
 
 interface ContactMessageWriteRepositoryInterface
 {
-    public function save(ContactMessage $message, bool $flush = true): void;
+    public function delete(ContactMessage $contactMessage, bool $flush = true): void;
+
+    public function save(ContactMessage $contactMessage, bool $flush = true): void;
 }

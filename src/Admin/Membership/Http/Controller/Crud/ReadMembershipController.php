@@ -42,9 +42,17 @@ class ReadMembershipController extends AbstractController
             return $this->redirectToRoute('admin_membership_read', ['id' => $membership->getId()]);
         }
 
+        $breadcrumb = [
+            ['label' => 'Accueil', 'path' => $this->generateUrl('app_home')],
+            ['label' => 'Administration', 'path' => $this->generateUrl('admin_dashboard')],
+            ['label' => 'Liste des demandes d\'adhésion', 'path' => $this->generateUrl('admin_membership_list')],
+            ['label' => $membership->getFirstname().' '.$membership->getLastname(), 'path' => null],
+        ];
+
         return $this->render('membership/crud/read.html.twig', [
             'membership' => $membership,
             'form' => $form,
+            'breadcrumb' => $breadcrumb,
         ]);
     }
 }

@@ -33,9 +33,15 @@ class CreateMembershipController extends AbstractController
 
             return $this->redirectToRoute('app_membership_pending', ['id' => $membership->getId()]);
         }
+        $breadcrumb = [
+            ['label' => 'Accueil', 'path' => $this->generateUrl('app_home')],
+            ['label' => 'Demande d\'adhésion', 'path' => null],
+        ];
+
 
         return $this->render('membership/crud/create.html.twig', [
             'form' => $form,
+            'breadcrumb' => $breadcrumb,
         ]);
     }
 }

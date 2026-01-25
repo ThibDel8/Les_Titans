@@ -3,7 +3,9 @@
 {% block title %}{{ parent() }}Profil{% endblock %}
 
 {% block body %}
-{% set days = (app.user.medicalCertificateExpiry|date('U') - "now"|date('U')) // 86400 %}
+    {% set days = (app.user.medicalCertificateExpiry|date('U') - "now"|date('U')) // 86400 %}
+
+    {% include '_partials/_breadcrumb/_breadcrumb.html.twig' with { breadcrumb: breadcrumb } %}
 
     <div class="right-content">
         <a class="btn btn-info" href="{{ path('app_profile_edit') }}" title="Modifier mon profil">Mettre à jour</a>
@@ -37,9 +39,9 @@
             {% endif %}
         </div><br>
         <div class="member-contact-info">
-            <p>☎️ {{ app.user.phone }}</p><br>
-            <p>🏠 {{ app.user.address }} {{ app.user.postalcode }}, {{ app.user.city }}</p><br>
-            <p>📧 {{ app.user.email }}</p><br>
+            <p>☎️ {{ app.user.phone }}</p>
+            <p>🏠 {{ app.user.address }} {{ app.user.postalcode }}, {{ app.user.city }}</p>
+            <p>📧 {{ app.user.email }}</p>
             {% if days > 0 %}
                 <p>
                     🩺 Certificat médical valable jusqu'au {{ app.user.medicalCertificateExpiry|fr_date }}
@@ -57,9 +59,9 @@
         <section class="public-section">
             <h2 class="public-title">Tuteur légal{% if app.user.tutorFirstname or app.user.tutorLastname %} : {{ app.user.tutorFirstname }} {{ app.user.tutorLastname }}{% endif %}</h2>
             <div class="member-contact-info">
-                {% if app.user.tutorPhone %}<a href="tel:+33{{ app.user.tutorPhone|slice(1) }}" title="Appeler le tuteur légal de {{ app.user.firstname }}">☎️ {{ app.user.tutorPhone }}</a><br>{% else %}<p>☎️ Information obligatoire manquante</p>{% endif %}
-                {% if app.user.tutorAddress and app.user.tutorPostalcode and app.user.tutorCity %}<p>🏠 {{ app.user.tutorAddress }} {{ app.user.tutorPostalcode }}, {{ app.user.tutorCity }}</p><br>{% else %}<p>🏠 Information obligatoire manquante</p>{% endif %}
-                {% if app.user.tutorEmail %}<a href="mailto:{{ app.user.tutorEmail }}" title="Envoyer un email au tuteur légal de {{ app.user.firstname }}">📧 {{ app.user.tutorEmail }}</a><br>{% else %}<p>📧 Information obligatoire manquante</p>{% endif %}
+                {% if app.user.tutorPhone %}<a href="tel:+33{{ app.user.tutorPhone|slice(1) }}" title="Appeler le tuteur légal de {{ app.user.firstname }}">☎️ {{ app.user.tutorPhone }}</a>{% else %}<p>☎️ Information obligatoire manquante</p>{% endif %}
+                {% if app.user.tutorAddress and app.user.tutorPostalcode and app.user.tutorCity %}<p>🏠 {{ app.user.tutorAddress }} {{ app.user.tutorPostalcode }}, {{ app.user.tutorCity }}</p>{% else %}<p>🏠 Information obligatoire manquante</p>{% endif %}
+                {% if app.user.tutorEmail %}<a href="mailto:{{ app.user.tutorEmail }}" title="Envoyer un email au tuteur légal de {{ app.user.firstname }}">📧 {{ app.user.tutorEmail }}</a>{% else %}<p>📧 Information obligatoire manquante</p>{% endif %}
             </div>
         </section>
     {% endif %}

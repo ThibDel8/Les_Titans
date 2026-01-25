@@ -3,7 +3,9 @@
 {% block title %}{{ parent() }}Profil de {{ user.firstname }}{% endblock %}
 
 {% block body %}
-{% set days = (user.medicalCertificateExpiry|date('U') - "now"|date('U')) // 86400 %}
+    {% set days = (user.medicalCertificateExpiry|date('U') - "now"|date('U')) // 86400 %}
+
+    {% include '_partials/_breadcrumb/_breadcrumb.html.twig' with { breadcrumb: breadcrumb } %}
 
     <div class="right-content">
         {% if user.annualMembershipFee is null and user.accessBadgeNumber is not null %}
@@ -78,9 +80,9 @@
             {% endif %}
         </div><br>
         <div class="member-contact-info">
-            <a href="tel:+33{{ user.phone|slice(1) }}" title="Appeler {{ user.firstname }}">☎️ {{ user.phone }}</a><br>
-            <p>🏠 {{ user.address }} {{ user.postalcode }}, {{ user.city }}</p><br>
-            <a href="mailto:{{ user.email }}" title="Envoyer un email à {{ user.firstname }}">📧 {{ user.email }}</a><br>
+            <a href="tel:+33{{ user.phone|slice(1) }}" title="Appeler {{ user.firstname }}">☎️ {{ user.phone }}</a>
+            <p>🏠 {{ user.address }} {{ user.postalcode }}, {{ user.city }}</p>
+            <a href="mailto:{{ user.email }}" title="Envoyer un email à {{ user.firstname }}">📧 {{ user.email }}</a>
             {% if days > 0 %}
                 <p>
                     🩺 Certificat médical valable jusqu'au {{ user.medicalCertificateExpiry|fr_date }}
@@ -98,9 +100,9 @@
         <section class="manager-section">
             <h2 class="manager-title">Tuteur légal{% if user.tutorFirstname or user.tutorLastname %} : {{ user.tutorFirstname }} {{ user.tutorLastname }}{% endif %}</h2>
             <div class="member-contact-info">
-                {% if user.tutorPhone %}<a href="tel:+33{{ user.tutorPhone|slice(1) }}" title="Appeler le tuteur légal de {{ user.firstname }}">☎️ {{ user.tutorPhone }}</a><br>{% else %}<p>☎️ Information obligatoire manquante</p>{% endif %}
-                {% if user.tutorAddress and user.tutorPostalcode and user.tutorCity %}<p>🏠 {{ user.tutorAddress }} {{ user.tutorPostalcode }}, {{ user.tutorCity }}</p><br>{% else %}<p>🏠 Information obligatoire manquante</p>{% endif %}
-                {% if user.tutorEmail %}<a href="mailto:{{ user.tutorEmail }}" title="Envoyer un email au tuteur légal de {{ user.firstname }}">📧 {{ user.tutorEmail }}</a><br>{% else %}<p>📧 Information obligatoire manquante</p>{% endif %}
+                {% if user.tutorPhone %}<a href="tel:+33{{ user.tutorPhone|slice(1) }}" title="Appeler le tuteur légal de {{ user.firstname }}">☎️ {{ user.tutorPhone }}</a>{% else %}<p>☎️ Information obligatoire manquante</p>{% endif %}
+                {% if user.tutorAddress and user.tutorPostalcode and user.tutorCity %}<p>🏠 {{ user.tutorAddress }} {{ user.tutorPostalcode }}, {{ user.tutorCity }}</p>{% else %}<p>🏠 Information obligatoire manquante</p>{% endif %}
+                {% if user.tutorEmail %}<a href="mailto:{{ user.tutorEmail }}" title="Envoyer un email au tuteur légal de {{ user.firstname }}">📧 {{ user.tutorEmail }}</a>{% else %}<p>📧 Information obligatoire manquante</p>{% endif %}
             </div>
         </section>
     {% endif %}
@@ -110,7 +112,7 @@
             <h2 class="manager-title">Attribuer un numéro de badge</h2>
             {{ form_start(form) }}
                 {{ form_rest(form) }}
-                <button type="submit" title="Enregistrer le numéro de badge">Enregistrer</button>
+                <button class="btn" type="submit" title="Enregistrer le numéro de badge">Enregistrer</button>
             {{ form_end(form) }}
         </section>
     {% endif %}

@@ -16,6 +16,20 @@
   border-left: 5px solid var(--manager-color);
 }
 
+.manager-section ul {
+  padding: 0;
+}
+
+.manager-section li {
+  width: 100%;
+}
+
+.manager-section ul li .icon {
+  width: 1em;
+  height: 1em;
+  color: var(--grey-light);
+}
+
 .manager-list-section,
 .manager-valid-section,
 .manager-invalid-section {
@@ -38,25 +52,4 @@
 .manager-title {
   color: var(--manager-color);
   margin-bottom: 30px;
-}
-
-.manager-section ul {
-  padding: 0;
-}
-
-.manager-section li {
-  width: 100%;
-}
-
-.gray-section a,
-.manager-section a {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.manager-section ul li .icon {
-  width: 1em;
-  height: 1em;
-  color: var(--grey-light);
 }

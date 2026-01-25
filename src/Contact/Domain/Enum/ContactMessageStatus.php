@@ -9,5 +9,13 @@ enum ContactMessageStatus: string
     case NEW = 'new';
     case IN_PROGRESS = 'in_progress';
     case ANSWERED = 'answered';
-    case ARCHIVED = 'archived';
+
+    public function label(): string
+    {
+        return match($this) {
+            self::NEW => 'Nouveau',
+            self::IN_PROGRESS => 'Lu',
+            self::ANSWERED => 'Répondu',
+        };
+    }
 }

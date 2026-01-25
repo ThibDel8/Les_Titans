@@ -19,8 +19,14 @@ class PrivacyPolicyController extends AbstractController
     {
         $legalsView = $this->legalsQuery->fetch();
 
+        $breadcrumb = [
+            ['label' => 'Accueil', 'path' => $this->generateUrl('app_home')],
+            ['label' => 'Politique de confidentialité', 'path' => null],
+        ];
+
         return $this->render('_partials/_footer/_legals/_privacy-policy.html.twig', [
             'legalsView' => $legalsView,
+            'breadcrumb' => $breadcrumb,
         ]);
     }
 }

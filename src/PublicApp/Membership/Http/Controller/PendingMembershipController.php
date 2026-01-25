@@ -15,8 +15,14 @@ class PendingMembershipController extends AbstractController
     #[Route(path: '/memberships/{id}/pending', name: 'app_membership_pending', requirements: ['id' => '[0-9a-fA-F\-]{36}'], methods: Request::METHOD_GET)]
     public function __invoke(Membership $membership): Response
     {
+        $breadcrumb = [
+            ['label' => 'Accueil', 'path' => $this->generateUrl('app_home')],
+            ['label' => 'Demande d\'adhésion', 'path' => null],
+        ];
+
         return $this->render('membership/pending.html.twig', [
             'membership' => $membership,
+            'breadcrumb' => $breadcrumb,
         ]);
     }
 }

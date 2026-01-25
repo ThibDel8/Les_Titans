@@ -24,9 +24,16 @@ final class ListUserController extends AbstractController
 
         $data = $this->listUserQueryHandler->fetch();
 
+        $breadcrumb = [
+            ['label' => 'Accueil', 'path' => $this->generateUrl('app_home')],
+            ['label' => 'Administration', 'path' => $this->generateUrl('admin_dashboard')],
+            ['label' => 'Liste des membres', 'path' => null],
+        ];
+
         return $this->render('users/list.html.twig', [
             'validMembers' => $data['validMembers'],
             'invalidMembers' => $data['invalidMembers'],
+            'breadcrumb' => $breadcrumb,
         ]);
     }
 }

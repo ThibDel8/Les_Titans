@@ -22,12 +22,18 @@ final class DashboardController extends AbstractController
     {
         $this->denyAccessUnlessGranted(Role::Secretary->value);
 
-        $data = $this->dashboardQuery->fetch();
+        $dataCounter = $this->dashboardQuery->fetch();
+
+        $breadcrumb = [
+            ['label' => 'Accueil', 'path' => $this->generateUrl('app_home')],
+            ['label' => 'Administration', 'path' => null],
+        ];
 
         return $this->render('dashboard/index.html.twig', [
-            'nbUsers' => $data['nbUsers'],
-            'nbUnreadMessages' => $data['nbUnreadMessages'],
-            'nbMemberships' => $data['nbMemberships'],
+            'nbUsers' => $dataCounter->nbUsers,
+            'nbUnreadMessages' => $dataCounter->nbContactMessages,
+            'nbMemberships' => $dataCounter->nbMemberships,
+            'breadcrumb' => $breadcrumb,
         ]);
     }
 }

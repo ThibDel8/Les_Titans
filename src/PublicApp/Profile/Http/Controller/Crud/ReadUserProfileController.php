@@ -17,6 +17,13 @@ class ReadUserProfileController extends AbstractController
     {
         $this->denyAccessUnlessGranted(Role::Member->value);
 
-        return $this->render('profile/crud/read.html.twig');
+        $breadcrumb = [
+            ['label' => 'Accueil', 'path' => $this->generateUrl('app_home')],
+            ['label' => 'Profil', 'path' => null],
+        ];
+
+        return $this->render('profile/crud/read.html.twig', [
+            'breadcrumb' => $breadcrumb,
+        ]);
     }
 }
