@@ -17,7 +17,7 @@ class MessageFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager): void
     {
         $faker = Factory::create('fr_FR');
-        $secretaryUserId = $this->getReference('secretary_user', User::class)->getUuid();
+        $secretaryUser = $this->getReference('secretary_user', User::class);
 
         $this->createContactMessage(
             manager: $manager,
@@ -31,7 +31,21 @@ class MessageFixtures extends Fixture implements DependentFixtureInterface
             email: $faker->email(),
             subject: $faker->sentence(),
             body: $faker->sentence(),
-            assignTo: $secretaryUserId,
+        );
+
+        $this->createContactMessage(
+            manager: $manager,
+            email: $faker->email(),
+            subject: $faker->sentence(),
+            body: $faker->sentence(),
+        );
+
+        $this->createContactMessage(
+            manager: $manager,
+            email: $faker->email(),
+            subject: $faker->sentence(),
+            body: $faker->sentence(),
+            assignTo: $secretaryUser,
             answer: $faker->sentence(),
         );
 
@@ -40,7 +54,16 @@ class MessageFixtures extends Fixture implements DependentFixtureInterface
             email: $faker->email(),
             subject: $faker->sentence(),
             body: $faker->sentence(),
-            assignTo: $secretaryUserId,
+            assignTo: $secretaryUser,
+        );
+
+        $this->createContactMessage(
+            manager: $manager,
+            email: $faker->email(),
+            subject: $faker->sentence(),
+            body: $faker->sentence(),
+            assignTo: $secretaryUser,
+            answer: $faker->sentence(),
         );
 
         $manager->flush();
@@ -58,7 +81,7 @@ class MessageFixtures extends Fixture implements DependentFixtureInterface
         string $email,
         string $subject,
         string $body,
-        ?Uuid $assignTo = null,
+        ?User $assignTo = null,
         ?string $answer = null,
     ): void
     {
@@ -69,12 +92,11 @@ class MessageFixtures extends Fixture implements DependentFixtureInterface
         );
 
         if (null !== $assignTo) {
-            $message->assignTo($assignTo);
+            $message->saveAssignTo($assignTo);
         }
 
         if (null !== $answer) {
-            $message->answer(answer: $answer, adminId: $assignTo);
-            $message->archive();
+            $message->saveAnswer(answer: $answer, boardMember: $assignTo);
         }
 
         $manager->persist($message);

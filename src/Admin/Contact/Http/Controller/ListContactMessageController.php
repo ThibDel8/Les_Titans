@@ -21,8 +21,15 @@ final class ListContactMessageController extends AbstractController
     {
         $messages = $this->listContactMessageQuery->fetch();
 
+        $breadcrumb = [
+            ['label' => 'Accueil', 'path' => $this->generateUrl('app_home')],
+            ['label' => 'Administration', 'path' => $this->generateUrl('admin_dashboard')],
+            ['label' => 'Messages', 'path' => null],
+        ];
+
         return $this->render('contact/list.html.twig', [
             'messages' => $messages,
+            'breadcrumb' => $breadcrumb,
         ]);
     }
 }

@@ -12,6 +12,13 @@ class AboutController extends AbstractController
     #[Route(path: '/about', name: 'app_about', methods: Request::METHOD_GET)]
     public function __invoke(): Response
     {
-        return $this->render('about/about.html.twig');
+        $breadcrumb = [
+            ['label' => 'Accueil', 'path' => $this->generateUrl('app_home')],
+            ['label' => 'À propos', 'path' => null],
+        ];
+
+        return $this->render('about/about.html.twig', [
+            'breadcrumb' => $breadcrumb,
+        ]);
     }
 }

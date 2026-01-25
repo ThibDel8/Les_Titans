@@ -6,6 +6,8 @@
 @import "components/board-members.css";
 @import "components/button.css";
 @import "components/buttons-native.css";
+@import "components/contact-message-card.css";
+@import "components/contact-message-status.css";
 @import "components/dashboard.css";
 @import "components/dialog.css";
 @import "components/flash.css";
@@ -18,6 +20,7 @@
 @import "components/subsection.css";
 @import "components/user-bar.css";
 
+@import "layout/breadcrumb.css";
 @import "layout/footer.css";
 @import "layout/grid.css";
 @import "layout/header.css";

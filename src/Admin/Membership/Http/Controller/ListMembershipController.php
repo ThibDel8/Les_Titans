@@ -24,8 +24,15 @@ class ListMembershipController extends AbstractController
 
         $memberships = $this->handler->handle();
 
+        $breadcrumb = [
+            ['label' => 'Accueil', 'path' => $this->generateUrl('app_home')],
+            ['label' => 'Administration', 'path' => $this->generateUrl('admin_dashboard')],
+            ['label' => 'Liste des demandes d\'adhésion', 'path' => null],
+        ];
+
         return $this->render('membership/list.html.twig', [
             'memberships' => $memberships,
+            'breadcrumb' => $breadcrumb,
         ]);
     }
 }

@@ -29,7 +29,7 @@
                 <div>
                     <input type="hidden" name="_csrf_token" data-controller="csrf-protection" value="{{ csrf_token('authenticate') }}">
                 </div>
-                <button type="submit" title="Se connecter">Se connecter</button>
+                <button class="btn" type="submit" title="Se connecter">Se connecter</button>
                 <div class="center"><a class="link-under-button" href="{{ path('app_forgot_password_request') }}" title="Réinitialiser son mot de passe">Mot de passe oublié ?</a></div>
             {% endif %}
 

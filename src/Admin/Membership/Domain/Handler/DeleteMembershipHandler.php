@@ -13,8 +13,7 @@ final class DeleteMembershipHandler
     public function __construct(
         private ProfileImageService $profileImageService,
         private MembershipWriteRepositoryInterface $membershipWriteRepository,
-    )
-    {
+    ) {
     }
 
     public function handle(Membership $membership): void

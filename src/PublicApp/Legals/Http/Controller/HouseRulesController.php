@@ -12,6 +12,13 @@ class HouseRulesController extends AbstractController
     #[Route(path: '/house-rules', name: 'app_house_rules', methods: Request::METHOD_GET)]
     public function __invoke(): Response
     {
-        return $this->render('_partials/_footer/_legals/_house-rules.html.twig');
+        $breadcrumb = [
+            ['label' => 'Accueil', 'path' => $this->generateUrl('app_home')],
+            ['label' => 'Règlements', 'path' => null],
+        ];
+
+        return $this->render('_partials/_footer/_legals/_house-rules.html.twig', [
+            'breadcrumb' => $breadcrumb,
+        ]);
     }
 }

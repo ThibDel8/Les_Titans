@@ -4,20 +4,86 @@
 
 {% block body %}
 
+    {% include '_partials/_breadcrumb/_breadcrumb.html.twig' with { breadcrumb: breadcrumb } %}
+
+    <div class="right-content">
+        {% if app.user == message.assignedTo and message.answer is null %}
+            <form method="post" action="{{ path('admin_contact_message_unread', {'id': message.id}) }}">
+                <input type="hidden" name="_token" value="{{ csrf_token('unread_' ~ message.id) }}">
+                <button class="btn btn-info" title="Mettre ce message comme non lu">Non lu</button>
+            </form>
+        {% endif %}
+        <button class="btn btn-error" onclick="document.getElementById('confirm-delete').showModal()" title="Supprimer ce message de contact">Supprimer</button>
+        <dialog id="confirm-delete">
+            <p>Êtes-vous sûr de vouloir supprimer ce message ?</p>
+            <br>
+            <form method="post" action="{{ path('admin_contact_message_delete', {id: message.id}) }}">
+                <input type="hidden" name="_token" value="{{ csrf_token('delete_message_' ~ message.id) }}">
+                <button class="btn btn-error" title="Supprimer ce message de contact">Oui, supprimer</button>
+                <button class="btn btn-warning" type="button" onclick="this.closest('dialog').close()" title="Annuler">Annuler</button>
+            </form>
+        </dialog>
+    </div>
+
     <section class="manager-section">
         <h2 class="manager-title">Message</h2>
 
         <div class="message-content">
-            <p><strong>Sujet :</strong> {{ message.subject }}</p>
+            <p>{{ message.subject }}</p>
             <br>
-            <p><strong>Message :</strong> {{ message.body }}</p>
+            <div class="subsection">
+                <p>{{ message.body }}</p>
+            </div>
         </div>
         <br>
         <div class="membership-list-date">
-            <p><strong>Envoyé par :</strong> {{ message.email }}</p>
+            <p><strong>Envoyé par :</strong> <a href"mailto:{{ message.email }}">{{ message.email }}</a></p>
             <p>{{ message.createdAt|fr_datetime }}</p>
         </div>
-
+        <div class="right-content"><span class="contact-message-status {{ message.status.value }}">{{ message.status.label }}</span></div>
     </section>
+
+    {% if message.answer is not null %}
+        <section class="manager-section">
+            <h2 class="manager-title">Réponse</h2>
+
+            <div class="message-content">
+                <div class="subsection">
+                    <p>{{ message.answer }}</p>
+                </div>
+            </div>
+            <br>
+            <div class="membership-list-date">
+                <p><strong>Répondu par :</strong> {{ message.answeredBy.firstname }} {{ message.answeredBy.lastname }}</p>
+                <p>{{ message.answeredAt|fr_datetime }}</p>
+            </div>
+        </section>
+    {% else %}
+            {% if app.user == message.assignedTo %}
+                <div class="info-line">
+                    <span>
+                        Ce message vous est assigné.
+                        Vous êtes actuellement la seule personne autorisée à y répondre.
+                    </span>
+                    <span>
+                        <small>Vous pouvez le repasser en « non lu » afin de permettre à un autre utilisateur de le traiter.</small>
+                    </span>
+                </div>
+                <div>
+                    {{ form_start(form) }}
+                        {{ form_rest(form) }}
+                        <button type="submit" class="btn" title="Répondre à ce message de contact">Répondre</button>
+                    {{ form_end(form) }}
+                </div>
+            {% else %}
+                <div class="info-line">
+                    <span>
+                        Message assigné à {{ message.assignedTo.firstname }} {{ message.assignedTo.lastname }}
+                        ({{ message.assignedTo.role }}).
+                        Cette personne est la seule autorisée à y répondre.
+                    </span>
+                </div>
+            {% endif %}
+    {% endif %}
 
 {% endblock %}

@@ -14,7 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class DeleteMembershipController extends AbstractController
 {
-    public function __construct(private DeleteMembershipHandler $handler)
+    public function __construct(private DeleteMembershipHandler $deleteMembershipHandler)
     {
     }
 
@@ -23,7 +23,7 @@ class DeleteMembershipController extends AbstractController
     {
         $this->denyAccessUnlessGranted(Role::Secretary->value);
 
-        $this->handler->handle($membership);
+        $this->deleteMembershipHandler->handle($membership);
 
         $this->addFlash('success', 'La demande d\'adhésion a bien été supprimée.');
 

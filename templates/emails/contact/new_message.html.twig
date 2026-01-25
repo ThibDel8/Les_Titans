@@ -1,12 +1,12 @@
 {% extends 'emails/base.html.twig' %}
 
-{% block subject %}{{ parent() }}Nouveau message{% endblock %}
+{% block subject %}{{ parent() }}Nouveau message de contact{% endblock %}
 
 {% block body %}
-    <h2 style="color: {{ colors.managerColor }};">Nouveau message</h2>
+    <h2 style="color: {{ colors.managerColor }};">Nouveau message de contact</h2>
     <div style="color: {{ colors.grey }}; margin-bottom: 20px;">
         <p>Bonjour,</p>
-        <p>Vous avez reçu un nouveau message via le formulaire de contact.</p>
+        <p>Un nouveau message a été reçu via le formulaire de contact.</p>
     </div>
 
     <section style="
@@ -18,7 +18,6 @@
     ">
         <h3 style="color: {{ colors.managerColor }}; margin-bottom: 40px;">Détails du message</h3>
         <div style="color: {{ colors.grey }};">
-            <strong>Email : </strong><a href="mailto:{{ email_address }}" style="color:{{ colors.grey }}; text-decoration: none;">{{ email_address }}</a><br><br>
             <strong>Sujet : </strong>{{ subject }}<br><br>
             <strong>Message : </strong><br>
             {{ message }}
@@ -26,7 +25,14 @@
     </section>
 
     <div style="color: {{ colors.grey }};">
-        <p>Pour répondre, veuillez cliquer sur l'adresse e-mail fournie ci-dessus, ou vous connecter sur le site.</p><br>
+        <p>
+            Vous pouvez répondre à ce message depuis l’interface d’administration du site Les Titans.
+        </p>
+        <p>
+            Information importante : la première personne à ouvrir le message depuis le site
+            sera la seule autorisée à y répondre. La réponse est unique ; les échanges complémentaires
+            se feront ensuite par email si nécessaire.
+        </p><br>
         <p>Merci,</p>
         <p>Saint-Ouen Musculation | Les Titans</p>
     </div>

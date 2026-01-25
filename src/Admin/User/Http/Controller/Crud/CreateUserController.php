@@ -23,13 +23,15 @@ class CreateUserController extends AbstractController
     {
         $this->denyAccessUnlessGranted(Role::Admin->value);
 
-        $success = $this->createUserHandler->handle($membership);
-        if ($success) {
-            $this->addFlash('success', 'Le membre a bien été créé.');
-        } else {
-            $this->addFlash('error', 'Le membre existe déjà.');
+        $user = $this->createUserHandler->handle($membership);
+
+        if (null === $user) {
+            $this->addFlash('error', 'Ce membre existe déjà.');
+            return $this->redirectToRoute('admin_membership_read', ['id' => $membership->getId()]);
         }
 
-        return $this->redirectToRoute('admin_user_list');
+        $this->addFlash('success', 'Le membre a bien été créé avec succès.');
+
+        return $this->redirectToRoute('admin_user_read', ['id' => $user->getId()]);
     }
 }

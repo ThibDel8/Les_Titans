@@ -4,11 +4,13 @@
 
 {% block body %}
 
+    {% include '_partials/_breadcrumb/_breadcrumb.html.twig' with { breadcrumb: breadcrumb } %}
+
     <div class="right-content">
         {% if membership.medicalCertificateExpiry
             and membership.accessBadgeDeposit
             and membership.annualMembershipFee %}
-            <form method="post" action="{{ path('admin_user_create', {id: membership.id}) }}" style="display:inline">
+            <form method="post" action="{{ path('admin_user_create', {id: membership.id}) }}">
                 <input type="hidden" name="_token" value="{{ csrf_token('validate_membership_' ~ membership.id) }}">
                 <button class="btn btn-success" title="Accepter cette demande d'adhésion">Accepter</button>
             </form>
@@ -38,8 +40,8 @@
             </p>
         </div><br>
         <div class="membership-contact-info">
-            <a href="tel:+33{{ membership.phone|slice(1) }}" title="Appeler {{ membership.firstname }}">☎️ {{ membership.phone }}</a><br>
-            <p>🏠 {{ membership.address }} {{ membership.postalcode }}, {{ membership.city }}</p><br>
+            <a href="tel:+33{{ membership.phone|slice(1) }}" title="Appeler {{ membership.firstname }}">☎️ {{ membership.phone }}</a>
+            <p>🏠 {{ membership.address }} {{ membership.postalcode }}, {{ membership.city }}</p>
             <a href="mailto:{{ membership.email }}" title="Envoyer un email à {{ membership.firstname }}">📧 {{ membership.email }}</a>
         </div>
     </section>
@@ -48,9 +50,9 @@
         <section class="manager-section">
             <h2 class="manager-title">Tuteur légal{% if membership.tutorFirstname or membership.tutorLastname %} : {{ membership.tutorFirstname }} {{ membership.tutorLastname }}{% endif %}</h2>
             <div class="membership-contact-info">
-                {% if membership.tutorPhone %}<a href="tel:+33{{ membership.tutorPhone|slice(1) }}" title="Appeler le tuteur légal de {{ membership.firstname }}">☎️ {{ membership.tutorPhone }}</a><br>{% else %}<p>☎️ Information obligatoire manquante</p>{% endif %}
-                {% if membership.tutorAddress and membership.tutorPostalcode and membership.tutorCity %}<p>🏠 {{ membership.tutorAddress }} {{ membership.tutorPostalcode }}, {{ membership.tutorCity }}</p><br>{% else %}<p>🏠 Information obligatoire manquante</p>{% endif %}
-                {% if membership.tutorEmail %}<a href="mailto:{{ membership.tutorEmail }}" title="Envoyer un email au tuteur légal de {{ membership.firstname }}">📧 {{ membership.tutorEmail }}</a><br>{% else %}<p>📧 Information obligatoire manquante</p>{% endif %}
+                {% if membership.tutorPhone %}<a href="tel:+33{{ membership.tutorPhone|slice(1) }}" title="Appeler le tuteur légal de {{ membership.firstname }}">☎️ {{ membership.tutorPhone }}</a>{% else %}<p>☎️ Information obligatoire manquante</p>{% endif %}
+                {% if membership.tutorAddress and membership.tutorPostalcode and membership.tutorCity %}<p>🏠 {{ membership.tutorAddress }} {{ membership.tutorPostalcode }}, {{ membership.tutorCity }}</p>{% else %}<p>🏠 Information obligatoire manquante</p>{% endif %}
+                {% if membership.tutorEmail %}<a href="mailto:{{ membership.tutorEmail }}" title="Envoyer un email au tuteur légal de {{ membership.firstname }}">📧 {{ membership.tutorEmail }}</a>{% else %}<p>📧 Information obligatoire manquante</p>{% endif %}
             </div>
         </section>
     {% endif %}
@@ -74,7 +76,7 @@
             {{ form_row(form.annualMembershipFee) }}
             {{ form_row(form.accessBadgeDeposit) }}
             <br>
-            <button type="submit" title="Enregistrer les données obligatoires">Enregistrer</button>
+            <button class="btn" type="submit" title="Enregistrer les données obligatoires">Enregistrer</button>
         {{ form_end(form) }}
     {% endif %}
 

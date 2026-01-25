@@ -4,23 +4,35 @@
 
 {% block body %}
 
+    {% include '_partials/_breadcrumb/_breadcrumb.html.twig' with { breadcrumb: breadcrumb } %}
+
     <section class="manager-section">
         <h2 class="manager-title">Administration</h2>
         <div class="dashboard">
             <ul>
                 <li>
                     <a href="{{ path('admin_user_list') }}" title="Liste des membres">
-                        {% include 'icons/manage-members.svg.twig' %} Membres ({{ nbUsers }})
+                        {% include 'icons/members.svg.twig' %} Membres ({{ nbUsers }})
                     </a>
                 </li>
                 <li>
                     <a href="{{ path('admin_contact_message_list') }}" title="Voir les messages">
-                        {% include 'icons/messages.svg.twig' %} Messages ({{ nbUnreadMessages }})
+                        {% include 'icons/contact-messages.svg.twig' %} Messages ({{ nbUnreadMessages }})
                     </a>
                 </li>
                 <li>
                     <a href="{{ path('admin_membership_list') }}" title="Voir les demandes d'adhésion">
-                        {% include 'icons/membership-adhesion.svg.twig' %} Demandes d'adhésion ({{ nbMemberships }})
+                        {% include 'icons/memberships.svg.twig' %} Adhésions ({{ nbMemberships }})
+                    </a>
+                </li>
+                <li>
+                    <a href="" title="" style="opacity: 0.5;">
+                        {% include 'icons/chats.svg.twig' %} Conversations <small>(à venir...)</small>
+                    </a>
+                </li>
+                <li>
+                    <a href="" title="" style="opacity: 0.5;">
+                        {% include 'icons/news.svg.twig' %} Fil d'actualité <small>(à venir...)</small>
                     </a>
                 </li>
             </ul>

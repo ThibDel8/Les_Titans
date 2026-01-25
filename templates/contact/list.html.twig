@@ -3,8 +3,11 @@
 {% block title %}{{ parent() }}Liste des messages{% endblock %}
 
 {% block body %}
+    {% set isUnreadMessages = messages|filter(message => message.assignedTo is null) %}
 
-    <h2 class="manager-title">Messages ({{ messages|length }})</h2>
+    {% include '_partials/_breadcrumb/_breadcrumb.html.twig' with { breadcrumb: breadcrumb } %}
+
+    <h2 class="manager-title">Messages ({{ isUnreadMessages|length }})</h2>
 
     {% for message in messages %}
         {% include 'contact/_card/_messages_list.html.twig' with { message: message } %}

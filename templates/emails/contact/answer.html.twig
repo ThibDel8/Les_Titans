@@ -1,0 +1,41 @@
+{% extends 'emails/base.html.twig' %}
+
+{% block subject %}{{ parent() }}Réponse au message de contact{% endblock %}
+
+{% block body %}
+    <h2 style="color: {{ colors.publicColor }};">Réponse au message de contact</h2>
+    <div style="color: {{ colors.grey }}; margin-bottom: 20px;">
+        <p>Bonjour,</p>
+        <p>{{ message.answeredBy.firstname }}, {{ message.answeredBy.role|lower }} de l'association, a répondu à votre message de contact.</p>
+    </div>
+
+    <section style="
+        background-color: {{ colors.greyDark }};
+        border-radius: 4px;
+        padding: 25px;
+        margin-bottom: 40px;
+        border-left: 5px solid {{ colors.publicColor }};
+    ">
+        <h3 style="color: {{ colors.publicColor }}; margin-bottom: 40px;">Réponse</h3>
+        <div style="color: {{ colors.grey }};">
+            {{ message.answer }}
+        </div><br>
+        <h3 style="color: {{ colors.publicColor }}; margin-bottom: 40px;">Rappel de la demande</h3>
+        <div style="color: {{ colors.grey }};">
+            <strong>Sujet : </strong>{{ message.subject }}<br><br>
+            <strong>Message : </strong><br>
+            {{ message.body }}
+        </div>
+    </section>
+
+    <div style="color: {{ colors.grey }};">
+        <p>
+            Pour poursuivre cet échange, vous pouvez contacter
+            {{ message.answeredBy.firstname }} à l’adresse suivante :
+            <a href="mailto:{{ message.answeredBy.email }}" style="color: {{ colors.publicColor }}; text-decoration: none;">{{ message.answeredBy.email }}</a>.
+        </p>
+        <p>Pour toute nouvelle demande, merci d’utiliser le formulaire de contact disponible sur notre site.</p><br>
+        <p>Merci,</p>
+        <p>Saint-Ouen Musculation | Les Titans</p>
+    </div>
+{% endblock %}

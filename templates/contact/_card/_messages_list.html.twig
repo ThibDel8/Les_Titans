@@ -1,13 +1,16 @@
 <section class="manager-section">
     <a class="manager" href="{{ path('admin_contact_message_read', {id: message.id}) }}" title="Cliquer pour lire le message">
-        <div class="message-list-names">
-            <div>
-                <p>{{ message.subject }}</p>
-                <div class="message-list-date">
-                    <p>Envoyé par {{ message.email }}.</p>
-                    <p>{{ message.createdAt|fr_datetime }}</p>
-                </div>
+        <div class="card-content">
+            <div class="card-main">
+                <h3 class="message-subject">{{ message.subject }}</h3>
+                <p class="message-email">Envoyé par {{ message.email }}</p>
+                <time class="message-date" datetime="{{ message.createdAt|date('c') }}">
+                    {{ message.createdAt|fr_datetime }}
+                </time>
             </div>
+            <span class="contact-message-status {{ message.status.value }}">
+                {{ message.status.label }}
+            </span>
         </div>
     </a>
 </section>
