@@ -45,22 +45,41 @@
     <div class="infos-grid">
         <div class="subsection">
             <h3>⏰ Horaires</h3>
-            <ul class="schedules">
-                <li><span>Lundi</span><span>7h – 22h</span></li>
-                <li><span>Mardi</span><span>7h – 22h</span></li>
-                <li><span>Mercredi</span><span>7h – 22h</span></li>
-                <li><span>Jeudi</span><span>7h – 22h</span></li>
-                <li><span>Vendredi</span><span>7h – 22h</span></li>
-                <li><span>Samedi</span><span>7h – 22h</span></li>
-                <li><span>Dimanche</span><span>7h – 22h</span></li>
-            </ul>
-            <br>
-            <p>Fermé les jours fériés.</p>
+            <div class="opening-hours">
+                {% set today = openingHours.getToday() %}
+                {% set nextDayLabel = openingHours.getNextOpeningDayLabel() %}
+                {% set nextDay = openingHours.getNextOpeningDay() %}
+                {% set isOpenNow = openingHours.isOpenNow() %}
+
+                {% if isOpenNow %}
+                    <small class="status open">
+                        Ouvert aujourd'hui jusqu'à {{ today.getClosingTime() }}
+                    </small>
+                {% else %}
+                    <small class="status closed">
+                        Fermé actuellement
+                        {% if nextDay %}
+                            , ouvre {{ nextDayLabel }} à {{ nextDay.getOpeningTime() }}
+                        {% endif %}
+                    </small>
+                {% endif %}
+                <br><br>
+                <ul class="schedules">
+                    {% for day in openingHours.getDays() %}
+                        <li>
+                            <span class="day">{{ day.getLabel() }}</span>
+                            <span class="hours">{{ day.getRangeAsString() }}</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <br>
+                <small class="note">Sauf jours fériés</small>
+            </div>
         </div>
         <div class="subsection">
             <h3>📍 Localisation</h3>
             <div>
-                <div id="map" style="height: 250px;"></div>
+                <div id="map" style="height: 350px;"></div>
             </div>
         </div>
     </div>
@@ -135,7 +154,7 @@
             }).addTo(map);
 
             L.marker([lat, lon]).addTo(map)
-                .bindPopup("<strong>Salle de musculation Les Titans</strong><br>Cité Saint-Jules, 80610 Saint-Ouen")
+                .bindPopup("<strong>Les Titans</strong><br>Cité Saint-Jules,<br>80610 Saint-Ouen")
                 .openPopup();
         })
         .catch(err => console.error("Erreur géocodage :", err));

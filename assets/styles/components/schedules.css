@@ -1,7 +1,6 @@
 .schedules {
     list-style: none;
     padding: 0;
-    margin: 0;
 }
 
 .schedules li {
@@ -9,3 +8,29 @@
     justify-content: space-between;
     padding: 5px 0;
 }
+
+.opening-hours li.today {
+    font-weight: 600;
+    background-color: #f0f8ff;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+}
+
+.opening-hours li.open .today-status {
+    color: green;
+}
+
+.opening-hours li.closed .today-status {
+    color: red;
+}
+
+.opening-hours .status.open {
+    color: green;
+    font-weight: bold;
+}
+
+.opening-hours .status.closed {
+    color: red;
+    font-weight: bold;
+}
+
