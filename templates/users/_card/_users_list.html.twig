@@ -1,9 +1,9 @@
 <section class="manager-{{ status }}-section">
-    <a class="manager" href="{{ path('admin_user_read', {id: user.id}) }}" title="Cliquer pour voir le membre">
+    <a href="{{ path('admin_user_read', {id: user.id}) }}" title="Cliquer pour voir le membre">
         <div class="member-list-names">
             <img src="{{ asset('images/profiles/uploads/' ~ user.profileImage) }}" alt="Image de profil du membre">
             <div>
-                <p>
+                <p class="manager-text">
                     {{ user.firstname }} {{ user.lastname }}
                     {% if user.medicalCertificateExpiry|date('U') < "now"|date('U') and user.annualMembershipFee is not null %}🩺{% endif %}
                     {% if user.annualMembershipFee is null and user.accessBadgeNumber is not null %}💰🔑{% endif %}

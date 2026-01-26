@@ -59,7 +59,16 @@
 
                 {% if is_granted('ROLE_SECRETARY') %}
                     <li>
-                        <a class="{{ app.request.pathInfo == path('admin_dashboard') ? 'active-manager' : '' }} manager" href="{{ path('admin_dashboard') }}">
+                        <a class="{{ app.request.attributes.get('_route') in [
+                            'admin_dashboard',
+                            'admin_user_list',
+                            'admin_user_read',
+                            'admin_user_update',
+                            'admin_contact_message_list',
+                            'admin_contact_message_read',
+                            'admin_membership_list',
+                            'admin_membership_read',
+                        ] ? 'active-manager ' : '' }}manager" href="{{ path('admin_dashboard') }}">
                             {% include 'icons/dashboard.svg.twig' %}
                             Administration
                         </a>

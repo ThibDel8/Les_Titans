@@ -9,7 +9,7 @@
     <h2 class="manager-title">Demandes d'adhésion ({{ memberships|length }})</h2>
         {% for membership in memberships %}
             <section class="manager-list-section">
-                    <a class="manager" href="{{ path('admin_membership_read', {id: membership.id}) }}" title="Voir la demande d'adhésion de {{ membership.firstname }} {{ membership.lastname }}">
+                    <a class="manager-text" href="{{ path('admin_membership_read', {id: membership.id}) }}" title="Voir la demande d'adhésion de {{ membership.firstname }} {{ membership.lastname }}">
                         <div class="membership-list-names">
                             <img src="{{ asset('images/profiles/uploads/' ~ membership.profileImage) }}" alt="Image de profil du potentiel futur membre">
                             <div>
