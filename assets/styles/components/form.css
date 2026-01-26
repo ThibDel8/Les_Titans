@@ -53,3 +53,8 @@ select:focus {
 .link-under-button {
     font-size: 0.9rem;
 }
+
+.required::after {
+    color: var(--red);
+    content: ' *';
+}

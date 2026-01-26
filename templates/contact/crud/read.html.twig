@@ -36,7 +36,7 @@
             </div>
         </div>
         <br>
-        <div class="membership-list-date">
+        <div class="message-date">
             <p><strong>Envoyé par :</strong> <a href"mailto:{{ message.email }}">{{ message.email }}</a></p>
             <p>{{ message.createdAt|fr_datetime }}</p>
         </div>
@@ -53,7 +53,7 @@
                 </div>
             </div>
             <br>
-            <div class="membership-list-date">
+            <div class="message-date">
                 <p><strong>Répondu par :</strong> {{ message.answeredBy.firstname }} {{ message.answeredBy.lastname }}</p>
                 <p>{{ message.answeredAt|fr_datetime }}</p>
             </div>
