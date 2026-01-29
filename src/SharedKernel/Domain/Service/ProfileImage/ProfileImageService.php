@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\SharedKernel\Domain\Service\ProfileImage;
 
+use Random\RandomException;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 
 class ProfileImageService
@@ -15,9 +16,9 @@ class ProfileImageService
 
     public function __construct(
         #[Autowire('%kernel.project_dir%/public/images/profiles/uploads/')]
-        private string $uploadsDir,
+        private readonly string $uploadsDir,
         #[Autowire('%kernel.project_dir%/public/images/profiles/defaults/')]
-        private string $defaultsDir
+        private readonly string $defaultsDir
     ) {
         if (!is_dir($this->uploadsDir)) {
             mkdir($this->uploadsDir, 0775, true);
@@ -28,6 +29,9 @@ class ProfileImageService
         }
     }
 
+    /**
+     * @throws RandomException
+     */
     public function save(string $originalPath): string
     {
         if (!file_exists($originalPath)) {

@@ -16,7 +16,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 final class UpdateUserController extends AbstractController
 {
-    public function __construct(private UpdateUserHandler $updateUserHandler)
+    public function __construct(private readonly UpdateUserHandler $updateUserHandler)
     {
     }
 

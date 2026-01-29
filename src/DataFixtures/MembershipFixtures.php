@@ -4,19 +4,23 @@ declare(strict_types=1);
 
 namespace App\DataFixtures;
 
-use Faker\Factory;
-use Doctrine\Persistence\ObjectManager;
+use App\MemberApp\Membership\Domain\Entity\Membership;
 use App\SharedKernel\Domain\Enum\Gender;
-use App\SharedKernel\Membership\Domain\Entity\Membership;
 use App\SharedKernel\Domain\Service\ProfileImage\ProfileImageService;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Persistence\ObjectManager;
+use Faker\Factory;
+use Random\RandomException;
 
 class MembershipFixtures extends Fixture
 {
-    public function __construct(private ProfileImageService $profileImageService)
+    public function __construct(private readonly ProfileImageService $profileImageService)
     {
     }
 
+    /**
+     * @throws RandomException
+     */
     public function load(ObjectManager $manager): void
     {
         $faker = Factory::create('fr_FR');

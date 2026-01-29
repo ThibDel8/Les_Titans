@@ -11,7 +11,7 @@ use App\Admin\User\Domain\Repository\UserReadRepositoryInterface;
 use App\Admin\User\Domain\Repository\UserWriteRepositoryInterface;
 use App\SharedKernel\Domain\Service\ProfileImage\ProfileImageService;
 
-final class DeleteUserHandler
+final readonly class DeleteUserHandler
 {
     public function __construct(
         private UserMailer $userMailer,

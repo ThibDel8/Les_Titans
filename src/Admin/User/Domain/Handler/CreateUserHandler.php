@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace App\Admin\User\Domain\Handler;
 
 use App\Admin\User\Domain\Entity\User;
-use App\Admin\User\Domain\Service\Mailer\UserMailer;
-use App\SharedKernel\Membership\Domain\Entity\Membership;
 use App\Admin\User\Domain\Repository\UserReadRepositoryInterface;
 use App\Admin\User\Domain\Repository\UserWriteRepositoryInterface;
-use App\SharedKernel\Membership\Domain\Repository\MembershipWriteRepositoryInterface;
+use App\Admin\User\Domain\Service\Mailer\UserMailer;
+use App\MemberApp\Membership\Domain\Entity\Membership;
+use App\MemberApp\Membership\Domain\Repository\MembershipWriteRepositoryInterface;
 
-final class CreateUserHandler
+final readonly class CreateUserHandler
 {
     public function __construct(
         private UserMailer $userMailer,

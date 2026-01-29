@@ -9,7 +9,7 @@ use App\Admin\User\Domain\Repository\UserWriteRepositoryInterface;
 
 class RestitutionBadgeUserHandler
 {
-    public function __construct(private UserWriteRepositoryInterface $userWriteRepository)
+    public function __construct(private readonly UserWriteRepositoryInterface $userWriteRepository)
     {
     }
 

@@ -13,11 +13,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 final class ListUserController extends AbstractController
 {
-    public function __construct(private ListUserQueryHandler $listUserQueryHandler)
+    public function __construct(private readonly ListUserQueryHandler $listUserQueryHandler)
     {
     }
 
-    #[Route(path: '/admin/users/list', name: 'admin_user_list', methods: Request::METHOD_GET)]
+    #[Route(path: '/admin/users', name: 'admin_user_list', methods: Request::METHOD_GET)]
     public function __invoke(): Response
     {
         $this->denyAccessUnlessGranted(Role::Secretary->value);

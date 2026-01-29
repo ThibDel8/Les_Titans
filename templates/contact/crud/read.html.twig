@@ -37,7 +37,7 @@
         </div>
         <br>
         <div class="message-date">
-            <p><strong>Envoyé par :</strong> <a href"mailto:{{ message.email }}">{{ message.email }}</a></p>
+            <p><strong>Envoyé par :</strong> <a href="mailto:{{ message.email }}">{{ message.email }}</a></p>
             <p>{{ message.createdAt|fr_datetime }}</p>
         </div>
         <div class="right-content"><span class="contact-message-status {{ message.status.value }}">{{ message.status.label }}</span></div>
@@ -62,7 +62,7 @@
             {% if app.user == message.assignedTo %}
                 <div class="info-line">
                     <span>
-                        Ce message vous est assigné.
+                        Ce message vous a été assigné.
                         Vous êtes actuellement la seule personne autorisée à y répondre.
                     </span>
                     <span>

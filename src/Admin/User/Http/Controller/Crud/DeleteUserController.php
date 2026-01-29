@@ -14,7 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class DeleteUserController extends AbstractController
 {
-    public function __construct(private DeleteUserHandler $deleteUserHandler)
+    public function __construct(private readonly DeleteUserHandler $deleteUserHandler)
     {
     }
 

@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Admin\Membership\Domain\Handler;
 
-use App\SharedKernel\Membership\Domain\Entity\Membership;
+use App\MemberApp\Membership\Domain\Entity\Membership;
+use App\MemberApp\Membership\Domain\Repository\MembershipWriteRepositoryInterface;
 use App\SharedKernel\Domain\Service\ProfileImage\ProfileImageService;
-use App\SharedKernel\Membership\Domain\Repository\MembershipWriteRepositoryInterface;
 
 final class DeleteMembershipHandler
 {

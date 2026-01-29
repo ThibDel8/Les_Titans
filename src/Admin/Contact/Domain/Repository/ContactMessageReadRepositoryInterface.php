@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Admin\Contact\Domain\Repository;
 
-use App\Contact\Domain\Entity\ContactMessage;
+use App\PublicApp\Contact\Domain\Entity\ContactMessage;
 
 interface ContactMessageReadRepositoryInterface
 {

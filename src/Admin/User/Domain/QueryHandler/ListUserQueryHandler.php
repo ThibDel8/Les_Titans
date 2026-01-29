@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace App\Admin\User\Domain\QueryHandler;
 
-use App\Admin\User\Domain\Repository\UserRepository;
 use App\Admin\User\Domain\Repository\UserReadRepositoryInterface;
 
-class ListUserQueryHandler
+readonly class ListUserQueryHandler
 {
     public function __construct(private UserReadRepositoryInterface $userReadRepository)
     {
@@ -20,7 +19,6 @@ class ListUserQueryHandler
 
         $validMembers = [];
         $invalidMembers = [];
-        /** @var User $user */
         foreach ($users as $user) {
             if ($user->isValid($now)) {
                 $validMembers[] = $user;

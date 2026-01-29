@@ -16,7 +16,7 @@
         <div class="member-profile-image">
             <img src="{{ asset('images/profiles/uploads/' ~ app.user.profileImage ) }}" alt="Image de profil du membre">
             <h3>{{ app.user.firstname }} {{ app.user.lastname }}</h3>
-            <p>{{ app.user.gender.label|trans }}</p>
+            <p>{{ app.user.gender.label|trans|capitalize }}</p>
             <p>
                 Né{% if app.user.gender.value == 'female' %}e{% endif %} le {{ app.user.birthdate|date('d/m/Y') }}
                 ({{ app.user.age }} ans)
