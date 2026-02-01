@@ -105,6 +105,7 @@ class MembershipCreationType extends AbstractType
             ])
             ->add('tutorLastname', TextType::class, [
                 'label' => 'Nom du tuteur légal',
+                'label_attr' => ['class' => 'required'],
                 'required' => false,
                 'row_attr' => [
                     'class' => 'form-row',
@@ -112,6 +113,7 @@ class MembershipCreationType extends AbstractType
             ])
             ->add('tutorFirstname', TextType::class, [
                 'label' => 'Prénom du tuteur légal',
+                'label_attr' => ['class' => 'required'],
                 'required' => false,
                 'row_attr' => [
                     'class' => 'form-row',
@@ -119,6 +121,7 @@ class MembershipCreationType extends AbstractType
             ])
             ->add('tutorPhone', TextType::class, [
                 'label' => 'Téléphone du tuteur légal',
+                'label_attr' => ['class' => 'required'],
                 'required' => false,
                 'row_attr' => [
                     'class' => 'form-row',
@@ -126,6 +129,7 @@ class MembershipCreationType extends AbstractType
             ])
             ->add('tutorEmail', EmailType::class, [
                 'label' => 'Email du tuteur légal',
+                'label_attr' => ['class' => 'required'],
                 'required' => false,
                 'row_attr' => [
                     'class' => 'form-row',
@@ -133,6 +137,7 @@ class MembershipCreationType extends AbstractType
             ])
             ->add('tutorAddress', TextType::class, [
                 'label' => 'Adresse du tuteur légal',
+                'label_attr' => ['class' => 'required'],
                 'required' => false,
                 'row_attr' => [
                     'class' => 'form-row',
@@ -140,6 +145,7 @@ class MembershipCreationType extends AbstractType
             ])
             ->add('tutorPostalcode', TextType::class, [
                 'label' => 'Code postal du tuteur légal',
+                'label_attr' => ['class' => 'required'],
                 'required' => false,
                 'row_attr' => [
                     'class' => 'form-row',
@@ -147,6 +153,7 @@ class MembershipCreationType extends AbstractType
             ])
             ->add('tutorCity', TextType::class, [
                 'label' => 'Ville du tuteur légal',
+                'label_attr' => ['class' => 'required'],
                 'required' => false,
                 'row_attr' => [
                     'class' => 'form-row',

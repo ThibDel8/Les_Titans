@@ -8,125 +8,115 @@
 
 {% block body %}
 
-{% if app.user %}
-    <div class="user-container">
-        <div class="profil-container">
-            <a href="{{ path('app_profile_read') }}" title="Voir le profil">
-                <img src="{{ asset('images/profiles/uploads/' ~ app.user.profileImage) }}" alt="Image de profil de l'utilisateur connecté"/>
-                <h2 class="public-title">{{ app.user.firstname }}</h2>
-            </a>
+    {% if app.user %}
+        <div class="user-container">
+            <div class="profil-container">
+                <a href="{{ path('app_profile_read') }}" title="Voir le profil">
+                    <img src="{{ asset('images/profiles/uploads/' ~ app.user.profileImage) }}" alt="Image de profil de l'utilisateur connecté"/>
+                    <h2 class="public-title">{{ app.user.firstname }}</h2>
+                </a>
+            </div>
         </div>
-    </div>
-{% endif %}
-
-<section class="public-section">
-    <h2 class="public-title">Présentation</h2>
-    <p>
-        Saint‑Ouen Musculation est une association sportive dédiée à la pratique de la musculation et du cardio‑training,
-        ouverte à tous les habitants souhaitant s’entraîner dans un cadre convivial, sécurisé et accessible.
-        Notre salle, équipée et encadrée par des bénévoles passionnés, permet à chacun de progresser à son rythme.
-        <a href="{{ path('app_about') }}">En savoir plus...</a>
-    </p>
+    {% endif %}
 
     {% if app.user is null %}
-        <br>
-        <p>
-            Vous souhaitez rejoindre l’association et profiter de la salle ainsi que de ses équipements ? Déposez dès maintenant votre demande d’adhésion.
-        </p>
-        <br>
-        <div class="center">
-            <a class="btn btn-warning" href="{{ path('app_membership_create') }}">Faire une demande d'adhésion</a>
-        </div>
-    {% endif %}
-</section>
-
-<section class="public-section">
-    <h2 class="public-title">Informations pratiques</h2>
-    <div class="infos-grid">
-        <div class="subsection">
-            <h3>⏰ Horaires</h3>
-            <div class="opening-hours">
-                {% set today = openingHours.getToday() %}
-                {% set nextDayLabel = openingHours.getNextOpeningDayLabel() %}
-                {% set nextDay = openingHours.getNextOpeningDay() %}
-                {% set isOpenNow = openingHours.isOpenNow() %}
-
-                {% if isOpenNow %}
-                    <small class="status open">
-                        Ouvert aujourd'hui jusqu'à {{ today.getClosingTime() }}
-                    </small>
-                {% else %}
-                    <small class="status closed">
-                        Fermé actuellement
-                        {% if nextDay %}
-                            , ouvre {{ nextDayLabel }} à {{ nextDay.getOpeningTime() }}
-                        {% endif %}
-                    </small>
-                {% endif %}
-                <br><br>
-                <ul class="schedules">
-                    {% for day in openingHours.getDays() %}
-                        <li>
-                            <span class="day">{{ day.getLabel() }}</span>
-                            <span class="hours">{{ day.getRangeAsString() }}</span>
-                        </li>
-                    {% endfor %}
-                </ul>
-                <br>
-                <small class="note"><span class="info-icon">&#x24D8; </span>Sauf jours fériés</small>
+        <section class="public-section">
+            <h2 class="public-title">Présentation</h2>
+            <p>
+                Saint‑Ouen Musculation est une association sportive dédiée à la pratique de la musculation et du cardio‑training,
+                ouverte à tous les habitants souhaitant s’entraîner dans un cadre convivial, sécurisé et accessible.
+                Notre salle, équipée et encadrée par des bénévoles passionnés, permet à chacun de progresser à son rythme.
+                <a href="{{ path('app_about') }}">En savoir plus...</a>
+            </p>
+            <br>
+            <p>
+                Vous souhaitez rejoindre l’association et profiter de la salle ainsi que de ses équipements ? Déposez dès maintenant votre demande d’adhésion.
+            </p>
+            <br>
+            <div class="center">
+                <a class="btn btn-warning" href="{{ path('app_membership_create') }}">Faire une demande d'adhésion</a>
             </div>
-        </div>
-        <div class="subsection">
-            <h3>📍 Localisation</h3>
-            <div>
-                <div id="map" style="height: 350px;"></div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="public-section">
-
-    {% if app.user %}
-        {# --- VERSION MEMBRE CONNECTÉ --- #}
-        <h2 class="public-title">Espace communauté</h2>
-
-        <p>
-            Notre plateforme est le cœur numérique de l’association Saint‑Ouen Musculation.
-            Pour échanger de manière plus informelle avec les autres membres, vous pouvez rejoindre notre groupe Facebook dédié.
-        </p>
-
-        <p>
-            Vous pouvez également consulter les informations institutionnelles sur la page “Associations” du site de la mairie.
-        </p>
-
-        <div class="community-links">
-            <a class="community-link" href="https://www.facebook.com/groups/627909098566646" target="_blank" rel="noopener noreferrer">
-                <img src="{{ asset('images/logos/facebook.png') }}" alt="Groupe Facebook" class="community-image">
-            </a>
-
-            <a class="community-link" href="https://www.mairie-saint-ouen.com/association/" target="_blank" rel="noopener noreferrer">
-                <img src="{{ asset('images/logos/mairie.png') }}" alt="Site de la Mairie" class="community-image">
-            </a>
-        </div>
-
+        </section>
     {% else %}
-        {# --- VERSION PUBLIQUE --- #}
-        <h2 class="public-title">Informations institutionnelles</h2>
-
-        <p>
-            Notre plateforme est le cœur numérique de l’association Saint‑Ouen Musculation.
-            Pour en savoir plus sur la vie associative de la commune, vous pouvez consulter la page dédiée sur le site de la mairie.
-        </p>
-
-        <div class="community-links">
-            <a class="community-link" href="https://www.mairie-saint-ouen.com/association/" target="_blank" rel="noopener noreferrer">
-                <img src="{{ asset('images/logos/mairie.png') }}" alt="Site de la Mairie" class="community-image">
-            </a>
-        </div>
+        <section class="public-section">
+            <h2 class="public-title">Espace communauté</h2>
+            <p>
+                Notre plateforme est le cœur numérique de l’association Saint‑Ouen Musculation.
+                Pour échanger de manière plus informelle avec les autres membres, vous pouvez rejoindre notre groupe Facebook dédié.
+            </p>
+            <p>
+                Vous pouvez également consulter les informations institutionnelles sur la page “Associations” du site de la mairie.
+            </p>
+            <div class="community-links">
+                <a class="community-link" href="https://www.facebook.com/groups/627909098566646" target="_blank" rel="noopener noreferrer">
+                    <img src="{{ asset('images/logos/facebook.png') }}" alt="Groupe Facebook" class="community-image">
+                </a>
+                <a class="community-link" href="https://www.mairie-saint-ouen.com/association/" target="_blank" rel="noopener noreferrer">
+                    <img src="{{ asset('images/logos/mairie.png') }}" alt="Site de la Mairie" class="community-image">
+                </a>
+            </div>
+        </section>
     {% endif %}
 
-</section>
+    <section class="public-section">
+        <h2 class="public-title">Informations pratiques</h2>
+        <div class="infos-grid">
+            <div class="subsection">
+                <h3>⏰ Horaires</h3>
+                <div class="opening-hours">
+                    {% set today = openingHours.getToday() %}
+                    {% set nextDayLabel = openingHours.getNextOpeningDayLabel() %}
+                    {% set nextDay = openingHours.getNextOpeningDay() %}
+                    {% set isOpenNow = openingHours.isOpenNow() %}
+
+                    {% if isOpenNow %}
+                        <small class="status open">
+                            Ouvert aujourd'hui jusqu'à {{ today.getClosingTime() }}
+                        </small>
+                    {% else %}
+                        <small class="status closed">
+                            Fermé actuellement
+                            {% if nextDay %}
+                                , ouvre {{ nextDayLabel }} à {{ nextDay.getOpeningTime() }}
+                            {% endif %}
+                        </small>
+                    {% endif %}
+                    <br><br>
+                    <ul class="schedules">
+                        {% for day in openingHours.getDays() %}
+                            <li>
+                                <span class="day">{{ day.getLabel() }}</span>
+                                <span class="hours">{{ day.getRangeAsString() }}</span>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                    <br>
+                    <small class="note"><span class="info-icon">&#x24D8; </span>Sauf jours fériés</small>
+                </div>
+            </div>
+            <div class="subsection">
+                <h3>📍 Localisation</h3>
+                <div>
+                    <div id="map" style="height: 350px;"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% if app.user is null %}
+        <section class="public-section">
+            <h2 class="public-title">Informations institutionnelles</h2>
+            <p>
+                Notre plateforme est le cœur numérique de l’association Saint‑Ouen Musculation.
+                Pour en savoir plus sur la vie associative de la commune, vous pouvez consulter la page dédiée sur le site de la mairie.
+            </p>
+            <div class="community-links">
+                <a class="community-link" href="https://www.mairie-saint-ouen.com/association/" target="_blank" rel="noopener noreferrer">
+                    <img src="{{ asset('images/logos/mairie.png') }}" alt="Site de la Mairie" class="community-image">
+                </a>
+            </div>
+        </section>
+    {% endif %}
 
 {% endblock %}
 

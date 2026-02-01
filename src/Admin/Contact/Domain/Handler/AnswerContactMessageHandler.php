@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace App\Admin\Contact\Domain\Handler;
 
-use App\Admin\User\Domain\Entity\User;
-use App\Contact\Domain\Entity\ContactMessage;
-use App\Admin\Contact\Domain\Service\Mailer\ContactMessageMailer;
 use App\Admin\Contact\Domain\DTO\Request\AnswerContactMessageRequest;
-use App\Contact\Domain\Repository\ContactMessageWriteRepositoryInterface;
+use App\Admin\Contact\Domain\Service\Mailer\ContactMessageMailer;
+use App\Admin\User\Domain\Entity\User;
+use App\PublicApp\Contact\Domain\Entity\ContactMessage;
+use App\PublicApp\Contact\Domain\Repository\ContactMessageWriteRepositoryInterface;
 
-final class AnswerContactMessageHandler
+final readonly class AnswerContactMessageHandler
 {
     public function __construct(
         private ContactMessageMailer $mailer,

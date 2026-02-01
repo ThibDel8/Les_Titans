@@ -10,7 +10,7 @@ use App\SharedKernel\Infrastructure\Doctrine\Repository\AbstractWriteRepository;
 
 class UserWriteRepository extends AbstractWriteRepository implements UserWriteRepositoryInterface
 {
-    public function __construct(private EntityManagerInterface $manager)
+    public function __construct(private readonly EntityManagerInterface $manager)
     {
     }
 

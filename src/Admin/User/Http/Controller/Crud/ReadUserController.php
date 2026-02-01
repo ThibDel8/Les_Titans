@@ -16,7 +16,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 final class ReadUserController extends AbstractController
 {
-    public function __construct(private CreateAccessBadgeNumberHandler $createAccessBadgeNumberHandler)
+    public function __construct(private readonly CreateAccessBadgeNumberHandler $createAccessBadgeNumberHandler)
     {
     }
 

@@ -19,7 +19,7 @@ class UserMailer
 
     public function sendPasswordSetupEmail(User $user): void
     {
-        $email = (new TemplatedEmail())
+        $email = new TemplatedEmail()
             ->from($this->params->get('app.email'))
             ->to($user->getEmail())
             ->subject('Les Titans | Inscription validée')
@@ -34,7 +34,7 @@ class UserMailer
 
     public function notifyPresidentOfUserDeletion(User $user, User $president): void
     {
-        $email = (new TemplatedEmail())
+        $email = new TemplatedEmail()
             ->from($this->params->get('app.email'))
             ->to($president->getEmail())
             ->subject('Les Titans | Suppression d\'un memebre dirigeant')

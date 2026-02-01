@@ -119,6 +119,9 @@ header {
 
 /* Menu mobile */
 @media screen and (max-width: 1024px) {
+    body {
+        overflow-x: hidden;
+    }
 
     .burger {
         display: flex;

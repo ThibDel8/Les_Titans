@@ -6,6 +6,7 @@ namespace App\PublicApp\Membership\Http\Controller\Crud;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Routing\Attribute\Route;
 use App\PublicApp\Membership\Http\Form\MembershipCreationType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,10 +15,13 @@ use App\PublicApp\Membership\Domain\DTO\Request\MembershipCreationRequest;
 
 class CreateMembershipController extends AbstractController
 {
-    public function __construct(private MembershipCreateHandler $createMembershipHandler)
+    public function __construct(private readonly MembershipCreateHandler $createMembershipHandler)
     {
     }
 
+    /**
+     * @throws TransportExceptionInterface
+     */
     #[Route(path: '/memberships/create', name: 'app_membership_create', requirements: ['id' => '[0-9a-fA-F\-]{36}'], methods: [Request::METHOD_GET, Request::METHOD_POST])]
     public function __invoke(Request $request): Response
     {

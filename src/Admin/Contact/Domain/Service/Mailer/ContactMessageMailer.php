@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Admin\Contact\Domain\Service\Mailer;
 
+use App\PublicApp\Contact\Domain\Entity\ContactMessage;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
-use App\Contact\Domain\Entity\ContactMessage;
-use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\Mailer\MailerInterface;
 
 class ContactMessageMailer
 {
@@ -19,7 +19,7 @@ class ContactMessageMailer
 
     public function sendAnswer(ContactMessage $contactMessage): void
     {
-        $email = (new TemplatedEmail())
+        $email = new TemplatedEmail()
             ->from($this->params->get('app.email'))
             ->to($contactMessage->getEmail())
             ->subject('Contact Saint-Ouen Musculation')

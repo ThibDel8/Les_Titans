@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace App\Admin\Contact\Domain\Handler;
 
 use App\Admin\User\Domain\Entity\User;
-use App\Contact\Domain\Entity\ContactMessage;
-use App\Contact\Domain\Repository\ContactMessageWriteRepositoryInterface;
+use App\PublicApp\Contact\Domain\Entity\ContactMessage;
+use App\PublicApp\Contact\Domain\Repository\ContactMessageWriteRepositoryInterface;
 
-class ReadContactMessageHandler
+readonly class ReadContactMessageHandler
 {
     public function __construct(private ContactMessageWriteRepositoryInterface $contactMessageWriteRepository)
     {

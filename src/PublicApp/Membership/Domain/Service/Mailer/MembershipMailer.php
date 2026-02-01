@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace App\PublicApp\Membership\Domain\Service\Mailer;
 
-use App\SharedKernel\Membership\Domain\Entity\Membership;
+use App\MemberApp\Membership\Domain\Entity\Membership;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
-use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-class MembershipMailer
+readonly class MembershipMailer
 {
     public function __construct(
         private MailerInterface $mailer,
@@ -21,7 +22,7 @@ class MembershipMailer
 
     public function sendMembershipPdfDownload(Membership $membership): void
     {
-        $email = (new TemplatedEmail())
+        $email = new TemplatedEmail()
             ->from($this->params->get('app.email'))
             ->to($membership->getEmail())
             ->subject('Adhésion Saint-Ouen Musculation')
@@ -38,11 +39,14 @@ class MembershipMailer
         $this->mailer->send($email);
     }
 
-    public function sendEmailNotificationToManager(Membership $membership): void
+    /**
+     * @throws TransportExceptionInterface
+     */
+    public function sendEmailNotificationToBoardMembers(Membership $membership, array $boardMemberEmails): void
     {
-        $email = (new TemplatedEmail())
+        $email = new TemplatedEmail()
             ->from($this->params->get('app.email'))
-            ->to($this->params->get('manager1.email'))
+            ->to(...$boardMemberEmails)
             ->subject('Nouvelle demande d\'adhésion')
             ->htmlTemplate('emails/memberships/notification_new_membership.html.twig')
             ->context([

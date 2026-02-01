@@ -4,23 +4,32 @@ declare(strict_types=1);
 
 namespace App\PublicApp\Membership\Domain\Handler;
 
-use App\SharedKernel\Domain\Enum\Gender;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
-use App\SharedKernel\Membership\Domain\Entity\Membership;
-use App\PublicApp\Membership\Domain\Service\Mailer\MembershipMailer;
-use App\SharedKernel\Domain\Service\ProfileImage\ProfileImageService;
+use App\Admin\User\Domain\Repository\UserReadRepositoryInterface;
+use App\MemberApp\Membership\Domain\Entity\Membership;
+use App\MemberApp\Membership\Domain\Repository\MembershipWriteRepositoryInterface;
 use App\PublicApp\Membership\Domain\DTO\Request\MembershipCreationRequest;
-use App\SharedKernel\Membership\Domain\Repository\MembershipWriteRepositoryInterface;
+use App\PublicApp\Membership\Domain\Service\Mailer\MembershipMailer;
+use App\SharedKernel\Domain\Enum\Gender;
+use App\SharedKernel\Domain\Service\ProfileImage\ProfileImageService;
+use Random\RandomException;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
+use Symfony\Component\Mime\Address;
 
-final class MembershipCreateHandler
+final readonly class MembershipCreateHandler
 {
     public function __construct(
         private MembershipMailer $membershipMailer,
         private ProfileImageService $profileImageService,
+        private UserReadRepositoryInterface $userReadRepository,
         private MembershipWriteRepositoryInterface $membershipWriteRepository,
     ) {
     }
 
+    /**
+     * @throws TransportExceptionInterface
+     * @throws RandomException
+     */
     public function handle(MembershipCreationRequest $request): Membership
     {
         $uploadedProfileImage = $request->profileImage;
@@ -49,12 +58,17 @@ final class MembershipCreateHandler
 
         $this->membershipWriteRepository->save($membership);
 
+        $boardMemberEmails = $this->getBoardMemberEmails();
+
         $this->membershipMailer->sendMembershipPdfDownload($membership);
-        $this->membershipMailer->sendEmailNotificationToManager($membership);
+        $this->membershipMailer->sendEmailNotificationToBoardMembers($membership, $boardMemberEmails);
 
         return $membership;
     }
 
+    /**
+     * @throws RandomException
+     */
     private function getCleanProfileImage(?UploadedFile $uploadedFile, Gender $gender): string
     {
         if (null === $uploadedFile) {
@@ -69,5 +83,17 @@ final class MembershipCreateHandler
         }
 
         return $this->profileImageService->save($originalPath);
+    }
+
+    private function getBoardMemberEmails(): array
+    {
+        $boardMembers = $this->userReadRepository->getBoardMembers();
+
+        $boardMemberEmails = [];
+        foreach ($boardMembers as $member) {
+            $boardMemberEmails[] = $member->getEmail();
+        }
+
+        return Address::createArray($boardMemberEmails);
     }
 }

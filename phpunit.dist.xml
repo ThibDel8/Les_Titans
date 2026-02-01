@@ -7,18 +7,26 @@
          failOnDeprecation="true"
          failOnNotice="true"
          failOnWarning="true"
-         bootstrap="tests/bootstrap.php"
+         bootstrap="vendor/autoload.php"
          cacheDirectory=".phpunit.cache"
 >
     <php>
         <ini name="display_errors" value="1" />
         <ini name="error_reporting" value="-1" />
         <server name="APP_ENV" value="test" force="true" />
+        <server name="KERNEL_CLASS" value="App\Kernel" />
         <server name="SHELL_VERBOSITY" value="-1" />
+        <env name="SYMFONY_DEPRECATIONS_HELPER" value="disabled" />
+        <env name="APP_ENV" value="test" />
+        <env name="DATABASE_URL" value="mysql://symfony:symfony@database:3306/les_titans?serverVersion=8.0&amp;charset=utf8mb4" />
+        <env name="DEFAULT_URI" value="http://localhost" />
+        <env name="APP_PUBLIC_URL" value="http://localhost:8080" />
+        <env name="MAILER_DSN" value="null://null" />
+        <env name="APP_EMAIL" value="test@email.com" />
     </php>
 
     <testsuites>
-        <testsuite name="Project Test Suite">
+        <testsuite name="Les_Titans Test Suite">
             <directory>tests</directory>
         </testsuite>
     </testsuites>
@@ -32,6 +40,10 @@
             <directory>src</directory>
         </include>
 
+        <exclude>
+            <directory>src/DataFixtures</directory>
+        </exclude>
+
         <deprecationTrigger>
             <method>Doctrine\Deprecations\Deprecation::trigger</method>
             <method>Doctrine\Deprecations\Deprecation::delegateTriggerToBackend</method>
@@ -40,5 +52,9 @@
     </source>
 
     <extensions>
+        <bootstrap class="Symfony\Bridge\PhpUnit\SymfonyExtension">
+            <parameter name="clock-mock-namespaces" value="App" />
+            <parameter name="dns-mock-namespaces" value="App" />
+        </bootstrap>
     </extensions>
 </phpunit>

@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }}Publications{% endblock %}
+
+{% block body %}
+
+    {% include '_partials/_breadcrumb/_breadcrumb.html.twig' with { breadcrumb: breadcrumb } %}
+
+    <h2 class="public-title">Publications</h2>
+
+    <div class="right-content">
+        <a class="btn btn-info" href="{{ path('app_post_create') }}" title="Ajouter une publication">Écrire</a>
+    </div>
+
+    {% for post in posts %}
+        <section class="public-section">
+            <div class="author-post">
+                {% if post.author %}
+                    <img src="{{ asset('images/profiles/uploads/' ~ post.author.profileImage) }}" alt="Image de profil de l'auteur du poste">
+                    <div class="post-info">
+                        <p>{{ post.author.firstname }} {{ post.author.lastname }}</p>
+                        <time class="post-date" datetime="{{ post.createdAt|date('c') }}">
+                            <small>{{ post.createdAt|fr_datetime }}</small>
+                        </time>
+                    </div>
+                {% else %}
+                    <img src="{{ asset('images/profiles/defaults/ghost_default_profile.png.png') }}" alt="Image de profil de l'auteur du poste">
+                    <div class="post-info">
+                        <p>Ancien membre</p>
+                        <time class="post-date" datetime="{{ post.createdAt|date('c') }}">
+                            <small>{{ post.createdAt|fr_datetime }}</small>
+                        </time>
+                    </div>
+                {% endif %}
+            </div>
+            <div>
+                <p>{{ post.text }}</p>
+            </div>
+            <br>
+
+            <a href="{{ path('app_post_read', {'id': post.id}) }}">{{ post.comments|length }} commentaire{% if post.comments|length > 1 %}s{% endif %}</a>
+        </section>
+    {% else %}
+        <p>Aucune publication pour le moment.</p>
+    {% endfor %}
+
+{% endblock %}

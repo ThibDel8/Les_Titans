@@ -5,25 +5,36 @@
 {% block body %}
 
     <section style="
-        background-color: {{ colors.greyDark }};
+        background-color: {{ colors.grey }};
         border-radius: 4px;
         padding: 25px;
         margin-bottom: 40px;
         border-left: 5px solid {{ colors.publicColor }};
     ">
         <h2 style="color: {{ colors.publicColor }}; padding-bottom: 20px;">Adhésion Saint-Ouen Musculation</h2>
-        <div style="color: {{ colors.grey }};">
+        <div style="color: {{ colors.greyLight }};">
             <p>Bonjour {{ membership.firstname }},</p><br>
             <p>Nous vous confirmons que votre demande d’adhésion a bien été prise en compte.</p>
             <p>Un membre du bureau a été informé et prendra contact avec vous prochainement afin de finaliser votre inscription.</p>
             <p>Afin de préparer cette étape, merci de suivre les instructions ci-dessous :</p>
             <ul>
-                <li>Télécharger votre formulaire d’adhésion : <a href="{{ downloadUrl }}" style="color: {{ colors.publicColor }};">Télécharger</a></li>
-                <li>Imprimer et signer le formulaire</li>
-                <li>Prévoir 50 € en espèces pour l’abonnement annuel</li>
-                <li>Prévoir 10 € en espèces pour la caution du badge magnétique (restituée lors de la fin de l’adhésion)</li>
-                <li>Fournir un certificat médical récent attestant de votre aptitude à la pratique de la musculation en salle</li>
-                <li>Apporter l’ensemble de ces éléments lors du rendez-vous fixé avec le dirigeant</li>
+                <li style="margin-bottom: 1.3rem">Télécharger votre formulaire d’adhésion :
+                    <div style="text-align: center;">
+                        <br>
+                        <a href="{{ downloadUrl }}" style="
+                            color: {{ colors.black }};
+                            background-color: {{ colors.publicColor }};
+                            text-decoration: none;
+                            border-radius: 5px;
+                            padding: 5px 15px;
+                            ">Télécharger</a><br>
+                    </div>
+                </li>
+                <li style="margin-bottom: 1.3rem">Imprimer et signer le formulaire</li>
+                <li style="margin-bottom: 1.3rem">Prévoir 50 € en espèces pour l’abonnement annuel</li>
+                <li style="margin-bottom: 1.3rem">Prévoir 10 € en espèces pour la caution du badge magnétique (restituée lors de la fin de l’adhésion)</li>
+                <li style="margin-bottom: 1.3rem">Fournir un certificat médical récent attestant de votre aptitude à la pratique de la musculation en salle</li>
+                <li style="margin-bottom: 1.3rem">Apporter l’ensemble de ces éléments lors du rendez-vous fixé avec le dirigeant</li>
             </ul>
             <p>Une fois les documents et paiements validés, votre adhésion sera confirmée et le badge magnétique vous sera remis.</p>
             <br>

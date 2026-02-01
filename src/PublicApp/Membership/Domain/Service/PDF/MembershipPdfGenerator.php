@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\PublicApp\Membership\Domain\Service\PDF;
 
-use TCPDF;
-use App\SharedKernel\Membership\Domain\Entity\Membership;
+use App\MemberApp\Membership\Domain\Entity\Membership;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use TCPDF;
 
-class MembershipPdfGenerator
+readonly class MembershipPdfGenerator
 {
     public function __construct(private TranslatorInterface $translator)
     {
@@ -23,9 +23,9 @@ class MembershipPdfGenerator
         $lastname = $membership->getLastname();
         $firstname = $membership->getFirstname();
         $birthday = $membership->getBirthdate()->format('d/m/Y');
-        $gender = $this->translator->trans($membership->getGender()->label());
+        $gender = ucfirst($this->translator->trans($membership->getGender()->label()));
         $phone = $membership->getPhone();
-        $address = $membership->getAddress().' '.$membership->getPostalcode().', '.$membership->getCity();
+        $address = ucfirst(strtolower($membership->getAddress())).' '.$membership->getPostalcode().', '.$membership->getCity();
         $tutorNames = $membership->getTutorFirstname().' '.$membership->getTutorLastname();
         $tutorAddress = $membership->getTutorAddress();
 
@@ -37,16 +37,16 @@ class MembershipPdfGenerator
         $pdf->AddPage();
 
         $pdf->SetFont(family: 'helvetica', style: 'B', size: 16);
-        $pdf->Cell(w: 0, h: 10, txt: 'SAINT-OUEN MUSCULATION', border: 0, ln: 1, align: 'C');
-        $pdf->SetFont(family: 'helvetica', style: '', size: 11);
+        $pdf->Cell(w: 0, h: 10, txt: 'SAINT-OUEN MUSCULATION', ln: 1, align: 'C');
+        $pdf->SetFont(family: 'helvetica', size: 11);
         $pdf->Ln(h: 2);
-        $pdf->Cell(w: 0, h: 6, txt: "Bulletin d’adhésion – Année {$year}", border: 0, ln: 1, align: 'C');
+        $pdf->Cell(w: 0, h: 6, txt: "Bulletin d’adhésion – Année {$year}", ln: 1, align: 'C');
         $pdf->Ln(h: 8);
 
         $pdf->SetFont(family: 'helvetica', style: 'B', size: 11);
-        $pdf->Cell(w: 0, h: 6, txt: 'IDENTITÉ DE L’ADHÉRENT', border: 0, ln: 1);
+        $pdf->Cell(w: 0, h: 6, txt: 'IDENTITÉ DE L’ADHÉRENT', ln: 1);
         $pdf->Ln(h: 2);
-        $pdf->SetFont(family: 'helvetica', style: '', size: 10);
+        $pdf->SetFont(family: 'helvetica', size: 10);
         $pdf->Cell(w: 50, h: 8, txt: 'Nom et Prénom :', border: 1);
         $pdf->Cell(w: 0, h: 8, txt: $lastname.' '.$firstname, border: 1, ln: 1);
         $pdf->Cell(w: 50, h: 8, txt: 'Sexe :', border: 1);
@@ -60,9 +60,9 @@ class MembershipPdfGenerator
         $pdf->Ln(h: 8);
 
         $pdf->SetFont(family: 'helvetica', style: 'B', size: 11);
-        $pdf->Cell(w: 0, h: 6, txt: 'CONDITIONS D’ADHÉSION', border: 0, ln: 1);
+        $pdf->Cell(w: 0, h: 6, txt: 'CONDITIONS D’ADHÉSION', ln: 1);
         $pdf->Ln(h: 2);
-        $pdf->SetFont(family: 'helvetica', style: '', size: 10);
+        $pdf->SetFont(family: 'helvetica', size: 10);
         $pdf->MultiCell(w: 0, h: 6, txt:"L’adhésion est valable du 1er janvier {$year} au 31 décembre {$year}.", ishtml: true);
         $pdf->Ln(h: 2);
         $pdf->MultiCell(w: 0, h: 6, txt:"Pour les adhérents âgés de 10 à 16 ans, l’accès est limité aux séances de renforcement musculaire léger et de cardio-training. Toute activité impliquant des charges lourdes ou des exercices complexes est strictement interdite. La présence et la responsabilité d’un adulte accompagnateur sont obligatoires.", ishtml: true);
@@ -75,17 +75,17 @@ class MembershipPdfGenerator
 
         if ($membership->getAge() < $majorityAge) {
             $pdf->SetFont(family: 'helvetica', style: 'B', size: 11);
-            $pdf->Cell(w: 0, h: 6, txt: 'AUTORISATION DU REPRÉSENTANT LÉGAL', border: 0, ln: 1);
+            $pdf->Cell(w: 0, h: 6, txt: 'AUTORISATION DU REPRÉSENTANT LÉGAL', ln: 1);
             $pdf->Ln(h: 2);
-            $pdf->SetFont(family: 'helvetica', style: '', size: 10);
+            $pdf->SetFont(family: 'helvetica', size: 10);
             $pdf->MultiCell(w: 0, h: 6, txt:"Je soussigné(e) {$tutorNames}, demeurant au {$tutorAddress}, représentant légal de {$firstname} {$lastname}, autorise ce dernier à fréquenter la salle de musculation de l’association Saint-Ouen Musculation.", ishtml: true);
             $pdf->Ln(h: 6);
         }
 
         $pdf->SetFont(family: 'helvetica', style: 'B', size: 11);
-        $pdf->Cell(w: 0, h: 6, txt: 'ENGAGEMENT ET SIGNATURES', border: 0, ln: 1);
+        $pdf->Cell(w: 0, h: 6, txt: 'ENGAGEMENT ET SIGNATURES', ln: 1);
         $pdf->Ln(h: 2);
-        $pdf->SetFont(family: 'helvetica', style: '', size: 10);
+        $pdf->SetFont(family: 'helvetica', size: 10);
         $pdf->MultiCell(w: 0, h: 6, txt:"Je reconnais avoir pris connaissance des statuts et du règlement intérieur de l’association et m’engage à les respecter.", ishtml: true);
         $pdf->Ln(h: 10);
 

@@ -7,6 +7,7 @@ namespace App\Admin\User\Domain\Entity;
 use App\SharedKernel\Domain\Enum\Role;
 use Doctrine\DBAL\Types\Types;
 use App\SharedKernel\Domain\Enum\Gender;
+use Random\RandomException;
 use Symfony\Component\Uid\Uuid;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -21,7 +22,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private Uuid $id;
 
     #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
-    private ?string $profileImage = null;
+    private ?string $profileImage;
 
     #[ORM\Column(type: Types::STRING, length: 100)]
     private string $lastname;
@@ -90,14 +91,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $accessBadgeNumber;
 
     #[ORM\Column(type: Types::STRING, length: 64, nullable: true)]
-    private ?string $passwordSetupToken = null;
+    private ?string $passwordSetupToken;
 
     #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: true)]
-    private ?\DateTimeImmutable $passwordSetupTokenExpiresAt = null;
+    private ?\DateTimeImmutable $passwordSetupTokenExpiresAt;
 
     #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: true)]
     private \DateTimeImmutable $createdAt;
 
+    /**
+     * @throws RandomException
+     */
     public function __construct(
         string $lastname,
         string $firstname,
@@ -119,6 +123,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         ?string $tutorPostalcode = null,
         ?string $tutorCity = null,
         ?string $profileImage = null,
+        ?string $id = null,
     ) {
         $now = new \DateTimeImmutable('now');
 
@@ -144,7 +149,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->profileImage = $profileImage;
 
         // Initialisation des valeurs par défaut
-        $this->id = Uuid::v4();
+        $this->id = $id ? Uuid::fromString($id) : Uuid::v4();
         $this->roles = [Role::Member->value];
         $this->createdAt = $now;
         $this->password = null;
@@ -427,6 +432,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         ?string $tutorPostalcode = null,
         ?string $tutorCity = null,
         ?string $profileImage = null,
+        ?string $id = null,
     ): self
     {
         return new self(
@@ -450,6 +456,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             tutorPostalcode: $tutorPostalcode,
             tutorCity: $tutorCity,
             profileImage: $profileImage,
+            id: $id,
         );
     }
 }

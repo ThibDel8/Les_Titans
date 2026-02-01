@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Admin\Dashboard\Domain\QueryHandler;
 
-use App\Admin\User\Domain\Repository\UserReadRepositoryInterface;
 use App\Admin\Contact\Domain\Repository\ContactMessageReadRepositoryInterface;
 use App\Admin\Dashboard\Domain\DataCounter\DataCounter;
-use App\SharedKernel\Membership\Domain\Repository\MembershipReadRepositoryInterface;
+use App\Admin\User\Domain\Repository\UserReadRepositoryInterface;
+use App\MemberApp\Membership\Domain\Repository\MembershipReadRepositoryInterface;
 
 class DashboardQueryHandler
 {

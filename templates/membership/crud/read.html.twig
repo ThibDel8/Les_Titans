@@ -32,7 +32,7 @@
         <div class="membership-profile-image">
             <img src="{{ asset('images/profiles/uploads/' ~ membership.profileImage ) }}" alt="Image de profil du potentiel futur membre">
             <p>
-                {{ membership.gender.label|trans }}
+                {{ membership.gender.label|trans|capitalize }}
             </p>
             <p>
                 Né{% if membership.gender.value == 'female' %}e{% endif %} le {{ membership.birthdate|date('d/m/Y') }}
@@ -72,10 +72,17 @@
     {% else %}
         <h2 class="manager-title">Validations pour acceptation</h2>
         {{ form_start(form) }}
-            {{ form_row(form.medicalCertificateExpiry) }}
-            {{ form_row(form.annualMembershipFee) }}
-            {{ form_row(form.accessBadgeDeposit) }}
-            <br>
+
+        {{ form_row(form.medicalCertificateExpiry) }}
+        <div class="form-check">
+            {{ form_widget(form.annualMembershipFee) }}
+            {{ form_label(form.annualMembershipFee) }}
+        </div>
+        <div class="form-check">
+        {{ form_widget(form.accessBadgeDeposit) }}
+            {{ form_label(form.accessBadgeDeposit) }}
+        </div>
+        <br>
             <button class="btn" type="submit" title="Enregistrer les données obligatoires">Enregistrer</button>
         {{ form_end(form) }}
     {% endif %}

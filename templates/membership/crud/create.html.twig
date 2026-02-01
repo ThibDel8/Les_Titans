@@ -49,26 +49,67 @@
             {{ form_row(form.city) }}
             {{ form_row(form.email) }}
             {{ form_row(form.profileImage) }}
+            <div class="tutor-fields" id="tutor-fields">
+                {{ form_row(form.tutorLastname) }}
+                {{ form_row(form.tutorFirstname) }}
+                {{ form_row(form.tutorPhone) }}
+                {{ form_row(form.tutorEmail) }}
+                {{ form_row(form.tutorAddress) }}
+                {{ form_row(form.tutorPostalcode) }}
+                {{ form_row(form.tutorCity) }}
+            </div>
             <br>
-            <h3 class="public-title">Informations du tuteur légal (si membre mineur)</h3>
-            <p>Ces informations sont obligatoires uniquement si le membre a moins de 18 ans.</p>
-            <br>
-            {{ form_row(form.tutorLastname) }}
-            {{ form_row(form.tutorFirstname) }}
-            {{ form_row(form.tutorPhone) }}
-            {{ form_row(form.tutorEmail) }}
-            {{ form_row(form.tutorAddress) }}
-            {{ form_row(form.tutorPostalcode) }}
-            {{ form_row(form.tutorCity) }}
+
             <div class="form-check">
                 {{ form_widget(form.acceptedRules) }}
                 <label class="form-check-label" for="{{ form.acceptedRules.vars.id }}">
-                    J'ai lu et j'accepte le <a href="{{ path('app_house_rules') }}" target="_blank">règlement intérieur de l'association</a>
+                    J'ai lu et j'accepte le <a class="required" href="{{ path('app_house_rules') }}" target="_blank">règlement intérieur de l'association</a>
                 </label>
             </div>
             <br>
+
             <button class="btn" type="submit" title="Envoyer la demande d'adhésion">Envoyer la demande</button>
         {{ form_end(form) }}
     </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const birthdateInput = document.getElementById('{{ form.birthdate.vars.id }}');
+            const tutorFields = document.getElementById('tutor-fields');
+
+            function isMinor(birthdateValue) {
+                if (!birthdateValue) {
+                    return false;
+                }
+
+                const birthdate = new Date(birthdateValue);
+                const today = new Date();
+
+                let age = today.getFullYear() - birthdate.getFullYear();
+                const monthDiff = today.getMonth() - birthdate.getMonth();
+
+                if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthdate.getDate())) {
+                    age--;
+                }
+
+                return age < 18;
+            }
+
+            function toggleTutorFields() {
+                if (isMinor(birthdateInput.value)) {
+                    tutorFields.style.display = 'grid';
+                } else {
+                    tutorFields.style.display = 'none';
+                }
+            }
+
+            // État initial
+            toggleTutorFields();
+
+            // Quand la date change
+            birthdateInput.addEventListener('change', toggleTutorFields);
+        });
+    </script>
+
 
 {% endblock %}

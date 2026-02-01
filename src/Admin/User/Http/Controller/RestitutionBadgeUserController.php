@@ -14,7 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 final class RestitutionBadgeUserController extends AbstractController
 {
-    public function __construct(private RestitutionBadgeUserHandler $restitutionBadgeUserHandler)
+    public function __construct(private readonly RestitutionBadgeUserHandler $restitutionBadgeUserHandler)
     {
     }
 

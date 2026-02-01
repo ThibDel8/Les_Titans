@@ -7,6 +7,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         apt-utils \
         gnupg \
         ca-certificates \
+        unzip \
+        p7zip-full \
+        zip \
+        git \
+        curl \
         libpng-dev \
         libjpeg62-turbo-dev \
         libwebp-dev \
@@ -15,7 +20,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         libonig-dev \
         libicu-dev \
         libzip-dev \
-        zip unzip git curl \
     && docker-php-ext-configure gd \
         --with-freetype \
         --with-jpeg \

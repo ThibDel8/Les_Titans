@@ -28,12 +28,6 @@
                 </li>
 
                 {% if app.user %}
-                    <li>
-                        <a class="{{ app.request.pathInfo == path('app_profile_read') ? 'active' : '' }}" href="{{ path('app_profile_read') }}">
-                            {% include 'icons/profile.svg.twig' %}
-                            Profil
-                        </a>
-                    </li>
                 {% else %}
                     <li>
                         <a class="{{ app.request.pathInfo == path('app_membership_create') ? 'active' : '' }}" href="{{ path('app_membership_create') }}">
@@ -41,22 +35,21 @@
                             Adhésions
                         </a>
                     </li>
+
+                    <li>
+                        <a class="{{ app.request.pathInfo == path('app_contact') ? 'active' : '' }}" href="{{ path('app_contact') }}">
+                            {% include 'icons/contact-messages.svg.twig' %}
+                            Contact
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="{{ app.request.pathInfo == path('app_about') ? 'active' : '' }}" href="{{ path('app_about') }}">
+                            {% include 'icons/about.svg.twig' %}
+                            À propos
+                        </a>
+                    </li>
                 {% endif %}
-
-                <li>
-                    <a class="{{ app.request.pathInfo == path('app_contact') ? 'active' : '' }}" href="{{ path('app_contact') }}">
-                        {% include 'icons/contact-messages.svg.twig' %}
-                        Contact
-                    </a>
-                </li>
-
-                <li>
-                    <a class="{{ app.request.pathInfo == path('app_about') ? 'active' : '' }}" href="{{ path('app_about') }}">
-                        {% include 'icons/about.svg.twig' %}
-                        À propos
-                    </a>
-                </li>
-
                 {% if is_granted('ROLE_SECRETARY') %}
                     <li>
                         <a class="{{ app.request.attributes.get('_route') in [
@@ -68,7 +61,7 @@
                             'admin_contact_message_read',
                             'admin_membership_list',
                             'admin_membership_read',
-                        ] ? 'active-manager ' : '' }}manager" href="{{ path('admin_dashboard') }}">
+                        ] ? 'active-manager ' : '' }}manager-text" href="{{ path('admin_dashboard') }}">
                             {% include 'icons/dashboard.svg.twig' %}
                             Administration
                         </a>
@@ -76,6 +69,12 @@
                 {% endif %}
 
                 {% if app.user %}
+                    <li>
+                        <a class="{{ app.request.pathInfo == path('app_post_list') ? 'active' : '' }}" href="{{ path('app_post_list') }}">
+                            {% include 'icons/news.svg.twig' %}
+                            Publications
+                        </a>
+                    </li>
                     <li>
                         <a href="{{ path('app_logout') }}" onclick="document.getElementById('confirm-logout').showModal()" title="Se déconnecter">
                             {% include 'icons/logout.svg.twig' %}

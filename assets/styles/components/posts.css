@@ -1,0 +1,52 @@
+.author-post {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.author-post img {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+
+    object-fit: cover;
+    object-position: center;
+}
+
+.post-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.post-date {
+    font-size: 0.8rem;
+    opacity: 0.5;
+}
+
+.comments-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.comment-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 15px;
+    background-color: var(--grey-dark);
+    border-radius: 6px;
+}
+
+.comment-author {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.comment-author img {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}

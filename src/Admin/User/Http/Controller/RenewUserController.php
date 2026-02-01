@@ -14,7 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 final class RenewUserController extends AbstractController
 {
-    public function __construct(private RenewUserHandler $renewUserHandler)
+    public function __construct(private readonly RenewUserHandler $renewUserHandler)
     {
     }
 

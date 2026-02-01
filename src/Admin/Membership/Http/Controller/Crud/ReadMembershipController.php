@@ -4,19 +4,19 @@ declare(strict_types=1);
 
 namespace App\Admin\Membership\Http\Controller\Crud;
 
+use App\Admin\Membership\Domain\DTO\Request\ValidateMembershipRequest;
+use App\Admin\Membership\Domain\Handler\ValidateMembershipHandler;
+use App\Admin\Membership\Http\Form\ValidateMembershipType;
+use App\MemberApp\Membership\Domain\Entity\Membership;
 use App\SharedKernel\Domain\Enum\Role;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use App\SharedKernel\Membership\Domain\Entity\Membership;
-use App\Admin\Membership\Http\Form\MembershipValidationType;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use App\Admin\Membership\Domain\Handler\MembershipValidationHandler;
-use App\Admin\Membership\Domain\DTO\Request\MembershipValidationRequest;
 
 class ReadMembershipController extends AbstractController
 {
-    public function __construct(private MembershipValidationHandler $handler)
+    public function __construct(private readonly ValidateMembershipHandler $validateMembershipHandler)
     {
     }
 
@@ -25,13 +25,13 @@ class ReadMembershipController extends AbstractController
     {
         $this->denyAccessUnlessGranted(Role::Secretary->value);
 
-        $membershipValidationRequest = MembershipValidationRequest::fromEntity($membership);
+        $membershipValidationRequest = ValidateMembershipRequest::fromEntity($membership);
 
-        $form = $this->createForm(MembershipValidationType::class, $membershipValidationRequest);
+        $form = $this->createForm(ValidateMembershipType::class, $membershipValidationRequest);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->handler->handle($membership, $membershipValidationRequest);
+            $this->validateMembershipHandler->handle($membership, $membershipValidationRequest);
 
             if ($membership->hasValidRegistration()) {
                 $this->addFlash('info', 'La demande d\'adhésion est maintenant valide. Elle peut être Acceptée.');

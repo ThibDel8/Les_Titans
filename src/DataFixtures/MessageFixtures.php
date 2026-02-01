@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace App\DataFixtures;
 
-use Faker\Factory;
-use Symfony\Component\Uid\Uuid;
 use App\Admin\User\Domain\Entity\User;
-use Doctrine\Persistence\ObjectManager;
+use App\PublicApp\Contact\Domain\Entity\ContactMessage;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use App\Contact\Domain\Entity\ContactMessage;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
+use Doctrine\Persistence\ObjectManager;
+use Faker\Factory;
 
 class MessageFixtures extends Fixture implements DependentFixtureInterface
 {

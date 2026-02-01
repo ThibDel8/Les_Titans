@@ -11,13 +11,23 @@ use Doctrine\Persistence\ObjectManager;
 use App\SharedKernel\Domain\Enum\Gender;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use App\SharedKernel\Domain\Service\ProfileImage\ProfileImageService;
+use Random\RandomException;
 
 class UserFixtures extends Fixture
 {
-    public function __construct(private ProfileImageService $profileImageService)
+    public const string USER_VICE_PRESIDENT_ID = 'a6ee5cfc-3ee3-4936-aec4-8d10a6b4cbbd';
+    public const string USER_SECRETARY_ID = '181c37fd-3bd0-4d88-9322-a0e4213e57b2';
+    public const string USER_MEMBER_ID = '3bac373a-840b-4fe4-93dc-19921c912169';
+
+    public const int USER_MEMBER_BADGE_NUMBER = 0001234567;
+
+    public function __construct(private readonly ProfileImageService $profileImageService)
     {
     }
 
+    /**
+     * @throws RandomException
+     */
     public function load(ObjectManager $manager): void
     {
         $faker = Factory::create('fr_FR');
@@ -35,6 +45,7 @@ class UserFixtures extends Fixture
             email: $faker->unique()->safeEmail(),
             profileImage: $this->profileImageService->save($this->profileImageService->getDefaultsDir() . ProfileImageService::MALE_PROFILE),
             badgeNumber: $faker->unique()->numerify('000#######'),
+            id: self::USER_MEMBER_ID,
         );
 
         $this->createUser(
@@ -48,8 +59,8 @@ class UserFixtures extends Fixture
             postalcode: $faker->postcode(),
             city: $faker->city(),
             email: $faker->unique()->safeEmail(),
-            profileImage: $this->profileImageService->save($this->profileImageService->getDefaultsDir() . ProfileImageService::MALE_PROFILE),
             annualMembershipFee: null,
+            profileImage: $this->profileImageService->save($this->profileImageService->getDefaultsDir() . ProfileImageService::MALE_PROFILE),
             badgeNumber: $faker->unique()->numerify('000#######'),
         );
 
@@ -102,6 +113,7 @@ class UserFixtures extends Fixture
             city: $faker->city(),
             email: $faker->unique()->safeEmail(),
             medicalCertificateExpiry:new \DateTimeImmutable('-1 day'),
+            accessBadgeDeposit: self::USER_MEMBER_BADGE_NUMBER,
             tutorLastname: $faker->lastName(),
             tutorFirstname: $faker->firstName(),
             tutorPhone: $faker->numerify('0#########'),
@@ -205,8 +217,8 @@ class UserFixtures extends Fixture
             postalcode: $faker->postcode(),
             city: $faker->city(),
             email: $faker->unique()->safeEmail(),
-            profileImage: $this->profileImageService->save($this->profileImageService->getDefaultsDir() . ProfileImageService::MALE_PROFILE),
             role: Role::President,
+            profileImage: $this->profileImageService->save($this->profileImageService->getDefaultsDir() . ProfileImageService::MALE_PROFILE),
             badgeNumber: $faker->unique()->numerify('000#######'),
         );
 
@@ -221,9 +233,10 @@ class UserFixtures extends Fixture
             postalcode: $faker->postcode(),
             city: $faker->city(),
             email: $faker->unique()->safeEmail(),
-            profileImage: $this->profileImageService->save($this->profileImageService->getDefaultsDir() . ProfileImageService::MALE_PROFILE),
             role: Role::VicePresident,
+            profileImage: $this->profileImageService->save($this->profileImageService->getDefaultsDir() . ProfileImageService::MALE_PROFILE),
             badgeNumber: $faker->unique()->numerify('000#######'),
+            id: self::USER_VICE_PRESIDENT_ID,
         );
 
         $this->createUser(
@@ -237,8 +250,8 @@ class UserFixtures extends Fixture
             postalcode: $faker->postcode(),
             city: $faker->city(),
             email: $faker->unique()->safeEmail(),
-            profileImage: $this->profileImageService->save($this->profileImageService->getDefaultsDir() . ProfileImageService::MALE_PROFILE),
             role: Role::Treasurer,
+            profileImage: $this->profileImageService->save($this->profileImageService->getDefaultsDir() . ProfileImageService::MALE_PROFILE),
             badgeNumber: $faker->unique()->numerify('000#######'),
         );
 
@@ -253,9 +266,10 @@ class UserFixtures extends Fixture
             postalcode: $faker->postcode(),
             city: $faker->city(),
             email: $faker->unique()->safeEmail(),
-            profileImage: $this->profileImageService->save($this->profileImageService->getDefaultsDir() . ProfileImageService::FEMALE_PROFILE),
             role: Role::Secretary,
+            profileImage: $this->profileImageService->save($this->profileImageService->getDefaultsDir() . ProfileImageService::FEMALE_PROFILE),
             badgeNumber: $faker->unique()->numerify('000#######'),
+            id: self::USER_SECRETARY_ID,
         );
 
         $this->addReference('secretary_user', $secretaryUser);
@@ -287,6 +301,7 @@ class UserFixtures extends Fixture
         ?string $tutorCity = null,
         ?string $profileImage = null,
         ?string $badgeNumber = null,
+        ?string $id = null,
     ): User
     {
         $user = User::create(
@@ -310,6 +325,7 @@ class UserFixtures extends Fixture
             tutorPostalcode: $tutorPostalcode,
             tutorCity: $tutorCity,
             profileImage: $profileImage,
+            id: $id,
         );
 
         $user->giveBadgeNumber($badgeNumber);

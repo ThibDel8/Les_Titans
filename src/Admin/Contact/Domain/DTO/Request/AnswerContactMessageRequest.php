@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace App\Admin\Contact\Domain\DTO\Request;
 
-use App\Admin\User\Domain\Entity\User;
-use App\Contact\Domain\Entity\ContactMessage;
+use App\PublicApp\Contact\Domain\Entity\ContactMessage;
 use Symfony\Component\Validator\Constraints as Assert;
 
 class AnswerContactMessageRequest
