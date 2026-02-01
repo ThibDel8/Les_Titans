@@ -18,8 +18,6 @@ class AbstractWebTestCase extends WebTestCase
         parent::setUp();
 
         $this->client = self::createClient();
-
-        self::getEntityManager()->beginTransaction();
     }
 
     protected static function getRepository(string $entityClass): object
@@ -41,15 +39,5 @@ class AbstractWebTestCase extends WebTestCase
         return self::getContainer()
             ->get(EntityManagerInterface::class)
         ;
-    }
-
-    protected function tearDown(): void
-    {
-        $em = self::getEntityManager();
-        if ($em->getConnection()->isTransactionActive()) {
-            $em->rollback();
-        }
-
-        parent::tearDown();
     }
 }

@@ -35,11 +35,15 @@ class UpdateUserControllerTest extends AbstractWebTestCase
     public function testUpdateUser(): void
     {
         $browser = self::getLoggedUser(UserFixtures::USER_SECRETARY_ID);
-        $browser->request(Request::METHOD_GET, $this->url);
+        $crawler = $browser->request(Request::METHOD_GET, $this->url);
 
         self::assertResponseStatusCodeSame(Response::HTTP_OK);
 
-        $browser->submitForm('Enregistrer', ['update_user[lastname]' => 'Nouveau Nom']);
+        $form = $crawler->selectButton('Enregistrer')->form();
+
+        $form['update_user[lastname]'] = 'Nouveau Nom';
+
+        $browser->submit($form);
 
         self::assertResponseStatusCodeSame(Response::HTTP_FOUND);
 

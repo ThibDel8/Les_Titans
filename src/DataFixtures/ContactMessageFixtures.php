@@ -11,8 +11,9 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
 
-class MessageFixtures extends Fixture implements DependentFixtureInterface
+class ContactMessageFixtures extends Fixture implements DependentFixtureInterface
 {
+    public const string ASSIGNED_CONTACT_MESSAGE_ID = 'e0dbb36b-397a-447c-bff8-b7463231e20c';
     public function load(ObjectManager $manager): void
     {
         $faker = Factory::create('fr_FR');
@@ -54,6 +55,7 @@ class MessageFixtures extends Fixture implements DependentFixtureInterface
             subject: $faker->sentence(),
             body: $faker->sentence(),
             assignTo: $secretaryUser,
+            id: self::ASSIGNED_CONTACT_MESSAGE_ID,
         );
 
         $this->createContactMessage(
@@ -82,12 +84,14 @@ class MessageFixtures extends Fixture implements DependentFixtureInterface
         string $body,
         ?User $assignTo = null,
         ?string $answer = null,
+        ?string $id = null,
     ): void
     {
         $message = ContactMessage::create(
             email: $email,
             subject: $subject,
             body: $body,
+            id: $id,
         );
 
         if (null !== $assignTo) {

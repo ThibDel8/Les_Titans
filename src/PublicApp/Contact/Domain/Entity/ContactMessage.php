@@ -51,13 +51,14 @@ class ContactMessage
         string $email,
         string $subject,
         string $body,
+        ?string $id = null,
     ) {
         $this->email = $email;
         $this->subject = $subject;
         $this->body = $body;
 
         // Initialisation des valeurs par défaut
-        $this->id = Uuid::v4();
+        $this->id = $id ? Uuid::fromString($id) : Uuid::v4();
         $this->status = ContactMessageStatus::NEW;
         $this->createdAt = new \DateTimeImmutable();
     }
@@ -143,7 +144,7 @@ class ContactMessage
             return;
         }
 
-        if ($this->assignedTo === null || !$this->assignedTo === $boardMember) {
+        if ($this->assignedTo === null) {
             return;
         }
 
@@ -157,12 +158,14 @@ class ContactMessage
         string $email,
         string $subject,
         string $body,
+        ?string $id = null
     ): self
     {
         return new self(
             email: \strtolower($email),
             subject: \trim(\ucfirst(\strtolower($subject))),
             body: \trim($body),
+            id: $id,
         );
     }
 }

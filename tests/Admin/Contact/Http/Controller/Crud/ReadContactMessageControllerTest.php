@@ -6,6 +6,7 @@ namespace App\Tests\Admin\Contact\Http\Controller\Crud;
 
 use App\DataFixtures\UserFixtures;
 use App\PublicApp\Contact\Domain\Entity\ContactMessage;
+use App\PublicApp\Contact\Domain\Enum\ContactMessageStatus;
 use App\Tests\AbstractWebTestCase;
 use PHPUnit\Framework\Attributes\Group;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,7 +21,7 @@ final class ReadContactMessageControllerTest extends AbstractWebTestCase
     {
         parent::setUp();
 
-        $this->contactMessage = self::getRepository(ContactMessage::class)->findOneBy([]);
+        $this->contactMessage = self::getRepository(ContactMessage::class)->findOneBy(['status' => ContactMessageStatus::IN_PROGRESS, 'assignedTo' => UserFixtures::USER_SECRETARY_ID]);
         $this->url = \sprintf('/admin/contact-messages/%s', $this->contactMessage->getId());
     }
 
