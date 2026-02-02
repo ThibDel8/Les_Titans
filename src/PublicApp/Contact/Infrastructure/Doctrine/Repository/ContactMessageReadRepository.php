@@ -10,15 +10,10 @@ use App\PublicApp\Contact\Domain\Enum\ContactMessageStatus;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
-class ContactMessageReadRepository extends ServiceEntityRepository implements ContactMessageReadRepositoryInterface
+readonly class ContactMessageReadRepository implements ContactMessageReadRepositoryInterface
 {
-    public function __construct(private readonly EntityManagerInterface $manager)
+    public function __construct(private EntityManagerInterface $manager)
     {
-    }
-
-    protected function getManager(): EntityManagerInterface
-    {
-        return $this->manager;
     }
 
     public function findAllOrderedByDate(): array

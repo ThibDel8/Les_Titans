@@ -8,17 +8,11 @@ use App\Admin\User\Domain\Entity\User;
 use App\SharedKernel\Domain\Enum\Role;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Admin\User\Domain\Repository\UserReadRepositoryInterface;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
-class UserReadRepository extends ServiceEntityRepository implements UserReadRepositoryInterface
+readonly class UserReadRepository implements UserReadRepositoryInterface
 {
-    public function __construct(private readonly EntityManagerInterface $manager)
+    public function __construct(private EntityManagerInterface $manager)
     {
-    }
-
-    protected function getManager(): EntityManagerInterface
-    {
-        return $this->manager;
     }
 
     public function findByEmail(string $email): ?User
