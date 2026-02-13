@@ -109,7 +109,6 @@ git clone https://github.com/ThibDel8/Les_Titans.git
 cd Les_Titans
 make up
 make install
-php bin/console app:init-project
 ```
 
 ## 📈 Roadmap
