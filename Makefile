@@ -1,54 +1,81 @@
+# =====================================
 # Settings
+# =====================================
+
 MAKEFLAGS += --no-print-directory
 
-# Variables
 CONSOLE=php bin/console
 COMPOSE=docker compose
-COMPOSE_PHP=docker compose exec php
+COMPOSE_EXEC=$(COMPOSE) exec php
 
-# ---------------------------
-# Cache / Permissions
-# ---------------------------
+# =====================================
+# Docker
+# =====================================
 
-cache-clear:
-	$(COMPOSE_PHP) $(CONSOLE) cache:clear
+up:
+	$(COMPOSE) up -d
 
-# ---------------------------
-# Database / Fixtures Commands
-# ---------------------------
-
-create-database:
-	$(COMPOSE_PHP) $(CONSOLE) app:clean-uploaded-file-fixture --env=dev
-	$(COMPOSE_PHP) $(CONSOLE) doctrine:database:drop --force --if-exists --env=dev
-	$(COMPOSE_PHP) $(CONSOLE) doctrine:database:create --env=dev
-	$(COMPOSE_PHP) $(CONSOLE) doctrine:migrations:migrate --no-interaction --env=dev
-	$(COMPOSE_PHP) $(CONSOLE) app:create-admin-account --env=dev
-	$(COMPOSE_PHP) $(CONSOLE) doctrine:fixtures:load --no-interaction --append --env=dev
-	$(COMPOSE_PHP) $(CONSOLE) cache:clear --env=dev
-
-tf-db:
-	$(COMPOSE_PHP) $(CONSOLE) cache:clear --env=test
-	$(COMPOSE_PHP) $(CONSOLE) doctrine:database:drop --force --if-exists --env=test
-	$(COMPOSE_PHP) $(CONSOLE) doctrine:database:create --env=test
-	$(COMPOSE_PHP) $(CONSOLE) doctrine:migrations:migrate --no-interaction --env=test
-	$(COMPOSE_PHP) $(CONSOLE) app:create-admin-account --env=test
-	$(COMPOSE_PHP) $(CONSOLE) doctrine:fixtures:load --no-interaction --append --env=test
-
-# ---------------------------
-# Symfony Commands Shortcut
-# ---------------------------
-
-bash:
-	docker exec -it les_titans_php bash
+down:
+	$(COMPOSE) down
 
 rebuild:
 	$(COMPOSE) down -v --remove-orphans
 	$(COMPOSE) up --build -d
 
-# ---------------------------
-# Tests PhpUnit
-# ---------------------------
+bash:
+	$(COMPOSE_EXEC) bash
+
+# =====================================
+# Installation
+# =====================================
+
+install:
+	$(COMPOSE_EXEC) composer install
+	$(MAKE) init-project
+
+init-project:
+	$(MAKE) create-database
+	$(MAKE) cache-clear
+
+# =====================================
+# Symfony
+# =====================================
+
+cache-clear:
+	$(COMPOSE_EXEC) $(CONSOLE) cache:clear
+
+migrate:
+	$(COMPOSE_EXEC) $(CONSOLE) doctrine:migrations:migrate --no-interaction
+
+# =====================================
+# Database DEV
+# =====================================
+
+create-database:
+	$(COMPOSE_EXEC) $(CONSOLE) app:clean-uploaded-file-fixture --env=dev
+	$(COMPOSE_EXEC) $(CONSOLE) doctrine:database:drop --force --if-exists --env=dev
+	$(COMPOSE_EXEC) $(CONSOLE) doctrine:database:create --env=dev
+	$(COMPOSE_EXEC) $(CONSOLE) doctrine:migrations:migrate --no-interaction --env=dev
+	$(COMPOSE_EXEC) $(CONSOLE) app:create-admin-account --env=dev
+	$(COMPOSE_EXEC) $(CONSOLE) doctrine:fixtures:load --no-interaction --append --env=dev
+	$(COMPOSE_EXEC) $(CONSOLE) cache:clear --env=dev
+
+# =====================================
+# Database TEST
+# =====================================
+
+test-db:
+	$(COMPOSE_EXEC) $(CONSOLE) cache:clear --env=test
+	$(COMPOSE_EXEC) $(CONSOLE) doctrine:database:drop --force --if-exists --env=test
+	$(COMPOSE_EXEC) $(CONSOLE) doctrine:database:create --env=test
+	$(COMPOSE_EXEC) $(CONSOLE) doctrine:migrations:migrate --no-interaction --env=test
+	$(COMPOSE_EXEC) $(CONSOLE) app:create-admin-account --env=test
+	$(COMPOSE_EXEC) $(CONSOLE) doctrine:fixtures:load --no-interaction --append --env=test
+
+# =====================================
+# Tests
+# =====================================
 
 test:
-	$(MAKE) tf-db
-	$(COMPOSE_PHP) env XDEBUG_MODE=coverage php bin/phpunit --coverage-html var/coverage
+	$(MAKE) test-db
+	$(COMPOSE_EXEC) env XDEBUG_MODE=coverage php bin/phpunit --coverage-html var/coverage
