@@ -1,6 +1,9 @@
 # Dockerfile pour PHP 8.4-FPM + Symfony (WSL2 friendly)
-
 FROM php:8.4-fpm
+
+# Droits User pour WSL2
+ARG UID=1000
+ARG GID=1000
 
 # Installer les dépendances système et extensions PHP
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -32,17 +35,18 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # Créer les dossiers nécessaires
-RUN mkdir -p /var/www/html/var \
-    && mkdir -p /var/www/html/public/images/profiles
-
-# Droits corrects pour Symfony
-RUN chown -R www-data:www-data /var/www/html/var /var/www/html/public/images \
-    && chmod -R 775 /var/www/html/var /var/www/html/public/images
+#RUN mkdir -p /var/www/html/var \
+#    && mkdir -p /var/www/html/public/images/profiles
 
 # Copier l’entrypoint
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
 WORKDIR /var/www/html
+
+RUN if ! getent group ${GID}; then groupadd -g ${GID} app; fi \
+ && useradd -u ${UID} -g ${GID} -m app || true
+
+USER app
 
 ENTRYPOINT ["entrypoint.sh"]

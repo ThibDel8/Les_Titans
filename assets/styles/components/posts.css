@@ -50,3 +50,12 @@
     width: 50px;
     border-radius: 50%;
 }
+
+.author-post .icon,
+.comment-author .icon {
+    height: 30px;
+    width: 30px;
+    margin-left: auto;
+    cursor: pointer;
+    color: var(--red);
+}
