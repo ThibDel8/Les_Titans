@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\PublicApp\Home\Domain\OpeningHours;
 
-use App\PublicApp\Home\Domain\OpeningHours\TimeRange;
-
 final class OpeningDay
 {
     private function __construct(
@@ -17,12 +15,12 @@ final class OpeningDay
 
     public function isClosed(): bool
     {
-        return $this->range === null;
+        return null === $this->range;
     }
 
     public function isOpenAt(\DateTimeImmutable $time): bool
     {
-        if ($this->range === null) {
+        if (null === $this->range) {
             return false;
         }
 
@@ -32,6 +30,7 @@ final class OpeningDay
     public function isToday(?\DateTimeImmutable $now = null): bool
     {
         $now ??= new \DateTimeImmutable();
+
         return strtolower($now->format('l')) === $this->key;
     }
 
@@ -64,8 +63,7 @@ final class OpeningDay
         string $key,
         string $label,
         ?TimeRange $range = null,
-    ): self
-    {
+    ): self {
         return new self(
             key: $key,
             label: $label,

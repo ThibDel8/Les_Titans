@@ -14,6 +14,7 @@ use Faker\Factory;
 class ContactMessageFixtures extends Fixture implements DependentFixtureInterface
 {
     public const string ASSIGNED_CONTACT_MESSAGE_ID = 'e0dbb36b-397a-447c-bff8-b7463231e20c';
+
     public function load(ObjectManager $manager): void
     {
         $faker = Factory::create('fr_FR');
@@ -85,8 +86,7 @@ class ContactMessageFixtures extends Fixture implements DependentFixtureInterfac
         ?User $assignTo = null,
         ?string $answer = null,
         ?string $id = null,
-    ): void
-    {
+    ): void {
         $message = ContactMessage::create(
             email: $email,
             subject: $subject,

@@ -35,7 +35,7 @@ abstract class AbstractWriteRepository implements WriteRepositoryInterface
             $this->getManager()->persist($entity);
             ++$i;
 
-            if ($i % $batchSize === 0) {
+            if (0 === $i % $batchSize) {
                 $this->getManager()->flush();
                 $this->getManager()->clear();
             }
@@ -53,7 +53,7 @@ abstract class AbstractWriteRepository implements WriteRepositoryInterface
             $this->getManager()->remove($entity);
             ++$i;
 
-            if ($i % $batchSize === 0) {
+            if (0 === $i % $batchSize) {
                 $this->getManager()->flush();
                 $this->getManager()->clear();
             }

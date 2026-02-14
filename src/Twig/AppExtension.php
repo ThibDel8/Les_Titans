@@ -44,7 +44,9 @@ class AppExtension extends AbstractExtension
 
         $dayName = $jours[$date->format('l')];
         $monthName = $mois[$date->format('F')];
-        return sprintf('%s %02d %s %d à %02d:%02d',
+
+        return sprintf(
+            '%s %02d %s %d à %02d:%02d',
             $dayName,
             $date->format('d'),
             $monthName,

@@ -39,7 +39,7 @@ readonly class UserReadRepository implements UserReadRepositoryInterface
     {
         return $this->manager->getRepository(User::class)
             ->createQueryBuilder('u')
-            ->andWhere("u.roles LIKE :role")
+            ->andWhere('u.roles LIKE :role')
             ->setParameter('role', '%"'.Role::President->value.'"%')
             ->getQuery()
             ->getOneOrNullResult()
@@ -50,7 +50,7 @@ readonly class UserReadRepository implements UserReadRepositoryInterface
     {
         return $this->manager->getRepository(User::class)
             ->createQueryBuilder('u')
-            ->where("u.roles NOT LIKE :memberRole")
+            ->where('u.roles NOT LIKE :memberRole')
             ->setParameter('memberRole', '%"'.Role::Member->value.'"%')
             ->getQuery()
             ->getResult()

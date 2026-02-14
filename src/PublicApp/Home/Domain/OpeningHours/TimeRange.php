@@ -37,8 +37,7 @@ final class TimeRange
     public static function create(
         string $start,
         string $end,
-    ): self
-    {
+    ): self {
         return new self(
             start: $start,
             end: $end,

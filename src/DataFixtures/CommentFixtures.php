@@ -64,8 +64,7 @@ class CommentFixtures extends Fixture implements DependentFixtureInterface
         Post $post,
         ?User $author,
         string $text,
-    ): void
-    {
+    ): void {
         $membership = Comment::create(
             post: $post,
             author: $author,

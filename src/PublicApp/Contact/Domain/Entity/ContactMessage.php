@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Uid\Uuid;
 
 #[ORM\Entity]
-#[ORM\Table(name: "contact_messages")]
+#[ORM\Table(name: 'contact_messages')]
 class ContactMessage
 {
     #[ORM\Id]
@@ -120,7 +120,7 @@ class ContactMessage
 
     public function saveAssignTo(User $boardMember): void
     {
-        if ($this->status !== ContactMessageStatus::NEW) {
+        if (ContactMessageStatus::NEW !== $this->status) {
             return;
         }
 
@@ -130,7 +130,7 @@ class ContactMessage
 
     public function saveUnread(): void
     {
-        if ($this->status !== ContactMessageStatus::IN_PROGRESS) {
+        if (ContactMessageStatus::IN_PROGRESS !== $this->status) {
             return;
         }
 
@@ -140,11 +140,11 @@ class ContactMessage
 
     public function saveAnswer(string $answer, User $boardMember): void
     {
-        if ($this->status !== ContactMessageStatus::IN_PROGRESS) {
+        if (ContactMessageStatus::IN_PROGRESS !== $this->status) {
             return;
         }
 
-        if ($this->assignedTo === null) {
+        if (null === $this->assignedTo) {
             return;
         }
 
@@ -158,9 +158,8 @@ class ContactMessage
         string $email,
         string $subject,
         string $body,
-        ?string $id = null
-    ): self
-    {
+        ?string $id = null,
+    ): self {
         return new self(
             email: \strtolower($email),
             subject: \trim(\ucfirst(\strtolower($subject))),

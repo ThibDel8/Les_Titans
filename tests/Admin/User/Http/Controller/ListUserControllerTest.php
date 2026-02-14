@@ -4,11 +4,9 @@ declare(strict_types=1);
 
 namespace App\Tests\Admin\User\Http\Controller;
 
-use App\Admin\User\Http\Controller\ListUserController;
 use App\DataFixtures\UserFixtures;
 use App\Tests\AbstractWebTestCase;
 use PHPUnit\Framework\Attributes\Group;
-use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 

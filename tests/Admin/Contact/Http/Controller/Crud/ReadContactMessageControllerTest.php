@@ -17,6 +17,7 @@ final class ReadContactMessageControllerTest extends AbstractWebTestCase
 {
     private ContactMessage $contactMessage;
     private string $url;
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -32,6 +33,7 @@ final class ReadContactMessageControllerTest extends AbstractWebTestCase
 
         self::assertResponseStatusCodeSame(Response::HTTP_FORBIDDEN);
     }
+
     public function testReadContactMessage(): void
     {
         $browser = $this->getLoggedUser(UserFixtures::USER_SECRETARY_ID);

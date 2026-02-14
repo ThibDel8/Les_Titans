@@ -4,12 +4,10 @@ declare(strict_types=1);
 
 namespace App\Tests\Admin\User\Http\Controller\Crud;
 
-use App\Admin\User\Http\Controller\Crud\CreateUserController;
 use App\DataFixtures\UserFixtures;
 use App\MemberApp\Membership\Domain\Entity\Membership;
 use App\Tests\AbstractWebTestCase;
 use PHPUnit\Framework\Attributes\Group;
-use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 

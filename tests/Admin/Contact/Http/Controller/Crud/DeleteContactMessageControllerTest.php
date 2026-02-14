@@ -4,14 +4,10 @@ declare(strict_types=1);
 
 namespace App\Tests\Admin\Contact\Http\Controller\Crud;
 
-use App\Admin\Contact\Http\Controller\Crud\DeleteContactMessageController;
 use App\DataFixtures\UserFixtures;
 use App\PublicApp\Contact\Domain\Entity\ContactMessage;
 use App\Tests\AbstractWebTestCase;
-use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Framework\Attributes\Group;
-use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -20,6 +16,7 @@ final class DeleteContactMessageControllerTest extends AbstractWebTestCase
 {
     private ContactMessage $contactMessage;
     private string $url;
+
     protected function setUp(): void
     {
         parent::setUp();

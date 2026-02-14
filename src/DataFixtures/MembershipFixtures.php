@@ -32,7 +32,7 @@ class MembershipFixtures extends Fixture
             birthdate: new \DateTimeImmutable('-20 years'),
             gender: Gender::Female,
             phone: $faker->numerify('0#########'),
-            address: $faker->buildingNumber() . ' ' . $faker->streetName(),
+            address: $faker->buildingNumber().' '.$faker->streetName(),
             postalcode: $faker->postcode(),
             city: $faker->city(),
             email: $faker->unique()->safeEmail(),
@@ -40,10 +40,10 @@ class MembershipFixtures extends Fixture
             tutorFirstname: $faker->firstName(),
             tutorPhone: $faker->numerify('0#########'),
             tutorEmail: $faker->unique()->safeEmail(),
-            tutorAddress: $faker->buildingNumber() . ' ' . $faker->streetName(),
+            tutorAddress: $faker->buildingNumber().' '.$faker->streetName(),
             tutorPostalcode: $faker->postcode(),
             tutorCity: $faker->city(),
-            profileImage: $this->profileImageService->save($this->profileImageService->getDefaultsDir() . ProfileImageService::FEMALE_PROFILE),
+            profileImage: $this->profileImageService->save($this->profileImageService->getDefaultsDir().ProfileImageService::FEMALE_PROFILE),
         );
 
         $this->createMembership(
@@ -53,11 +53,11 @@ class MembershipFixtures extends Fixture
             birthdate: new \DateTimeImmutable('-25 years'),
             gender: Gender::Male,
             phone: $faker->numerify('0#########'),
-            address: $faker->buildingNumber() . ' ' . $faker->streetName(),
+            address: $faker->buildingNumber().' '.$faker->streetName(),
             postalcode: $faker->postcode(),
             city: $faker->city(),
             email: $faker->unique()->safeEmail(),
-            profileImage: $this->profileImageService->save($this->profileImageService->getDefaultsDir() . ProfileImageService::MALE_PROFILE),
+            profileImage: $this->profileImageService->save($this->profileImageService->getDefaultsDir().ProfileImageService::MALE_PROFILE),
         );
 
         $this->createMembership(
@@ -67,7 +67,7 @@ class MembershipFixtures extends Fixture
             birthdate: new \DateTimeImmutable('-15 years'),
             gender: Gender::Other,
             phone: $faker->numerify('0#########'),
-            address: $faker->buildingNumber() . ' ' . $faker->streetName(),
+            address: $faker->buildingNumber().' '.$faker->streetName(),
             postalcode: $faker->postcode(),
             city: $faker->city(),
             email: $faker->unique()->safeEmail(),
@@ -75,10 +75,10 @@ class MembershipFixtures extends Fixture
             tutorFirstname: $faker->firstName(),
             tutorPhone: $faker->numerify('0#########'),
             tutorEmail: $faker->unique()->safeEmail(),
-            tutorAddress: $faker->buildingNumber() . ' ' . $faker->streetName(),
+            tutorAddress: $faker->buildingNumber().' '.$faker->streetName(),
             tutorPostalcode: $faker->postcode(),
             tutorCity: $faker->city(),
-            profileImage: $this->profileImageService->save($this->profileImageService->getDefaultsDir() . ProfileImageService::OTHER_PROFILE),
+            profileImage: $this->profileImageService->save($this->profileImageService->getDefaultsDir().ProfileImageService::OTHER_PROFILE),
         );
 
         $manager->flush();
@@ -103,8 +103,7 @@ class MembershipFixtures extends Fixture
         ?string $tutorPostalcode = null,
         ?string $tutorCity = null,
         ?string $profileImage = null,
-    ): void
-    {
+    ): void {
         $membership = Membership::create(
             lastname: $lastname,
             firstname: $firstname,

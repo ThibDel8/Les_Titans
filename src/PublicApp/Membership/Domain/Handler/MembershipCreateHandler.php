@@ -77,7 +77,7 @@ final readonly class MembershipCreateHandler
                 Gender::Female->value => ProfileImageService::FEMALE_PROFILE,
                 Gender::Other->value => ProfileImageService::OTHER_PROFILE,
             };
-            $originalPath = $this->profileImageService->getDefaultsDir() . $defaultFile;
+            $originalPath = $this->profileImageService->getDefaultsDir().$defaultFile;
         } else {
             $originalPath = $uploadedFile->getPathname();
         }

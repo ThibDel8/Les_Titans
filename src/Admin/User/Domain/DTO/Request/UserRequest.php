@@ -20,7 +20,7 @@ class UserRequest
             'image/bmp',
             'image/x-ms-bmp',
             'image/webp',
-            'image/vnd.wap.wbmp'
+            'image/vnd.wap.wbmp',
         ],
         mimeTypesMessage: 'L\'image doit être au format JPEG, PNG, GIF, BMP, WebP ou WBMP.'
     )]
@@ -75,14 +75,14 @@ class UserRequest
     public ?string $email = null;
 
     #[Assert\Type(\DateTimeImmutable::class)]
-    #[Assert\GreaterThan("today", message: "Le certificat médical doit être plus ancien qu'aujourd'hui.")]
+    #[Assert\GreaterThan('today', message: "Le certificat médical doit être plus ancien qu'aujourd'hui.")]
     public ?\DateTimeImmutable $medicalCertificateExpiry = null;
 
-    #[Assert\Type("integer")]
-    #[Assert\PositiveOrZero(message: "Le dépôt du badge doit être positif ou nul.")]
+    #[Assert\Type('integer')]
+    #[Assert\PositiveOrZero(message: 'Le dépôt du badge doit être positif ou nul.')]
     public ?int $accessBadgeDeposit = null;
 
-    #[Assert\Type("string")]
+    #[Assert\Type('string')]
     #[Assert\Regex(
         pattern: '/^\d{10}$/',
         message: 'Le numéro de badge doit contenir exactement 10 chiffres.'
@@ -90,8 +90,8 @@ class UserRequest
     public ?string $accessBadgeNumber = null;
 
 
-    #[Assert\Type("integer")]
-    #[Assert\PositiveOrZero(message: "La cotisation annuelle doit être positive ou nulle.")]
+    #[Assert\Type('integer')]
+    #[Assert\PositiveOrZero(message: 'La cotisation annuelle doit être positive ou nulle.')]
     public ?int $annualMembershipFee = null;
 
     public ?string $tutorLastname = null;

@@ -39,11 +39,11 @@ class UserFixtures extends Fixture
             birthdate: new \DateTimeImmutable('-25 years'),
             gender: Gender::Male,
             phone: $faker->numerify('0#########'),
-            address: $faker->buildingNumber() . ' ' . $faker->streetName(),
+            address: $faker->buildingNumber().' '.$faker->streetName(),
             postalcode: $faker->postcode(),
             city: $faker->city(),
             email: $faker->unique()->safeEmail(),
-            profileImage: $this->profileImageService->save($this->profileImageService->getDefaultsDir() . ProfileImageService::MALE_PROFILE),
+            profileImage: $this->profileImageService->save($this->profileImageService->getDefaultsDir().ProfileImageService::MALE_PROFILE),
             badgeNumber: $faker->unique()->numerify('000#######'),
             id: self::USER_MEMBER_ID,
         );
@@ -55,12 +55,12 @@ class UserFixtures extends Fixture
             birthdate: new \DateTimeImmutable('-24 years'),
             gender: Gender::Male,
             phone: $faker->numerify('0#########'),
-            address: $faker->buildingNumber() . ' ' . $faker->streetName(),
+            address: $faker->buildingNumber().' '.$faker->streetName(),
             postalcode: $faker->postcode(),
             city: $faker->city(),
             email: $faker->unique()->safeEmail(),
             annualMembershipFee: null,
-            profileImage: $this->profileImageService->save($this->profileImageService->getDefaultsDir() . ProfileImageService::MALE_PROFILE),
+            profileImage: $this->profileImageService->save($this->profileImageService->getDefaultsDir().ProfileImageService::MALE_PROFILE),
             badgeNumber: $faker->unique()->numerify('000#######'),
         );
 
@@ -71,11 +71,11 @@ class UserFixtures extends Fixture
             birthdate: new \DateTimeImmutable('-31 years'),
             gender: Gender::Male,
             phone: $faker->numerify('0#########'),
-            address: $faker->buildingNumber() . ' ' . $faker->streetName(),
+            address: $faker->buildingNumber().' '.$faker->streetName(),
             postalcode: $faker->postcode(),
             city: $faker->city(),
             email: $faker->unique()->safeEmail(),
-            profileImage: $this->profileImageService->save($this->profileImageService->getDefaultsDir() . ProfileImageService::MALE_PROFILE),
+            profileImage: $this->profileImageService->save($this->profileImageService->getDefaultsDir().ProfileImageService::MALE_PROFILE),
             badgeNumber: $faker->unique()->numerify('000#######'),
         );
 
@@ -86,7 +86,7 @@ class UserFixtures extends Fixture
             birthdate: new \DateTimeImmutable('-17 years'),
             gender: Gender::Male,
             phone: $faker->numerify('0#########'),
-            address: $faker->buildingNumber() . ' ' . $faker->streetName(),
+            address: $faker->buildingNumber().' '.$faker->streetName(),
             postalcode: $faker->postcode(),
             city: $faker->city(),
             email: $faker->unique()->safeEmail(),
@@ -94,10 +94,10 @@ class UserFixtures extends Fixture
             tutorFirstname: $faker->firstName(),
             tutorPhone: $faker->numerify('0#########'),
             tutorEmail: $faker->unique()->safeEmail(),
-            tutorAddress: $faker->buildingNumber() . ' ' . $faker->streetName(),
+            tutorAddress: $faker->buildingNumber().' '.$faker->streetName(),
             tutorPostalcode: $faker->postcode(),
             tutorCity: $faker->city(),
-            profileImage: $this->profileImageService->save($this->profileImageService->getDefaultsDir() . ProfileImageService::MALE_PROFILE),
+            profileImage: $this->profileImageService->save($this->profileImageService->getDefaultsDir().ProfileImageService::MALE_PROFILE),
             badgeNumber: $faker->unique()->numerify('000#######'),
         );
 
@@ -108,7 +108,7 @@ class UserFixtures extends Fixture
             birthdate: new \DateTimeImmutable('-20 years'),
             gender: Gender::Female,
             phone: $faker->numerify('0#########'),
-            address: $faker->buildingNumber() . ' ' . $faker->streetName(),
+            address: $faker->buildingNumber().' '.$faker->streetName(),
             postalcode: $faker->postcode(),
             city: $faker->city(),
             email: $faker->unique()->safeEmail(),
@@ -118,10 +118,10 @@ class UserFixtures extends Fixture
             tutorFirstname: $faker->firstName(),
             tutorPhone: $faker->numerify('0#########'),
             tutorEmail: $faker->unique()->safeEmail(),
-            tutorAddress: $faker->buildingNumber() . ' ' . $faker->streetName(),
+            tutorAddress: $faker->buildingNumber().' '.$faker->streetName(),
             tutorPostalcode: $faker->postcode(),
             tutorCity: $faker->city(),
-            profileImage: $this->profileImageService->save($this->profileImageService->getDefaultsDir() . ProfileImageService::FEMALE_PROFILE),
+            profileImage: $this->profileImageService->save($this->profileImageService->getDefaultsDir().ProfileImageService::FEMALE_PROFILE),
             badgeNumber: $faker->unique()->numerify('000#######'),
         );
 
@@ -132,12 +132,12 @@ class UserFixtures extends Fixture
             birthdate: new \DateTimeImmutable('-22 years'),
             gender: Gender::Female,
             phone: $faker->numerify('0#########'),
-            address: $faker->buildingNumber() . ' ' . $faker->streetName(),
+            address: $faker->buildingNumber().' '.$faker->streetName(),
             postalcode: $faker->postcode(),
             city: $faker->city(),
             email: $faker->unique()->safeEmail(),
             medicalCertificateExpiry:new \DateTimeImmutable('-1 day'),
-            profileImage: $this->profileImageService->save($this->profileImageService->getDefaultsDir() . ProfileImageService::FEMALE_PROFILE),
+            profileImage: $this->profileImageService->save($this->profileImageService->getDefaultsDir().ProfileImageService::FEMALE_PROFILE),
         );
 
         $this->createUser(
@@ -147,11 +147,11 @@ class UserFixtures extends Fixture
             birthdate: new \DateTimeImmutable('-18 years'),
             gender: Gender::Female,
             phone: $faker->numerify('0#########'),
-            address: $faker->buildingNumber() . ' ' . $faker->streetName(),
+            address: $faker->buildingNumber().' '.$faker->streetName(),
             postalcode: $faker->postcode(),
             city: $faker->city(),
             email: $faker->unique()->safeEmail(),
-            profileImage: $this->profileImageService->save($this->profileImageService->getDefaultsDir() . ProfileImageService::FEMALE_PROFILE),
+            profileImage: $this->profileImageService->save($this->profileImageService->getDefaultsDir().ProfileImageService::FEMALE_PROFILE),
             badgeNumber: $faker->unique()->numerify('000#######'),
         );
 
@@ -162,11 +162,11 @@ class UserFixtures extends Fixture
             birthdate: new \DateTimeImmutable('-43 years'),
             gender: Gender::Female,
             phone: $faker->numerify('0#########'),
-            address: $faker->buildingNumber() . ' ' . $faker->streetName(),
+            address: $faker->buildingNumber().' '.$faker->streetName(),
             postalcode: $faker->postcode(),
             city: $faker->city(),
             email: $faker->unique()->safeEmail(),
-            profileImage: $this->profileImageService->save($this->profileImageService->getDefaultsDir() . ProfileImageService::FEMALE_PROFILE),
+            profileImage: $this->profileImageService->save($this->profileImageService->getDefaultsDir().ProfileImageService::FEMALE_PROFILE),
             badgeNumber: $faker->unique()->numerify('000#######'),
         );
 
@@ -177,7 +177,7 @@ class UserFixtures extends Fixture
             birthdate: new \DateTimeImmutable('-16 years'),
             gender: Gender::Female,
             phone: $faker->numerify('0#########'),
-            address: $faker->buildingNumber() . ' ' . $faker->streetName(),
+            address: $faker->buildingNumber().' '.$faker->streetName(),
             postalcode: $faker->postcode(),
             city: $faker->city(),
             email: $faker->unique()->safeEmail(),
@@ -185,10 +185,10 @@ class UserFixtures extends Fixture
             tutorFirstname: $faker->firstName(),
             tutorPhone: $faker->numerify('0#########'),
             tutorEmail: $faker->unique()->safeEmail(),
-            tutorAddress: $faker->buildingNumber() . ' ' . $faker->streetName(),
+            tutorAddress: $faker->buildingNumber().' '.$faker->streetName(),
             tutorPostalcode: $faker->postcode(),
             tutorCity: $faker->city(),
-            profileImage: $this->profileImageService->save($this->profileImageService->getDefaultsDir() . ProfileImageService::FEMALE_PROFILE),
+            profileImage: $this->profileImageService->save($this->profileImageService->getDefaultsDir().ProfileImageService::FEMALE_PROFILE),
             badgeNumber: $faker->unique()->numerify('000#######'),
         );
 
@@ -199,11 +199,11 @@ class UserFixtures extends Fixture
             birthdate: new \DateTimeImmutable('-21 years'),
             gender: Gender::Other,
             phone: $faker->numerify('0#########'),
-            address: $faker->buildingNumber() . ' ' . $faker->streetName(),
+            address: $faker->buildingNumber().' '.$faker->streetName(),
             postalcode: $faker->postcode(),
             city: $faker->city(),
             email: $faker->unique()->safeEmail(),
-            profileImage: $this->profileImageService->save($this->profileImageService->getDefaultsDir() . ProfileImageService::OTHER_PROFILE),
+            profileImage: $this->profileImageService->save($this->profileImageService->getDefaultsDir().ProfileImageService::OTHER_PROFILE),
         );
 
         $this->createUser(
@@ -213,12 +213,12 @@ class UserFixtures extends Fixture
             birthdate: new \DateTimeImmutable('-29 years'),
             gender: Gender::Male,
             phone: $faker->numerify('0#########'),
-            address: $faker->buildingNumber() . ' ' . $faker->streetName(),
+            address: $faker->buildingNumber().' '.$faker->streetName(),
             postalcode: $faker->postcode(),
             city: $faker->city(),
             email: $faker->unique()->safeEmail(),
             role: Role::President,
-            profileImage: $this->profileImageService->save($this->profileImageService->getDefaultsDir() . ProfileImageService::MALE_PROFILE),
+            profileImage: $this->profileImageService->save($this->profileImageService->getDefaultsDir().ProfileImageService::MALE_PROFILE),
             badgeNumber: $faker->unique()->numerify('000#######'),
         );
 
@@ -229,12 +229,12 @@ class UserFixtures extends Fixture
             birthdate: new \DateTimeImmutable('-25 years'),
             gender: Gender::Male,
             phone: $faker->numerify('0#########'),
-            address: $faker->buildingNumber() . ' ' . $faker->streetName(),
+            address: $faker->buildingNumber().' '.$faker->streetName(),
             postalcode: $faker->postcode(),
             city: $faker->city(),
             email: $faker->unique()->safeEmail(),
             role: Role::VicePresident,
-            profileImage: $this->profileImageService->save($this->profileImageService->getDefaultsDir() . ProfileImageService::MALE_PROFILE),
+            profileImage: $this->profileImageService->save($this->profileImageService->getDefaultsDir().ProfileImageService::MALE_PROFILE),
             badgeNumber: $faker->unique()->numerify('000#######'),
             id: self::USER_VICE_PRESIDENT_ID,
         );
@@ -246,12 +246,12 @@ class UserFixtures extends Fixture
             birthdate: new \DateTimeImmutable('-21 years'),
             gender: Gender::Male,
             phone: $faker->numerify('0#########'),
-            address: $faker->buildingNumber() . ' ' . $faker->streetName(),
+            address: $faker->buildingNumber().' '.$faker->streetName(),
             postalcode: $faker->postcode(),
             city: $faker->city(),
             email: $faker->unique()->safeEmail(),
             role: Role::Treasurer,
-            profileImage: $this->profileImageService->save($this->profileImageService->getDefaultsDir() . ProfileImageService::MALE_PROFILE),
+            profileImage: $this->profileImageService->save($this->profileImageService->getDefaultsDir().ProfileImageService::MALE_PROFILE),
             badgeNumber: $faker->unique()->numerify('000#######'),
         );
 
@@ -262,12 +262,12 @@ class UserFixtures extends Fixture
             birthdate: new \DateTimeImmutable('-22 years'),
             gender: Gender::Female,
             phone: $faker->numerify('0#########'),
-            address: $faker->buildingNumber() . ' ' . $faker->streetName(),
+            address: $faker->buildingNumber().' '.$faker->streetName(),
             postalcode: $faker->postcode(),
             city: $faker->city(),
             email: $faker->unique()->safeEmail(),
             role: Role::Secretary,
-            profileImage: $this->profileImageService->save($this->profileImageService->getDefaultsDir() . ProfileImageService::FEMALE_PROFILE),
+            profileImage: $this->profileImageService->save($this->profileImageService->getDefaultsDir().ProfileImageService::FEMALE_PROFILE),
             badgeNumber: $faker->unique()->numerify('000#######'),
             id: self::USER_SECRETARY_ID,
         );
@@ -302,8 +302,7 @@ class UserFixtures extends Fixture
         ?string $profileImage = null,
         ?string $badgeNumber = null,
         ?string $id = null,
-    ): User
-    {
+    ): User {
         $user = User::create(
             lastname: $lastname,
             firstname: $firstname,

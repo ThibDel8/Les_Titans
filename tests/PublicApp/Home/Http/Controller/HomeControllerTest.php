@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Tests\PublicApp\Home\Http\Controller;
 
 use App\Tests\AbstractWebTestCase;
@@ -12,6 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 final class HomeControllerTest extends AbstractWebTestCase
 {
     private string $url;
+
     protected function setUp(): void
     {
         parent::setUp();
