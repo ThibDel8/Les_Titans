@@ -8,22 +8,39 @@
 
     <h2 class="public-title">Publication</h2>
     <div class="author-post">
-        {% if post.author %}
-            <img src="{{ asset('images/profiles/uploads/' ~ post.author.profileImage) }}" alt="Image de profil de l'auteur du poste">
-            <div class="post-info">
-                <p>{{ post.author.firstname }} {{ post.author.lastname }}</p>
-                <time class="post-date" datetime="{{ post.createdAt|date('c') }}">
-                    <small>{{ post.createdAt|fr_datetime }}</small>
-                </time>
-            </div>
-        {% else %}
-            <img src="{{ asset('images/profiles/defaults/ghost_default_profile.png.png') }}" alt="Image de profil de l'auteur du poste">
-            <div class="post-info">
-                <p>Ancien membre</p>
-                <time class="post-date" datetime="{{ post.createdAt|date('c') }}">
-                    <small>{{ post.createdAt|fr_datetime }}</small>
-                </time>
-            </div>
+        <img src="
+            {% if post.author %}
+                {{ asset('images/profiles/uploads/' ~ post.author.profileImage) }}
+            {% else %}
+                {{ asset('images/profiles/defaults/ghost_default_profile.png.png') }}
+            {% endif %}
+        " alt="Image de profil de l'auteur du poste">
+        <div class="post-info">
+            <p>
+                {% if post.author %}
+                    {{ post.author.firstname }} {{ post.author.lastname }}
+                {% else %}
+                    Ancien membre
+                {% endif %}
+            </p>
+            <time class="post-date" datetime="{{ post.createdAt|date('c') }}">
+                <small>{{ post.createdAt|fr_datetime }}</small>
+            </time>
+        </div>
+        {% if app.user == post.author or is_granted('ROLE_VICE_PRESIDENT') %}
+            {% include 'icons/trash.svg.twig' with {
+                onclick: "document.getElementById('confirm-delete-" ~ post.id ~ "').showModal()",
+                title: "Supprimer cette publication"
+            } %}
+            <dialog id="confirm-delete-{{ post.id }}">
+                <p>Êtes-vous sûr de vouloir supprimer cette publication, et tous ses commentaires ?</p>
+                <br>
+                <form method="post" action="{{ path('app_post_delete', {id: post.id}) }}">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete_post_' ~ post.id) }}">
+                    <button class="btn btn-error" title="Supprimer cette publication">Oui, supprimer</button>
+                    <button class="btn btn-warning" type="button" onclick="this.closest('dialog').close()" title="Annuler">Annuler</button>
+                </form>
+            </dialog>
         {% endif %}
     </div>
     <div>
@@ -37,22 +54,39 @@
                 {% for comment in comments %}
                     <div class="comment-content">
                         <div class="comment-author">
-                            {% if comment.author %}
-                                <img src="{{ asset('images/profiles/uploads/' ~ comment.author.profileImage) }}" alt="Image de profil de l'auteur du commentaire">
-                                <div class="post-info">
-                                    <p>{{ comment.author.firstname }} {{ comment.author.lastname }}</p>
-                                    <time class="post-date" datetime="{{ comment.createdAt|date('c') }}">
-                                        <small>{{ comment.createdAt|fr_datetime }}</small>
-                                    </time>
-                                </div>
-                            {% else %}
-                                <img src="{{ asset('images/profiles/defaults/ghost_default_profile.png.png') }}" alt="Image de profil de l'auteur du commentaire">
-                                <div class="post-info">
-                                    <p>Ancien membre</p>
-                                    <time class="post-date" datetime="{{ comment.createdAt|date('c') }}">
-                                        <small>{{ comment.createdAt|fr_datetime }}</small>
-                                    </time>
-                                </div>
+                            <img src="
+                                {% if comment.author %}
+                                    {{ asset('images/profiles/uploads/' ~ comment.author.profileImage) }}
+                                {% else %}
+                                    {{ asset('images/profiles/defaults/ghost_default_profile.png.png') }}
+                                {% endif %}
+                            " alt="Image de profil de l'auteur du commentaire">
+                            <div class="post-info">
+                                <p>
+                                    {% if comment.author %}
+                                        {{ comment.author.firstname }} {{ comment.author.lastname }}
+                                    {% else %}
+                                        Ancien membre
+                                    {% endif %}
+                                </p>
+                                <time class="post-date" datetime="{{ comment.createdAt|date('c') }}">
+                                    <small>{{ comment.createdAt|fr_datetime }}</small>
+                                </time>
+                            </div>
+                            {% if app.user == comment.author or is_granted('ROLE_VICE_PRESIDENT') %}
+                                {% include 'icons/trash.svg.twig' with {
+                                    onclick: "document.getElementById('confirm-delete-" ~ comment.id ~ "').showModal()",
+                                    title: "Supprimer ce commentaire"
+                                } %}
+                                <dialog id="confirm-delete-{{ comment.id }}">
+                                    <p>Êtes-vous sûr de vouloir supprimer ce commentaire ?</p>
+                                    <br>
+                                    <form method="post" action="{{ path('app_post_comment_delete', {id: comment.id}) }}">
+                                        <input type="hidden" name="_token" value="{{ csrf_token('delete_comment_' ~ comment.id) }}">
+                                        <button class="btn btn-error" title="Supprimer ce commentaire">Oui, supprimer</button>
+                                        <button class="btn btn-warning" type="button" onclick="this.closest('dialog').close()" title="Annuler">Annuler</button>
+                                    </form>
+                                </dialog>
                             {% endif %}
                         </div>
                         <p>{{ comment.text }}</p>

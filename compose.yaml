@@ -18,6 +18,10 @@ services:
     build:
       context: ./docker/php
       dockerfile: Dockerfile
+      args:
+        UID: ${UID}
+        GID: ${GID}
+    user: "${UID}:${GID}"
     container_name: les_titans_php
     restart: unless-stopped
     volumes:
