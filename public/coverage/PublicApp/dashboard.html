@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Dashboard for /var/www/html/src/PublicApp</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="../_css/bootstrap.min.css?v=12.5.2" rel="stylesheet" type="text/css">
+  <link href="../_css/billboard.min.css?v=12.5.2" rel="stylesheet" type="text/css">
+  <link href="../_css/style.css?v=12.5.2" rel="stylesheet" type="text/css">
+  <link href="../_css/custom.css" rel="stylesheet" type="text/css">
+ </head>
+ <body>
+  <header>
+   <div class="container-fluid">
+    <div class="row">
+     <div class="col-md-12">
+      <nav aria-label="breadcrumb">
+       <ol class="breadcrumb">
+         <li class="breadcrumb-item"><a href="../index.html">/var/www/html/src</a></li>
+         <li class="breadcrumb-item"><a href="index.html">PublicApp</a></li>
+         <li class="breadcrumb-item active">(Dashboard)</li>
+
+       </ol>
+      </nav>
+     </div>
+    </div>
+   </div>
+  </header>
+  <div class="container-fluid">
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Classes</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="classesCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="classComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3 style="margin-top: 2rem;">Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Membership/Domain/DTO/Request/MembershipCreationRequest.php.html#13">App\PublicApp\Membership\Domain\DTO\Request\MembershipCreationRequest</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Membership/Domain/Handler/MembershipCreateHandler.php.html#19">App\PublicApp\Membership\Domain\Handler\MembershipCreateHandler</a></td><td class="text-right">2%</td></tr>
+       <tr><td><a href="Membership/Domain/Service/Mailer/MembershipMailer.php.html#14">App\PublicApp\Membership\Domain\Service\Mailer\MembershipMailer</a></td><td class="text-right">4%</td></tr>
+       <tr><td><a href="Contact/Domain/Handler/CreateContactMessageHandler.php.html#15">App\PublicApp\Contact\Domain\Handler\CreateContactMessageHandler</a></td><td class="text-right">7%</td></tr>
+       <tr><td><a href="Contact/Domain/Service/ContactMessageContactService.php.html#13">App\PublicApp\Contact\Domain\Service\ContactMessageContactService</a></td><td class="text-right">8%</td></tr>
+       <tr><td><a href="Contact/Domain/Entity/ContactMessage.php.html#13">App\PublicApp\Contact\Domain\Entity\ContactMessage</a></td><td class="text-right">53%</td></tr>
+       <tr><td><a href="Home/Domain/OpeningHours/OpeningHours.php.html#7">App\PublicApp\Home\Domain\OpeningHours\OpeningHours</a></td><td class="text-right">75%</td></tr>
+       <tr><td><a href="Legals/Domain/QueryHandler/LegalsQueryHandler.php.html#11">App\PublicApp\Legals\Domain\QueryHandler\LegalsQueryHandler</a></td><td class="text-right">80%</td></tr>
+       <tr><td><a href="Membership/Http/Controller/Crud/CreateMembershipController.php.html#16">App\PublicApp\Membership\Http\Controller\Crud\CreateMembershipController</a></td><td class="text-right">81%</td></tr>
+       <tr><td><a href="Contact/Http/Controller/Crud/CreateContactMessageController.php.html#16">App\PublicApp\Contact\Http\Controller\Crud\CreateContactMessageController</a></td><td class="text-right">83%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3 style="margin-top: 2rem;">Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right">Coverage</th>
+         <th class="text-right">Complexity</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Membership/Domain/Handler/MembershipCreateHandler.php.html#19">App\PublicApp\Membership\Domain\Handler\MembershipCreateHandler</a></td><td class="text-right">2.4%</td><td class="text-right">9</td><td class="text-right">84</td></tr>
+       <tr><td><a href="Contact/Domain/Entity/ContactMessage.php.html#13">App\PublicApp\Contact\Domain\Entity\ContactMessage</a></td><td class="text-right">53.8%</td><td class="text-right">21</td><td class="text-right">64</td></tr>
+       <tr><td><a href="Home/Domain/OpeningHours/OpeningHours.php.html#7">App\PublicApp\Home\Domain\OpeningHours\OpeningHours</a></td><td class="text-right">75.0%</td><td class="text-right">25</td><td class="text-right">34</td></tr>
+       <tr><td><a href="Membership/Domain/DTO/Request/MembershipCreationRequest.php.html#13">App\PublicApp\Membership\Domain\DTO\Request\MembershipCreationRequest</a></td><td class="text-right">0.0%</td><td class="text-right">4</td><td class="text-right">20</td></tr>
+       <tr><td><a href="Contact/Domain/Handler/CreateContactMessageHandler.php.html#15">App\PublicApp\Contact\Domain\Handler\CreateContactMessageHandler</a></td><td class="text-right">7.1%</td><td class="text-right">4</td><td class="text-right">16</td></tr>
+       <tr><td><a href="Contact/Http/Controller/Crud/CreateContactMessageController.php.html#16">App\PublicApp\Contact\Http\Controller\Crud\CreateContactMessageController</a></td><td class="text-right">83.3%</td><td class="text-right">4</td><td class="text-right">4</td></tr>
+       <tr><td><a href="Membership/Http/Controller/Crud/CreateMembershipController.php.html#16">App\PublicApp\Membership\Http\Controller\Crud\CreateMembershipController</a></td><td class="text-right">81.2%</td><td class="text-right">4</td><td class="text-right">4</td></tr>
+       <tr><td><a href="Legals/Domain/QueryHandler/LegalsQueryHandler.php.html#11">App\PublicApp\Legals\Domain\QueryHandler\LegalsQueryHandler</a></td><td class="text-right">80.0%</td><td class="text-right">3</td><td class="text-right">3</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-12">
+     <h2 style="margin-top: 3rem;">Methods</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="methodsCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="methodComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3 style="margin-top: 2rem;">Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Contact/Domain/Entity/ContactMessage.php.html#50"><abbr title="App\PublicApp\Contact\Domain\Entity\ContactMessage::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Contact/Domain/Entity/ContactMessage.php.html#66"><abbr title="App\PublicApp\Contact\Domain\Entity\ContactMessage::getUuid">getUuid</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Contact/Domain/Entity/ContactMessage.php.html#157"><abbr title="App\PublicApp\Contact\Domain\Entity\ContactMessage::create">create</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Contact/Domain/Handler/CreateContactMessageHandler.php.html#27"><abbr title="App\PublicApp\Contact\Domain\Handler\CreateContactMessageHandler::handle">handle</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Contact/Domain/Handler/CreateContactMessageHandler.php.html#42"><abbr title="App\PublicApp\Contact\Domain\Handler\CreateContactMessageHandler::getBoardMemberEmails">getBoardMemberEmails</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Contact/Domain/Service/ContactMessageContactService.php.html#24"><abbr title="App\PublicApp\Contact\Domain\Service\ContactMessageContactService::sendContactMessage">sendContactMessage</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Contact/Infrastructure/Doctrine/Repository/ContactMessageReadRepository.php.html#26"><abbr title="App\PublicApp\Contact\Infrastructure\Doctrine\Repository\ContactMessageReadRepository::findAllMessages">findAllMessages</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Membership/Domain/DTO/Request/MembershipCreationRequest.php.html#108"><abbr title="App\PublicApp\Membership\Domain\DTO\Request\MembershipCreationRequest::validateTutorFields">validateTutorFields</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Membership/Domain/Handler/MembershipCreateHandler.php.html#33"><abbr title="App\PublicApp\Membership\Domain\Handler\MembershipCreateHandler::handle">handle</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Membership/Domain/Handler/MembershipCreateHandler.php.html#72"><abbr title="App\PublicApp\Membership\Domain\Handler\MembershipCreateHandler::getCleanProfileImage">getCleanProfileImage</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Membership/Domain/Handler/MembershipCreateHandler.php.html#88"><abbr title="App\PublicApp\Membership\Domain\Handler\MembershipCreateHandler::getBoardMemberEmails">getBoardMemberEmails</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Membership/Domain/Service/Mailer/MembershipMailer.php.html#23"><abbr title="App\PublicApp\Membership\Domain\Service\Mailer\MembershipMailer::sendMembershipPdfDownload">sendMembershipPdfDownload</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Membership/Domain/Service/Mailer/MembershipMailer.php.html#45"><abbr title="App\PublicApp\Membership\Domain\Service\Mailer\MembershipMailer::sendEmailNotificationToBoardMembers">sendEmailNotificationToBoardMembers</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Contact/Domain/Entity/ContactMessage.php.html#121"><abbr title="App\PublicApp\Contact\Domain\Entity\ContactMessage::saveAssignTo">saveAssignTo</abbr></a></td><td class="text-right">50%</td></tr>
+       <tr><td><a href="Home/Domain/OpeningHours/OpeningHours.php.html#89"><abbr title="App\PublicApp\Home\Domain\OpeningHours\OpeningHours::getDateOfDay">getDateOfDay</abbr></a></td><td class="text-right">53%</td></tr>
+       <tr><td><a href="Home/Domain/OpeningHours/OpeningDay.php.html#21"><abbr title="App\PublicApp\Home\Domain\OpeningHours\OpeningDay::isOpenAt">isOpenAt</abbr></a></td><td class="text-right">66%</td></tr>
+       <tr><td><a href="Contact/Domain/Entity/ContactMessage.php.html#131"><abbr title="App\PublicApp\Contact\Domain\Entity\ContactMessage::saveUnread">saveUnread</abbr></a></td><td class="text-right">75%</td></tr>
+       <tr><td><a href="Contact/Domain/Entity/ContactMessage.php.html#141"><abbr title="App\PublicApp\Contact\Domain\Entity\ContactMessage::saveAnswer">saveAnswer</abbr></a></td><td class="text-right">75%</td></tr>
+       <tr><td><a href="Legals/Domain/QueryHandler/LegalsQueryHandler.php.html#17"><abbr title="App\PublicApp\Legals\Domain\QueryHandler\LegalsQueryHandler::fetch">fetch</abbr></a></td><td class="text-right">75%</td></tr>
+       <tr><td><a href="Home/Domain/OpeningHours/OpeningHours.php.html#22"><abbr title="App\PublicApp\Home\Domain\OpeningHours\OpeningHours::getToday">getToday</abbr></a></td><td class="text-right">80%</td></tr>
+       <tr><td><a href="Home/Domain/OpeningHours/OpeningHours.php.html#39"><abbr title="App\PublicApp\Home\Domain\OpeningHours\OpeningHours::getNextOpeningDay">getNextOpeningDay</abbr></a></td><td class="text-right">80%</td></tr>
+       <tr><td><a href="Membership/Http/Controller/Crud/CreateMembershipController.php.html#25"><abbr title="App\PublicApp\Membership\Http\Controller\Crud\CreateMembershipController::__invoke">__invoke</abbr></a></td><td class="text-right">80%</td></tr>
+       <tr><td><a href="Home/Domain/OpeningHours/OpeningHours.php.html#70"><abbr title="App\PublicApp\Home\Domain\OpeningHours\OpeningHours::getNextOpeningDayLabel">getNextOpeningDayLabel</abbr></a></td><td class="text-right">81%</td></tr>
+       <tr><td><a href="Contact/Http/Controller/Crud/CreateContactMessageController.php.html#24"><abbr title="App\PublicApp\Contact\Http\Controller\Crud\CreateContactMessageController::__invoke">__invoke</abbr></a></td><td class="text-right">82%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3 style="margin-top: 2rem;">Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right">Coverage</th>
+         <th class="text-right">Complexity</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Membership/Domain/Handler/MembershipCreateHandler.php.html#72"><abbr title="App\PublicApp\Membership\Domain\Handler\MembershipCreateHandler::getCleanProfileImage">getCleanProfileImage</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">5</td><td class="text-right">30</td></tr>
+       <tr><td><a href="Membership/Domain/DTO/Request/MembershipCreationRequest.php.html#108"><abbr title="App\PublicApp\Membership\Domain\DTO\Request\MembershipCreationRequest::validateTutorFields">validateTutorFields</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">4</td><td class="text-right">20</td></tr>
+       <tr><td><a href="Home/Domain/OpeningHours/OpeningHours.php.html#89"><abbr title="App\PublicApp\Home\Domain\OpeningHours\OpeningHours::getDateOfDay">getDateOfDay</abbr></a></td><td class="text-right">53.8%</td><td class="text-right">9</td><td class="text-right">16</td></tr>
+       <tr><td><a href="Contact/Domain/Entity/ContactMessage.php.html#50"><abbr title="App\PublicApp\Contact\Domain\Entity\ContactMessage::__construct">__construct</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">2</td><td class="text-right">6</td></tr>
+       <tr><td><a href="Contact/Domain/Handler/CreateContactMessageHandler.php.html#42"><abbr title="App\PublicApp\Contact\Domain\Handler\CreateContactMessageHandler::getBoardMemberEmails">getBoardMemberEmails</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">2</td><td class="text-right">6</td></tr>
+       <tr><td><a href="Membership/Domain/Handler/MembershipCreateHandler.php.html#88"><abbr title="App\PublicApp\Membership\Domain\Handler\MembershipCreateHandler::getBoardMemberEmails">getBoardMemberEmails</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">2</td><td class="text-right">6</td></tr>
+       <tr><td><a href="Home/Domain/OpeningHours/OpeningHours.php.html#39"><abbr title="App\PublicApp\Home\Domain\OpeningHours\OpeningHours::getNextOpeningDay">getNextOpeningDay</abbr></a></td><td class="text-right">80.0%</td><td class="text-right">5</td><td class="text-right">5</td></tr>
+       <tr><td><a href="Home/Domain/OpeningHours/OpeningHours.php.html#70"><abbr title="App\PublicApp\Home\Domain\OpeningHours\OpeningHours::getNextOpeningDayLabel">getNextOpeningDayLabel</abbr></a></td><td class="text-right">81.8%</td><td class="text-right">4</td><td class="text-right">4</td></tr>
+       <tr><td><a href="Contact/Domain/Entity/ContactMessage.php.html#141"><abbr title="App\PublicApp\Contact\Domain\Entity\ContactMessage::saveAnswer">saveAnswer</abbr></a></td><td class="text-right">75.0%</td><td class="text-right">3</td><td class="text-right">3</td></tr>
+       <tr><td><a href="Contact/Http/Controller/Crud/CreateContactMessageController.php.html#24"><abbr title="App\PublicApp\Contact\Http\Controller\Crud\CreateContactMessageController::__invoke">__invoke</abbr></a></td><td class="text-right">82.4%</td><td class="text-right">3</td><td class="text-right">3</td></tr>
+       <tr><td><a href="Home/Domain/OpeningHours/OpeningHours.php.html#22"><abbr title="App\PublicApp\Home\Domain\OpeningHours\OpeningHours::getToday">getToday</abbr></a></td><td class="text-right">80.0%</td><td class="text-right">3</td><td class="text-right">3</td></tr>
+       <tr><td><a href="Membership/Http/Controller/Crud/CreateMembershipController.php.html#25"><abbr title="App\PublicApp\Membership\Http\Controller\Crud\CreateMembershipController::__invoke">__invoke</abbr></a></td><td class="text-right">80.0%</td><td class="text-right">3</td><td class="text-right">3</td></tr>
+       <tr><td><a href="Contact/Domain/Entity/ContactMessage.php.html#121"><abbr title="App\PublicApp\Contact\Domain\Entity\ContactMessage::saveAssignTo">saveAssignTo</abbr></a></td><td class="text-right">50.0%</td><td class="text-right">2</td><td class="text-right">2</td></tr>
+       <tr><td><a href="Contact/Domain/Entity/ContactMessage.php.html#131"><abbr title="App\PublicApp\Contact\Domain\Entity\ContactMessage::saveUnread">saveUnread</abbr></a></td><td class="text-right">75.0%</td><td class="text-right">2</td><td class="text-right">2</td></tr>
+       <tr><td><a href="Home/Domain/OpeningHours/OpeningDay.php.html#21"><abbr title="App\PublicApp\Home\Domain\OpeningHours\OpeningDay::isOpenAt">isOpenAt</abbr></a></td><td class="text-right">66.7%</td><td class="text-right">2</td><td class="text-right">2</td></tr>
+       <tr><td><a href="Legals/Domain/QueryHandler/LegalsQueryHandler.php.html#17"><abbr title="App\PublicApp\Legals\Domain\QueryHandler\LegalsQueryHandler::fetch">fetch</abbr></a></td><td class="text-right">75.0%</td><td class="text-right">2</td><td class="text-right">2</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <footer>
+    <hr/>
+    <p>
+     <small>Generated by <a href="https://github.com/sebastianbergmann/php-code-coverage" target="_top">php-code-coverage 12.5.2</a> using <a href="https://www.php.net/" target="_top">PHP 8.4.18</a> and <a href="https://phpunit.de/">PHPUnit 12.5.8</a> at Sat Feb 14 10:12:43 UTC 2026.</small>
+    </p>
+   </footer>
+  </div>
+  <script src="../_js/billboard.pkgd.min.js?v=12.5.2" type="text/javascript"></script>
+  <script type="application/json" id="complexity_class">[[0,4,"Membership\/Domain\/DTO\/Request\/MembershipCreationRequest.php.html#13","App\\PublicApp\\Membership\\Domain\\DTO\\Request\\MembershipCreationRequest","20"],[2.4390243902439024,9,"Membership\/Domain\/Handler\/MembershipCreateHandler.php.html#19","App\\PublicApp\\Membership\\Domain\\Handler\\MembershipCreateHandler","84.22"],[4,3,"Membership\/Domain\/Service\/Mailer\/MembershipMailer.php.html#14","App\\PublicApp\\Membership\\Domain\\Service\\Mailer\\MembershipMailer","10.96"],[7.142857142857142,4,"Contact\/Domain\/Handler\/CreateContactMessageHandler.php.html#15","App\\PublicApp\\Contact\\Domain\\Handler\\CreateContactMessageHandler","16.81"],[8.333333333333332,2,"Contact\/Domain\/Service\/ContactMessageContactService.php.html#13","App\\PublicApp\\Contact\\Domain\\Service\\ContactMessageContactService","5.08"],[53.84615384615385,21,"Contact\/Domain\/Entity\/ContactMessage.php.html#13","App\\PublicApp\\Contact\\Domain\\Entity\\ContactMessage","64.36"],[75,25,"Home\/Domain\/OpeningHours\/OpeningHours.php.html#7","App\\PublicApp\\Home\\Domain\\OpeningHours\\OpeningHours","34.77"],[80,3,"Legals\/Domain\/QueryHandler\/LegalsQueryHandler.php.html#11","App\\PublicApp\\Legals\\Domain\\QueryHandler\\LegalsQueryHandler","3.07"],[81.25,4,"Membership\/Http\/Controller\/Crud\/CreateMembershipController.php.html#16","App\\PublicApp\\Membership\\Http\\Controller\\Crud\\CreateMembershipController","4.11"],[83.33333333333334,4,"Contact\/Http\/Controller\/Crud\/CreateContactMessageController.php.html#16","App\\PublicApp\\Contact\\Http\\Controller\\Crud\\CreateContactMessageController","4.07"],[90.36144578313254,5,"Membership\/Domain\/Service\/PDF\/MembershipPdfGenerator.php.html#10","App\\PublicApp\\Membership\\Domain\\Service\\PDF\\MembershipPdfGenerator","5.02"],[92.3076923076923,4,"Contact\/Infrastructure\/Doctrine\/Repository\/ContactMessageReadRepository.php.html#12","App\\PublicApp\\Contact\\Infrastructure\\Doctrine\\Repository\\ContactMessageReadRepository","4.01"],[94.11764705882352,11,"Home\/Domain\/OpeningHours\/OpeningDay.php.html#7","App\\PublicApp\\Home\\Domain\\OpeningHours\\OpeningDay","11.02"],[100,1,"About\/Http\/Controller\/AboutController.php.html#12","App\\PublicApp\\About\\Http\\Controller\\AboutController","1"],[100,0,"Contact\/Domain\/DTO\/Request\/ContactMessageCreationRequest.php.html#9","App\\PublicApp\\Contact\\Domain\\DTO\\Request\\ContactMessageCreationRequest","0"],[100,4,"Contact\/Domain\/Enum\/ContactMessageStatus.php.html#7","App\\PublicApp\\Contact\\Domain\\Enum\\ContactMessageStatus","4"],[100,2,"Contact\/Domain\/QueryHandler\/CreateContactMessageQueryHandler.php.html#9","App\\PublicApp\\Contact\\Domain\\QueryHandler\\CreateContactMessageQueryHandler","2"],[100,2,"Contact\/Http\/Form\/ContactMessageType.php.html#15","App\\PublicApp\\Contact\\Http\\Form\\ContactMessageType","2"],[100,2,"Contact\/Infrastructure\/Doctrine\/Repository\/ContactMessageWriteRepository.php.html#11","App\\PublicApp\\Contact\\Infrastructure\\Doctrine\\Repository\\ContactMessageWriteRepository","2"],[100,7,"Home\/Domain\/OpeningHours\/TimeRange.php.html#7","App\\PublicApp\\Home\\Domain\\OpeningHours\\TimeRange","7"],[100,1,"Home\/Domain\/Service\/OpeningHoursProvider.php.html#11","App\\PublicApp\\Home\\Domain\\Service\\OpeningHoursProvider","1"],[100,2,"Home\/Http\/Controller\/HomeController.php.html#13","App\\PublicApp\\Home\\Http\\Controller\\HomeController","2"],[100,2,"Legals\/Domain\/DTO\/View\/LegalsView.php.html#9","App\\PublicApp\\Legals\\Domain\\DTO\\View\\LegalsView","2"],[100,1,"Legals\/Http\/Controller\/HouseRulesController.php.html#12","App\\PublicApp\\Legals\\Http\\Controller\\HouseRulesController","1"],[100,2,"Legals\/Http\/Controller\/LegalNoticesController.php.html#13","App\\PublicApp\\Legals\\Http\\Controller\\LegalNoticesController","2"],[100,2,"Legals\/Http\/Controller\/PrivacyPolicyController.php.html#13","App\\PublicApp\\Legals\\Http\\Controller\\PrivacyPolicyController","2"],[100,2,"Membership\/Http\/Controller\/DownloadMembershipController.php.html#15","App\\PublicApp\\Membership\\Http\\Controller\\DownloadMembershipController","2"],[100,1,"Membership\/Http\/Controller\/PendingMembershipController.php.html#13","App\\PublicApp\\Membership\\Http\\Controller\\PendingMembershipController","1"],[100,2,"Membership\/Http\/Form\/MembershipCreationType.php.html#20","App\\PublicApp\\Membership\\Http\\Form\\MembershipCreationType","2"]]</script>
+  <script type="application/json" id="complexity_method">[[0,2,"Contact\/Domain\/Entity\/ContactMessage.php.html#50","App\\PublicApp\\Contact\\Domain\\Entity\\ContactMessage::__construct","6"],[0,1,"Contact\/Domain\/Entity\/ContactMessage.php.html#66","App\\PublicApp\\Contact\\Domain\\Entity\\ContactMessage::getUuid","2"],[0,1,"Contact\/Domain\/Entity\/ContactMessage.php.html#157","App\\PublicApp\\Contact\\Domain\\Entity\\ContactMessage::create","2"],[0,1,"Contact\/Domain\/Handler\/CreateContactMessageHandler.php.html#27","App\\PublicApp\\Contact\\Domain\\Handler\\CreateContactMessageHandler::handle","2"],[0,2,"Contact\/Domain\/Handler\/CreateContactMessageHandler.php.html#42","App\\PublicApp\\Contact\\Domain\\Handler\\CreateContactMessageHandler::getBoardMemberEmails","6"],[0,1,"Contact\/Domain\/Service\/ContactMessageContactService.php.html#24","App\\PublicApp\\Contact\\Domain\\Service\\ContactMessageContactService::sendContactMessage","2"],[0,1,"Contact\/Infrastructure\/Doctrine\/Repository\/ContactMessageReadRepository.php.html#26","App\\PublicApp\\Contact\\Infrastructure\\Doctrine\\Repository\\ContactMessageReadRepository::findAllMessages","2"],[0,4,"Membership\/Domain\/DTO\/Request\/MembershipCreationRequest.php.html#108","App\\PublicApp\\Membership\\Domain\\DTO\\Request\\MembershipCreationRequest::validateTutorFields","20"],[0,1,"Membership\/Domain\/Handler\/MembershipCreateHandler.php.html#33","App\\PublicApp\\Membership\\Domain\\Handler\\MembershipCreateHandler::handle","2"],[0,5,"Membership\/Domain\/Handler\/MembershipCreateHandler.php.html#72","App\\PublicApp\\Membership\\Domain\\Handler\\MembershipCreateHandler::getCleanProfileImage","30"],[0,2,"Membership\/Domain\/Handler\/MembershipCreateHandler.php.html#88","App\\PublicApp\\Membership\\Domain\\Handler\\MembershipCreateHandler::getBoardMemberEmails","6"],[0,1,"Membership\/Domain\/Service\/Mailer\/MembershipMailer.php.html#23","App\\PublicApp\\Membership\\Domain\\Service\\Mailer\\MembershipMailer::sendMembershipPdfDownload","2"],[0,1,"Membership\/Domain\/Service\/Mailer\/MembershipMailer.php.html#45","App\\PublicApp\\Membership\\Domain\\Service\\Mailer\\MembershipMailer::sendEmailNotificationToBoardMembers","2"],[50,2,"Contact\/Domain\/Entity\/ContactMessage.php.html#121","App\\PublicApp\\Contact\\Domain\\Entity\\ContactMessage::saveAssignTo","2.50"],[53.84615384615385,9,"Home\/Domain\/OpeningHours\/OpeningHours.php.html#89","App\\PublicApp\\Home\\Domain\\OpeningHours\\OpeningHours::getDateOfDay","16.96"],[66.66666666666666,2,"Home\/Domain\/OpeningHours\/OpeningDay.php.html#21","App\\PublicApp\\Home\\Domain\\OpeningHours\\OpeningDay::isOpenAt","2.15"],[75,2,"Contact\/Domain\/Entity\/ContactMessage.php.html#131","App\\PublicApp\\Contact\\Domain\\Entity\\ContactMessage::saveUnread","2.06"],[75,3,"Contact\/Domain\/Entity\/ContactMessage.php.html#141","App\\PublicApp\\Contact\\Domain\\Entity\\ContactMessage::saveAnswer","3.14"],[75,2,"Legals\/Domain\/QueryHandler\/LegalsQueryHandler.php.html#17","App\\PublicApp\\Legals\\Domain\\QueryHandler\\LegalsQueryHandler::fetch","2.06"],[80,3,"Home\/Domain\/OpeningHours\/OpeningHours.php.html#22","App\\PublicApp\\Home\\Domain\\OpeningHours\\OpeningHours::getToday","3.07"],[80,5,"Home\/Domain\/OpeningHours\/OpeningHours.php.html#39","App\\PublicApp\\Home\\Domain\\OpeningHours\\OpeningHours::getNextOpeningDay","5.20"],[80,3,"Membership\/Http\/Controller\/Crud\/CreateMembershipController.php.html#25","App\\PublicApp\\Membership\\Http\\Controller\\Crud\\CreateMembershipController::__invoke","3.07"],[81.81818181818183,4,"Home\/Domain\/OpeningHours\/OpeningHours.php.html#70","App\\PublicApp\\Home\\Domain\\OpeningHours\\OpeningHours::getNextOpeningDayLabel","4.10"],[82.35294117647058,3,"Contact\/Http\/Controller\/Crud\/CreateContactMessageController.php.html#24","App\\PublicApp\\Contact\\Http\\Controller\\Crud\\CreateContactMessageController::__invoke","3.05"],[90.2439024390244,4,"Membership\/Domain\/Service\/PDF\/MembershipPdfGenerator.php.html#16","App\\PublicApp\\Membership\\Domain\\Service\\PDF\\MembershipPdfGenerator::generate","4.01"],[100,1,"About\/Http\/Controller\/AboutController.php.html#14","App\\PublicApp\\About\\Http\\Controller\\AboutController::__invoke","1"],[100,1,"Contact\/Domain\/Entity\/ContactMessage.php.html#71","App\\PublicApp\\Contact\\Domain\\Entity\\ContactMessage::getId","1"],[100,1,"Contact\/Domain\/Entity\/ContactMessage.php.html#76","App\\PublicApp\\Contact\\Domain\\Entity\\ContactMessage::getEmail","1"],[100,1,"Contact\/Domain\/Entity\/ContactMessage.php.html#81","App\\PublicApp\\Contact\\Domain\\Entity\\ContactMessage::getSubject","1"],[100,1,"Contact\/Domain\/Entity\/ContactMessage.php.html#86","App\\PublicApp\\Contact\\Domain\\Entity\\ContactMessage::getBody","1"],[100,1,"Contact\/Domain\/Entity\/ContactMessage.php.html#91","App\\PublicApp\\Contact\\Domain\\Entity\\ContactMessage::getStatus","1"],[100,1,"Contact\/Domain\/Entity\/ContactMessage.php.html#96","App\\PublicApp\\Contact\\Domain\\Entity\\ContactMessage::getAssignedTo","1"],[100,1,"Contact\/Domain\/Entity\/ContactMessage.php.html#101","App\\PublicApp\\Contact\\Domain\\Entity\\ContactMessage::getAnswer","1"],[100,1,"Contact\/Domain\/Entity\/ContactMessage.php.html#106","App\\PublicApp\\Contact\\Domain\\Entity\\ContactMessage::getAnsweredBy","1"],[100,1,"Contact\/Domain\/Entity\/ContactMessage.php.html#111","App\\PublicApp\\Contact\\Domain\\Entity\\ContactMessage::getAnsweredAt","1"],[100,1,"Contact\/Domain\/Entity\/ContactMessage.php.html#116","App\\PublicApp\\Contact\\Domain\\Entity\\ContactMessage::getCreatedAt","1"],[100,4,"Contact\/Domain\/Enum\/ContactMessageStatus.php.html#13","App\\PublicApp\\Contact\\Domain\\Enum\\ContactMessageStatus::label","4"],[100,1,"Contact\/Domain\/Handler\/CreateContactMessageHandler.php.html#17","App\\PublicApp\\Contact\\Domain\\Handler\\CreateContactMessageHandler::__construct","1"],[100,1,"Contact\/Domain\/QueryHandler\/CreateContactMessageQueryHandler.php.html#11","App\\PublicApp\\Contact\\Domain\\QueryHandler\\CreateContactMessageQueryHandler::__construct","1"],[100,1,"Contact\/Domain\/QueryHandler\/CreateContactMessageQueryHandler.php.html#15","App\\PublicApp\\Contact\\Domain\\QueryHandler\\CreateContactMessageQueryHandler::fetch","1"],[100,1,"Contact\/Domain\/Service\/ContactMessageContactService.php.html#15","App\\PublicApp\\Contact\\Domain\\Service\\ContactMessageContactService::__construct","1"],[100,1,"Contact\/Http\/Controller\/Crud\/CreateContactMessageController.php.html#18","App\\PublicApp\\Contact\\Http\\Controller\\Crud\\CreateContactMessageController::__construct","1"],[100,1,"Contact\/Http\/Form\/ContactMessageType.php.html#17","App\\PublicApp\\Contact\\Http\\Form\\ContactMessageType::buildForm","1"],[100,1,"Contact\/Http\/Form\/ContactMessageType.php.html#47","App\\PublicApp\\Contact\\Http\\Form\\ContactMessageType::configureOptions","1"],[100,1,"Contact\/Infrastructure\/Doctrine\/Repository\/ContactMessageReadRepository.php.html#14","App\\PublicApp\\Contact\\Infrastructure\\Doctrine\\Repository\\ContactMessageReadRepository::__construct","1"],[100,1,"Contact\/Infrastructure\/Doctrine\/Repository\/ContactMessageReadRepository.php.html#18","App\\PublicApp\\Contact\\Infrastructure\\Doctrine\\Repository\\ContactMessageReadRepository::findAllOrderedByDate","1"],[100,1,"Contact\/Infrastructure\/Doctrine\/Repository\/ContactMessageReadRepository.php.html#31","App\\PublicApp\\Contact\\Infrastructure\\Doctrine\\Repository\\ContactMessageReadRepository::findUnreadContactMessages","1"],[100,1,"Contact\/Infrastructure\/Doctrine\/Repository\/ContactMessageWriteRepository.php.html#13","App\\PublicApp\\Contact\\Infrastructure\\Doctrine\\Repository\\ContactMessageWriteRepository::__construct","1"],[100,1,"Contact\/Infrastructure\/Doctrine\/Repository\/ContactMessageWriteRepository.php.html#17","App\\PublicApp\\Contact\\Infrastructure\\Doctrine\\Repository\\ContactMessageWriteRepository::getManager","1"],[100,1,"Home\/Domain\/OpeningHours\/OpeningDay.php.html#9","App\\PublicApp\\Home\\Domain\\OpeningHours\\OpeningDay::__construct","1"],[100,1,"Home\/Domain\/OpeningHours\/OpeningDay.php.html#16","App\\PublicApp\\Home\\Domain\\OpeningHours\\OpeningDay::isClosed","1"],[100,1,"Home\/Domain\/OpeningHours\/OpeningDay.php.html#30","App\\PublicApp\\Home\\Domain\\OpeningHours\\OpeningDay::isToday","1"],[100,1,"Home\/Domain\/OpeningHours\/OpeningDay.php.html#37","App\\PublicApp\\Home\\Domain\\OpeningHours\\OpeningDay::getLabel","1"],[100,1,"Home\/Domain\/OpeningHours\/OpeningDay.php.html#42","App\\PublicApp\\Home\\Domain\\OpeningHours\\OpeningDay::getKey","1"],[100,1,"Home\/Domain\/OpeningHours\/OpeningDay.php.html#47","App\\PublicApp\\Home\\Domain\\OpeningHours\\OpeningDay::getRangeAsString","1"],[100,1,"Home\/Domain\/OpeningHours\/OpeningDay.php.html#52","App\\PublicApp\\Home\\Domain\\OpeningHours\\OpeningDay::getClosingTime","1"],[100,1,"Home\/Domain\/OpeningHours\/OpeningDay.php.html#57","App\\PublicApp\\Home\\Domain\\OpeningHours\\OpeningDay::getOpeningTime","1"],[100,1,"Home\/Domain\/OpeningHours\/OpeningDay.php.html#62","App\\PublicApp\\Home\\Domain\\OpeningHours\\OpeningDay::create","1"],[100,1,"Home\/Domain\/OpeningHours\/OpeningHours.php.html#12","App\\PublicApp\\Home\\Domain\\OpeningHours\\OpeningHours::__construct","1"],[100,1,"Home\/Domain\/OpeningHours\/OpeningHours.php.html#17","App\\PublicApp\\Home\\Domain\\OpeningHours\\OpeningHours::getDays","1"],[100,1,"Home\/Domain\/OpeningHours\/OpeningHours.php.html#34","App\\PublicApp\\Home\\Domain\\OpeningHours\\OpeningHours::isOpenNow","1"],[100,1,"Home\/Domain\/OpeningHours\/OpeningHours.php.html#108","App\\PublicApp\\Home\\Domain\\OpeningHours\\OpeningHours::create","1"],[100,1,"Home\/Domain\/OpeningHours\/TimeRange.php.html#9","App\\PublicApp\\Home\\Domain\\OpeningHours\\TimeRange::__construct","1"],[100,2,"Home\/Domain\/OpeningHours\/TimeRange.php.html#15","App\\PublicApp\\Home\\Domain\\OpeningHours\\TimeRange::contains","2"],[100,1,"Home\/Domain\/OpeningHours\/TimeRange.php.html#22","App\\PublicApp\\Home\\Domain\\OpeningHours\\TimeRange::toHumanString","1"],[100,1,"Home\/Domain\/OpeningHours\/TimeRange.php.html#27","App\\PublicApp\\Home\\Domain\\OpeningHours\\TimeRange::getStart","1"],[100,1,"Home\/Domain\/OpeningHours\/TimeRange.php.html#32","App\\PublicApp\\Home\\Domain\\OpeningHours\\TimeRange::getEnd","1"],[100,1,"Home\/Domain\/OpeningHours\/TimeRange.php.html#37","App\\PublicApp\\Home\\Domain\\OpeningHours\\TimeRange::create","1"],[100,1,"Home\/Domain\/Service\/OpeningHoursProvider.php.html#13","App\\PublicApp\\Home\\Domain\\Service\\OpeningHoursProvider::getOpeningHours","1"],[100,1,"Home\/Http\/Controller\/HomeController.php.html#15","App\\PublicApp\\Home\\Http\\Controller\\HomeController::__construct","1"],[100,1,"Home\/Http\/Controller\/HomeController.php.html#19","App\\PublicApp\\Home\\Http\\Controller\\HomeController::__invoke","1"],[100,1,"Legals\/Domain\/DTO\/View\/LegalsView.php.html#11","App\\PublicApp\\Legals\\Domain\\DTO\\View\\LegalsView::__construct","1"],[100,1,"Legals\/Domain\/DTO\/View\/LegalsView.php.html#15","App\\PublicApp\\Legals\\Domain\\DTO\\View\\LegalsView::create","1"],[100,1,"Legals\/Domain\/QueryHandler\/LegalsQueryHandler.php.html#13","App\\PublicApp\\Legals\\Domain\\QueryHandler\\LegalsQueryHandler::__construct","1"],[100,1,"Legals\/Http\/Controller\/HouseRulesController.php.html#14","App\\PublicApp\\Legals\\Http\\Controller\\HouseRulesController::__invoke","1"],[100,1,"Legals\/Http\/Controller\/LegalNoticesController.php.html#15","App\\PublicApp\\Legals\\Http\\Controller\\LegalNoticesController::__construct","1"],[100,1,"Legals\/Http\/Controller\/LegalNoticesController.php.html#19","App\\PublicApp\\Legals\\Http\\Controller\\LegalNoticesController::__invoke","1"],[100,1,"Legals\/Http\/Controller\/PrivacyPolicyController.php.html#15","App\\PublicApp\\Legals\\Http\\Controller\\PrivacyPolicyController::__construct","1"],[100,1,"Legals\/Http\/Controller\/PrivacyPolicyController.php.html#19","App\\PublicApp\\Legals\\Http\\Controller\\PrivacyPolicyController::__invoke","1"],[100,1,"Membership\/Domain\/Handler\/MembershipCreateHandler.php.html#21","App\\PublicApp\\Membership\\Domain\\Handler\\MembershipCreateHandler::__construct","1"],[100,1,"Membership\/Domain\/Service\/Mailer\/MembershipMailer.php.html#16","App\\PublicApp\\Membership\\Domain\\Service\\Mailer\\MembershipMailer::__construct","1"],[100,1,"Membership\/Domain\/Service\/PDF\/MembershipPdfGenerator.php.html#12","App\\PublicApp\\Membership\\Domain\\Service\\PDF\\MembershipPdfGenerator::__construct","1"],[100,1,"Membership\/Http\/Controller\/Crud\/CreateMembershipController.php.html#18","App\\PublicApp\\Membership\\Http\\Controller\\Crud\\CreateMembershipController::__construct","1"],[100,1,"Membership\/Http\/Controller\/DownloadMembershipController.php.html#17","App\\PublicApp\\Membership\\Http\\Controller\\DownloadMembershipController::__construct","1"],[100,1,"Membership\/Http\/Controller\/DownloadMembershipController.php.html#21","App\\PublicApp\\Membership\\Http\\Controller\\DownloadMembershipController::__invoke","1"],[100,1,"Membership\/Http\/Controller\/PendingMembershipController.php.html#15","App\\PublicApp\\Membership\\Http\\Controller\\PendingMembershipController::__invoke","1"],[100,1,"Membership\/Http\/Form\/MembershipCreationType.php.html#22","App\\PublicApp\\Membership\\Http\\Form\\MembershipCreationType::buildForm","1"],[100,1,"Membership\/Http\/Form\/MembershipCreationType.php.html#176","App\\PublicApp\\Membership\\Http\\Form\\MembershipCreationType::configureOptions","1"]]</script>
+  <script type="text/javascript" defer>
+  const barLabels = [
+    '0%',
+    '0-10%',
+    '10-20%',
+    '20-30%',
+    '30-40%',
+    '40-50%',
+    '50-60%',
+    '60-70%',
+    '70-80%',
+    '80-90%',
+    '90-100%',
+    '100%'
+  ];
+  const barConfig = (name, fullName, values) => ({
+    axis: {
+      x: {
+        type: "category",
+        categories: barLabels,
+      },
+      y: {
+        label: {
+          text: `#${name}`,
+          position: 'outer-top',
+        },
+      },
+    },
+    bindto: `#${name}CoverageDistribution`,
+    data: {
+      columns: [
+        [fullName].concat(values),
+      ],
+      colors: {
+        [fullName]: "rgba(69, 114, 167, 0.75)",
+      },
+      type: "bar",
+    },
+    bar: {
+      width: {
+        ratio: 0.9,
+      },
+    },
+    grid: {
+      focus: {
+        show: false,
+      },
+      x: {
+        show: true,
+      },
+      y: {
+        show: true,
+      },
+    },
+    legend: {
+      show: false,
+    },
+    tooltip: {
+      contents: function (data) {
+        return `<table class="bb-tooltip"><tbody>
+            <tr><th colspan="2">Coverage ${barLabels[data[0].x]}</th></tr>
+            <tr><td class="value">${data[0].value} ${name}</td></tr>
+          </tbody></table>`;
+      },
+      grouped: false,
+    },
+  });
+  bb.generate(
+    barConfig('classes', "Class Coverage", [1,4,0,0,0,0,1,0,1,3,3,16])
+  );
+  bb.generate(
+    barConfig('methods', "Method Coverage", [13,0,0,0,0,0,2,1,3,5,1,63])
+  );
+
+  const scatterConfig = (name, complexityData) => ({
+    axis: {
+      x: {
+        label: {
+          text: 'Code Coverage (in percent)',
+          position: 'outer-right',
+        },
+        tick: {
+          values: [0, 20, 40, 60, 80, 100],
+        },
+      },
+      y: {
+        label: {
+          text: 'Cyclomatic Complexity',
+          position: 'outer-top',
+        },
+        min: 0,
+        padding: {
+          bottom: 0,
+          top: 5,
+        },
+      },
+    },
+    bindto: `#${name}Complexity`,
+    data: {
+      columns: [
+        ["complexity_x"].concat(complexityData.map(d => d[0])),
+        ["complexity"].concat(complexityData.map(d => d[1])),
+      ],
+      onclick: function(data, element) {
+        window.location = complexityData[data.index][2];
+      },
+      type: "scatter",
+      xs: {
+        "complexity": "complexity_x",
+      },
+    },
+    grid: {
+      focus: {
+        show: true,
+        y: true,
+      },
+      x: {
+        show: true,
+      },
+      y: {
+        show: true,
+      },
+    },
+    legend: {
+      show: false,
+    },
+    tooltip: {
+      contents: function (data) {
+        const coverage = Math.round(data[0].x);
+        const complexity = data[0].value;
+        const targetName = complexityData[data[0].index][3];
+        const crap = complexityData[data[0].index][4];
+        return `<table class="bb-tooltip"><tbody>
+            <tr><th colspan="2">${targetName}</th></tr>
+            <tr class="bb-tooltip-name-complexity"><td>Coverage</td><td class="name">${coverage}%</td></tr>
+            <tr class="bb-tooltip-name-complexity"><td>Complexity</td><td class="value">${complexity}</td></tr>
+            <tr class="bb-tooltip-name-complexity"><td>Crap</td><td class="value">${crap}</td></tr>
+          </tbody></table>`;
+      },
+      grouped: false,
+    },
+  });
+  const classComplexityData = JSON.parse(document.getElementById('complexity_class').textContent);
+  bb.generate(
+    scatterConfig("class", classComplexityData)
+  );
+  const methodComplexityData = JSON.parse(document.getElementById('complexity_method').textContent);
+  bb.generate(
+    scatterConfig("method", methodComplexityData),
+  );
+  </script>
+ </body>
+</html>
