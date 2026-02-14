@@ -162,7 +162,7 @@ class ContactMessage
     ): self {
         return new self(
             email: \strtolower($email),
-            subject: \trim(\ucfirst(\strtolower($subject))),
+            subject: \ucfirst(\strtolower(\trim($subject))),
             body: \trim($body),
             id: $id,
         );

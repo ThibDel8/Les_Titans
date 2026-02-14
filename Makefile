@@ -79,7 +79,6 @@ test-db:
 test:
 	$(MAKE) test-db
 	$(COMPOSE_EXEC) env XDEBUG_MODE=coverage php bin/phpunit --coverage-html var/coverage
-	@if [ -d public/coverage ]; then rm -rf public/coverage; fi && cp -r var/coverage public/coverage
 
 # =====================================
 # PHP CS Fixer

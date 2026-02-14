@@ -41,7 +41,7 @@
         </div><br>
         <div class="membership-contact-info">
             <a href="tel:+33{{ membership.phone|slice(1) }}" title="Appeler {{ membership.firstname }}">☎️ {{ membership.phone }}</a>
-            <p>🏠 {{ membership.address }} {{ membership.postalcode }}, {{ membership.city }}</p>
+            <p>🏠 {{ membership.address }}, {{ membership.postalcode }} {{ membership.city }}</p>
             <a href="mailto:{{ membership.email }}" title="Envoyer un email à {{ membership.firstname }}">📧 {{ membership.email }}</a>
         </div>
     </section>

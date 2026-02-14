@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\MemberApp\Membership\Domain\Entity;
 
 use App\SharedKernel\Domain\Enum\Gender;
+use App\SharedKernel\Domain\Service\Utils\Formatter\StringFormatter;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Uid\Uuid;
@@ -29,7 +30,7 @@ class Membership
     #[ORM\Column(type: Types::DATE_IMMUTABLE)]
     private \DateTimeImmutable $birthdate;
 
-    #[ORM\Column(enumType: Gender::class, length: 10)]
+    #[ORM\Column(length: 10, enumType: Gender::class)]
     private Gender $gender;
 
     #[ORM\Column(type: Types::STRING, length: 20)]
@@ -281,22 +282,22 @@ class Membership
         ?string $profileImage = null,
     ): self {
         return new self(
-            lastname: \trim(\ucfirst(\strtolower($lastname))),
-            firstname: \trim(\ucfirst(\strtolower($firstname))),
+            lastname: StringFormatter::properNoun($lastname),
+            firstname: StringFormatter::properNoun($firstname),
             birthdate: $birthdate,
             gender: $gender,
             phone: $phone,
-            address: $address,
+            address: StringFormatter::address($address),
             postalcode: $postalcode,
-            city: \trim(\ucfirst(\strtolower($city))),
+            city: StringFormatter::address($city),
             email: \strtolower(\trim($email)),
-            tutorLastname: null !== $tutorLastname ? \trim(\ucfirst(\strtolower($tutorLastname))) : null,
-            tutorFirstname: null !== $tutorFirstname ? \trim(\ucfirst(\strtolower($tutorFirstname))) : null,
+            tutorLastname: null !== $tutorLastname ? StringFormatter::properNoun($tutorLastname) : null,
+            tutorFirstname: null !== $tutorFirstname ? StringFormatter::properNoun($tutorFirstname) : null,
             tutorPhone: $tutorPhone,
             tutorEmail: null !== $tutorEmail ? \strtolower(\trim($tutorEmail)) : null,
-            tutorAddress: $tutorAddress,
+            tutorAddress: null !== $tutorAddress ? StringFormatter::address($tutorAddress): null,
             tutorPostalcode: $tutorPostalcode,
-            tutorCity: null !== $tutorCity ? \trim(\ucfirst(\strtolower($tutorCity))) : null,
+            tutorCity: null !== $tutorCity ? StringFormatter::address($tutorCity) : null,
             profileImage: $profileImage,
         );
     }

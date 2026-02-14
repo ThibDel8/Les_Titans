@@ -34,10 +34,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# Créer les dossiers nécessaires
-#RUN mkdir -p /var/www/html/var \
-#    && mkdir -p /var/www/html/public/images/profiles
-
 # Copier l’entrypoint
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
