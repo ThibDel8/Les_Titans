@@ -4,14 +4,12 @@ declare(strict_types=1);
 
 namespace App\Tests\Admin\Contact\Http\Controller\Crud;
 
-use App\Admin\Contact\Http\Controller\Crud\UpdateContactMessageController;
 use App\DataFixtures\ContactMessageFixtures;
 use App\DataFixtures\UserFixtures;
 use App\PublicApp\Contact\Domain\Entity\ContactMessage;
 use App\PublicApp\Contact\Domain\Enum\ContactMessageStatus;
 use App\Tests\AbstractWebTestCase;
 use PHPUnit\Framework\Attributes\Group;
-use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -20,6 +18,7 @@ final class UpdateContactMessageControllerTest extends AbstractWebTestCase
 {
     private ContactMessage $contactMessage;
     private string $url;
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -28,6 +27,7 @@ final class UpdateContactMessageControllerTest extends AbstractWebTestCase
         $this->url = \sprintf('/admin/contact-messages/%s/unread', $this->contactMessage->getId());
 
     }
+
     public function testDenyAccess(): void
     {
         $browser = $this->getLoggedUser(UserFixtures::USER_MEMBER_ID);
@@ -35,6 +35,7 @@ final class UpdateContactMessageControllerTest extends AbstractWebTestCase
 
         self::assertResponseStatusCodeSame(Response::HTTP_FORBIDDEN);
     }
+
     public function testMarkAsUnreadContactMessage(): void
     {
         $browser = $this->getLoggedUser(UserFixtures::USER_SECRETARY_ID);

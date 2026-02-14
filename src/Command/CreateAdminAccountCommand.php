@@ -16,7 +16,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 #[AsCommand(
     name: 'app:create-admin-account',
-    description: "Création du compte Admin.",
+    description: 'Création du compte Admin.',
 )]
 class CreateAdminAccountCommand extends Command
 {
@@ -25,8 +25,7 @@ class CreateAdminAccountCommand extends Command
         private ProfileImageService $profileImageService,
         private UserReadRepositoryInterface $userReadRepository,
         private UserWriteRepositoryInterface $userWriteRepository,
-    )
-    {
+    ) {
         parent::__construct();
     }
 
@@ -37,6 +36,7 @@ class CreateAdminAccountCommand extends Command
 
         if ($existing) {
             $output->writeln('Admin déjà existant');
+
             return Command::FAILURE;
         }
 
@@ -53,7 +53,7 @@ class CreateAdminAccountCommand extends Command
             medicalCertificateExpiry: new \DateTimeImmutable('2027-01-01'),
             accessBadgeDeposit: 10,
             annualMembershipFee: 50,
-            profileImage: $this->profileImageService->save($this->profileImageService->getDefaultsDir() . ProfileImageService::ADMIN_PROFILE),
+            profileImage: $this->profileImageService->save($this->profileImageService->getDefaultsDir().ProfileImageService::ADMIN_PROFILE),
         );
 
         $user->giveBadgeNumber('0009559203');

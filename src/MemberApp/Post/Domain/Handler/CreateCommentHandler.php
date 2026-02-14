@@ -6,11 +6,9 @@ namespace App\MemberApp\Post\Domain\Handler;
 
 use App\Admin\User\Domain\Entity\User;
 use App\MemberApp\Post\Domain\DTO\Request\CreateCommentRequest;
-use App\MemberApp\Post\Domain\DTO\Request\CreatePostRequest;
 use App\MemberApp\Post\Domain\Entity\Comment;
 use App\MemberApp\Post\Domain\Entity\Post;
 use App\MemberApp\Post\Domain\Repository\CommentWriteRepositoryInterface;
-use App\MemberApp\Post\Domain\Repository\PostWriteRepositoryInterface;
 
 readonly class CreateCommentHandler
 {

@@ -14,7 +14,8 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class UpdateContactMessageController extends AbstractController
 {
-    public function __construct(private readonly UpdateContactMessageHandler $updateContactMessageHandler) {
+    public function __construct(private readonly UpdateContactMessageHandler $updateContactMessageHandler)
+    {
     }
 
     #[Route(path: '/admin/contact-messages/{id}/unread', name: 'admin_contact_message_unread', methods: Request::METHOD_POST)]

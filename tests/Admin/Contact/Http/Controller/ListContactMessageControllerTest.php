@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\Response;
 final class ListContactMessageControllerTest extends AbstractWebTestCase
 {
     private string $url;
+
     protected function setUp(): void
     {
         parent::setUp();

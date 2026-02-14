@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\MemberApp\Post\Infrastructure\Doctrine\Repository;
 
-use App\MemberApp\Membership\Domain\Entity\Membership;
-use App\MemberApp\Membership\Domain\Repository\MembershipReadRepositoryInterface;
 use App\MemberApp\Post\Domain\Entity\Post;
 use App\MemberApp\Post\Domain\Repository\PostReadRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;

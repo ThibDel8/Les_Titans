@@ -79,3 +79,10 @@ test-db:
 test:
 	$(MAKE) test-db
 	$(COMPOSE_EXEC) env XDEBUG_MODE=coverage php bin/phpunit --coverage-html var/coverage
+
+# =====================================
+# PHP CS Fixer
+# =====================================
+
+qa:
+	./vendor/bin/php-cs-fixer fix --verbose

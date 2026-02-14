@@ -18,8 +18,7 @@ final class CreateContactMessageController extends AbstractController
     public function __construct(
         private readonly CreateContactMessageHandler $createMessageHandler,
         private readonly CreateContactMessageQueryHandler $createMessageQuery,
-        )
-    {
+    ) {
     }
 
     #[Route(path: '/contact', name: 'app_contact', methods: [Request::METHOD_GET, Request::METHOD_POST])]

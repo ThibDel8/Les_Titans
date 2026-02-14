@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 final class CreateMembershipControllerTest extends AbstractWebTestCase
 {
     private string $url;
+
     protected function setUp(): void
     {
         parent::setUp();

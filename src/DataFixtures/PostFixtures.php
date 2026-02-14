@@ -49,8 +49,7 @@ class PostFixtures extends Fixture implements DependentFixtureInterface
         string $text,
         array $attachments = [],
         array $linkPreview = [],
-    ): Post
-    {
+    ): Post {
         $post = Post::create(
             author: $author,
             text: $text,

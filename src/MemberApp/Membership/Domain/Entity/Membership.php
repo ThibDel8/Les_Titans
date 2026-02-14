@@ -246,15 +246,15 @@ class Membership
 
     public function hasValidRegistration(): bool
     {
-        return $this->medicalCertificateExpiry !== null
-            && $this->accessBadgeDeposit !== null
-            && $this->annualMembershipFee !== null;
+        return null !== $this->medicalCertificateExpiry
+            && null !== $this->accessBadgeDeposit
+            && null !== $this->annualMembershipFee;
     }
 
     public function updateValidation(
         ?int $annualMembershipFee = null,
         ?int $accessBadgeDeposit = null,
-        ?\DateTimeImmutable $medicalCertificateExpiry = null
+        ?\DateTimeImmutable $medicalCertificateExpiry = null,
     ): void {
         $this->medicalCertificateExpiry = $medicalCertificateExpiry;
         $this->accessBadgeDeposit = $accessBadgeDeposit;
@@ -300,5 +300,4 @@ class Membership
             profileImage: $profileImage,
         );
     }
-
 }

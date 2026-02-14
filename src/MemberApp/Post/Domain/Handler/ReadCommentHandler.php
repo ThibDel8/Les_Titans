@@ -12,7 +12,7 @@ readonly class ReadCommentHandler
     {
         $comments = $post->getComments()->toArray();
 
-        usort($comments, function($a, $b) {
+        usort($comments, function ($a, $b) {
             return $a->getCreatedAt() <=> $b->getCreatedAt();
         });
 

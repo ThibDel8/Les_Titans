@@ -167,7 +167,7 @@ class MembershipCreationType extends AbstractType
                     new IsTrue(message: 'Vous devez accepter le règlement intérieur pour valider l’adhésion.'),
                 ],
                 'attr' => [
-                    'class' => 'form-check-input'
+                    'class' => 'form-check-input',
                 ],
             ])
         ;

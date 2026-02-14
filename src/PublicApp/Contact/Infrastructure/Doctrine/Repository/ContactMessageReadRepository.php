@@ -7,7 +7,6 @@ namespace App\PublicApp\Contact\Infrastructure\Doctrine\Repository;
 use App\Admin\Contact\Domain\Repository\ContactMessageReadRepositoryInterface;
 use App\PublicApp\Contact\Domain\Entity\ContactMessage;
 use App\PublicApp\Contact\Domain\Enum\ContactMessageStatus;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
 readonly class ContactMessageReadRepository implements ContactMessageReadRepositoryInterface

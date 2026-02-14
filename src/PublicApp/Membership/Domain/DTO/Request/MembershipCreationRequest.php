@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\PublicApp\Membership\Domain\DTO\Request;
 
-use DateTimeImmutable;
 use App\SharedKernel\Domain\Enum\Gender;
 use Symfony\Component\Validator\Constraints\Callback;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -21,7 +20,7 @@ final class MembershipCreationRequest
             'image/bmp',
             'image/x-ms-bmp',
             'image/webp',
-            'image/vnd.wap.wbmp'
+            'image/vnd.wap.wbmp',
         ],
         mimeTypesMessage: 'L\'image doit être au format JPEG, PNG, GIF, BMP, WebP ou WBMP.'
     )]
@@ -38,7 +37,7 @@ final class MembershipCreationRequest
         value: 'today',
         message: 'La date de naissance ne peut pas être après aujourd\'hui.'
     )]
-    public ?DateTimeImmutable $birthdate = null;
+    public ?\DateTimeImmutable $birthdate = null;
 
     #[Assert\NotBlank(message: 'Le sexe doit être renseigné.')]
     public ?Gender $gender = null;
@@ -125,7 +124,7 @@ final class MembershipCreationRequest
 
             foreach ($requiredFields as $fieldName => $value) {
                 if (empty($value)) {
-                    $context->buildViolation("Ce champ est obligatoire pour un mineur.")
+                    $context->buildViolation('Ce champ est obligatoire pour un mineur.')
                         ->atPath($fieldName)
                         ->addViolation();
                 }

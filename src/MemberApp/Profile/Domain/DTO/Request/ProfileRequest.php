@@ -19,7 +19,7 @@ class ProfileRequest
             'image/bmp',
             'image/x-ms-bmp',
             'image/webp',
-            'image/vnd.wap.wbmp'
+            'image/vnd.wap.wbmp',
         ],
         mimeTypesMessage: 'L\'image doit être au format JPEG, PNG, GIF, BMP, WebP ou WBMP.'
     )]

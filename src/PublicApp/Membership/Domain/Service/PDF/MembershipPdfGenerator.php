@@ -6,7 +6,6 @@ namespace App\PublicApp\Membership\Domain\Service\PDF;
 
 use App\MemberApp\Membership\Domain\Entity\Membership;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use TCPDF;
 
 readonly class MembershipPdfGenerator
 {
@@ -29,7 +28,7 @@ readonly class MembershipPdfGenerator
         $tutorNames = $membership->getTutorFirstname().' '.$membership->getTutorLastname();
         $tutorAddress = $membership->getTutorAddress();
 
-        $pdf = new TCPDF();
+        $pdf = new \TCPDF();
         $pdf->setPrintHeader(false);
         $pdf->setPrintFooter(false);
         $pdf->SetMargins(left: 20, top: 20);
@@ -65,12 +64,12 @@ readonly class MembershipPdfGenerator
         $pdf->SetFont(family: 'helvetica', size: 10);
         $pdf->MultiCell(w: 0, h: 6, txt:"L’adhésion est valable du 1er janvier {$year} au 31 décembre {$year}.", ishtml: true);
         $pdf->Ln(h: 2);
-        $pdf->MultiCell(w: 0, h: 6, txt:"Pour les adhérents âgés de 10 à 16 ans, l’accès est limité aux séances de renforcement musculaire léger et de cardio-training. Toute activité impliquant des charges lourdes ou des exercices complexes est strictement interdite. La présence et la responsabilité d’un adulte accompagnateur sont obligatoires.", ishtml: true);
+        $pdf->MultiCell(w: 0, h: 6, txt:'Pour les adhérents âgés de 10 à 16 ans, l’accès est limité aux séances de renforcement musculaire léger et de cardio-training. Toute activité impliquant des charges lourdes ou des exercices complexes est strictement interdite. La présence et la responsabilité d’un adulte accompagnateur sont obligatoires.', ishtml: true);
         $pdf->Ln(h: 2);
-        $pdf->MultiCell(w: 0, h: 6, txt:"Pour des raisons d’hygiène et de sécurité, le port de chaussures propres et l’utilisation d’une serviette sont obligatoires à chaque séance.", ishtml: true);
+        $pdf->MultiCell(w: 0, h: 6, txt:'Pour des raisons d’hygiène et de sécurité, le port de chaussures propres et l’utilisation d’une serviette sont obligatoires à chaque séance.', ishtml: true);
         $pdf->Ln(h: 2);
-        $pdf->MultiCell(w: 0, h: 6, txt:"L’adhésion est effective après remise du présent bulletin signé, d’un certificat médical valide couvrant toute la durée de l’adhésion (à défaut, celui-ci devra être renouvelé sous peine de suspension d’accès), ainsi que du règlement de la cotisation annuelle de 50 €.
-        Une caution de 10 € est demandée pour le badge magnétique et restituée en cas de non-renouvellement.", ishtml: true);
+        $pdf->MultiCell(w: 0, h: 6, txt:'L’adhésion est effective après remise du présent bulletin signé, d’un certificat médical valide couvrant toute la durée de l’adhésion (à défaut, celui-ci devra être renouvelé sous peine de suspension d’accès), ainsi que du règlement de la cotisation annuelle de 50 €.
+        Une caution de 10 € est demandée pour le badge magnétique et restituée en cas de non-renouvellement.', ishtml: true);
         $pdf->Ln(h: 8);
 
         if ($membership->getAge() < $majorityAge) {
@@ -86,12 +85,12 @@ readonly class MembershipPdfGenerator
         $pdf->Cell(w: 0, h: 6, txt: 'ENGAGEMENT ET SIGNATURES', ln: 1);
         $pdf->Ln(h: 2);
         $pdf->SetFont(family: 'helvetica', size: 10);
-        $pdf->MultiCell(w: 0, h: 6, txt:"Je reconnais avoir pris connaissance des statuts et du règlement intérieur de l’association et m’engage à les respecter.", ishtml: true);
+        $pdf->MultiCell(w: 0, h: 6, txt:'Je reconnais avoir pris connaissance des statuts et du règlement intérieur de l’association et m’engage à les respecter.', ishtml: true);
         $pdf->Ln(h: 10);
 
-        $pdf->Cell(w: 11, h: 6, txt: "Fait à");
+        $pdf->Cell(w: 11, h: 6, txt: 'Fait à');
         $pdf->setTextColor(180, 180, 180);
-        $pdf->Cell(w: 60, h: 6, txt: "______________________________");
+        $pdf->Cell(w: 60, h: 6, txt: '______________________________');
         $pdf->setTextColor(0, 0, 0);
         $pdf->Cell(w: 0, h: 6, txt: ", le {$today}", ln: 1);
         $pdf->Ln(h: 10);

@@ -21,8 +21,7 @@ class ReadPostController extends AbstractController
     public function __construct(
         private readonly ReadCommentHandler $readCommentHandler,
         private readonly CreateCommentHandler $createCommentHandler,
-    )
-    {
+    ) {
     }
 
     #[Route(path: '/posts/{id}', name: 'app_post_read', methods: [Request::METHOD_GET, Request::METHOD_POST])]

@@ -4,15 +4,13 @@ declare(strict_types=1);
 
 namespace App\PublicApp\Home\Domain\OpeningHours;
 
-use App\PublicApp\Home\Domain\OpeningHours\OpeningDay;
-
 final class OpeningHours
 {
     /**
      * @param OpeningDay[] $days
      */
     private function __construct(
-        private array $days
+        private array $days,
     ) {
     }
 
@@ -41,32 +39,32 @@ final class OpeningHours
     public function getNextOpeningDay(?\DateTimeImmutable $from = null): ?OpeningDay
     {
 
-    $from ??= new \DateTimeImmutable();
-    $todayKey = strtolower($from->format('l'));
+        $from ??= new \DateTimeImmutable();
+        $todayKey = strtolower($from->format('l'));
 
-    $keys = array_map(fn(OpeningDay $day) => $day->getKey(), $this->days);
-    $todayIndex = array_search($todayKey, $keys, true);
+        $keys = array_map(fn (OpeningDay $day) => $day->getKey(), $this->days);
+        $todayIndex = array_search($todayKey, $keys, true);
 
-    $daysCount = count($this->days);
+        $daysCount = count($this->days);
 
-    for ($i = 0; $i < $daysCount; $i++) {
-        $day = $this->days[($todayIndex + $i) % $daysCount];
+        for ($i = 0; $i < $daysCount; ++$i) {
+            $day = $this->days[($todayIndex + $i) % $daysCount];
 
-        if ($day->isClosed()) {
-            continue;
-        }
-
-        if ($day->isToday($from)) {
-            if ($day->getOpeningTime() > $from->format('H:i')) {
-                return $day;
+            if ($day->isClosed()) {
+                continue;
             }
-            continue;
+
+            if ($day->isToday($from)) {
+                if ($day->getOpeningTime() > $from->format('H:i')) {
+                    return $day;
+                }
+                continue;
+            }
+
+            return $day;
         }
 
-        return $day;
-    }
-
-    return null;
+        return null;
     }
 
     public function getNextOpeningDayLabel(?\DateTimeImmutable $from = null): ?string
@@ -90,7 +88,7 @@ final class OpeningHours
 
     private function getDateOfDay(string $dayKey, \DateTimeImmutable $from): \DateTimeImmutable
     {
-        $currentDayIndex = (int)$from->format('N');
+        $currentDayIndex = (int) $from->format('N');
         $targetDayIndex = match ($dayKey) {
             'monday' => 1,
             'tuesday' => 2,
@@ -102,7 +100,7 @@ final class OpeningHours
         };
 
         $diff = ($targetDayIndex - $currentDayIndex + 7) % 7;
-        $diff = $diff === 0 ? 7 : $diff;
+        $diff = 0 === $diff ? 7 : $diff;
 
         return $from->modify("+{$diff} day");
     }

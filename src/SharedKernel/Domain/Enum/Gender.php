@@ -12,6 +12,6 @@ enum Gender: string
 
     public function label(): string
     {
-        return 'gender.' . $this->value;
+        return 'gender.'.$this->value;
     }
 }

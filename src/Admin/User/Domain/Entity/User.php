@@ -309,6 +309,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPasswordSetupToken(?string $token): self
     {
         $this->passwordSetupToken = $token;
+
         return $this;
     }
 
@@ -320,6 +321,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPasswordSetupTokenExpiresAt(?\DateTimeImmutable $expiresAt): self
     {
         $this->passwordSetupTokenExpiresAt = $expiresAt;
+
         return $this;
     }
 
@@ -335,11 +337,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function isValid(\DateTimeImmutable $now): bool
     {
-        return $this->medicalCertificateExpiry !== null
+        return null !== $this->medicalCertificateExpiry
             && $this->medicalCertificateExpiry > $now
-            && $this->accessBadgeDeposit !== null
-            && $this->annualMembershipFee !== null
-            && $this->accessBadgeNumber !== null;
+            && null !== $this->accessBadgeDeposit
+            && null !== $this->annualMembershipFee
+            && null !== $this->accessBadgeNumber;
     }
 
     public function giveBadgeNumber(?string $number = null): void
@@ -386,8 +388,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         ?string $tutorPostalcode = null,
         ?string $tutorCity = null,
         ?string $profileImage = null,
-    ): void
-    {
+    ): void {
         $this->lastname = \trim(\ucfirst(\strtolower($lastname)));
         $this->firstname = \trim(\ucfirst(\strtolower($firstname)));
         $this->birthdate = $birthdate;
@@ -433,8 +434,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         ?string $tutorCity = null,
         ?string $profileImage = null,
         ?string $id = null,
-    ): self
-    {
+    ): self {
         return new self(
             lastname: $lastname,
             firstname: $firstname,
