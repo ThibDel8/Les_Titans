@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Admin\User\Domain\Entity;
 
 use App\SharedKernel\Domain\Enum\Role;
+use App\SharedKernel\Domain\Service\Utils\Formatter\StringFormatter;
 use Doctrine\DBAL\Types\Types;
 use App\SharedKernel\Domain\Enum\Gender;
 use Random\RandomException;
@@ -389,26 +390,26 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         ?string $tutorCity = null,
         ?string $profileImage = null,
     ): void {
-        $this->lastname = \trim(\ucfirst(\strtolower($lastname)));
-        $this->firstname = \trim(\ucfirst(\strtolower($firstname)));
+        $this->lastname = StringFormatter::properNoun($lastname);
+        $this->firstname = StringFormatter::properNoun($firstname);
         $this->birthdate = $birthdate;
         $this->gender = $gender;
         $this->phone = $phone;
-        $this->address = $address;
+        $this->address = StringFormatter::address($address);
         $this->postalcode = $postalcode;
-        $this->city = \trim(\ucfirst(\strtolower($city)));
+        $this->city = StringFormatter::address($city);
         $this->email = \strtolower(\trim($email));
         $this->medicalCertificateExpiry = $medicalCertificateExpiry;
         $this->accessBadgeDeposit = $accessBadgeDeposit;
         $this->annualMembershipFee = $annualMembershipFee;
         $this->accessBadgeNumber = $accessBadgeNumber;
-        $this->tutorLastname = null !== $tutorLastname ? \trim(\ucfirst(\strtolower($tutorLastname))) : null;
-        $this->tutorFirstname = null !== $tutorFirstname ? \trim(\ucfirst(\strtolower($tutorFirstname))) : null;
+        $this->tutorLastname = null !== $tutorLastname ? StringFormatter::properNoun($tutorLastname) : null;
+        $this->tutorFirstname = null !== $tutorFirstname ? StringFormatter::properNoun($tutorFirstname) : null;
         $this->tutorPhone = $tutorPhone;
         $this->tutorEmail = null !== $tutorEmail ? \strtolower(\trim($tutorEmail)) : null;
-        $this->tutorAddress = $tutorAddress;
+        $this->tutorAddress = null !== $tutorAddress ? StringFormatter::address($tutorAddress): null;
         $this->tutorPostalcode = $tutorPostalcode;
-        $this->tutorCity = null !== $tutorCity ? \trim(\ucfirst(\strtolower($tutorCity))) : null;
+        $this->tutorCity = null !== $tutorCity ? StringFormatter::address($tutorCity) : null;
         $this->profileImage = $profileImage;
     }
 

@@ -1,7 +1,7 @@
 [![PHP Version](https://img.shields.io/badge/PHP-8.4-blue.svg)](https://www.php.net/releases/8.4/)
 [![Symfony Version](https://img.shields.io/badge/Symfony-8.0-purple.svg)](https://symfony.com/releases/8.0)
 [![PHPStan](https://img.shields.io/badge/PHPStan-Level%207-brightgreen)](https://phpstan.org/)
-[![Tests Coverage](https://img.shields.io/badge/Coverage-65%25-red.svg)](https://github.com/ThibDel8/Les_Titans/blob/main/public/coverage/index.html)
+[![Tests Coverage](https://img.shields.io/badge/Coverage-65%25-red.svg)](#)
 [![License](https://img.shields.io/badge/License-Proprietary-red.svg)](LICENSE)
 # 🏋️ Les Titans
 

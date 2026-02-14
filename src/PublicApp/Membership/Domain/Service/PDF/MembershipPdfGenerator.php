@@ -24,7 +24,7 @@ readonly class MembershipPdfGenerator
         $birthday = $membership->getBirthdate()->format('d/m/Y');
         $gender = ucfirst($this->translator->trans($membership->getGender()->label()));
         $phone = $membership->getPhone();
-        $address = ucfirst(strtolower($membership->getAddress())).' '.$membership->getPostalcode().', '.$membership->getCity();
+        $address = $membership->getAddress().', '.$membership->getPostalcode().' '.$membership->getCity();
         $tutorNames = $membership->getTutorFirstname().' '.$membership->getTutorLastname();
         $tutorAddress = $membership->getTutorAddress();
 

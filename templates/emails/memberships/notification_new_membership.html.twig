@@ -27,7 +27,7 @@
                 <li style="margin-bottom: 1.3rem">⚧️ Sexe : {{ membership.gender.label|trans|capitalize }}</li>
                 <li style="margin-bottom: 1.3rem">🎂 Date de naissance : {{ membership.birthdate|date('d/m/Y') }} ({{ age }} ans)</li>
                 <li style="margin-bottom: 1.3rem"><a href="tel:+33{{ membership.phone|slice(1) }}" style="color: {{ colors.greyLight }}; text-decoration: none;">☎️ Téléphone : {{ membership.phone }}</a></li>
-                <li style="margin-bottom: 1.3rem">🏠 Adresse : {{ membership.address }} {{ membership.postalcode }}, {{ membership.city }}</li>
+                <li style="margin-bottom: 1.3rem">🏠 Adresse : {{ membership.address }}, {{ membership.postalcode }} {{ membership.city }}</li>
                 <li style="margin-bottom: 1.3rem"><a href="mailto:{{ membership.email }}" style="color: {{ colors.greyLight }}; text-decoration: none;">📧 Email : {{ membership.email }}</a></li>
             </ul><br>
             {% if age < 18 %}
