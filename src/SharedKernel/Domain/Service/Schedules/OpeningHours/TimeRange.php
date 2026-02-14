@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\PublicApp\Home\Domain\OpeningHours;
+namespace App\SharedKernel\Domain\Service\Schedules\OpeningHours;
 
 final class TimeRange
 {

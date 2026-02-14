@@ -407,7 +407,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->tutorFirstname = null !== $tutorFirstname ? StringFormatter::properNoun($tutorFirstname) : null;
         $this->tutorPhone = $tutorPhone;
         $this->tutorEmail = null !== $tutorEmail ? \strtolower(\trim($tutorEmail)) : null;
-        $this->tutorAddress = null !== $tutorAddress ? StringFormatter::address($tutorAddress): null;
+        $this->tutorAddress = null !== $tutorAddress ? StringFormatter::address($tutorAddress) : null;
         $this->tutorPostalcode = $tutorPostalcode;
         $this->tutorCity = null !== $tutorCity ? StringFormatter::address($tutorCity) : null;
         $this->profileImage = $profileImage;

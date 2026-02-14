@@ -17,7 +17,7 @@ readonly class CreateContactMessageQueryHandler
     {
         $users = $this->userReadRepository->getBoardMembers();
 
-        usort($users, function($a, $b) {
+        usort($users, function ($a, $b) {
             $roleHierarchy = [
                 Role::Admin->value => 1,
                 Role::President->value => 2,
@@ -25,8 +25,9 @@ readonly class CreateContactMessageQueryHandler
                 Role::Treasurer->value => 4,
                 Role::Secretary->value => 5,
             ];
-            $roleA = array_reduce($a->getRoles(), fn($carry, $r) => min($carry, $roleHierarchy[$r] ?? 999), 999);
-            $roleB = array_reduce($b->getRoles(), fn($carry, $r) => min($carry, $roleHierarchy[$r] ?? 999), 999);
+            $roleA = array_reduce($a->getRoles(), fn ($carry, $r) => min($carry, $roleHierarchy[$r] ?? 999), 999);
+            $roleB = array_reduce($b->getRoles(), fn ($carry, $r) => min($carry, $roleHierarchy[$r] ?? 999), 999);
+
             return $roleA <=> $roleB;
         });
 

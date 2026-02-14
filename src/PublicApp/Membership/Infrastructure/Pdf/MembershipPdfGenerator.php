@@ -2,31 +2,16 @@
 
 declare(strict_types=1);
 
-namespace App\PublicApp\Membership\Domain\Service\PDF;
+namespace App\PublicApp\Membership\Infrastructure\Pdf;
 
-use App\MemberApp\Membership\Domain\Entity\Membership;
-use Symfony\Contracts\Translation\TranslatorInterface;
+use App\PublicApp\Membership\Domain\DTO\Pdf\MembershipPdf;
 
 readonly class MembershipPdfGenerator
 {
-    public function __construct(private TranslatorInterface $translator)
+    public function generate(MembershipPdf $membershipPdf): string
     {
-    }
-
-    public function generate(Membership $membership): string
-    {
-        $now = new \DateTimeImmutable('now');
-        $today = $now->format('d/m/Y');
-        $year = $now->format('Y');
-        $majorityAge = 18;
-        $lastname = $membership->getLastname();
-        $firstname = $membership->getFirstname();
-        $birthday = $membership->getBirthdate()->format('d/m/Y');
-        $gender = ucfirst($this->translator->trans($membership->getGender()->label()));
-        $phone = $membership->getPhone();
-        $address = $membership->getAddress().', '.$membership->getPostalcode().' '.$membership->getCity();
-        $tutorNames = $membership->getTutorFirstname().' '.$membership->getTutorLastname();
-        $tutorAddress = $membership->getTutorAddress();
+        $today = $membershipPdf->now->format('d/m/Y');
+        $year = $membershipPdf->now->format('Y');
 
         $pdf = new \TCPDF();
         $pdf->setPrintHeader(false);
@@ -47,15 +32,15 @@ readonly class MembershipPdfGenerator
         $pdf->Ln(h: 2);
         $pdf->SetFont(family: 'helvetica', size: 10);
         $pdf->Cell(w: 50, h: 8, txt: 'Nom et Prénom :', border: 1);
-        $pdf->Cell(w: 0, h: 8, txt: $lastname.' '.$firstname, border: 1, ln: 1);
+        $pdf->Cell(w: 0, h: 8, txt: $membershipPdf->lastname.' '.$membershipPdf->firstname, border: 1, ln: 1);
         $pdf->Cell(w: 50, h: 8, txt: 'Sexe :', border: 1);
-        $pdf->Cell(w: 0, h: 8, txt: $gender, border: 1, ln: 1);
+        $pdf->Cell(w: 0, h: 8, txt: $membershipPdf->gender, border: 1, ln: 1);
         $pdf->Cell(w: 50, h: 8, txt: 'Date de naissance :', border: 1);
-        $pdf->Cell(w: 0, h: 8, txt: $birthday, border: 1, ln: 1);
+        $pdf->Cell(w: 0, h: 8, txt: $membershipPdf->birthday, border: 1, ln: 1);
         $pdf->Cell(w: 50, h: 8, txt: 'Téléphone :', border: 1);
-        $pdf->Cell(w: 0, h: 8, txt: $phone, border: 1, ln: 1);
+        $pdf->Cell(w: 0, h: 8, txt: $membershipPdf->phone, border: 1, ln: 1);
         $pdf->Cell(w: 50, h: 8, txt: 'Adresse :', border: 1);
-        $pdf->Cell(w: 0, h: 8, txt: $address, border: 1, ln: 1);
+        $pdf->Cell(w: 0, h: 8, txt: $membershipPdf->address, border: 1, ln: 1);
         $pdf->Ln(h: 8);
 
         $pdf->SetFont(family: 'helvetica', style: 'B', size: 11);
@@ -72,12 +57,12 @@ readonly class MembershipPdfGenerator
         Une caution de 10 € est demandée pour le badge magnétique et restituée en cas de non-renouvellement.', ishtml: true);
         $pdf->Ln(h: 8);
 
-        if ($membership->getAge() < $majorityAge) {
+        if ($membershipPdf->age < $membershipPdf->majorityAge) {
             $pdf->SetFont(family: 'helvetica', style: 'B', size: 11);
             $pdf->Cell(w: 0, h: 6, txt: 'AUTORISATION DU REPRÉSENTANT LÉGAL', ln: 1);
             $pdf->Ln(h: 2);
             $pdf->SetFont(family: 'helvetica', size: 10);
-            $pdf->MultiCell(w: 0, h: 6, txt:"Je soussigné(e) {$tutorNames}, demeurant au {$tutorAddress}, représentant légal de {$firstname} {$lastname}, autorise ce dernier à fréquenter la salle de musculation de l’association Saint-Ouen Musculation.", ishtml: true);
+            $pdf->MultiCell(w: 0, h: 6, txt:"Je soussigné(e) {$membershipPdf->tutorNames}, demeurant au {$membershipPdf->tutorAddress}, représentant légal de {$membershipPdf->firstname} {$membershipPdf->lastname}, autorise ce dernier à fréquenter la salle de musculation de l’association Saint-Ouen Musculation.", ishtml: true);
             $pdf->Ln(h: 6);
         }
 
@@ -95,14 +80,14 @@ readonly class MembershipPdfGenerator
         $pdf->Cell(w: 0, h: 6, txt: ", le {$today}", ln: 1);
         $pdf->Ln(h: 10);
         $pdf->Cell(w: 56, h: 6, txt: 'Signature de l’adhérent :');
-        if ($membership->getAge() < $majorityAge) {
+        if ($membershipPdf->age < $membershipPdf->majorityAge) {
             $pdf->Cell(w: 56, h: 6, txt: 'Signature du représentant légal :', align: 'C');
         }
         $pdf->Cell(w: 56, h: 6, txt: 'Signature de la direction :', align: 'R');
         $pdf->Ln(h: 16);
         $pdf->setTextColor(180, 180, 180);
         $pdf->Cell(w: 56, h: 6, txt: '____________________');
-        if ($membership->getAge() < $majorityAge) {
+        if ($membershipPdf->age < $membershipPdf->majorityAge) {
             $pdf->Cell(w: 56, h: 6, txt: '____________________', align: 'C');
         }
         $pdf->Cell(w: 56, h: 6, txt: '____________________', align: 'R');

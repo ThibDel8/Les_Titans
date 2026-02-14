@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\PublicApp\Home\Domain\Service;
+namespace App\SharedKernel\Domain\Service\Schedules;
 
-use App\PublicApp\Home\Domain\OpeningHours\TimeRange;
-use App\PublicApp\Home\Domain\OpeningHours\OpeningDay;
-use App\PublicApp\Home\Domain\OpeningHours\OpeningHours;
+use App\SharedKernel\Domain\Service\Schedules\OpeningHours\OpeningDay;
+use App\SharedKernel\Domain\Service\Schedules\OpeningHours\OpeningHours;
+use App\SharedKernel\Domain\Service\Schedules\OpeningHours\TimeRange;
 
 final class OpeningHoursProvider
 {
