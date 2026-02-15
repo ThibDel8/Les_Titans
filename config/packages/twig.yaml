@@ -2,6 +2,7 @@ twig:
     file_name_pattern: '*.twig'
     globals:
       app_public_url: '%env(APP_PUBLIC_URL)%'
+      app_email: '%env(APP_EMAIL)%'
 
 when@test:
     twig:

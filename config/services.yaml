@@ -11,14 +11,19 @@ parameters:
     admin.init.password: '%env(ADMIN_INIT_PASSWORD)%'
     admin.init.lastname: '%env(ADMIN_INIT_LASTNAME)%'
     admin.init.firstname: '%env(ADMIN_INIT_FIRSTNAME)%'
+    admin.init.gender: '%env(ADMIN_INIT_GENDER)%'
     admin.init.birthdate: '%env(ADMIN_INIT_BIRTHDATE)%'
     admin.init.phone: '%env(ADMIN_INIT_PHONE)%'
     admin.init.address: '%env(ADMIN_INIT_ADDRESS)%'
     admin.init.postalcode: '%env(ADMIN_INIT_POSTALCODE)%'
     admin.init.city: '%env(ADMIN_INIT_CITY)%'
+
     app.public.url: '%env(APP_PUBLIC_URL)%'
     app.email: '%env(APP_EMAIL)%'
     app.slogan: '%env(APP_SLOGAN)%'
+
+    membership.annual_fee: 50
+    membership.access_badge_deposit: 10
 
 services:
     # default configuration for services in *this* file

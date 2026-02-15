@@ -3,6 +3,11 @@
 [![PHPStan](https://img.shields.io/badge/PHPStan-Level%207-brightgreen)](https://phpstan.org/)
 [![Tests Coverage](https://img.shields.io/badge/Coverage-65%25-red.svg)](#)
 [![License](https://img.shields.io/badge/License-Proprietary-red.svg)](LICENSE)
+
+<div style="text-align: center;">
+  <img src="public/images/logos/les_titans.png" alt="Les Titans Mascotte" width="250">
+</div>
+
 # 🏋️ Les Titans
 
 Les Titans est une application web développée avec Symfony permettant la
