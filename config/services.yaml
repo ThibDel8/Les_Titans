@@ -7,6 +7,15 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
+    admin.init.email: '%env(ADMIN_INIT_EMAIL)%'
+    admin.init.password: '%env(ADMIN_INIT_PASSWORD)%'
+    admin.init.lastname: '%env(ADMIN_INIT_LASTNAME)%'
+    admin.init.firstname: '%env(ADMIN_INIT_FIRSTNAME)%'
+    admin.init.birthdate: '%env(ADMIN_INIT_BIRTHDATE)%'
+    admin.init.phone: '%env(ADMIN_INIT_PHONE)%'
+    admin.init.address: '%env(ADMIN_INIT_ADDRESS)%'
+    admin.init.postalcode: '%env(ADMIN_INIT_POSTALCODE)%'
+    admin.init.city: '%env(ADMIN_INIT_CITY)%'
     app.public.url: '%env(APP_PUBLIC_URL)%'
     app.email: '%env(APP_EMAIL)%'
     app.slogan: '%env(APP_SLOGAN)%'
