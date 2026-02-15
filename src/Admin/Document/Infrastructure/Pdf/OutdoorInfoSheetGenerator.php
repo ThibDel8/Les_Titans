@@ -27,7 +27,7 @@ class OutdoorInfoSheetGenerator
         $pdf->Rect(x: 0, y: 0, w: $pdf->getPageWidth(), h: $pdf->getPageHeight(), style: 'F');
 
         // ---------------- LOGO TEXT ----------------
-        $pdf->Image(file: $outdoorInfoSheetPdf->logo, x: 8, y: 5, w: 30, h: 30);
+        $pdf->Image(file: $outdoorInfoSheetPdf->logoImage, x: 8, y: 5, w: 30, h: 30);
 
         $pdf->SetFont(family: 'helvetica', style: 'B', size: 28);
         $pdf->SetTextColor(col1: 182, col2: 136, col3: 42);
@@ -117,7 +117,9 @@ class OutdoorInfoSheetGenerator
 
         // ---------------- PHRASE ACCROCHE ----------------
 
-        $pdf->SetY(-35);
+        $pdf->SetY(-55);
+        $pdf->Image(file: $outdoorInfoSheetPdf->logoText, h: 30, palign: 'C');
+        $pdf->SetY(-20);
         $pdf->SetTextColor(col1: 146, col2: 146, col3: 146);
         $pdf->SetFont(family: 'helvetica', style: 'I', size: 14);
         $pdf->Cell(w: 0, h: 10, txt: $outdoorInfoSheetPdf->slogan, align: 'C');

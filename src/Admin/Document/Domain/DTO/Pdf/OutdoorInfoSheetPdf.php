@@ -9,7 +9,8 @@ use App\SharedKernel\Domain\Service\Schedules\OpeningHours\OpeningHours;
 class OutdoorInfoSheetPdf
 {
     public function __construct(
-        public string $logo,
+        public string $logoImage,
+        public string $logoText,
         public OpeningHours $schedules,
         public string $qrcode,
         public string $slogan,
@@ -17,13 +18,15 @@ class OutdoorInfoSheetPdf
     }
 
     public static function create(
-        string $logo,
+        string $logoImage,
+        string $logoText,
         OpeningHours $schedules,
         string $qrcode,
         string $slogan,
     ): self {
         return new self(
-            logo: $logo,
+            logoImage: $logoImage,
+            logoText: $logoText,
             schedules: $schedules,
             qrcode: $qrcode,
             slogan: $slogan,
