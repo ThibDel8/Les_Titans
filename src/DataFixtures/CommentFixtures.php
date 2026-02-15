@@ -14,6 +14,8 @@ use Faker\Factory;
 
 class CommentFixtures extends Fixture implements DependentFixtureInterface
 {
+    public const string ID_SECRETARY_COMMENT = '771bbc25-c140-45c0-afb3-0d933e5b7621';
+
     public function load(ObjectManager $manager): void
     {
         $faker = Factory::create('fr_FR');
@@ -26,6 +28,7 @@ class CommentFixtures extends Fixture implements DependentFixtureInterface
             post: $ghostUserPost,
             author: $secretaryUser,
             text: $faker->realText(),
+            id: self::ID_SECRETARY_COMMENT,
         );
 
         $this->createComment(
@@ -64,11 +67,13 @@ class CommentFixtures extends Fixture implements DependentFixtureInterface
         Post $post,
         ?User $author,
         string $text,
+        ?string $id = null,
     ): void {
         $membership = Comment::create(
             post: $post,
             author: $author,
             text: $text,
+            id: $id,
         );
 
         $manager->persist($membership);

@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mime\Address;
 
-final readonly class MembershipCreateHandler
+final readonly class CreateMembershipHandler
 {
     public function __construct(
         private MembershipMailer $membershipMailer,

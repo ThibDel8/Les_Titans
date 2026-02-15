@@ -53,8 +53,8 @@ readonly class MembershipPdfGenerator
         $pdf->Ln(h: 2);
         $pdf->MultiCell(w: 0, h: 6, txt:'Pour des raisons d’hygiène et de sécurité, le port de chaussures propres et l’utilisation d’une serviette sont obligatoires à chaque séance.', ishtml: true);
         $pdf->Ln(h: 2);
-        $pdf->MultiCell(w: 0, h: 6, txt:'L’adhésion est effective après remise du présent bulletin signé, d’un certificat médical valide couvrant toute la durée de l’adhésion (à défaut, celui-ci devra être renouvelé sous peine de suspension d’accès), ainsi que du règlement de la cotisation annuelle de 50 €.
-        Une caution de 10 € est demandée pour le badge magnétique et restituée en cas de non-renouvellement.', ishtml: true);
+        $pdf->MultiCell(w: 0, h: 6, txt:"L’adhésion est effective après remise du présent bulletin signé, d’un certificat médical valide couvrant toute la durée de l’adhésion (à défaut, celui-ci devra être renouvelé sous peine de suspension d’accès), ainsi que du règlement de la cotisation annuelle de $membershipPdf->annualFee €.
+        Une caution de $membershipPdf->accessBadgeDeposit € est demandée pour le badge magnétique et restituée en cas de non-renouvellement.", ishtml: true);
         $pdf->Ln(h: 8);
 
         if ($membershipPdf->age < $membershipPdf->majorityAge) {

@@ -25,7 +25,7 @@ class ValidateMembershipType extends AbstractType
                 ],
             ])
             ->add('accessBadgeDeposit', CheckboxType::class, [
-                'label' => 'Caution pour le badge de 10 €',
+                'label' => \sprintf('Caution pour le badge de %d €', $options['badge_deposit']),
                 'attr' => ['class' => 'form-check-input'],
                 'required' => false,
                 'row_attr' => [
@@ -33,7 +33,7 @@ class ValidateMembershipType extends AbstractType
                 ],
             ])
             ->add('annualMembershipFee', CheckboxType::class, [
-                'label' => 'Cotisation annuelle de 50 €',
+                'label' => \sprintf('Cotisation annuelle de %d €', $options['annual_fee']),
                 'attr' => ['class' => 'form-check-input'],
                 'required' => false,
                 'row_attr' => [
@@ -45,6 +45,11 @@ class ValidateMembershipType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver): void
     {
+        $resolver->setRequired([
+            'annual_fee',
+            'badge_deposit',
+        ]);
+
         $resolver->setDefaults([
             'attr' => [
                 'autocomplete' => 'off',

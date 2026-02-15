@@ -21,7 +21,7 @@ class DeletePostController extends AbstractController
     #[Route(path: '/posts/{id}/delete', name: 'app_post_delete', requirements: ['id' => '[0-9a-fA-F\-]{36}'], methods:Request::METHOD_POST)]
     public function __invoke(Post $post): Response
     {
-        $this->denyAccessUnlessGranted(Role::Member->value);
+        $this->denyAccessUnlessGranted(Role::Member->value); // voter
 
         $this->deletePostHandler->handle($post);
 

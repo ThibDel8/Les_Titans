@@ -32,5 +32,16 @@ final class CreateContactMessageControllerTest extends AbstractWebTestCase
         $this->client->request(Request::METHOD_POST, $this->url);
 
         self::assertResponseStatusCodeSame(Response::HTTP_OK);
+
+        $this->client->submitForm('Envoyer', [
+            'contact_message[email]' => 'random-address@email.fr',
+            'contact_message[subject]' => 'Test message',
+            'contact_message[body]' => 'Test message',
+        ]);
+
+        self::assertResponseStatusCodeSame(Response::HTTP_FOUND);
+
+        $this->client->followRedirect();
+        self::assertResponseIsSuccessful();
     }
 }

@@ -13,6 +13,8 @@ use Faker\Factory;
 
 class PostFixtures extends Fixture implements DependentFixtureInterface
 {
+    public const string ID_SECRETARY_POST = 'cfe077fa-3f90-4502-9826-65f107054dac';
+
     public function load(ObjectManager $manager): void
     {
         $faker = Factory::create('fr_FR');
@@ -21,6 +23,7 @@ class PostFixtures extends Fixture implements DependentFixtureInterface
             manager: $manager,
             author: $this->getReference('secretary_user', User::class),
             text: $faker->realText(),
+            id: self::ID_SECRETARY_POST
         );
 
         $this->addReference('secretary_post', $secretaryPost);
@@ -49,12 +52,14 @@ class PostFixtures extends Fixture implements DependentFixtureInterface
         string $text,
         array $attachments = [],
         array $linkPreview = [],
+        ?string $id = null,
     ): Post {
         $post = Post::create(
             author: $author,
             text: $text,
             attachments: $attachments,
             linkPreview: $linkPreview,
+            id: $id,
         );
 
         $manager->persist($post);

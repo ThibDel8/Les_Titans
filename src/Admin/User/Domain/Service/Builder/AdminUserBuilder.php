@@ -14,6 +14,8 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 readonly class AdminUserBuilder
 {
     public function __construct(
+        private int $annualFee,
+        private int $accessBadgeDeposit,
         private ParameterBagInterface $parameterBag,
         private UserPasswordHasherInterface $hasher,
         private ProfileImageService $profileImageService,
@@ -35,8 +37,8 @@ readonly class AdminUserBuilder
             city: $this->parameterBag->get('admin.init.city'),
             email: $this->getEmail(),
             medicalCertificateExpiry: new \DateTimeImmutable('2099-01-01'),
-            accessBadgeDeposit: (int) $this->parameterBag->get('membership.access_badge_deposit'),
-            annualMembershipFee:(int) $this->parameterBag->get('membership.annual_fee'),
+            accessBadgeDeposit: $this->accessBadgeDeposit,
+            annualMembershipFee: $this->annualFee,
             profileImage: $this->profileImageService->save($adminProfileImagePath),
         );
 

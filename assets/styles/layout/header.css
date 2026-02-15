@@ -119,10 +119,6 @@ header {
 
 /* Menu mobile */
 @media screen and (max-width: 1024px) {
-    body {
-        overflow-x: hidden;
-    }
-
     .burger {
         display: flex;
     }
@@ -142,7 +138,7 @@ header {
     .nav-links {
         position: absolute;
         padding-bottom: 30px;
-        top: 117.3px;
+        top: 117px;
         right: 0;
         width: 70%;
         background: var(--black);

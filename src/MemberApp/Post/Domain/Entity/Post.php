@@ -43,6 +43,7 @@ class Post
         string $text,
         array $attachments = [],
         array $linkPreview = [],
+        ?string $id = null,
     ) {
         $this->author = $author;
         $this->text = $text;
@@ -50,7 +51,7 @@ class Post
         $this->linkPreview = $linkPreview;
 
         // Initialisation des valeurs par défaut
-        $this->id = Uuid::v4();
+        $this->id = $id ? Uuid::fromString($id) : Uuid::v4();
         $this->comments = new ArrayCollection();
         $this->createdAt = new \DateTimeImmutable();
     }
@@ -100,12 +101,14 @@ class Post
         string $text,
         array $attachments = [],
         array $linkPreview = [],
+        ?string $id = null,
     ): self {
         return new self(
-            $author,
-            $text,
-            $attachments,
-            $linkPreview,
+            author: $author,
+            text: $text,
+            attachments: $attachments,
+            linkPreview: $linkPreview,
+            id: $id,
         );
     }
 }

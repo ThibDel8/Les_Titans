@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class UpdateUserProfileController extends AbstractController
 {
-    public function __construct(private UpdateProfileHandler $updateProfileHandler)
+    public function __construct(private readonly UpdateProfileHandler $updateProfileHandler)
     {
     }
 

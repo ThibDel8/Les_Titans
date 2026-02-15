@@ -12,6 +12,7 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 readonly class OutdoorInfoSheetQuery
 {
     public function __construct(
+        private string $appSlogan,
         private QrCodeGenerator $qrcodeGenerator,
         private ParameterBagInterface $parameterBag,
         private OpeningHoursProvider $openingHoursProvider,
@@ -27,7 +28,7 @@ readonly class OutdoorInfoSheetQuery
             logoText: $this->parameterBag->get('kernel.project_dir').'/public/images/logos/les_titans_text.png',
             schedules: $this->openingHoursProvider->getOpeningHours(),
             qrcode: $this->qrcodeGenerator->generate($appPublicUrl),
-            slogan: $this->parameterBag->get('app.slogan'),
+            slogan: $this->appSlogan,
         );
     }
 }
