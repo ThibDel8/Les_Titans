@@ -25,7 +25,9 @@ final class DownloadMembershipControllerTest extends AbstractWebTestCase
 
     public function testIndex(): void
     {
+        ob_start();
         $this->client->request(Request::METHOD_GET, $this->url);
+        ob_end_clean();
 
         self::assertResponseStatusCodeSame(Response::HTTP_OK);
     }
