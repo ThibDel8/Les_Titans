@@ -10,12 +10,12 @@ use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Routing\Attribute\Route;
 use App\PublicApp\Membership\Http\Form\MembershipCreationType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use App\PublicApp\Membership\Domain\Handler\MembershipCreateHandler;
+use App\PublicApp\Membership\Domain\Handler\CreateMembershipHandler;
 use App\PublicApp\Membership\Domain\DTO\Request\MembershipCreationRequest;
 
 class CreateMembershipController extends AbstractController
 {
-    public function __construct(private readonly MembershipCreateHandler $createMembershipHandler)
+    public function __construct(private readonly CreateMembershipHandler $createMembershipHandler)
     {
     }
 

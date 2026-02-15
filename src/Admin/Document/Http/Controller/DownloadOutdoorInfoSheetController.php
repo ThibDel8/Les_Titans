@@ -20,7 +20,7 @@ class DownloadOutdoorInfoSheetController extends AbstractController
     ) {
     }
 
-    #[Route(path: '/documents/download-outdoor-info-sheet', name: 'admin_document_download_outdoor_info_sheet', methods: Request::METHOD_GET)]
+    #[Route(path: '/admin/documents/download-outdoor-info-sheet', name: 'admin_document_download_outdoor_info_sheet', methods: Request::METHOD_GET)]
     public function __invoke(): Response
     {
         $this->denyAccessUnlessGranted(Role::Secretary->value);

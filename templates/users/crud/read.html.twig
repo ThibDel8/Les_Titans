@@ -11,7 +11,7 @@
         {% if user.annualMembershipFee is null and user.accessBadgeNumber is not null %}
             <button class="btn btn-success" onclick="document.getElementById('confirm-renew').showModal()" title="Valider le renouvellement de l'adhésion">Renouveler</button>
             <dialog id="confirm-renew">
-                <p>Vous êtes sur le point de renouveler l'adhésion de {{ user.firstname }} {{ user.lastname }}. Êtes-vous sûr d'avoir reçu les 50€ de cotisation annuelle ?</p>
+                <p>Vous êtes sur le point de renouveler l'adhésion de {{ user.firstname }} {{ user.lastname }}. Êtes-vous sûr d'avoir reçu les {{ annual_fee }}€ de cotisation annuelle ?</p>
                 <br>
                 <form method="post"
                     action="{{ path('admin_user_renew', {id: user.id}) }}">
@@ -43,7 +43,7 @@
         {% if user.accessBadgeNumber is not null and user.accessBadgeDeposit is not null %}
             <button class="btn btn-error" onclick="document.getElementById('confirm-restitution').showModal()" title="Valider la restitution de la caution et réception du badge">Restitution</button>
             <dialog id="confirm-restitution">
-                <p>Vous êtes sur le point de valider la restitution de la caution de {{ user.firstname }} {{ user.lastname }} contre réception de son badge. Êtes-vous sûr d'avoir rendu les 10€ de caution et récupéré le badge ?</p>
+                <p>Vous êtes sur le point de valider la restitution de la caution de {{ user.firstname }} {{ user.lastname }} contre réception de son badge. Êtes-vous sûr d'avoir rendu les {{ access_badge_deposit }}€ de caution et récupéré le badge ?</p>
                 <br>
                 <form method="post"
                     action="{{ path('admin_user_restitution', {id: user.id}) }}">

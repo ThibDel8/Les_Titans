@@ -17,11 +17,10 @@ parameters:
     admin.init.address: '%env(ADMIN_INIT_ADDRESS)%'
     admin.init.postalcode: '%env(ADMIN_INIT_POSTALCODE)%'
     admin.init.city: '%env(ADMIN_INIT_CITY)%'
-
     app.public.url: '%env(APP_PUBLIC_URL)%'
     app.email: '%env(APP_EMAIL)%'
-    app.slogan: '%env(APP_SLOGAN)%'
 
+    app.slogan: 'Rejoignez-nous pour vous dépasser et rester en forme !'
     membership.annual_fee: 50
     membership.access_badge_deposit: 10
 
@@ -30,6 +29,10 @@ services:
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        bind:
+            int $annualFee: '%membership.annual_fee%'
+            int $accessBadgeDeposit: '%membership.access_badge_deposit%'
+            string $appSlogan: '%app.slogan%'
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name

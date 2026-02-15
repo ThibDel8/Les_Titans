@@ -16,8 +16,11 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class ReadMembershipController extends AbstractController
 {
-    public function __construct(private readonly ValidateMembershipHandler $validateMembershipHandler)
-    {
+    public function __construct(
+        private readonly int $annualFee,
+        private readonly int $accessBadgeDeposit,
+        private readonly ValidateMembershipHandler $validateMembershipHandler,
+    ) {
     }
 
     #[Route(path: '/admin/memberships/{id}', name: 'admin_membership_read', requirements: ['id' => '[0-9a-fA-F\-]{36}'], methods:[Request::METHOD_GET, Request::METHOD_POST])]
@@ -27,7 +30,10 @@ class ReadMembershipController extends AbstractController
 
         $membershipValidationRequest = ValidateMembershipRequest::fromEntity($membership);
 
-        $form = $this->createForm(ValidateMembershipType::class, $membershipValidationRequest);
+        $form = $this->createForm(ValidateMembershipType::class, $membershipValidationRequest, [
+            'annual_fee' => $this->annualFee,
+            'badge_deposit' => $this->accessBadgeDeposit,
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

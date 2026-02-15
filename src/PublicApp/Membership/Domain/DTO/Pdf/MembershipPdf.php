@@ -14,10 +14,12 @@ class MembershipPdf
         public string $gender,
         public string $phone,
         public string $address,
+        public int $annualFee,
+        public int $accessBadgeDeposit,
+        public \DateTimeImmutable $now = new \DateTimeImmutable('now'),
+        public int $majorityAge = 18,
         public ?string $tutorNames = null,
         public ?string $tutorAddress = null,
-        public int $majorityAge = 18,
-        public \DateTimeImmutable $now = new \DateTimeImmutable('now'),
     ) {
     }
 
@@ -31,6 +33,8 @@ class MembershipPdf
         string $address,
         ?string $tutorNames,
         ?string $tutorAddress,
+        int $annualFee,
+        int $accessBadgeDeposit,
     ): self {
         return new self(
             lastname: $lastname,
@@ -40,6 +44,8 @@ class MembershipPdf
             gender: $gender,
             phone: $phone,
             address: $address,
+            annualFee: $annualFee,
+            accessBadgeDeposit: $accessBadgeDeposit,
             tutorNames: $tutorNames,
             tutorAddress: $tutorAddress,
         );

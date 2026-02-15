@@ -35,13 +35,14 @@ class Comment
         Post $post,
         ?User $author,
         string $text,
+        ?string $id = null,
     ) {
         $this->post = $post;
         $this->author = $author;
         $this->text = $text;
 
         // Initialisation des valeurs par défaut
-        $this->id = Uuid::v4();
+        $this->id = $id ? Uuid::fromString($id) : Uuid::v4();
         $this->createdAt = new \DateTimeImmutable();
     }
 
@@ -79,11 +80,13 @@ class Comment
         Post $post,
         ?User $author,
         string $text,
+        ?string $id = null,
     ): self {
         return new self(
-            $post,
-            $author,
-            $text,
+            post: $post,
+            author: $author,
+            text: $text,
+            id: $id,
         );
     }
 }

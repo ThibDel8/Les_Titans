@@ -12,10 +12,6 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class ListDocumentController extends AbstractController
 {
-    public function __construct()
-    {
-    }
-
     #[Route(path: '/admin/documents', name: 'admin_document_list', methods: Request::METHOD_GET)]
     public function __invoke(): Response
     {

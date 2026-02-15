@@ -3,6 +3,8 @@ twig:
     globals:
       app_public_url: '%env(APP_PUBLIC_URL)%'
       app_email: '%env(APP_EMAIL)%'
+      annual_fee: 50
+      access_badge_deposit: 10
 
 when@test:
     twig:

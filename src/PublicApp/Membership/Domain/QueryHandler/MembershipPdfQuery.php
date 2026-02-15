@@ -10,8 +10,11 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 readonly class MembershipPdfQuery
 {
-    public function __construct(private TranslatorInterface $translator)
-    {
+    public function __construct(
+        private int $annualFee,
+        private int $accessBadgeDeposit,
+        private TranslatorInterface $translator,
+    ) {
     }
 
     public function fetch(Membership $membership): MembershipPdf
@@ -26,6 +29,8 @@ readonly class MembershipPdfQuery
             address: $membership->getAddress().', '.$membership->getPostalcode().' '.$membership->getCity(),
             tutorNames: $membership->getTutorFirstname().' '.$membership->getTutorLastname(),
             tutorAddress: $membership->getTutorAddress(),
+            annualFee: $this->annualFee,
+            accessBadgeDeposit: $this->accessBadgeDeposit,
         );
     }
 }

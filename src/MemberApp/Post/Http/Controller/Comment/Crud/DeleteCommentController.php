@@ -21,7 +21,7 @@ class DeleteCommentController extends AbstractController
     #[Route(path: '/posts/comments/{id}/delete', name: 'app_post_comment_delete', requirements: ['id' => '[0-9a-fA-F\-]{36}'], methods:Request::METHOD_POST)]
     public function __invoke(Comment $comment): Response
     {
-        $this->denyAccessUnlessGranted(Role::Member->value);
+        $this->denyAccessUnlessGranted(Role::Member->value); // voter
 
         $this->deleteCommentHandler->handle($comment);
 
