@@ -1,6 +1,9 @@
 # Dockerfile pour PHP 8.4-FPM + Symfony (WSL2 friendly)
 FROM php:8.4-fpm
 
+# Récupérer Composer depuis l'image officielle
+COPY --from=composer:2.9.5 /usr/bin/composer /usr/bin/composer
+
 # Droits User pour WSL2
 ARG UID=1000
 ARG GID=1000

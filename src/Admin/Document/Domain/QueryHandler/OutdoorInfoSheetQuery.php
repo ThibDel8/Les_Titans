@@ -20,10 +20,12 @@ readonly class OutdoorInfoSheetQuery
 
     public function fetch(): OutdoorInfoSheetPdf
     {
+        $appPublicUrl = $this->parameterBag->get('app.public.url');
+
         return OutdoorInfoSheetPdf::create(
             logo: $this->parameterBag->get('kernel.project_dir').'/public/images/logos/les_titans_image.png',
             schedules: $this->openingHoursProvider->getOpeningHours(),
-            qrcode: $this->qrcodeGenerator->generate('https://www.google.com'),
+            qrcode: $this->qrcodeGenerator->generate($appPublicUrl),
             slogan: $this->parameterBag->get('app.slogan'),
         );
     }
