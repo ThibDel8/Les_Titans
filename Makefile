@@ -13,7 +13,7 @@ COMPOSE_EXEC=$(COMPOSE) exec php
 # =====================================
 
 up:
-	$(COMPOSE) up -d
+	$(COMPOSE) up --build -d
 
 down:
 	$(COMPOSE) down
