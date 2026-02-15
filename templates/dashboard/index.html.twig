@@ -26,13 +26,8 @@
                     </a>
                 </li>
                 <li>
-                    <a href="" title="" style="opacity: 0.5;">
-                        {% include 'icons/chats.svg.twig' %} Conversations <small>(à venir...)</small>
-                    </a>
-                </li>
-                <li>
-                    <a href="" title="" style="opacity: 0.5;">
-                        {% include 'icons/news.svg.twig' %} Fil d'actualité <small>(à venir...)</small>
+                    <a href="{{ path('admin_document_list') }}" title="Voir les documents à télécharger">
+                        {% include 'icons/document.svg.twig' %} Documents
                     </a>
                 </li>
             </ul>

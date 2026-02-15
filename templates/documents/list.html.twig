@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }}Liste des documents{% endblock %}
+
+{% block body %}
+
+    {% include '_partials/_breadcrumb/_breadcrumb.html.twig' with { breadcrumb: breadcrumb } %}
+
+    <section class="manager-section">
+
+        <h2 class="manager-title">Documents</h2>
+        <a class="document-link" href="{{ path('admin_document_download_outdoor_info_sheet') }}">{% include 'icons/pdf.svg.twig' %} Fiche porte d'entrée extérieure</a>
+    </section>
+
+{% endblock %}

@@ -1,0 +1,13 @@
+.document-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1.1rem;
+    line-height: 3rem;
+    color: var(--grey-light);
+}
+
+.document-link .icon {
+    height: 1.3rem;
+    width: 1.3rem;
+ }

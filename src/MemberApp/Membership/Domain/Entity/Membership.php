@@ -295,7 +295,7 @@ class Membership
             tutorFirstname: null !== $tutorFirstname ? StringFormatter::properNoun($tutorFirstname) : null,
             tutorPhone: $tutorPhone,
             tutorEmail: null !== $tutorEmail ? \strtolower(\trim($tutorEmail)) : null,
-            tutorAddress: null !== $tutorAddress ? StringFormatter::address($tutorAddress): null,
+            tutorAddress: null !== $tutorAddress ? StringFormatter::address($tutorAddress) : null,
             tutorPostalcode: $tutorPostalcode,
             tutorCity: null !== $tutorCity ? StringFormatter::address($tutorCity) : null,
             profileImage: $profileImage,

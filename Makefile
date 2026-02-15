@@ -30,7 +30,7 @@ bash:
 # =====================================
 
 install:
-	$(COMPOSE_EXEC) composer install
+	composer install
 	$(MAKE) init-project
 
 init-project:

@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace App\PublicApp\Home\Http\Controller;
 
-use App\PublicApp\Home\Domain\Service\OpeningHoursProvider;
+use App\SharedKernel\Domain\Service\Schedules\OpeningHoursProvider;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 final class HomeController extends AbstractController
 {
-    public function __construct(private OpeningHoursProvider $openingHoursProvider)
+    public function __construct(private readonly OpeningHoursProvider $openingHoursProvider)
     {
     }
 

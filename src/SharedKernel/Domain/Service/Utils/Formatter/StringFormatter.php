@@ -20,7 +20,7 @@ final class StringFormatter
     public static function address(string $address): string
     {
         $exceptions = [
-            'le', 'la', 'les', "l'", 'du', 'de', 'des', 'au', 'aux', 'à', 'sur', 'sous', 'chez', 'par', 'et', '/'
+            'le', 'la', 'les', "l'", 'du', 'de', 'des', 'au', 'aux', 'à', 'sur', 'sous', 'chez', 'par', 'et', '/',
         ];
 
         // trim + réduire les espaces multiples
@@ -40,7 +40,7 @@ final class StringFormatter
                         // majuscule pour la première lettre UTF-8
                         $first = mb_substr($part, 0, 1, 'UTF-8');
                         $rest  = mb_substr($part, 1, null, 'UTF-8');
-                        $part = mb_strtoupper($first, 'UTF-8') . $rest;
+                        $part = mb_strtoupper($first, 'UTF-8').$rest;
                     }
                 }
                 $slashPart = implode('-', $dashParts);
