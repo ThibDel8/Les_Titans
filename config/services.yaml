@@ -20,7 +20,7 @@ parameters:
     app.public.url: '%env(APP_PUBLIC_URL)%'
     app.email: '%env(APP_EMAIL)%'
 
-    app.slogan: 'Rejoignez-nous pour vous dépasser et rester en forme !'
+    app.slogan: '"Plus dure est la bataille, plus belle est la victoire."'
     membership.annual_fee: 50
     membership.access_badge_deposit: 10
 

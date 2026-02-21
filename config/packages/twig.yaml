@@ -5,6 +5,7 @@ twig:
       app_email: '%env(APP_EMAIL)%'
       annual_fee: 50
       access_badge_deposit: 10
+      app_slogan: '%app.slogan%'
 
 when@test:
     twig:

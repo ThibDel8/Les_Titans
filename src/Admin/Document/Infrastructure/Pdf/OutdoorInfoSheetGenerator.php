@@ -14,7 +14,7 @@ class OutdoorInfoSheetGenerator
 
     public function generate(OutdoorInfoSheetPdf $outdoorInfoSheetPdf): string
     {
-
+        $borderStyle = ['width' => 1, 'cap' => 'butt', 'join' => 'miter', 'dash' => '0', 'color' => [182, 136, 42]];
 
         $pdf = new \TCPDF();
         $pdf->setPrintHeader(false);
@@ -47,7 +47,6 @@ class OutdoorInfoSheetGenerator
         // ---------------- INFOS ----------------
 
         // Section
-        $borderStyle = ['width' => 1, 'cap' => 'butt', 'join' => 'miter', 'dash' => '0', 'color' => [182, 136, 42]];
         $pdf->RoundedRect(x: 10, y: 50, w: 190, h: 96, r: 1, style: 'DF', border_style: $borderStyle, fill_color: [42, 42, 42]);
         $pdf->RoundedRect(x: 10.5, y: 49.5, w: 190, h: 97, r: 1, round_corner: '1100', style: 'F', fill_color: [42, 42, 42]);
         $pdf->SetFillColor(col1: 42, col2: 42, col3: 42);
@@ -91,7 +90,6 @@ class OutdoorInfoSheetGenerator
         // ---------------- MEMBERSHIP ----------------
 
         // Section
-        $borderStyle = ['width' => 1, 'cap' => 'butt', 'join' => 'miter', 'dash' => '0', 'color' => [182, 136, 42]];
         $pdf->RoundedRect(x: 10, y: 156, w: 190, h: 74, r: 1, style: 'DF', border_style: $borderStyle, fill_color: [42, 42, 42]);
         $pdf->RoundedRect(x: 10.5, y: 155.5, w: 190, h: 75, r: 1, round_corner: '1100', style: 'F', fill_color: [42, 42, 42]);
         $pdf->SetFillColor(col1: 42, col2: 42, col3: 42);
@@ -117,11 +115,11 @@ class OutdoorInfoSheetGenerator
 
         // ---------------- PHRASE ACCROCHE ----------------
 
-        $pdf->SetY(-55);
+        $pdf->SetY(-53);
         $pdf->Image(file: $outdoorInfoSheetPdf->logoText, h: 30, palign: 'C');
-        $pdf->SetY(-20);
+        $pdf->SetY(-33);
         $pdf->SetTextColor(col1: 146, col2: 146, col3: 146);
-        $pdf->SetFont(family: 'helvetica', style: 'I', size: 14);
+        $pdf->SetFont(family: 'helvetica', style: 'I', size: 10);
         $pdf->Cell(w: 0, h: 10, txt: $outdoorInfoSheetPdf->slogan, align: 'C');
 
         return $pdf->Output(name: 'affiche_extérieure_porte_d_entrée.pdf', dest: 'D');
