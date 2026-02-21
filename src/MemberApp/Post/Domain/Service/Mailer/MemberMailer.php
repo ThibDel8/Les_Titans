@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace App\Admin\Contact\Domain\Service\Mailer;
+namespace App\MemberApp\Post\Domain\Service\Mailer;
 
-use App\PublicApp\Contact\Domain\Entity\ContactMessage;
+use App\Admin\User\Domain\Entity\User;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
 
-readonly class ContactMessageMailer
+readonly class MemberMailer
 {
     public function __construct(
         private MailerInterface $mailer,
@@ -21,15 +21,16 @@ readonly class ContactMessageMailer
     /**
      * @throws TransportExceptionInterface
      */
-    public function sendAnswer(ContactMessage $contactMessage): void
+    public function sendToAllMembers(array $memberEmails, User $author, string $postUrl): void
     {
         $email = new TemplatedEmail()
             ->from($this->params->get('app.email'))
-            ->to($contactMessage->getEmail())
-            ->subject('Contact Saint-Ouen Musculation')
-            ->htmlTemplate('emails/contact/answer.html.twig')
+            ->to(...$memberEmails)
+            ->subject('Nouvelle Publication Les Titans')
+            ->htmlTemplate('emails/posts/new_board_member_post.html.twig')
             ->context([
-                'message' => $contactMessage,
+                'author' => $author,
+                'postUrl' => $postUrl,
             ]);
 
         $this->mailer->send($email);

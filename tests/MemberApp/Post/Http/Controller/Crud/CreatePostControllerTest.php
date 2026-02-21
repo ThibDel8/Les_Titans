@@ -38,9 +38,22 @@ class CreatePostControllerTest extends AbstractWebTestCase
 
         $browser->submitForm('Publier', ['create_post[text]' => 'test']);
 
+        self::assertEmailCount(0);
+
         self::assertResponseStatusCodeSame(Response::HTTP_FOUND);
 
         $browser->followRedirect();
         self::assertResponseIsSuccessful();
+    }
+
+    public function testEmailSentForSecretary(): void
+    {
+        $browser = self::getLoggedUser(UserFixtures::USER_SECRETARY_ID);
+
+        $browser->request(Request::METHOD_GET, $this->url);
+
+        $browser->submitForm('Publier', ['create_post[text]' => 'test']);
+
+        self::assertEmailCount(1);
     }
 }
