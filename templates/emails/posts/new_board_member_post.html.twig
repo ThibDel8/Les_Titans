@@ -1,0 +1,36 @@
+{% extends 'emails/base.html.twig' %}
+
+{% block subject %}{{ parent() }}Nouvelle Publication{% endblock %}
+
+{% block body %}
+
+    <section style="
+        background-color: {{ colors.grey }};
+        border-radius: 4px;
+        padding: 25px;
+        margin-bottom: 40px;
+        border-left: 5px solid {{ colors.publicColor }};
+        ">
+        <h2 style="color: {{ colors.publicColor }}; padding-bottom: 20px;">Nouvelle publication</h2>
+        <div style="color: {{ colors.greyLight }};">
+            <p>Bonjour,</p>
+            <p>{{ author.firstname }} {{ author.lastname }} a publié un nouveau message destiné aux membres de l'association.</p>
+            <p>Nous vous invitons à en prendre connaissance en cliquant sur le bouton ci-dessous :</p>
+            <div style="text-align: center;">
+                <br>
+                <a href="{{ postUrl }}" style="color: {{ colors.black }}; background-color: {{ colors.publicColor }}; text-decoration: none; border-radius: 5px; padding: 5px 15px;">Consulter la publication</a>
+                <br>
+            </div>
+            <br>
+            <br>
+            <div style="background-color: {{ colors.greyDark }}; padding: 25px; border-radius: 4px;">
+                <small style="color: {{ colors.red }}; font-style: italic;">
+                    Conformément au règlement intérieur, chaque membre est tenu de prendre connaissance des communications officielles de l'association.
+                </small>
+            </div>
+            <br>
+            <p>Cordialement,</p>
+            <p>Saint-Ouen Musculation | Les Titans</p>
+        </div>
+    </section>
+{% endblock %}

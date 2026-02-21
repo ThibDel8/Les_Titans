@@ -56,4 +56,14 @@ readonly class UserReadRepository implements UserReadRepositoryInterface
             ->getResult()
         ;
     }
+
+    public function findAllMemberEmails(): array
+    {
+        return $this->manager->getRepository(User::class)
+            ->createQueryBuilder('u')
+            ->select('u.email')
+            ->getQuery()
+            ->getScalarResult()
+        ;
+    }
 }

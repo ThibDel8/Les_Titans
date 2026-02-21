@@ -22,4 +22,6 @@ interface UserReadRepositoryInterface
 
     /** @return User[] */
     public function getBoardMembers(): array;
+
+    public function findAllMemberEmails(): array;
 }
