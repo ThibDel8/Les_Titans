@@ -25,13 +25,13 @@ final readonly class DeleteUserHandler
     {
         $profileImage = $user->getProfileImage();
 
-        $role = $user->getRoles();
+        $userRole = array_first($user->getRoles());
 
         $this->userWriteRepository->delete($user);
 
         $this->profileImageService->remove($profileImage);
 
-        if ($role !== Role::Member->value) {
+        if (in_array($userRole, Role::boardMembers(), true)) {
             $president = $this->userReadRepository->findPresident();
 
             if (null === $president) {

@@ -6,6 +6,7 @@ namespace App\PublicApp\Membership\Http\Controller;
 
 use App\MemberApp\Membership\Domain\Entity\Membership;
 use App\PublicApp\Membership\Http\Breadcrumb\PublicMembershipBreadcrumbFactory;
+use App\SharedKernel\Domain\Const\Regex;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,7 +18,7 @@ final class PendingMembershipController extends AbstractController
     {
     }
 
-    #[Route(path: '/memberships/{id}/pending', name: 'app_membership_pending', requirements: ['id' => '[0-9a-fA-F\-]{36}'], methods: Request::METHOD_GET)]
+    #[Route(path: '/memberships/{id}/pending', name: 'app_membership_pending', requirements: ['id' => Regex::UUID_V4], methods: Request::METHOD_GET)]
     public function __invoke(Membership $membership): Response
     {
         return $this->render('membership/pending.html.twig', [

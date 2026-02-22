@@ -6,6 +6,7 @@ namespace App\Admin\Membership\Http\Controller\Crud;
 
 use App\Admin\Membership\Domain\Handler\DeleteMembershipHandler;
 use App\MemberApp\Membership\Domain\Entity\Membership;
+use App\SharedKernel\Domain\Const\Regex;
 use App\SharedKernel\Domain\Enum\Role;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,7 +19,7 @@ class DeleteMembershipController extends AbstractController
     {
     }
 
-    #[Route(path: '/admin/memberships/{id}/delete', name: 'admin_membership_delete', requirements: ['id' => '[0-9a-fA-F\-]{36}'], methods:Request::METHOD_POST)]
+    #[Route(path: '/admin/memberships/{id}/delete', name: 'admin_membership_delete', requirements: ['id' => Regex::UUID_V4], methods: Request::METHOD_POST)]
     public function __invoke(Membership $membership): Response
     {
         $this->denyAccessUnlessGranted(Role::Secretary->value);

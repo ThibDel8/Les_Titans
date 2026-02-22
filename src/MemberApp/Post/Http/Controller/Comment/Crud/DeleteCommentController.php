@@ -6,7 +6,8 @@ namespace App\MemberApp\Post\Http\Controller\Comment\Crud;
 
 use App\MemberApp\Post\Domain\Entity\Comment;
 use App\MemberApp\Post\Domain\Handler\DeleteCommentHandler;
-use App\SharedKernel\Domain\Enum\Role;
+use App\SharedKernel\Domain\Const\Regex;
+use App\SharedKernel\Domain\Voter\CommentVoter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,10 +19,10 @@ class DeleteCommentController extends AbstractController
     {
     }
 
-    #[Route(path: '/posts/comments/{id}/delete', name: 'app_post_comment_delete', requirements: ['id' => '[0-9a-fA-F\-]{36}'], methods:Request::METHOD_POST)]
+    #[Route(path: '/posts/comments/{id}/delete', name: 'app_post_comment_delete', requirements: ['id' => Regex::UUID_V4], methods: Request::METHOD_POST)]
     public function __invoke(Comment $comment): Response
     {
-        $this->denyAccessUnlessGranted(Role::Member->value); // voter
+        $this->denyAccessUnlessGranted(attribute: CommentVoter::DELETE, subject: $comment); // voter
 
         $this->deleteCommentHandler->handle($comment);
 

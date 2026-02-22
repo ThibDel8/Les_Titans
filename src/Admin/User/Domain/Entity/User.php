@@ -242,11 +242,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return Role::tryFrom($role)->label();
     }
 
-    public function getUserRole(): Role
-    {
-        return Role::from($this->roles[0]);
-    }
-
     public function getTutorLastname(): ?string
     {
         return $this->tutorLastname;

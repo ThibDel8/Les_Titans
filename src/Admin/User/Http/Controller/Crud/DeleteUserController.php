@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Admin\User\Http\Controller\Crud;
 
 use App\Admin\User\Domain\Entity\User;
+use App\SharedKernel\Domain\Const\Regex;
 use App\SharedKernel\Domain\Enum\Role;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,7 +19,7 @@ class DeleteUserController extends AbstractController
     {
     }
 
-    #[Route(path: '/admin/user/{id}/delete', name: 'admin_user_delete', requirements: ['id' => '[0-9a-fA-F\-]{36}'], methods:Request::METHOD_POST)]
+    #[Route(path: '/admin/user/{id}/delete', name: 'admin_user_delete', requirements: ['id' => Regex::UUID_V4], methods: Request::METHOD_POST)]
     public function __invoke(User $user): Response
     {
         $this->denyAccessUnlessGranted(Role::VicePresident->value);
