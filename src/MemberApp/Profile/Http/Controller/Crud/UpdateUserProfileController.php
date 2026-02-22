@@ -7,6 +7,7 @@ namespace App\MemberApp\Profile\Http\Controller\Crud;
 use App\Admin\User\Domain\Entity\User;
 use App\MemberApp\Profile\Domain\DTO\Request\ProfileRequest;
 use App\MemberApp\Profile\Domain\Handler\UpdateProfileHandler;
+use App\MemberApp\Profile\Http\Breadcrumb\MemberProfileBreadcrumbFactory;
 use App\MemberApp\Profile\Http\Controller\Form\ProfileType;
 use App\SharedKernel\Domain\Enum\Role;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,10 +15,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-class UpdateUserProfileController extends AbstractController
+final class UpdateUserProfileController extends AbstractController
 {
-    public function __construct(private readonly UpdateProfileHandler $updateProfileHandler)
-    {
+    public function __construct(
+        private readonly UpdateProfileHandler $updateProfileHandler,
+        private readonly MemberProfileBreadcrumbFactory $breadcrumbFactory,
+    ) {
     }
 
     #[Route(path: '/profile/edit', name: 'app_profile_edit', methods: [Request::METHOD_GET, Request::METHOD_POST])]
@@ -40,16 +43,9 @@ class UpdateUserProfileController extends AbstractController
             return $this->redirectToRoute('app_profile_read');
         }
 
-        $breadcrumb = [
-            ['label' => 'Accueil', 'path' => $this->generateUrl('app_home')],
-            ['label' => 'Profil', 'path' => $this->generateUrl('app_profile_read')],
-            ['label' => 'Modifications', 'path' => null],
-        ];
-
-
         return $this->render('profile/crud/update.html.twig', [
             'form' => $form,
-            'breadcrumb' => $breadcrumb,
+            'breadcrumbs' => $this->breadcrumbFactory->updateProfile(),
         ]);
     }
 }

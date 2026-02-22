@@ -7,6 +7,7 @@ namespace App\MemberApp\Post\Http\Controller\Crud;
 use App\Admin\User\Domain\Entity\User;
 use App\MemberApp\Post\Domain\DTO\Request\CreatePostRequest;
 use App\MemberApp\Post\Domain\Handler\CreatePostHandler;
+use App\MemberApp\Post\Http\Breadcrumb\MemberPostBreadcrumbFactory;
 use App\MemberApp\Post\Http\Form\CreatePostType;
 use App\SharedKernel\Domain\Enum\Role;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,10 +15,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-class CreatePostController extends AbstractController
+final class CreatePostController extends AbstractController
 {
-    public function __construct(private readonly CreatePostHandler $createPostHandler)
-    {
+    public function __construct(
+        private readonly CreatePostHandler $createPostHandler,
+        private readonly MemberPostBreadcrumbFactory $breadcrumbFactory,
+    ) {
     }
 
     #[Route(path: '/posts/create', name: 'app_post_create', methods: [Request::METHOD_GET, Request::METHOD_POST])]
@@ -40,15 +43,9 @@ class CreatePostController extends AbstractController
             return $this->redirectToRoute('app_post_list');
         }
 
-        $breadcrumb = [
-            ['label' => 'Accueil', 'path' => $this->generateUrl('app_home')],
-            ['label' => 'Publications', 'path' => $this->generateUrl('app_post_list')],
-            ['label' => 'Écrire une publication', 'path' => null],
-        ];
-
         return $this->render('posts/crud/create.html.twig', [
-            'breadcrumb' => $breadcrumb,
             'form' => $form,
+            'breadcrumbs' => $this->breadcrumbFactory->createPost(),
         ]);
     }
 }

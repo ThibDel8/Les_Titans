@@ -4,10 +4,44 @@
 
 {% block body %}
 
-    {% include '_partials/_breadcrumb/_breadcrumb.html.twig' with { breadcrumb: breadcrumb } %}
+    {% include '_partials/_breadcrumb/_breadcrumb.html.twig' with { breadcrumbs: breadcrumbs } %}
 
     <section class="public-section">
         <h2 class="public-title">À propos de l'association</h2>
+
+        <h3>Notre slogan</h3>
+
+        <blockquote>
+            <p><em>"{{ app_slogan }}"</em></p>
+            <p class="blockquote-footer">— Leslie Calvin Brown</p>
+        </blockquote>
+
+        <p>
+            Notre association a choisi ce slogan, car il reflète parfaitement notre vision du sport et du dépassement de soi.
+            Cette citation est souvent attribuée au conférencier américain Leslie Calvin Brown, connu pour ses discours sur la motivation et la persévérance.
+            Même si son origine exacte n’est pas formellement prouvée, son message est universel et intemporel.
+        </p>
+
+        <p>
+            Dans le sport comme dans la vie, rien de grand ne s’obtient sans effort.
+            Plus le défi est exigeant, plus le travail est rigoureux, plus les obstacles sont nombreux… plus la réussite devient forte de sens.
+        </p>
+
+        <p>Ce slogan nous rappelle que :</p>
+        <ul>
+            <li>la difficulté n’est pas un frein, mais une étape ;</li>
+            <li>l’effort forge le caractère ;</li>
+            <li>la victoire n’a de valeur que parce qu’elle a été méritée.</li>
+        </ul>
+
+        <p>
+            Au sein de notre association, nous ne cherchons pas seulement la performance.
+            Nous valorisons la discipline, la persévérance, le respect du travail et la progression personnelle.
+        </p>
+
+        <p>
+            Car au final, ce n’est pas la facilité qui rend fier… c’est le chemin parcouru.
+        </p><br>
 
         <h3>Notre mission</h3>
         <p>
@@ -17,14 +51,12 @@
         </p><br>
 
         <h3>Nos valeurs</h3>
-        <p>
-            <ul>
-                <li><u>Accessibilité</u> : permettre à chacun de pratiquer, quel que soit son âge ou son expérience.</li>
-                <li><u>Convivialité</u> : favoriser un esprit de club où l’entraide et le respect sont essentiels.</li>
-                <li><u>Sécurité</u> : garantir un cadre d’entraînement conforme aux bonnes pratiques, avec du matériel entretenu et des règles claires.</li>
-                <li><u>Engagement local</u> : contribuer à la dynamique sportive de la commune et soutenir la vie associative.</li>
-            </ul>
-        </p><br>
+        <ul>
+            <li><u>Accessibilité</u> : permettre à chacun de pratiquer, quel que soit son âge ou son expérience.</li>
+            <li><u>Convivialité</u> : favoriser un esprit de club où l’entraide et le respect sont essentiels.</li>
+            <li><u>Sécurité</u> : garantir un cadre d’entraînement conforme aux bonnes pratiques, avec du matériel entretenu et des règles claires.</li>
+            <li><u>Engagement local</u> : contribuer à la dynamique sportive de la commune et soutenir la vie associative.</li>
+        </ul><br>
 
         <h3>Ce que nous proposons</h3>
         <p>
@@ -61,13 +93,13 @@
             Notre salle de musculation met à disposition un ensemble de matériels adaptés aussi bien aux débutants qu’aux pratiquants confirmés.
             L’espace est organisé pour permettre un entraînement efficace, varié et sécurisé.
             On y trouve notamment :
-            <ul>
-                <li>des appareils guidés pour un travail en toute stabilité</li>
-                <li>des bancs, haltères et barres libres pour progresser à son rythme</li>
-                <li>un espace cardio pour l’échauffement et l’endurance</li>
-                <li>du matériel régulièrement entretenu pour garantir une pratique confortable et fiable</li>
-            </ul>
         </p>
+        <ul>
+            <li>des appareils guidés pour un travail en toute stabilité</li>
+            <li>des bancs, haltères et barres libres pour progresser à son rythme</li>
+            <li>un espace cardio pour l’échauffement et l’endurance</li>
+            <li>du matériel régulièrement entretenu pour garantir une pratique confortable et fiable</li>
+        </ul>
         <p>L’objectif est d’offrir un environnement simple, fonctionnel et accessible, permettant à chacun de s’entraîner dans de bonnes conditions.</p>
     </section>
 
@@ -78,14 +110,14 @@
             La sécurité est au cœur du fonctionnement de Saint‑Ouen Musculation.
             Afin de garantir une pratique sereine pour tous,
             l’association s’appuie sur un ensemble de règles simples et essentielles :
-            <ul>
-                <li>respecter le matériel et les autres adhérents</li>
-                <li>utiliser les équipements de manière appropriée</li>
-                <li>ranger et nettoyer le matériel après utilisation</li>
-                <li>signaler tout problème ou dysfonctionnement</li>
-                <li>adopter une attitude bienveillante et responsable</li>
-            </ul>
         </p>
+        <ul>
+            <li>respecter le matériel et les autres adhérents</li>
+            <li>utiliser les équipements de manière appropriée</li>
+            <li>ranger et nettoyer le matériel après utilisation</li>
+            <li>signaler tout problème ou dysfonctionnement</li>
+            <li>adopter une attitude bienveillante et responsable</li>
+        </ul>
         <p>
             En contrepartie, l’association s’engage à maintenir un cadre propre, sécurisé et conforme aux bonnes pratiques sportives.
             Ce fonctionnement partagé permet de préserver une ambiance agréable et un environnement d’entraînement durable pour l’ensemble des membres.

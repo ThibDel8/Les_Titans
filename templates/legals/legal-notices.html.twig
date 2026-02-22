@@ -4,14 +4,14 @@
 
 {% block body %}
 
-    {% include '_partials/_breadcrumb/_breadcrumb.html.twig' with { breadcrumb: breadcrumb } %}
+    {% include '_partials/_breadcrumb/_breadcrumb.html.twig' with { breadcrumbs: breadcrumbs } %}
 
     <section class="public-section">
         <h2 class="public-title">Mentions légales</h2>
 
         <h3>1. Éditeur du site</h3>
         <br>
-        <p>Le présent site internet, accessible à l’adresse <a>les-titans.fr</a>, est édité par :</p>
+        <p>Le présent site internet, accessible à l’adresse <a href="{{ app_public_url }}">{{ app_public_url }}</a>, est édité par :</p>
         <br>
         <ul class="paragraph">
             <li><b>Association Saint-Ouen Musculation</b></li>

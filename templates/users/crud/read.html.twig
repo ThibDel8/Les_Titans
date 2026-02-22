@@ -5,7 +5,7 @@
 {% block body %}
     {% set days = (user.medicalCertificateExpiry|date('U') - "now"|date('U')) // 86400 %}
 
-    {% include '_partials/_breadcrumb/_breadcrumb.html.twig' with { breadcrumb: breadcrumb } %}
+    {% include '_partials/_breadcrumb/_breadcrumb.html.twig' with { breadcrumbs: breadcrumbs } %}
 
     <div class="right-content">
         {% if user.annualMembershipFee is null and user.accessBadgeNumber is not null %}

@@ -1,11 +1,13 @@
 <nav class="nav-breadcrumb" aria-label="Fil d'Ariane">
     <ol class="breadcrumb">
-        {% for item in breadcrumb %}
-            {% if item.path %}
-                <li><a href="{{ item.path }}">{{ item.label }}</a></li>
-            {% else %}
-                <li aria-current="page">{{ item.label }}</li>
-            {% endif %}
+        {% for item in breadcrumbs %}
+            <li class="breadcrumb-item {% if not item.route %}active{% endif %}">
+                {% if item.route %}
+                    <a href="{{ path(item.route, item.parameters) }}">{{ item.label }}</a>
+                {% else %}
+                    {{ item.label }}
+                {% endif %}
+            </li>
         {% endfor %}
     </ol>
 </nav>

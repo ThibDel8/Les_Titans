@@ -3,6 +3,7 @@
 @import "base/reset.css";
 @import "base/variables.css";
 
+@import "components/blockquote.css";
 @import "components/board-members.css";
 @import "components/button.css";
 @import "components/buttons-native.css";

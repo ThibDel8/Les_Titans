@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Admin\Dashboard\Http\Controller;
 
+use App\Admin\Dashboard\Http\Breadcrumb\AdminDashboardBreadcrumbFactory;
 use App\SharedKernel\Domain\Enum\Role;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,8 +14,10 @@ use App\Admin\Dashboard\Domain\QueryHandler\DashboardQueryHandler;
 
 final class DashboardController extends AbstractController
 {
-    public function __construct(private DashboardQueryHandler $dashboardQuery)
-    {
+    public function __construct(
+        private readonly DashboardQueryHandler $dashboardQuery,
+        private readonly AdminDashboardBreadcrumbFactory $breadcrumbFactory,
+    ) {
     }
 
     #[Route(path: '/admin/dashboard', name: 'admin_dashboard', methods: Request::METHOD_GET)]
@@ -24,16 +27,11 @@ final class DashboardController extends AbstractController
 
         $dataCounter = $this->dashboardQuery->fetch();
 
-        $breadcrumb = [
-            ['label' => 'Accueil', 'path' => $this->generateUrl('app_home')],
-            ['label' => 'Administration', 'path' => null],
-        ];
-
         return $this->render('dashboard/index.html.twig', [
             'nbUsers' => $dataCounter->nbUsers,
-            'nbUnreadMessages' => $dataCounter->nbContactMessages,
             'nbMemberships' => $dataCounter->nbMemberships,
-            'breadcrumb' => $breadcrumb,
+            'nbUnreadMessages' => $dataCounter->nbContactMessages,
+            'breadcrumbs' => $this->breadcrumbFactory->dashboard(),
         ]);
     }
 }

@@ -4,7 +4,7 @@
 
 {% block body %}
 
-    {% include '_partials/_breadcrumb/_breadcrumb.html.twig' with { breadcrumb: breadcrumb } %}
+    {% include '_partials/_breadcrumb/_breadcrumb.html.twig' with { breadcrumbs: breadcrumbs } %}
 
     <section class="public-section">
         <h2 class="public-title">Politique de confidentialité</h2>
@@ -13,7 +13,7 @@
         <br>
         <p>
             La présente politique décrit la manière dont l’association <b>Saint-Ouen Musculation</b> collecte,
-            utilise et protège les données personnelles des membres et futurs membres via le site <a href="les-titans.fr">les-titans.fr</a>.
+            utilise et protège les données personnelles des membres et futurs membres via le site <a href="{{ app_public_url }}">{{ app_public_url }}</a>.
         </p>
         <p>L’association s’engage à respecter le Règlement Général sur la Protection des Données (RGPD) et la loi Informatique et Libertés.</p>
         <br>
