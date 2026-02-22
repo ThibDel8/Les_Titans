@@ -25,12 +25,9 @@ enum Role: string
         };
     }
 
-    public function isBoardMember(): bool
+    public static function boardMembers(): array
     {
-        return match ($this) {
-            self::Admin, self::President, self::VicePresident, self::Treasurer, self::Secretary => true,
-            self::Member => false,
-        };
+        return [self::Admin->value, self::President->value, self::VicePresident->value, self::Treasurer->value, self::Secretary->value];
     }
 
     public static function values(): array

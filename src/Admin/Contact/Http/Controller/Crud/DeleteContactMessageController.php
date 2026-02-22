@@ -6,6 +6,7 @@ namespace App\Admin\Contact\Http\Controller\Crud;
 
 use App\Admin\Contact\Domain\Handler\DeleteContactMessageHandler;
 use App\PublicApp\Contact\Domain\Entity\ContactMessage;
+use App\SharedKernel\Domain\Const\Regex;
 use App\SharedKernel\Domain\Enum\Role;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,7 +19,7 @@ class DeleteContactMessageController extends AbstractController
     {
     }
 
-    #[Route(path: '/admin/contact-messages/{id}/delete', name: 'admin_contact_message_delete', requirements: ['id' => '[0-9a-fA-F\-]{36}'], methods: Request::METHOD_POST)]
+    #[Route(path: '/admin/contact-messages/{id}/delete', name: 'admin_contact_message_delete', requirements: ['id' => Regex::UUID_V4], methods: Request::METHOD_POST)]
     public function __invoke(ContactMessage $contactMessage): Response
     {
         $this->denyAccessUnlessGranted(Role::Secretary->value);

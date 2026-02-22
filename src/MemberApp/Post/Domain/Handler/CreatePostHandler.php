@@ -10,6 +10,7 @@ use App\MemberApp\Post\Domain\DTO\Request\CreatePostRequest;
 use App\MemberApp\Post\Domain\Entity\Post;
 use App\MemberApp\Post\Domain\Repository\PostWriteRepositoryInterface;
 use App\MemberApp\Post\Domain\Service\Mailer\MemberMailer;
+use App\SharedKernel\Domain\Enum\Role;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -38,7 +39,9 @@ readonly class CreatePostHandler
 
         $this->postWriteRepository->save($post);
 
-        if ($author->getUserRole()->isBoardMember()) {
+        $authorRole = array_first($author->getRoles());
+
+        if (in_array($authorRole, Role::boardMembers(), true)) {
             $memberEmails = $this->getAllMemberEmails($author);
             $postUrl = $this->urlGenerator->generate(
                 name: 'app_post_read',

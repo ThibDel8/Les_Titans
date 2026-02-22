@@ -32,7 +32,7 @@ class UpdateUserProfileControllerTest extends AbstractWebTestCase
 
     public function testUpdateProfile(): void
     {
-        $client = self::getLoggedUser(UserFixtures::USER_MEMBER_ID);
+        $client = self::getLoggedUser(UserFixtures::USER_MINOR_MEMBER_ID);
         $client->request(method: Request::METHOD_GET, uri: $this->url);
 
         self::assertResponseStatusCodeSame(Response::HTTP_OK);
@@ -40,13 +40,20 @@ class UpdateUserProfileControllerTest extends AbstractWebTestCase
         $client->submitForm('Enregistrer', [
             'profile[lastname]' => 'Lastname',
             'profile[firstname]' => 'Firstname',
-            'profile[birthdate]' => '1995-01-01',
+            'profile[birthdate]' => '2015-01-01',
             'profile[gender]' => Gender::Male->value,
             'profile[phone]' => '0666666666',
             'profile[address]' => '5 avenue de Quelque Part',
             'profile[postalcode]' => '80500',
             'profile[city]' => 'Cityville',
             'profile[email]' => 'random-address@email.fr',
+            'profile[tutorLastname]' => 'Tutorlastname',
+            'profile[tutorFirstname]' => 'Tutorfirstname',
+            'profile[tutorPhone]' => '0666666669',
+            'profile[tutorEmail]' => 'tutor-address@email.fr',
+            'profile[tutorAddress]' => '5 avenue de Quelque Part',
+            'profile[tutorPostalcode]' => '80500',
+            'profile[tutorCity]' => 'Cityville',
         ]);
 
         $client->followRedirect();

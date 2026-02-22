@@ -34,7 +34,7 @@ class DeleteCommentControllerTest extends AbstractWebTestCase
 
     public function testDeleteComment(): void
     {
-        $client = self::getLoggedUser(UserFixtures::USER_MEMBER_ID);
+        $client = self::getLoggedUser(UserFixtures::USER_SECRETARY_ID);
         $client->request(method: Request::METHOD_POST, uri: $this->url);
 
         self::assertResponseStatusCodeSame(Response::HTTP_FOUND);

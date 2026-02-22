@@ -18,6 +18,7 @@ class UserFixtures extends Fixture
     public const string USER_VICE_PRESIDENT_ID = 'a6ee5cfc-3ee3-4936-aec4-8d10a6b4cbbd';
     public const string USER_SECRETARY_ID = '181c37fd-3bd0-4d88-9322-a0e4213e57b2';
     public const string USER_MEMBER_ID = '3bac373a-840b-4fe4-93dc-19921c912169';
+    public const string USER_MINOR_MEMBER_ID = '502f1d97-01c2-4852-a8ad-8bc40b080f73';
 
     public const int USER_MEMBER_BADGE_NUMBER = 0001234567;
 
@@ -99,6 +100,7 @@ class UserFixtures extends Fixture
             tutorCity: $faker->city(),
             profileImage: $this->profileImageService->save($this->profileImageService->getDefaultsDir().ProfileImageService::MALE_PROFILE),
             badgeNumber: $faker->unique()->numerify('000#######'),
+            id: self::USER_MINOR_MEMBER_ID,
         );
 
         $this->createUser(
