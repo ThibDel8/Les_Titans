@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Admin\User\Http\Controller\Crud;
 
+use App\Admin\User\Http\Controller\Breadcrumb\AdminUserBreadcrumbFactory;
 use App\SharedKernel\Domain\Enum\Role;
 use App\Admin\User\Domain\Entity\User;
 use App\Admin\User\Http\Form\UpdateUserType;
@@ -16,8 +17,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 final class UpdateUserController extends AbstractController
 {
-    public function __construct(private readonly UpdateUserHandler $updateUserHandler)
-    {
+    public function __construct(
+        private readonly UpdateUserHandler $updateUserHandler,
+        private readonly AdminUserBreadcrumbFactory $breadcrumbFactory,
+    ) {
     }
 
     #[Route(path: '/admin/users/{id}/update', name: 'admin_user_update', requirements: ['id' => '[0-9a-fA-F\-]{36}'], methods:[Request::METHOD_GET, Request::METHOD_POST])]
@@ -39,18 +42,10 @@ final class UpdateUserController extends AbstractController
             return $this->redirectToRoute('admin_user_read', ['id' => $user->getId()]);
         }
 
-        $breadcrumb = [
-            ['label' => 'Accueil', 'path' => $this->generateUrl('app_home')],
-            ['label' => 'Administration', 'path' => $this->generateUrl('admin_dashboard')],
-            ['label' => 'Liste des membres', 'path' => $this->generateUrl('admin_user_list')],
-            ['label' => $user->getFirstname().' '.$user->getLastname(), 'path' => $this->generateUrl('admin_user_read', ['id' => $user->getId()])],
-            ['label' => 'Modifications', 'path' => null],
-        ];
-
         return $this->render('users/crud/update.html.twig', [
             'user' => $user,
             'form' => $form,
-            'breadcrumb' => $breadcrumb,
+            'breadcrumbs' => $this->breadcrumbFactory->updateUser($user),
         ]);
     }
 }

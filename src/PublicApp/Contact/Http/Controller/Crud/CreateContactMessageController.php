@@ -7,6 +7,7 @@ namespace App\PublicApp\Contact\Http\Controller\Crud;
 use App\PublicApp\Contact\Domain\DTO\Request\ContactMessageCreationRequest;
 use App\PublicApp\Contact\Domain\Handler\CreateContactMessageHandler;
 use App\PublicApp\Contact\Domain\QueryHandler\CreateContactMessageQueryHandler;
+use App\PublicApp\Contact\Http\Breadcrumb\PublicContactBreadcrumbFactory;
 use App\PublicApp\Contact\Http\Form\ContactMessageType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,6 +18,7 @@ final class CreateContactMessageController extends AbstractController
 {
     public function __construct(
         private readonly CreateContactMessageHandler $createMessageHandler,
+        private readonly PublicContactBreadcrumbFactory $breadcrumbFactory,
         private readonly CreateContactMessageQueryHandler $createMessageQuery,
     ) {
     }
@@ -39,15 +41,10 @@ final class CreateContactMessageController extends AbstractController
             return $this->redirectToRoute('app_contact');
         }
 
-        $breadcrumb = [
-            ['label' => 'Accueil', 'path' => $this->generateUrl('app_home')],
-            ['label' => 'Contact', 'path' => null],
-        ];
-
         return $this->render('contact/crud/create.html.twig', [
             'form' => $form,
             'boardMembers' => $boardMembers,
-            'breadcrumb' => $breadcrumb,
+            'breadcrumbs' => $this->breadcrumbFactory->createContactMessage(),
         ]);
     }
 }

@@ -9,6 +9,7 @@ use App\MemberApp\Post\Domain\DTO\Request\CreateCommentRequest;
 use App\MemberApp\Post\Domain\Entity\Post;
 use App\MemberApp\Post\Domain\Handler\CreateCommentHandler;
 use App\MemberApp\Post\Domain\Handler\ReadCommentHandler;
+use App\MemberApp\Post\Http\Breadcrumb\MemberPostBreadcrumbFactory;
 use App\MemberApp\Post\Http\Form\CreateCommentType;
 use App\SharedKernel\Domain\Enum\Role;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,11 +17,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-class ReadPostController extends AbstractController
+final class ReadPostController extends AbstractController
 {
     public function __construct(
         private readonly ReadCommentHandler $readCommentHandler,
         private readonly CreateCommentHandler $createCommentHandler,
+        private readonly MemberPostBreadcrumbFactory $breadcrumbFactory,
     ) {
     }
 
@@ -46,17 +48,11 @@ class ReadPostController extends AbstractController
 
         $comments = $this->readCommentHandler->handle($post);
 
-        $breadcrumb = [
-            ['label' => 'Accueil', 'path' => $this->generateUrl('app_home')],
-            ['label' => 'Publications', 'path' => $this->generateUrl('app_post_list')],
-            ['label' => 'Commentaires', 'path' => null],
-        ];
-
         return $this->render('posts/crud/read.html.twig', [
-            'breadcrumb' => $breadcrumb,
             'post' => $post,
-            'comments' => $comments,
             'form' => $form,
+            'comments' => $comments,
+            'breadcrumbs' => $this->breadcrumbFactory->readPost(),
         ]);
     }
 }

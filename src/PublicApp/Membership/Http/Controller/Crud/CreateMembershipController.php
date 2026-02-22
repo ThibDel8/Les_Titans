@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\PublicApp\Membership\Http\Controller\Crud;
 
+use App\PublicApp\Membership\Http\Breadcrumb\PublicMembershipBreadcrumbFactory;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
@@ -13,10 +14,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\PublicApp\Membership\Domain\Handler\CreateMembershipHandler;
 use App\PublicApp\Membership\Domain\DTO\Request\MembershipCreationRequest;
 
-class CreateMembershipController extends AbstractController
+final class CreateMembershipController extends AbstractController
 {
-    public function __construct(private readonly CreateMembershipHandler $createMembershipHandler)
-    {
+    public function __construct(
+        private readonly CreateMembershipHandler $createMembershipHandler,
+        private readonly PublicMembershipBreadcrumbFactory $breadcrumbFactory,
+    ) {
     }
 
     /**
@@ -37,15 +40,10 @@ class CreateMembershipController extends AbstractController
 
             return $this->redirectToRoute('app_membership_pending', ['id' => $membership->getId()]);
         }
-        $breadcrumb = [
-            ['label' => 'Accueil', 'path' => $this->generateUrl('app_home')],
-            ['label' => 'Demande d\'adhésion', 'path' => null],
-        ];
-
 
         return $this->render('membership/crud/create.html.twig', [
             'form' => $form,
-            'breadcrumb' => $breadcrumb,
+            'breadcrumbs' => $this->breadcrumbFactory->createMembership(),
         ]);
     }
 }

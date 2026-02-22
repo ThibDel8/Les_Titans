@@ -1,0 +1,14 @@
+blockquote {
+    font-style: italic;
+    border-left: 4px solid var(--grey-light);
+    margin: 1.5rem 0;
+    padding-left: 1rem;
+    color: var(--grey-light);
+}
+
+.blockquote-footer {
+    font-size: 0.85rem;
+    font-style: normal;
+    color: var(--grey-light);
+    margin-top: 0.5rem;
+}

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Admin\User\Http\Controller;
 
+use App\Admin\User\Http\Controller\Breadcrumb\AdminUserBreadcrumbFactory;
 use App\SharedKernel\Domain\Enum\Role;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,8 +14,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 final class ListUserController extends AbstractController
 {
-    public function __construct(private readonly ListUserQueryHandler $listUserQueryHandler)
-    {
+    public function __construct(
+        private readonly ListUserQueryHandler $listUserQueryHandler,
+        private readonly AdminUserBreadcrumbFactory $breadcrumbFactory,
+    ) {
     }
 
     #[Route(path: '/admin/users', name: 'admin_user_list', methods: Request::METHOD_GET)]
@@ -24,16 +27,10 @@ final class ListUserController extends AbstractController
 
         $data = $this->listUserQueryHandler->fetch();
 
-        $breadcrumb = [
-            ['label' => 'Accueil', 'path' => $this->generateUrl('app_home')],
-            ['label' => 'Administration', 'path' => $this->generateUrl('admin_dashboard')],
-            ['label' => 'Liste des membres', 'path' => null],
-        ];
-
         return $this->render('users/list.html.twig', [
             'validMembers' => $data['validMembers'],
             'invalidMembers' => $data['invalidMembers'],
-            'breadcrumb' => $breadcrumb,
+            'breadcrumbs' => $this->breadcrumbFactory->listUsers(),
         ]);
     }
 }

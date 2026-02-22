@@ -6,6 +6,7 @@ namespace App\Admin\Membership\Http\Controller\Crud;
 
 use App\Admin\Membership\Domain\DTO\Request\ValidateMembershipRequest;
 use App\Admin\Membership\Domain\Handler\ValidateMembershipHandler;
+use App\Admin\Membership\Http\Breadcrumb\AdminMembershipBreadcrumbFactory;
 use App\Admin\Membership\Http\Form\ValidateMembershipType;
 use App\MemberApp\Membership\Domain\Entity\Membership;
 use App\SharedKernel\Domain\Enum\Role;
@@ -14,11 +15,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-class ReadMembershipController extends AbstractController
+final class ReadMembershipController extends AbstractController
 {
     public function __construct(
         private readonly int $annualFee,
         private readonly int $accessBadgeDeposit,
+        private readonly AdminMembershipBreadcrumbFactory $breadcrumbFactory,
         private readonly ValidateMembershipHandler $validateMembershipHandler,
     ) {
     }
@@ -48,17 +50,10 @@ class ReadMembershipController extends AbstractController
             return $this->redirectToRoute('admin_membership_read', ['id' => $membership->getId()]);
         }
 
-        $breadcrumb = [
-            ['label' => 'Accueil', 'path' => $this->generateUrl('app_home')],
-            ['label' => 'Administration', 'path' => $this->generateUrl('admin_dashboard')],
-            ['label' => 'Liste des demandes d\'adhésion', 'path' => $this->generateUrl('admin_membership_list')],
-            ['label' => $membership->getFirstname().' '.$membership->getLastname(), 'path' => null],
-        ];
-
         return $this->render('membership/crud/read.html.twig', [
             'membership' => $membership,
             'form' => $form,
-            'breadcrumb' => $breadcrumb,
+            'breadcrumbs' => $this->breadcrumbFactory->readMembership($membership),
         ]);
     }
 }

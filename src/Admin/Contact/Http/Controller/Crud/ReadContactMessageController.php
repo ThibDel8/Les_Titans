@@ -7,6 +7,7 @@ namespace App\Admin\Contact\Http\Controller\Crud;
 use App\Admin\Contact\Domain\DTO\Request\AnswerContactMessageRequest;
 use App\Admin\Contact\Domain\Handler\AnswerContactMessageHandler;
 use App\Admin\Contact\Domain\Handler\ReadContactMessageHandler;
+use App\Admin\Contact\Http\Breadcrumb\AdminContactBreadcrumbFactory;
 use App\Admin\Contact\Http\Form\AnswerContactMessageType;
 use App\Admin\User\Domain\Entity\User;
 use App\PublicApp\Contact\Domain\Entity\ContactMessage;
@@ -19,6 +20,7 @@ use Symfony\Component\Routing\Attribute\Route;
 final class ReadContactMessageController extends AbstractController
 {
     public function __construct(
+        private readonly AdminContactBreadcrumbFactory $breadcrumbFactory,
         private readonly ReadContactMessageHandler $readContactMessageHandler,
         private readonly AnswerContactMessageHandler $answerContactMessageHandler,
     ) {
@@ -46,17 +48,10 @@ final class ReadContactMessageController extends AbstractController
 
         $this->readContactMessageHandler->handle($contactMessage, $user);
 
-        $breadcrumb = [
-            ['label' => 'Accueil', 'path' => $this->generateUrl('app_home')],
-            ['label' => 'Administration', 'path' => $this->generateUrl('admin_dashboard')],
-            ['label' => 'Liste des messages', 'path' => $this->generateUrl('admin_contact_message_list')],
-            ['label' => 'Message', 'path' => null],
-        ];
-
         return $this->render('contact/crud/read.html.twig', [
             'message' => $contactMessage,
             'form' => $form,
-            'breadcrumb' => $breadcrumb,
+            'breadcrumbs' => $this->breadcrumbFactory->readContactMessage(),
         ]);
     }
 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Admin\User\Http\Controller\Crud;
 
+use App\Admin\User\Http\Controller\Breadcrumb\AdminUserBreadcrumbFactory;
 use App\SharedKernel\Domain\Enum\Role;
 use App\Admin\User\Domain\Entity\User;
 use App\Admin\User\Http\Form\UserAccessBadgeType;
@@ -16,8 +17,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 final class ReadUserController extends AbstractController
 {
-    public function __construct(private readonly CreateAccessBadgeNumberHandler $createAccessBadgeNumberHandler)
-    {
+    public function __construct(
+        private readonly AdminUserBreadcrumbFactory $breadcrumbFactory,
+        private readonly CreateAccessBadgeNumberHandler $createAccessBadgeNumberHandler,
+    ) {
     }
 
     #[Route(path: '/admin/users/{id}', name: 'admin_user_read', requirements: ['id' => '[0-9a-fA-F\-]{36}'], methods:[Request::METHOD_GET, Request::METHOD_POST])]
@@ -37,17 +40,10 @@ final class ReadUserController extends AbstractController
             return $this->redirectToRoute('admin_user_read', ['id' => $user->getId()]);
         }
 
-        $breadcrumb = [
-            ['label' => 'Accueil', 'path' => $this->generateUrl('app_home')],
-            ['label' => 'Administration', 'path' => $this->generateUrl('admin_dashboard')],
-            ['label' => 'Liste des membres', 'path' => $this->generateUrl('admin_user_list')],
-            ['label' => $user->getFirstname().' '.$user->getLastname(), 'path' => null],
-        ];
-
         return $this->render('users/crud/read.html.twig', [
             'user' => $user,
             'form' => $form,
-            'breadcrumb' => $breadcrumb,
+            'breadcrumbs' => $this->breadcrumbFactory->readUser($user),
         ]);
     }
 }

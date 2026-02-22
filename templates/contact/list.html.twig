@@ -5,7 +5,7 @@
 {% block body %}
     {% set isUnreadMessages = messages|filter(message => message.assignedTo is null) %}
 
-    {% include '_partials/_breadcrumb/_breadcrumb.html.twig' with { breadcrumb: breadcrumb } %}
+    {% include '_partials/_breadcrumb/_breadcrumb.html.twig' with { breadcrumbs: breadcrumbs } %}
 
     <h2 class="manager-title">Messages ({{ isUnreadMessages|length }})</h2>
 

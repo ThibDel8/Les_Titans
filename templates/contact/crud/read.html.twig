@@ -4,7 +4,7 @@
 
 {% block body %}
 
-    {% include '_partials/_breadcrumb/_breadcrumb.html.twig' with { breadcrumb: breadcrumb } %}
+    {% include '_partials/_breadcrumb/_breadcrumb.html.twig' with { breadcrumbs: breadcrumbs } %}
 
     <div class="right-content">
         {% if app.user == message.assignedTo and message.answer is null %}
