@@ -2,12 +2,14 @@
 
 {% block title %}{{ parent() }}Adhésion{% endblock %}
 
+{% block h1 %}Demande d'adhésion{% endblock %}
+
 {% block body %}
 
     {% include '_partials/_breadcrumb/_breadcrumb.html.twig' with { breadcrumbs: breadcrumbs } %}
 
     <section class="public-section">
-        <h2 class="public-title">Demande d'adhésion</h2>
+        <h2 class="public-title">Inscription</h2>
 
         <p>
             L’adhésion à la salle est de <strong>{{ annual_fee }} € par an</strong> et permet l’obtention d’un <strong>badge d’accès</strong>

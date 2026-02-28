@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Admin\User\Http\Controller\Crud;
 
 use App\Admin\User\Http\Controller\Breadcrumb\AdminUserBreadcrumbFactory;
-use App\SharedKernel\Domain\Const\Regex;
 use App\SharedKernel\Domain\Enum\Role;
 use App\Admin\User\Domain\Entity\User;
 use App\Admin\User\Http\Form\UserAccessBadgeType;
@@ -15,6 +14,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use App\Admin\User\Domain\DTO\Request\UserAccessBadgeRequest;
 use App\Admin\User\Domain\Handler\CreateAccessBadgeNumberHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Routing\Requirement\Requirement;
 
 final class ReadUserController extends AbstractController
 {
@@ -24,7 +24,7 @@ final class ReadUserController extends AbstractController
     ) {
     }
 
-    #[Route(path: '/admin/users/{id}', name: 'admin_user_read', requirements: ['id' => Regex::UUID_V4], methods:[Request::METHOD_GET, Request::METHOD_POST])]
+    #[Route(path: '/admin/users/{id}', name: 'admin_user_read', requirements: ['id' => Requirement::UUID_V4], methods:[Request::METHOD_GET, Request::METHOD_POST])]
     public function __invoke(User $user, Request $request): Response
     {
         $this->denyAccessUnlessGranted(Role::Secretary->value);

@@ -3,7 +3,7 @@
 {% block subject %}{{ parent() }}Nouveau message de contact{% endblock %}
 
 {% block body %}
-    <h2 style="color: {{ colors.managerColor }};">Nouveau message de contact</h2>
+    <h1 style="color: {{ colors.managerColor }};">Nouveau message de contact</h1>
     <div style="color: {{ colors.greyLight }}; margin-bottom: 20px;">
         <p>Bonjour,</p>
         <p>Un nouveau message a été reçu via le formulaire de contact.</p>
@@ -16,10 +16,8 @@
         margin-bottom: 40px;
         border-left: 5px solid {{ colors.managerColor }};
     ">
-        <h3 style="color: {{ colors.managerColor }}; margin-bottom: 40px;">Détails du message</h3>
+        <h2 style="color: {{ colors.managerColor }}; margin-bottom: 40px;">{{ subject }}</h2>
         <div style="color: {{ colors.greyLight }};">
-            <strong>Sujet : </strong>{{ subject }}<br><br>
-            <strong>Message : </strong><br>
             {{ message }}
         </div>
     </section>

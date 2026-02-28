@@ -2,6 +2,8 @@
 
 {% block title %}{{ parent() }}Liste des messages{% endblock %}
 
+{% block h1 %}Liste des messages{% endblock %}
+
 {% block body %}
     {% set isUnreadMessages = messages|filter(message => message.assignedTo is null) %}
 

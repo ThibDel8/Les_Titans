@@ -2,12 +2,14 @@
 
 {% block title %}{{ parent() }}Demandes d'adhésion{% endblock %}
 
+{% block h1 %}Demande d'adhésion{% endblock %}
+
 {% block body %}
 
     {% include '_partials/_breadcrumb/_breadcrumb.html.twig' with { breadcrumbs: breadcrumbs } %}
 
     <section class="public-section">
-        <h2 class="public-title">Demandes d'adhésion</h2>
+        <h2 class="public-title">Demandes d'adhésion envoyée</h2>
         <div>
             <p>Félicitations ! Vous avez complété la première étape de votre adhésion.</p><br>
             <p>Un email vous a été envoyé contenant le lien pour télécharger votre formulaire d'adhésion ainsi que les instructions pour les étapes suivantes.</p>

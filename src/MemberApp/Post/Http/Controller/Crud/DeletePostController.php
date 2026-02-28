@@ -6,12 +6,12 @@ namespace App\MemberApp\Post\Http\Controller\Crud;
 
 use App\MemberApp\Post\Domain\Entity\Post;
 use App\MemberApp\Post\Domain\Handler\DeletePostHandler;
-use App\SharedKernel\Domain\Const\Regex;
 use App\SharedKernel\Domain\Voter\PostVoter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Routing\Requirement\Requirement;
 
 class DeletePostController extends AbstractController
 {
@@ -19,7 +19,7 @@ class DeletePostController extends AbstractController
     {
     }
 
-    #[Route(path: '/posts/{id}/delete', name: 'app_post_delete', requirements: ['id' => Regex::UUID_V4], methods: Request::METHOD_POST)]
+    #[Route(path: '/posts/{id}/delete', name: 'app_post_delete', requirements: ['id' => Requirement::UUID_V4], methods: Request::METHOD_POST)]
     public function __invoke(Post $post): Response
     {
         $this->denyAccessUnlessGranted(attribute: PostVoter::DELETE, subject: $post); // voter

@@ -3,6 +3,7 @@
 {% block subject %}{{ parent() }}Adhésion{% endblock %}
 
 {% block body %}
+    <h1 style="color: {{ colors.publicColor }}; padding-bottom: 20px;">Adhésion Saint-Ouen Musculation</h1>
 
     <section style="
         background-color: {{ colors.grey }};
@@ -11,7 +12,6 @@
         margin-bottom: 40px;
         border-left: 5px solid {{ colors.publicColor }};
     ">
-        <h2 style="color: {{ colors.publicColor }}; padding-bottom: 20px;">Adhésion Saint-Ouen Musculation</h2>
         <div style="color: {{ colors.greyLight }};">
             <p>Bonjour {{ membership.firstname }},</p><br>
             <p>Nous vous confirmons que votre demande d’adhésion a bien été prise en compte.</p>

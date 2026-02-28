@@ -2,12 +2,14 @@
 
 {% block title %}{{ parent() }}Administration{% endblock %}
 
+{% block h1 %}Administration{% endblock %}
+
 {% block body %}
 
     {% include '_partials/_breadcrumb/_breadcrumb.html.twig' with { breadcrumbs: breadcrumbs } %}
 
     <section class="manager-section">
-        <h2 class="manager-title">Administration</h2>
+        <h2 class="manager-title">Tableau de bord</h2>
         <div class="dashboard">
             <ul>
                 <li>

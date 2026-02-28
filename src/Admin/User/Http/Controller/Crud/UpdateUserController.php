@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Admin\User\Http\Controller\Crud;
 
 use App\Admin\User\Http\Controller\Breadcrumb\AdminUserBreadcrumbFactory;
-use App\SharedKernel\Domain\Const\Regex;
 use App\SharedKernel\Domain\Enum\Role;
 use App\Admin\User\Domain\Entity\User;
 use App\Admin\User\Http\Form\UpdateUserType;
@@ -15,6 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Routing\Requirement\Requirement;
 
 final class UpdateUserController extends AbstractController
 {
@@ -24,7 +24,7 @@ final class UpdateUserController extends AbstractController
     ) {
     }
 
-    #[Route(path: '/admin/users/{id}/update', name: 'admin_user_update', requirements: ['id' => Regex::UUID_V4], methods:[Request::METHOD_GET, Request::METHOD_POST])]
+    #[Route(path: '/admin/users/{id}/update', name: 'admin_user_update', requirements: ['id' => Requirement::UUID_V4], methods:[Request::METHOD_GET, Request::METHOD_POST])]
     public function __invoke(User $user, Request $request): Response
     {
         $this->denyAccessUnlessGranted(Role::Secretary->value);

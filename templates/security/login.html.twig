@@ -2,9 +2,11 @@
 
 {% block title %}{{ parent() }}Connexion{% endblock %}
 
+{% block h1 %}Connexion{% endblock %}
+
 {% block body %}
     <section class="public-section">
-        <h2 class="public-title">Connexion</h2>
+        <h2 class="public-title">Identification</h2>
         <form method="post">
             {% if error %}
                 <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>

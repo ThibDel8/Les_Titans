@@ -2,6 +2,8 @@
 
 {% block title %}{{ parent() }}Profil{% endblock %}
 
+{% block h1 %}Profil{% endblock %}
+
 {% block body %}
     {% set days = (app.user.medicalCertificateExpiry|date('U') - "now"|date('U')) // 86400 %}
 
@@ -12,7 +14,7 @@
     </div>
 
     <section class="public-section">
-        <h2 class="public-title">Mon profil</h2>
+        <h2 class="public-title">Mes informations</h2>
         <div class="member-profile-image">
             <img src="{{ asset('images/profiles/uploads/' ~ app.user.profileImage ) }}" alt="Image de profil du membre">
             <h3>{{ app.user.firstname }} {{ app.user.lastname }}</h3>
