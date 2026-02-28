@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\PublicApp\Membership\Http\Controller\Crud;
 
 use App\PublicApp\Membership\Http\Breadcrumb\PublicMembershipBreadcrumbFactory;
-use App\SharedKernel\Domain\Const\Regex;
 use Random\RandomException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,6 +14,7 @@ use App\PublicApp\Membership\Http\Form\MembershipCreationType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\PublicApp\Membership\Domain\Handler\CreateMembershipHandler;
 use App\PublicApp\Membership\Domain\DTO\Request\MembershipCreationRequest;
+use Symfony\Component\Routing\Requirement\Requirement;
 
 final class CreateMembershipController extends AbstractController
 {
@@ -27,7 +27,7 @@ final class CreateMembershipController extends AbstractController
     /**
      * @throws TransportExceptionInterface|RandomException
      */
-    #[Route(path: '/memberships/create', name: 'app_membership_create', requirements: ['id' => Regex::UUID_V4], methods: [Request::METHOD_GET, Request::METHOD_POST])]
+    #[Route(path: '/memberships/create', name: 'app_membership_create', requirements: ['id' => Requirement::UUID_V4], methods: [Request::METHOD_GET, Request::METHOD_POST])]
     public function __invoke(Request $request): Response
     {
         $membershipCreationRequest = new MembershipCreationRequest();

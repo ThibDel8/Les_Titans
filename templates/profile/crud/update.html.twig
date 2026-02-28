@@ -2,12 +2,14 @@
 
 {% block title %}{{ parent() }}Profil{% endblock %}
 
+{% block h1 %}Modifications du profil{% endblock %}
+
 {% block body %}
 
     {% include '_partials/_breadcrumb/_breadcrumb.html.twig' with { breadcrumbs: breadcrumbs } %}
 
     <section class="public-section">
-        <h2 class="public-title">Mise à jour du profil</h2>
+        <h2 class="public-title">Mes informations</h2>
         {{ form_start(form) }}
             {{ form_rest(form) }}
             <br>

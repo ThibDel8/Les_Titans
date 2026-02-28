@@ -2,12 +2,14 @@
 
 {% block title %}{{ parent() }}Publication{% endblock %}
 
+{% block h1 %}Écrire une publication{% endblock %}
+
 {% block body %}
 
     {% include '_partials/_breadcrumb/_breadcrumb.html.twig' with { breadcrumbs: breadcrumbs } %}
 
     <section class="public-section">
-        <h2 class="public-title">Écrire une publication</h2>
+        <h2 class="public-title">Publication</h2>
 
         {{ form_start(form) }}
             {{ form_rest(form) }}

@@ -3,10 +3,10 @@
 {% block subject %}{{ parent() }}Réponse au message de contact{% endblock %}
 
 {% block body %}
-    <h2 style="color: {{ colors.publicColor }};">Réponse au message de contact</h2>
+    <h1 style="color: {{ colors.publicColor }};">Réponse au message de contact</h1>
     <div style="color: {{ colors.greyLight }}; margin-bottom: 20px;">
         <p>Bonjour,</p>
-        <p>{{ message.answeredBy.firstname }}, {{ message.answeredBy.role|lower }} de l'association, a répondu à votre message de contact.</p>
+        <p>{{ message.answeredBy.firstname }}, {{ message.answeredBy.role|lower }} de l'association, a répondu à votre message.</p>
     </div>
 
     <section style="
@@ -16,11 +16,11 @@
         margin-bottom: 40px;
         border-left: 5px solid {{ colors.publicColor }};
     ">
-        <h3 style="color: {{ colors.publicColor }}; margin-bottom: 40px;">Réponse</h3>
+        <h2 style="color: {{ colors.publicColor }}; margin-bottom: 40px;">Réponse</h2>
         <div style="color: {{ colors.greyLight }};">
             {{ message.answer }}
         </div><br>
-        <h3 style="color: {{ colors.publicColor }}; margin-bottom: 40px;">Rappel de la demande</h3>
+        <h2 style="color: {{ colors.publicColor }}; margin-bottom: 40px;">Rappel de la demande</h2>
         <div style="color: {{ colors.greyLight }};">
             <strong>Sujet : </strong>{{ message.subject }}<br><br>
             <strong>Message : </strong><br>

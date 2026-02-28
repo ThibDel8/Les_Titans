@@ -2,6 +2,8 @@
 
 {% block title %}{{ parent() }}Profil de {{ user.firstname }}{% endblock %}
 
+{% block h1 %}Membre{% endblock %}
+
 {% block body %}
     {% set days = (user.medicalCertificateExpiry|date('U') - "now"|date('U')) // 86400 %}
 

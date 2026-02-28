@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Admin\User\Http\Controller;
 
-use App\SharedKernel\Domain\Const\Regex;
 use App\SharedKernel\Domain\Enum\Role;
 use App\Admin\User\Domain\Entity\User;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,6 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Admin\User\Domain\Handler\RestitutionBadgeUserHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Routing\Requirement\Requirement;
 
 final class RestitutionBadgeUserController extends AbstractController
 {
@@ -19,7 +19,7 @@ final class RestitutionBadgeUserController extends AbstractController
     {
     }
 
-    #[Route(path: '/admin/users/{id}/restitution', name: 'admin_user_restitution', requirements: ['id' => Regex::UUID_V4], methods: Request::METHOD_POST)]
+    #[Route(path: '/admin/users/{id}/restitution', name: 'admin_user_restitution', requirements: ['id' => Requirement::UUID_V4], methods: Request::METHOD_POST)]
     public function __invoke(User $user): Response
     {
         $this->denyAccessUnlessGranted(Role::Secretary->value);

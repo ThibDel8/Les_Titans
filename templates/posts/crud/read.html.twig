@@ -2,11 +2,11 @@
 
 {% block title %}{{ parent() }}Publication{% endblock %}
 
+{% block h1 %}Commentaires{% endblock %}
+
 {% block body %}
 
     {% include '_partials/_breadcrumb/_breadcrumb.html.twig' with { breadcrumbs: breadcrumbs } %}
-
-    <h2 class="public-title">Publication</h2>
     <div class="author-post">
         <img src="
             {% if post.author %}

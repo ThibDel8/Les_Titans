@@ -9,12 +9,12 @@ use App\Admin\Membership\Domain\Handler\ValidateMembershipHandler;
 use App\Admin\Membership\Http\Breadcrumb\AdminMembershipBreadcrumbFactory;
 use App\Admin\Membership\Http\Form\ValidateMembershipType;
 use App\MemberApp\Membership\Domain\Entity\Membership;
-use App\SharedKernel\Domain\Const\Regex;
 use App\SharedKernel\Domain\Enum\Role;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Routing\Requirement\Requirement;
 
 final class ReadMembershipController extends AbstractController
 {
@@ -26,7 +26,7 @@ final class ReadMembershipController extends AbstractController
     ) {
     }
 
-    #[Route(path: '/admin/memberships/{id}', name: 'admin_membership_read', requirements: ['id' => Regex::UUID_V4], methods:[Request::METHOD_GET, Request::METHOD_POST])]
+    #[Route(path: '/admin/memberships/{id}', name: 'admin_membership_read', requirements: ['id' => Requirement::UUID_V4], methods:[Request::METHOD_GET, Request::METHOD_POST])]
     public function __invoke(Membership $membership, Request $request): Response
     {
         $this->denyAccessUnlessGranted(Role::Secretary->value);

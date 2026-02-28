@@ -2,11 +2,11 @@
 
 {% block title %}{{ parent() }}Publications{% endblock %}
 
+{% block h1 %}Publications{% endblock %}
+
 {% block body %}
 
     {% include '_partials/_breadcrumb/_breadcrumb.html.twig' with { breadcrumbs: breadcrumbs } %}
-
-    <h2 class="public-title">Publications</h2>
 
     <div class="right-content">
         <a class="btn btn-info" href="{{ path('app_post_create') }}" title="Ajouter une publication">Écrire</a>

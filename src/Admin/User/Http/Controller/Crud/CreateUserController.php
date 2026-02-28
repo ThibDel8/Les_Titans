@@ -6,12 +6,12 @@ namespace App\Admin\User\Http\Controller\Crud;
 
 use App\Admin\User\Domain\Handler\CreateUserHandler;
 use App\MemberApp\Membership\Domain\Entity\Membership;
-use App\SharedKernel\Domain\Const\Regex;
 use App\SharedKernel\Domain\Enum\Role;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Routing\Requirement\Requirement;
 
 class CreateUserController extends AbstractController
 {
@@ -19,7 +19,7 @@ class CreateUserController extends AbstractController
     {
     }
 
-    #[Route(path: 'admin/users/create/{id}', name: 'admin_user_create', requirements: ['id' => Regex::UUID_V4], methods: Request::METHOD_POST)]
+    #[Route(path: 'admin/users/create/{id}', name: 'admin_user_create', requirements: ['id' => Requirement::UUID_V4], methods: Request::METHOD_POST)]
     public function __invoke(Membership $membership): Response
     {
         $this->denyAccessUnlessGranted(Role::Secretary->value);

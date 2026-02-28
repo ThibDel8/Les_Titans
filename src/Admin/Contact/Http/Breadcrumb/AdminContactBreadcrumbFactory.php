@@ -14,7 +14,7 @@ class AdminContactBreadcrumbFactory
             ->add(label: 'Accueil', route: 'app_home')
             ->add(label: 'Administration', route: 'admin_dashboard')
             ->add(label: 'Liste des messages', route: 'admin_contact_message_list')
-            ->add(label: 'Messages')
+            ->add(label: 'Message')
             ->build();
     }
 

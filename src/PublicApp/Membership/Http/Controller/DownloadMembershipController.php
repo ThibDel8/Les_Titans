@@ -7,11 +7,11 @@ namespace App\PublicApp\Membership\Http\Controller;
 use App\MemberApp\Membership\Domain\Entity\Membership;
 use App\PublicApp\Membership\Domain\QueryHandler\MembershipPdfQuery;
 use App\PublicApp\Membership\Infrastructure\Pdf\MembershipPdfGenerator;
-use App\SharedKernel\Domain\Const\Regex;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Routing\Requirement\Requirement;
 
 class DownloadMembershipController extends AbstractController
 {
@@ -21,7 +21,7 @@ class DownloadMembershipController extends AbstractController
     ) {
     }
 
-    #[Route(path: '/memberships/{id}/download', name: 'app_membership_download', requirements: ['id' => Regex::UUID_V4], methods: Request::METHOD_GET)]
+    #[Route(path: '/memberships/{id}/download', name: 'app_membership_download', requirements: ['id' => Requirement::UUID_V4], methods: Request::METHOD_GET)]
     public function __invoke(Membership $membership): Response
     {
         $data = $this->membershipPdfQuery->fetch($membership);

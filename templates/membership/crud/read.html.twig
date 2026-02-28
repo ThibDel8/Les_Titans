@@ -2,6 +2,8 @@
 
 {% block title %}{{ parent() }}Adhésion de {{ membership.firstname }}{% endblock %}
 
+{% block h1 %}Demande d'adhésion{% endblock %}
+
 {% block body %}
 
     {% include '_partials/_breadcrumb/_breadcrumb.html.twig' with { breadcrumbs: breadcrumbs } %}

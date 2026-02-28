@@ -2,15 +2,14 @@
 
 {% block title %}{{ parent() }}Mentions légales{% endblock %}
 
+{% block h1 %}Mentions légales{% endblock %}
+
 {% block body %}
 
     {% include '_partials/_breadcrumb/_breadcrumb.html.twig' with { breadcrumbs: breadcrumbs } %}
 
     <section class="public-section">
-        <h2 class="public-title">Mentions légales</h2>
-
-        <h3>1. Éditeur du site</h3>
-        <br>
+        <h2 class="public-title">1. Éditeur du site</h2>
         <p>Le présent site internet, accessible à l’adresse <a href="{{ app_public_url }}">{{ app_public_url }}</a>, est édité par :</p>
         <br>
         <ul class="paragraph">
@@ -25,14 +24,12 @@
         </ul>
         <br>
 
-        <h3>2. Directeur de la publication</h3>
-        <br>
+        <h2 class="public-title">2. Directeur de la publication</h2>
         <p>Le directeur de la publication est :</p>
         <p>M. {{ legalsView.president.firstname }} {{ legalsView.president.lastname|upper }}, en sa qualité de Président de l’association.</p>
         <br>
 
-        <h3>3. Contact</h3>
-        <br>
+        <h2 class="public-title">3. Contact</h2>
         <p>Pour toute demande concernant l’association ou le site :</p>
         <ul>
             <li>Adresse postale : 7 rue Philippe Louis, 80610 Saint-Ouen</li>
@@ -41,8 +38,7 @@
         </ul>
         <br>
 
-        <h3>3. Hébergement</h3>
-        <br>
+        <h2 class="public-title">3. Hébergement</h2>
         <p>Le site est hébergé par :</p>
         <br>
         <ul class="paragraph">
@@ -54,15 +50,13 @@
         </ul>
         <br>
 
-        <h3>5. Propriété intellectuelle</h3>
-        <br>
+        <h2 class="public-title">5. Propriété intellectuelle</h2>
         <p>L’ensemble du contenu présent sur le site (textes, images, logos, éléments graphiques, structure, fonctionnalités) est la propriété exclusive de l’association Saint-Ouen Musculation, sauf mention contraire.</p>
         <br>
         <p>Toute reproduction, représentation, modification ou exploitation, totale ou partielle, sans autorisation écrite préalable est interdite.</p>
         <br>
 
-        <h3>6. Responsabilité</h3>
-        <br>
+        <h2 class="public-title">6. Responsabilité</h2>
         <p>L’association s’efforce d’assurer l’exactitude et la mise à jour des informations diffusées sur le site.</p>
         <p>Elle ne saurait toutefois être tenue responsable :</p>
         <ul>
@@ -72,19 +66,16 @@
         </ul>
         <br>
 
-        <h3>7. Liens externes</h3>
-        <br>
+        <h2 class="public-title">7. Liens externes</h2>
         <p>Le site peut contenir des liens vers des sites tiers (ex. : page Facebook de la salle, site de la mairie).</p>
         <p>L’association n’exerce aucun contrôle sur ces sites et décline toute responsabilité quant à leur contenu ou fonctionnement.</p>
         <br>
 
-        <h3>8. Données personnelles</h3>
-        <br>
+        <h2 class="public-title">8. Données personnelles</h2>
         <p>Le traitement des données personnelles est détaillé dans la <a href="{{ path('app_privacy_policy') }}">Politique de confidentialité</a>, accessible sur une page dédiée.</p>
         <br>
 
-        <h3>9. Cookies</h3>
-        <br>
+        <h2 class="public-title">9. Cookies</h2>
         <p>Le site n’utilise <b>aucun cookie de suivi</b>, ni cookie publicitaire, ni cookie tiers.</p>
         <p>Seuls des cookies techniques indispensables au fonctionnement du site peuvent être utilisés (ex. : session utilisateur).</p>
     </section>
