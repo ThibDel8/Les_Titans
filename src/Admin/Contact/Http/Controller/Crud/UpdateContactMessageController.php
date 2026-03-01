@@ -18,7 +18,7 @@ final class UpdateContactMessageController extends AbstractController
     {
     }
 
-    #[Route(path: '/admin/contact-messages/{id}/unread', name: 'admin_contact_message_unread', methods: Request::METHOD_POST)]
+    #[Route(path: '/admin/contact-messages/{id}/unread', name: 'admin_contact_message_unread', methods: [Request::METHOD_POST])]
     public function __invoke(ContactMessage $contactMessage): Response
     {
         $this->denyAccessUnlessGranted(Role::Secretary->value);

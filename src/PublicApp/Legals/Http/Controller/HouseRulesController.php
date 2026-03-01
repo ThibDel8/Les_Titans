@@ -16,7 +16,7 @@ final class HouseRulesController extends AbstractController
     {
     }
 
-    #[Route(path: '/house-rules', name: 'app_house_rules', methods: Request::METHOD_GET)]
+    #[Route(path: '/house-rules', name: 'app_house_rules', methods: [Request::METHOD_GET])]
     public function __invoke(): Response
     {
         return $this->render('legals/house-rules.html.twig', [

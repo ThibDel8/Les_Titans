@@ -20,7 +20,7 @@ final class DashboardController extends AbstractController
     ) {
     }
 
-    #[Route(path: '/admin/dashboard', name: 'admin_dashboard', methods: Request::METHOD_GET)]
+    #[Route(path: '/admin/dashboard', name: 'admin_dashboard', methods: [Request::METHOD_GET])]
     public function __invoke(): Response
     {
         $this->denyAccessUnlessGranted(Role::Secretary->value);

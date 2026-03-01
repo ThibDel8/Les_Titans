@@ -19,7 +19,7 @@ final class PrivacyPolicyController extends AbstractController
     ) {
     }
 
-    #[Route(path: '/privacy-policy', name: 'app_privacy_policy', methods: Request::METHOD_GET)]
+    #[Route(path: '/privacy-policy', name: 'app_privacy_policy', methods: [Request::METHOD_GET])]
     public function __invoke(): Response
     {
         $legalsView = $this->legalsQuery->fetch();

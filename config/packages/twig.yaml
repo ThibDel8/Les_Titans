@@ -3,9 +3,10 @@ twig:
     globals:
       app_public_url: '%env(APP_PUBLIC_URL)%'
       app_email: '%env(APP_EMAIL)%'
-      annual_fee: 50
-      access_badge_deposit: 10
+      annual_fee: '%membership.annual_fee%'
+      access_badge_deposit: '%membership.access_badge_deposit%'
       app_slogan: '%app.slogan%'
+      number_max_members: '%number.max.members%'
 
 when@test:
     twig:

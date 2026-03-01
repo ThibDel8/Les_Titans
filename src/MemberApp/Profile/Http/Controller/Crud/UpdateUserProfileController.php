@@ -38,7 +38,7 @@ final class UpdateUserProfileController extends AbstractController
 
             $this->updateProfileHandler->handle($user, $profileRequest);
 
-            $this->addFlash('success', 'Votre profil a été mis à jour avec succès.');
+            $this->addFlash('success', 'Votre profil a bien été mis à jour.');
 
             return $this->redirectToRoute('app_profile_read');
         }

@@ -20,7 +20,7 @@ final class ListPostController extends AbstractController
     ) {
     }
 
-    #[Route(path: '/posts', name: 'app_post_list', methods: Request::METHOD_GET)]
+    #[Route(path: '/posts', name: 'app_post_list', methods: [Request::METHOD_GET])]
     public function __invoke(): Response
     {
         $this->denyAccessUnlessGranted(Role::Member->value);

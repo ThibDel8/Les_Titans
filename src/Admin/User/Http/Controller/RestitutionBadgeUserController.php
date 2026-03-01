@@ -19,13 +19,13 @@ final class RestitutionBadgeUserController extends AbstractController
     {
     }
 
-    #[Route(path: '/admin/users/{id}/restitution', name: 'admin_user_restitution', requirements: ['id' => Requirement::UUID_V4], methods: Request::METHOD_POST)]
+    #[Route(path: '/admin/users/{id}/restitution', name: 'admin_user_restitution', requirements: ['id' => Requirement::UUID_V4], methods: [Request::METHOD_POST])]
     public function __invoke(User $user): Response
     {
         $this->denyAccessUnlessGranted(Role::Secretary->value);
 
         $this->restitutionBadgeUserHandler->handle($user);
-        $this->addFlash('success', 'La restitution de la caution et la réception du badge ont été validées avec succès.');
+        $this->addFlash('success', 'La restitution de la caution et la réception du badge ont bien été validées.');
 
         return $this->redirectToRoute('admin_user_read', ['id' => $user->getId()]);
     }

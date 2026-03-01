@@ -25,7 +25,7 @@
                 </form>
             </dialog>
         {% endif %}
-        <a class="btn btn-info" href="{{ path('admin_user_update', {id: user.id}) }}" title="Modifier les informations du membre">Mettre à jour</a>
+        <a class="btn btn-info" href="{{ path('admin_user_update', {id: user.id}) }}" title="Modifier les informations du membre">Modifier</a>
         {% if user.accessBadgeNumber is null and user.accessBadgeDeposit is null %}
             <button class="btn btn-error" onclick="document.getElementById('confirm-delete').showModal()" title="Supprimer ce membre">Supprimer</button>
             <dialog id="confirm-delete">

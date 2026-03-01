@@ -8,14 +8,27 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class ContactMessageCreationRequest
 {
-    #[Assert\NotBlank(message: 'L\'email doit être renseigné.')]
-    #[Assert\Email(message: 'Ceci n\'est pas un email valide.')]
-    #[Assert\Length(max: 255)]
-    public ?string $email = null;
+    public function __construct(
+        #[Assert\NotBlank(message: 'L\'email doit être renseigné.')]
+        #[Assert\Email(message: 'Ceci n\'est pas un email valide.')]
+        #[Assert\Length(max: 255)]
+        public ?string $email = null,
+        #[Assert\NotBlank(message: 'Le sujet doit être renseigné.')]
+        public ?string $subject = null,
+        #[Assert\NotBlank(message: 'Le message doit être renseigné.')]
+        public ?string $body = null,
+    ) {
+    }
 
-    #[Assert\NotBlank(message: 'Le sujet doit être renseigné.')]
-    public ?string $subject = null;
-
-    #[Assert\NotBlank(message: 'Le message doit être renseigné.')]
-    public ?string $body = null;
+    public static function create(
+        ?string $email = null,
+        ?string $subject = null,
+        ?string $body = null,
+    ): self {
+        return new self(
+            email: $email,
+            subject: $subject,
+            body: $body,
+        );
+    }
 }

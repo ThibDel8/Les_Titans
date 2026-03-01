@@ -38,7 +38,7 @@ final class UpdateUserController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->updateUserHandler->handle($user, $userRequest);
-            $this->addFlash('success', 'Le profil a été mis à jour avec succès.');
+            $this->addFlash('success', 'Le profil a bien été mis à jour.');
 
             return $this->redirectToRoute('admin_user_read', ['id' => $user->getId()]);
         }

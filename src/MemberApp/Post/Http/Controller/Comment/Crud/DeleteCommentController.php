@@ -13,13 +13,13 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Routing\Requirement\Requirement;
 
-class DeleteCommentController extends AbstractController
+final class DeleteCommentController extends AbstractController
 {
     public function __construct(private readonly DeleteCommentHandler $deleteCommentHandler)
     {
     }
 
-    #[Route(path: '/posts/comments/{id}/delete', name: 'app_post_comment_delete', requirements: ['id' => Requirement::UUID_V4], methods: Request::METHOD_POST)]
+    #[Route(path: '/posts/comments/{id}/delete', name: 'app_post_comment_delete', requirements: ['id' => Requirement::UUID_V4], methods: [Request::METHOD_POST])]
     public function __invoke(Comment $comment): Response
     {
         $this->denyAccessUnlessGranted(attribute: CommentVoter::DELETE, subject: $comment); // voter

@@ -4,11 +4,13 @@
 
 {% block h1 %}Liste des membre{% endblock %}
 
+{% set nbMembers = validMembers|length + invalidMembers|length %}
+
 {% block body %}
 
     {% include '_partials/_breadcrumb/_breadcrumb.html.twig' with { breadcrumbs: breadcrumbs } %}
 
-    <h2 class="manager-title">Membres ({{ validMembers|length + invalidMembers|length }})</h2>
+    <h2 class="manager-title">Membres ({{ nbMembers }})</h2>
 
     {% if invalidMembers|length > 0 %}
         {% for user in invalidMembers %}
@@ -21,5 +23,11 @@
     {% else %}
         <p>Aucun membre pour le moment.</p>
     {% endfor %}
+
+    <div class="info-line">
+        <span>Nombre maximum de membres : {{ number_max_members }}</span>
+        <span>Nombre de membres : {{ nbMembers }}</span>
+        <span>Nombre de places disponibles : {{ number_max_members - nbMembers }}</span>
+    </div>
 
 {% endblock %}

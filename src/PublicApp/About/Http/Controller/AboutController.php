@@ -16,7 +16,7 @@ final class AboutController extends AbstractController
     {
     }
 
-    #[Route(path: '/about', name: 'app_about', methods: Request::METHOD_GET)]
+    #[Route(path: '/about', name: 'app_about', methods: [Request::METHOD_GET])]
     public function __invoke(): Response
     {
         return $this->render('about/about.html.twig', [

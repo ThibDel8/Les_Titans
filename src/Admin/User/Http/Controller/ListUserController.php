@@ -20,7 +20,7 @@ final class ListUserController extends AbstractController
     ) {
     }
 
-    #[Route(path: '/admin/users', name: 'admin_user_list', methods: Request::METHOD_GET)]
+    #[Route(path: '/admin/users', name: 'admin_user_list', methods: [Request::METHOD_GET])]
     public function __invoke(): Response
     {
         $this->denyAccessUnlessGranted(Role::Secretary->value);

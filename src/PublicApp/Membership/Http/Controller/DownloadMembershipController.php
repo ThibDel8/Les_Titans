@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Routing\Requirement\Requirement;
 
-class DownloadMembershipController extends AbstractController
+final class DownloadMembershipController extends AbstractController
 {
     public function __construct(
         private readonly MembershipPdfQuery $membershipPdfQuery,
@@ -21,7 +21,7 @@ class DownloadMembershipController extends AbstractController
     ) {
     }
 
-    #[Route(path: '/memberships/{id}/download', name: 'app_membership_download', requirements: ['id' => Requirement::UUID_V4], methods: Request::METHOD_GET)]
+    #[Route(path: '/memberships/{id}/download', name: 'app_membership_download', requirements: ['id' => Requirement::UUID_V4], methods: [Request::METHOD_GET])]
     public function __invoke(Membership $membership): Response
     {
         $data = $this->membershipPdfQuery->fetch($membership);

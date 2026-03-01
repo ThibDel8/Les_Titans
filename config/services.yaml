@@ -23,6 +23,7 @@ parameters:
     app.slogan: 'Plus dure est la bataille, plus belle est la victoire.'
     membership.annual_fee: 50
     membership.access_badge_deposit: 10
+    number.max.members: 100
 
 services:
     # default configuration for services in *this* file
