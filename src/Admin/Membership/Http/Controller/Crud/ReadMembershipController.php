@@ -45,7 +45,7 @@ final class ReadMembershipController extends AbstractController
             if ($membership->hasValidRegistration()) {
                 $this->addFlash('info', 'La demande d\'adhésion est maintenant valide. Elle peut être Acceptée.');
             } else {
-                $this->addFlash('success', 'La modification de cette demande d\'adhésion a été enregistrée avec succès.');
+                $this->addFlash('success', 'La modification de cette demande d\'adhésion a bien été enregistrée.');
             }
 
             return $this->redirectToRoute('admin_membership_read', ['id' => $membership->getId()]);

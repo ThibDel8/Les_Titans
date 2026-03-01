@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-class PasswordSetupController extends AbstractController
+final class PasswordSetupController extends AbstractController
 {
     public function __construct(
         private readonly PasswordSetupQuery $passwordSetupQuery,
@@ -31,7 +31,7 @@ class PasswordSetupController extends AbstractController
 
             $this->passwordSetupHandler->handle(user: $user, password: $password);
 
-            $this->addFlash('success', 'Le mot de passe a été défini avec succès, vous pouvez maintenant vous connecter.');
+            $this->addFlash('success', 'Le mot de passe a bien été défini, vous pouvez maintenant vous connecter.');
 
             return $this->redirectToRoute('app_login');
         }

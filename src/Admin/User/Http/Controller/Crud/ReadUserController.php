@@ -36,7 +36,7 @@ final class ReadUserController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->createAccessBadgeNumberHandler->handle($user, $userAccessBadgeRequest);
-            $this->addFlash('success', 'Le numéro de badge a été enregistré avec succès.');
+            $this->addFlash('success', 'Le numéro de badge a bien été enregistré.');
 
             return $this->redirectToRoute('admin_user_read', ['id' => $user->getId()]);
         }

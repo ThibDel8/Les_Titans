@@ -25,7 +25,7 @@ readonly class MembershipMailer
         $email = new TemplatedEmail()
             ->from($this->params->get('app.email'))
             ->to($membership->getEmail())
-            ->subject('Adhésion Saint-Ouen Musculation')
+            ->subject('Adhésion Les Titans')
             ->htmlTemplate('emails/memberships/download_membership.html.twig')
             ->context([
                 'membership' => $membership,

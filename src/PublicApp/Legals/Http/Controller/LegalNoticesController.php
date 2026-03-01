@@ -19,7 +19,7 @@ final class LegalNoticesController extends AbstractController
     ) {
     }
 
-    #[Route(path: '/legal-notices', name: 'app_legal_notices', methods: Request::METHOD_GET)]
+    #[Route(path: '/legal-notices', name: 'app_legal_notices', methods: [Request::METHOD_GET])]
     public function __invoke(): Response
     {
         $legalsView = $this->legalsQuery->fetch();

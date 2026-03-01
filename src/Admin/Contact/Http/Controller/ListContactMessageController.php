@@ -20,7 +20,7 @@ final class ListContactMessageController extends AbstractController
     ) {
     }
 
-    #[Route(path: '/admin/contact-messages', name: 'admin_contact_message_list', methods: Request::METHOD_GET)]
+    #[Route(path: '/admin/contact-messages', name: 'admin_contact_message_list', methods: [Request::METHOD_GET])]
     public function __invoke(): Response
     {
         $this->denyAccessUnlessGranted(Role::Secretary->value);

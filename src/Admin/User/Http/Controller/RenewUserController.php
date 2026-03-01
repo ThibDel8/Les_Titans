@@ -19,13 +19,13 @@ final class RenewUserController extends AbstractController
     {
     }
 
-    #[Route(path: '/admin/users/{id}/renew', name: 'admin_user_renew', requirements: ['id' => Requirement::UUID_V4], methods: Request::METHOD_POST)]
+    #[Route(path: '/admin/users/{id}/renew', name: 'admin_user_renew', requirements: ['id' => Requirement::UUID_V4], methods: [Request::METHOD_POST])]
     public function __invoke(User $user): Response
     {
         $this->denyAccessUnlessGranted(Role::Secretary->value);
 
         $this->renewUserHandler->handle($user);
-        $this->addFlash('success', 'L\'adhésion de ce membre a été renouvelée avec succès.');
+        $this->addFlash('success', 'L\'adhésion de ce membre a bien été renouvelée.');
 
         return $this->redirectToRoute('admin_user_read', ['id' => $user->getId()]);
     }

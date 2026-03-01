@@ -13,13 +13,13 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Routing\Requirement\Requirement;
 
-class DeleteMembershipController extends AbstractController
+final class DeleteMembershipController extends AbstractController
 {
     public function __construct(private readonly DeleteMembershipHandler $deleteMembershipHandler)
     {
     }
 
-    #[Route(path: '/admin/memberships/{id}/delete', name: 'admin_membership_delete', requirements: ['id' => Requirement::UUID_V4], methods: Request::METHOD_POST)]
+    #[Route(path: '/admin/memberships/{id}/delete', name: 'admin_membership_delete', requirements: ['id' => Requirement::UUID_V4], methods: [Request::METHOD_POST])]
     public function __invoke(Membership $membership): Response
     {
         $this->denyAccessUnlessGranted(Role::Secretary->value);

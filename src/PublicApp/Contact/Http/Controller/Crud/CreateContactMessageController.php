@@ -12,6 +12,7 @@ use App\PublicApp\Contact\Http\Form\ContactMessageType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Routing\Attribute\Route;
 
 final class CreateContactMessageController extends AbstractController
@@ -23,10 +24,13 @@ final class CreateContactMessageController extends AbstractController
     ) {
     }
 
+    /**
+     * @throws TransportExceptionInterface
+     */
     #[Route(path: '/contact', name: 'app_contact', methods: [Request::METHOD_GET, Request::METHOD_POST])]
     public function __invoke(Request $request): Response
     {
-        $messageRequest = new ContactMessageCreationRequest();
+        $messageRequest = ContactMessageCreationRequest::create(email: $this->getUser()?->getUserIdentifier());
 
         $boardMembers = $this->createMessageQuery->fetch();
 
@@ -36,7 +40,7 @@ final class CreateContactMessageController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->createMessageHandler->handle($messageRequest);
 
-            $this->addFlash('success', 'Votre message a été envoyé avec succès.');
+            $this->addFlash('success', 'Votre message a bien été envoyé.');
 
             return $this->redirectToRoute('app_contact');
         }

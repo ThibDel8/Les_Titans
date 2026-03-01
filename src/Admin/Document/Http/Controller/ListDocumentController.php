@@ -17,7 +17,7 @@ final class ListDocumentController extends AbstractController
     {
     }
 
-    #[Route(path: '/admin/documents', name: 'admin_document_list', methods: Request::METHOD_GET)]
+    #[Route(path: '/admin/documents', name: 'admin_document_list', methods: [Request::METHOD_GET])]
     public function __invoke(): Response
     {
         $this->denyAccessUnlessGranted(Role::Secretary->value);

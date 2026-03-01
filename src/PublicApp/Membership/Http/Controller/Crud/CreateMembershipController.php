@@ -38,7 +38,7 @@ final class CreateMembershipController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $membership = $this->createMembershipHandler->handle($membershipCreationRequest);
 
-            $this->addFlash('success', 'La demande d’adhésion a été enregistrée avec succès.');
+            $this->addFlash('success', 'La demande d’adhésion a bien été enregistrée.');
 
             return $this->redirectToRoute('app_membership_pending', ['id' => $membership->getId()]);
         }

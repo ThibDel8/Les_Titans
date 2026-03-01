@@ -17,7 +17,7 @@ final class ReadUserProfileController extends AbstractController
     {
     }
 
-    #[Route(path: '/profile', name: 'app_profile_read', methods: Request::METHOD_GET)]
+    #[Route(path: '/profile', name: 'app_profile_read', methods: [Request::METHOD_GET])]
     public function __invoke(): Response
     {
         $this->denyAccessUnlessGranted(Role::Member->value);

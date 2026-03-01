@@ -26,7 +26,7 @@ readonly class ContactMessageMailer
         $email = new TemplatedEmail()
             ->from($this->params->get('app.email'))
             ->to($contactMessage->getEmail())
-            ->subject('Contact Saint-Ouen Musculation')
+            ->subject('Contact Les Titans')
             ->htmlTemplate('emails/contact/answer.html.twig')
             ->context([
                 'message' => $contactMessage,
