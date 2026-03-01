@@ -81,6 +81,29 @@ class MembershipFixtures extends Fixture
             profileImage: $this->profileImageService->save($this->profileImageService->getDefaultsDir().ProfileImageService::OTHER_PROFILE),
         );
 
+        $membership = $this->createMembership(
+            manager: $manager,
+            lastname: $faker->lastName(),
+            firstname: $faker->firstName(),
+            birthdate: new \DateTimeImmutable('-15 years'),
+            gender: Gender::Other,
+            phone: $faker->numerify('0#########'),
+            address: $faker->buildingNumber().' '.$faker->streetName(),
+            postalcode: $faker->postcode(),
+            city: $faker->city(),
+            email: $faker->unique()->safeEmail(),
+            tutorLastname: $faker->lastName(),
+            tutorFirstname: $faker->firstName(),
+            tutorPhone: $faker->numerify('0#########'),
+            tutorEmail: $faker->unique()->safeEmail(),
+            tutorAddress: $faker->buildingNumber().' '.$faker->streetName(),
+            tutorPostalcode: $faker->postcode(),
+            tutorCity: $faker->city(),
+            profileImage: $this->profileImageService->save($this->profileImageService->getDefaultsDir().ProfileImageService::OTHER_PROFILE),
+        );
+
+        $this->addReference(name: 'membership', object: $membership);
+
         $manager->flush();
     }
 
@@ -103,7 +126,7 @@ class MembershipFixtures extends Fixture
         ?string $tutorPostalcode = null,
         ?string $tutorCity = null,
         ?string $profileImage = null,
-    ): void {
+    ): Membership {
         $membership = Membership::create(
             lastname: $lastname,
             firstname: $firstname,
@@ -125,5 +148,7 @@ class MembershipFixtures extends Fixture
         );
 
         $manager->persist($membership);
+
+        return $membership;
     }
 }

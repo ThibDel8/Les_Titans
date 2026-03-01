@@ -25,12 +25,13 @@ final class DashboardController extends AbstractController
     {
         $this->denyAccessUnlessGranted(Role::Secretary->value);
 
-        $dataCounter = $this->dashboardQuery->fetch();
+        $dashboardData = $this->dashboardQuery->fetch();
 
         return $this->render('dashboard/index.html.twig', [
-            'nbUsers' => $dataCounter->nbUsers,
-            'nbMemberships' => $dataCounter->nbMemberships,
-            'nbUnreadMessages' => $dataCounter->nbContactMessages,
+            'nbUsers' => $dashboardData->nbUsers,
+            'nbMemberships' => $dashboardData->nbMemberships,
+            'nbUnreadMessages' => $dashboardData->nbContactMessages,
+            'logs' => $dashboardData->logs,
             'breadcrumbs' => $this->breadcrumbFactory->dashboard(),
         ]);
     }

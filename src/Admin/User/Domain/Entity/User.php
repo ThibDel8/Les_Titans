@@ -15,11 +15,10 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 #[ORM\Entity]
-#[ORM\Table(name: 'users')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
-    #[ORM\Column(type: 'uuid', length: 36)]
+    #[ORM\Column(type: 'uuid')]
     private Uuid $id;
 
     #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
@@ -150,7 +149,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->profileImage = $profileImage;
 
         // Initialisation des valeurs par défaut
-        $this->id = $id ? Uuid::fromString($id) : Uuid::v4();
+        $this->id = $id ? Uuid::fromString($id) : Uuid::v7();
         $this->roles = [Role::Member->value];
         $this->createdAt = $now;
         $this->password = null;
@@ -181,6 +180,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getFirstname(): string
     {
         return $this->firstname;
+    }
+
+    public function getFullname(): string
+    {
+        return $this->lastname.' '.$this->firstname;
     }
 
     public function getBirthdate(): \DateTimeImmutable

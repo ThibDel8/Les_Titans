@@ -11,11 +11,10 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Uid\Uuid;
 
 #[ORM\Entity]
-#[ORM\Table(name: 'contact_messages')]
 class ContactMessage
 {
     #[ORM\Id]
-    #[ORM\Column(type: 'uuid', length: 36)]
+    #[ORM\Column(type: 'uuid')]
     private Uuid $id;
 
     #[ORM\Column(type: Types::STRING, length: 255)]
@@ -58,7 +57,7 @@ class ContactMessage
         $this->body = $body;
 
         // Initialisation des valeurs par défaut
-        $this->id = $id ? Uuid::fromString($id) : Uuid::v4();
+        $this->id = $id ? Uuid::fromString($id) : Uuid::v7();
         $this->status = ContactMessageStatus::NEW;
         $this->createdAt = new \DateTimeImmutable();
     }

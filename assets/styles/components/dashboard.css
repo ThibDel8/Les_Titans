@@ -15,3 +15,7 @@
     height: 1.3rem;
     width: 1.3rem;
 }
+
+.log-datetime {
+    color: var(--red);
+}

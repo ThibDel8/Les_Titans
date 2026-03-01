@@ -15,10 +15,10 @@ use Random\RandomException;
 
 class UserFixtures extends Fixture
 {
-    public const string USER_VICE_PRESIDENT_ID = 'a6ee5cfc-3ee3-4936-aec4-8d10a6b4cbbd';
-    public const string USER_SECRETARY_ID = '181c37fd-3bd0-4d88-9322-a0e4213e57b2';
-    public const string USER_MEMBER_ID = '3bac373a-840b-4fe4-93dc-19921c912169';
-    public const string USER_MINOR_MEMBER_ID = '502f1d97-01c2-4852-a8ad-8bc40b080f73';
+    public const string USER_VICE_PRESIDENT_ID = '019ca9d1-9505-7921-91e6-ce397cd888b5';
+    public const string USER_SECRETARY_ID = '019ca9d1-aa53-7fbd-8f6e-aa0bc3662b33';
+    public const string USER_MEMBER_ID = '019ca9d1-c414-738f-9ac7-4c116b2589a9';
+    public const string USER_MINOR_MEMBER_ID = '019ca9d1-df40-799d-b923-5ee6f7f61aa7';
 
     public const int USER_MEMBER_BADGE_NUMBER = 0001234567;
 
@@ -194,7 +194,7 @@ class UserFixtures extends Fixture
             badgeNumber: $faker->unique()->numerify('000#######'),
         );
 
-        $this->createUser(
+        $newUser = $this->createUser(
             manager: $manager,
             lastname: $faker->lastName(),
             firstname: $faker->firstName(),
@@ -207,6 +207,8 @@ class UserFixtures extends Fixture
             email: $faker->unique()->safeEmail(),
             profileImage: $this->profileImageService->save($this->profileImageService->getDefaultsDir().ProfileImageService::OTHER_PROFILE),
         );
+
+        $this->addReference(name: 'new_user', object: $newUser);
 
         $this->createUser(
             manager: $manager,
@@ -274,7 +276,7 @@ class UserFixtures extends Fixture
             id: self::USER_SECRETARY_ID,
         );
 
-        $this->addReference('secretary_user', $secretaryUser);
+        $this->addReference(name: 'secretary_user', object: $secretaryUser);
 
         $manager->flush();
     }

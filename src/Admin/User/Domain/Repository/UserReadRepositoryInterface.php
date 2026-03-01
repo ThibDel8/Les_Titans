@@ -24,4 +24,6 @@ interface UserReadRepositoryInterface
     public function getBoardMembers(): array;
 
     public function findAllMemberEmails(): array;
+
+    public function findById(string $userId): ?User;
 }

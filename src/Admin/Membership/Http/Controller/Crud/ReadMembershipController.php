@@ -26,7 +26,7 @@ final class ReadMembershipController extends AbstractController
     ) {
     }
 
-    #[Route(path: '/admin/memberships/{id}', name: 'admin_membership_read', requirements: ['id' => Requirement::UUID_V4], methods:[Request::METHOD_GET, Request::METHOD_POST])]
+    #[Route(path: '/admin/memberships/{id}', name: 'admin_membership_read', requirements: ['id' => Requirement::UUID_V7], methods:[Request::METHOD_GET, Request::METHOD_POST])]
     public function __invoke(Membership $membership, Request $request): Response
     {
         $this->denyAccessUnlessGranted(Role::Secretary->value);

@@ -18,7 +18,7 @@ final class PendingMembershipController extends AbstractController
     {
     }
 
-    #[Route(path: '/memberships/{id}/pending', name: 'app_membership_pending', requirements: ['id' => Requirement::UUID_V4], methods: [Request::METHOD_GET])]
+    #[Route(path: '/memberships/{id}/pending', name: 'app_membership_pending', requirements: ['id' => Requirement::UUID_V7], methods: [Request::METHOD_GET])]
     public function __invoke(Membership $membership): Response
     {
         return $this->render('membership/pending.html.twig', [

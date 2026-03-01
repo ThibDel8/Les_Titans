@@ -13,7 +13,7 @@ use Faker\Factory;
 
 class PostFixtures extends Fixture implements DependentFixtureInterface
 {
-    public const string ID_SECRETARY_POST = 'cfe077fa-3f90-4502-9826-65f107054dac';
+    public const string ID_SECRETARY_POST = '019ca9d1-6806-7fff-9991-266c6cda1356';
 
     public function load(ObjectManager $manager): void
     {

@@ -11,11 +11,10 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Uid\Uuid;
 
 #[ORM\Entity]
-#[ORM\Table(name: 'memberships')]
 class Membership
 {
     #[ORM\Id]
-    #[ORM\Column(type: 'uuid', length: 36)]
+    #[ORM\Column(type: 'uuid')]
     private Uuid $id;
 
     #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
@@ -119,7 +118,7 @@ class Membership
         $this->profileImage = $profileImage;
 
         // Initialisation des valeurs par défaut
-        $this->id = Uuid::v4();
+        $this->id = Uuid::v7();
         $this->createdAt = new \DateTimeImmutable('now');
     }
 
