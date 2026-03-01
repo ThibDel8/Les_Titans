@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Admin\User\Http\Controller\Crud;
 
+use App\Admin\User\Domain\Entity\User;
 use App\Admin\User\Domain\Handler\CreateUserHandler;
 use App\MemberApp\Membership\Domain\Entity\Membership;
 use App\SharedKernel\Domain\Enum\Role;
@@ -19,12 +20,15 @@ final class CreateUserController extends AbstractController
     {
     }
 
-    #[Route(path: 'admin/users/create/{id}', name: 'admin_user_create', requirements: ['id' => Requirement::UUID_V4], methods: [Request::METHOD_POST])]
+    #[Route(path: 'admin/users/create/{id}', name: 'admin_user_create', requirements: ['id' => Requirement::UUID_V7], methods: [Request::METHOD_POST])]
     public function __invoke(Membership $membership): Response
     {
         $this->denyAccessUnlessGranted(Role::Secretary->value);
 
-        $user = $this->createUserHandler->handle($membership);
+        /** @var User $author */
+        $author = $this->getUser();
+
+        $user = $this->createUserHandler->handle($membership, $author);
 
         if (null === $user) {
             $this->addFlash('error', 'Ce membre existe déjà.');

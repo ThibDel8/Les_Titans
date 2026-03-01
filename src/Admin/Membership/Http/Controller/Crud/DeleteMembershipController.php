@@ -19,7 +19,7 @@ final class DeleteMembershipController extends AbstractController
     {
     }
 
-    #[Route(path: '/admin/memberships/{id}/delete', name: 'admin_membership_delete', requirements: ['id' => Requirement::UUID_V4], methods: [Request::METHOD_POST])]
+    #[Route(path: '/admin/memberships/{id}/delete', name: 'admin_membership_delete', requirements: ['id' => Requirement::UUID_V7], methods: [Request::METHOD_POST])]
     public function __invoke(Membership $membership): Response
     {
         $this->denyAccessUnlessGranted(Role::Secretary->value);

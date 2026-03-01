@@ -66,4 +66,9 @@ readonly class UserReadRepository implements UserReadRepositoryInterface
             ->getScalarResult()
         ;
     }
+
+    public function findById(string $userId): ?User
+    {
+        return $this->manager->getRepository(User::class)->find($userId);
+    }
 }

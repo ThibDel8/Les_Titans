@@ -13,7 +13,7 @@ use Faker\Factory;
 
 class ContactMessageFixtures extends Fixture implements DependentFixtureInterface
 {
-    public const string ASSIGNED_CONTACT_MESSAGE_ID = 'e0dbb36b-397a-447c-bff8-b7463231e20c';
+    public const string ASSIGNED_CONTACT_MESSAGE_ID = '019ca9d0-f76f-7a9c-a96d-fb7cdbd92522';
 
     public function load(ObjectManager $manager): void
     {

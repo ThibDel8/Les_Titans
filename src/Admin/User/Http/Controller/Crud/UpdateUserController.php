@@ -24,7 +24,7 @@ final class UpdateUserController extends AbstractController
     ) {
     }
 
-    #[Route(path: '/admin/users/{id}/update', name: 'admin_user_update', requirements: ['id' => Requirement::UUID_V4], methods:[Request::METHOD_GET, Request::METHOD_POST])]
+    #[Route(path: '/admin/users/{id}/update', name: 'admin_user_update', requirements: ['id' => Requirement::UUID_V7], methods:[Request::METHOD_GET, Request::METHOD_POST])]
     public function __invoke(User $user, Request $request): Response
     {
         $this->denyAccessUnlessGranted(Role::Secretary->value);

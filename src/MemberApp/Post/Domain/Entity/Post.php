@@ -12,11 +12,10 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Uid\Uuid;
 
 #[ORM\Entity]
-#[ORM\Table(name: 'posts')]
 class Post
 {
     #[ORM\Id]
-    #[ORM\Column(type: 'uuid', length: 36)]
+    #[ORM\Column(type: 'uuid')]
     private Uuid $id;
 
     #[ORM\ManyToOne(targetEntity: User::class)]
@@ -51,7 +50,7 @@ class Post
         $this->linkPreview = $linkPreview;
 
         // Initialisation des valeurs par défaut
-        $this->id = $id ? Uuid::fromString($id) : Uuid::v4();
+        $this->id = $id ? Uuid::fromString($id) : Uuid::v7();
         $this->comments = new ArrayCollection();
         $this->createdAt = new \DateTimeImmutable();
     }

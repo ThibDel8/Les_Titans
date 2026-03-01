@@ -10,11 +10,11 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Uid\Uuid;
 
 #[ORM\Entity]
-#[ORM\Table(name: 'post_comments')]
+#[ORM\Table(name: 'post_comment')]
 class Comment
 {
     #[ORM\Id]
-    #[ORM\Column(type: 'uuid', length: 36)]
+    #[ORM\Column(type: 'uuid')]
     private Uuid $id;
 
     #[ORM\ManyToOne(targetEntity: Post::class, inversedBy: 'comments')]
@@ -42,7 +42,7 @@ class Comment
         $this->text = $text;
 
         // Initialisation des valeurs par défaut
-        $this->id = $id ? Uuid::fromString($id) : Uuid::v4();
+        $this->id = $id ? Uuid::fromString($id) : Uuid::v7();
         $this->createdAt = new \DateTimeImmutable();
     }
 

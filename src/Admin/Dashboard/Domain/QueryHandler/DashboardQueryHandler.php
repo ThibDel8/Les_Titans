@@ -4,30 +4,34 @@ declare(strict_types=1);
 
 namespace App\Admin\Dashboard\Domain\QueryHandler;
 
+use App\Admin\AuditLog\Domain\Repository\AuditLogReadRepositoryInterface;
 use App\Admin\Contact\Domain\Repository\ContactMessageReadRepositoryInterface;
-use App\Admin\Dashboard\Domain\DataCounter\DataCounter;
+use App\Admin\Dashboard\Domain\DTO\DashboardData;
 use App\Admin\User\Domain\Repository\UserReadRepositoryInterface;
 use App\MemberApp\Membership\Domain\Repository\MembershipReadRepositoryInterface;
 
-class DashboardQueryHandler
+readonly class DashboardQueryHandler
 {
     public function __construct(
         private UserReadRepositoryInterface $userReadRepository,
-        private ContactMessageReadRepositoryInterface $contactMessageReadRepository,
+        private AuditLogReadRepositoryInterface $auditLogReadRepository,
         private MembershipReadRepositoryInterface $membershipReadRepository,
+        private ContactMessageReadRepositoryInterface $contactMessageReadRepository,
     ) {
     }
 
-    public function fetch(): DataCounter
+    public function fetch(): DashboardData
     {
         $users = $this->userReadRepository->findAllUsers();
-        $messages = $this->contactMessageReadRepository->findUnreadContactMessages();
         $memberships = $this->membershipReadRepository->findAllMemberships();
+        $messages = $this->contactMessageReadRepository->findUnreadContactMessages();
+        $logs = $this->auditLogReadRepository->getLatestLogs();
 
-        return DataCounter::create(
+        return DashboardData::create(
             nbUsers: \count($users),
             nbContactMessages: \count($messages),
             nbMemberships: \count($memberships),
+            logs: $logs,
         );
     }
 }

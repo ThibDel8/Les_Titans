@@ -19,7 +19,7 @@ final class DeleteUserController extends AbstractController
     {
     }
 
-    #[Route(path: '/admin/user/{id}/delete', name: 'admin_user_delete', requirements: ['id' => Requirement::UUID_V4], methods: [Request::METHOD_POST])]
+    #[Route(path: '/admin/user/{id}/delete', name: 'admin_user_delete', requirements: ['id' => Requirement::UUID_V7], methods: [Request::METHOD_POST])]
     public function __invoke(User $user): Response
     {
         $this->denyAccessUnlessGranted(Role::VicePresident->value);

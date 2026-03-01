@@ -14,7 +14,7 @@ use Faker\Factory;
 
 class CommentFixtures extends Fixture implements DependentFixtureInterface
 {
-    public const string ID_SECRETARY_COMMENT = '771bbc25-c140-45c0-afb3-0d933e5b7621';
+    public const string ID_SECRETARY_COMMENT = '019ca9d0-ba5c-79a1-bf2e-fef80f8f4c2f';
 
     public function load(ObjectManager $manager): void
     {

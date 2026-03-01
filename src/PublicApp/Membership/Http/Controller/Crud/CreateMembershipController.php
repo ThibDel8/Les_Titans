@@ -27,7 +27,7 @@ final class CreateMembershipController extends AbstractController
     /**
      * @throws TransportExceptionInterface|RandomException
      */
-    #[Route(path: '/memberships/create', name: 'app_membership_create', requirements: ['id' => Requirement::UUID_V4], methods: [Request::METHOD_GET, Request::METHOD_POST])]
+    #[Route(path: '/memberships/create', name: 'app_membership_create', requirements: ['id' => Requirement::UUID_V7], methods: [Request::METHOD_GET, Request::METHOD_POST])]
     public function __invoke(Request $request): Response
     {
         $membershipCreationRequest = new MembershipCreationRequest();

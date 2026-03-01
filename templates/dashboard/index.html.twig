@@ -36,4 +36,19 @@
         </div>
     </section>
 
+    {% if is_granted('ROLE_ADMIN') %}
+        <section class="manager-section">
+            <h2 class="manager-title">Derniers logs enregistrés</h2>
+            <div>
+            {% if logs is not empty %}
+                {% for log in logs %}
+                    <p><span class="log-datetime">[{{ log.occurredAt|fr_datetime }}]</span> &rarr; {{ log.authorFullname }} a {{ log.action.logLabel }} : {{ log.entityType.label }}{% if log.message is not null %} ({{ log.message }}){% endif %}.</p>
+                {% endfor %}
+            {% else %}
+                <p>Pas encore de logs.</p>
+            {% endif %}
+            </div>
+        </section>
+    {% endif %}
+
 {% endblock %}
